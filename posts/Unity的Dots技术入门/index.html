@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Unity的Dots技术入门 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1unity%e7%9a%84dots%e7%94%b1%e6%9d%a5">
+				                            1.Unity的Dots由来
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%b8%8eoop%e7%bc%96%e7%a8%8b%e5%af%b9%e6%af%94">
+				                            2.与OOP编程对比
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3dots%e5%ae%98%e6%96%b9%e6%a1%88%e4%be%8b">
+				                            3.Dots官方案例
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#4%e5%ae%9e%e6%88%98dots%e6%8a%80%e6%9c%af">
+				                            4.实战Dots技术
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#5%e6%80%bb%e7%bb%93">
+				                            5.总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Unity的Dots技术入门</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Unity的Dots技术入门</h1>
+                <div class="stuff">
+                    <span>August 13, 2020</span>
+                    <span>字数 4696</span>
+                                  
+                    <span id="/posts/Unity的Dots技术入门/" class="leancloud_visitors" data-flag-title="Unity的Dots技术入门">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <h2 id="前言">前言</h2>
+<blockquote>
+<p>看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data-Oriented Technology Stack(数据导向的技术栈):借助Unity全新高性能多线程式数据导向型技术堆栈(DOTS),充分利用当今的多核处理器。游戏的运行速度会变得更快。</p>
+</blockquote>
+<h2 id="1unity的dots由来">1.Unity的Dots由来</h2>
+<p>这种技术在游戏领域最先成功的案例来自守望先锋,各位可以去看看<a href="https://gameinstitute.qq.com/community/detail/114516">《守望先锋》架构设计与网络同步</a>,ECS全称是Entity Component System,即实体、组件和系统。</p>
+<ul>
+<li>实体一般用途的对象,可以用唯一ID来标识。</li>
+<li>组件是一组数据,可以是实体一部分,也可以是实体和世界交互的中间数据(注意：没有功能)。实体由若干组件组成的,否则它是空盒子。</li>
+<li>系统基于实体中的特定组件来实现特定功能,但是系统是集中批量处理所有的实体的。</li>
+</ul>
+<p>ECS这种架构有什么好处呢？相比OOP方式实现Component,ECS中相同组件的数据是连续的,<b><font color="red">System集中处理这些组件,可以方便利用CPU Cache提升效率</font></b>。由于System处理的可能是几个组件,ECS将组件尽量的最小化(否则会有很多数据冗余),这样就实现数据的扁平化。同时System间禁止相互调用,最大程度的实现代码解耦。<b><font color="red">而OOP最被诟病的调用层次深,结构复杂等问题都被解决了。</font></b><br>
+Dots就是由实体组件系统(ECS)、任务系统(Job System)、Burst Compiler编译器三部分组成。DOTS保证相同类型组件在内存中都是顺序排列,极大程度增加缓存的命中率,此外配合任务系统(Job System)让开发者无需头疼多线程同时访问数据需要手动加解锁的麻烦,最终加持Burst Compiler让性能飞起来。</p>
+<h2 id="2与oop编程对比">2.与OOP编程对比</h2>
+<p>在对比之前,需要了解CPU相关概念:</p>
+<ul>
+<li>1.CPU处理数据速度非常快,内存条和硬盘跟不上它的速度。</li>
+<li>2.CPU自身有三级缓存,用来提高CPU获取数据速度。n级缓存最快(n是1-&gt;3),但容量最小。</li>
+<li>3.内存是指CPU拿取数据的最开始的地方,CPU访问内存速率远小于三级缓存速率。</li>
+<li>4.CPU操作数据会从三级缓存中取得数据,速度非常快,但有些情况下数据不在三级缓存中(缺页中断),就需要寻址到内存中,并且把目标数据重新放到三级缓存中,提高下一次访问速度。</li>
+</ul>
+<p>很多传统游戏引擎是基于面向对象来设计的,游戏世界中的东西都是对象(GameObject),<b><font color="red">每个对象都有叫做Update方法,游戏引擎遍历所有对象,依次调用其Update方法</font></b>。有些引擎甚至定义多种Update方法,在同一帧的不同时机去调用(Unity通过反射机制调用这些Update函数)。
+OOP编程模式其实是有极大的缺陷的。<b><font color="red">因为游戏对象由很多部分聚合而成,引擎的功能模块很多,不同模块关注的部分往往互不相关</font></b>。比如音效模块数据并不需要关心物理碰撞数据、渲染模块数据不关心游戏逻辑数据,对于某种模块没有必要的数据保存到CPU中,我们可以称为垃圾数据。从自然意义上说,把游戏对象属性聚合是很正常的事情,对象生命期管理也是最合理的方式。但这种对象大量存在时就会严重性能问题,接下来展示Unity的MonoBehaviour所继承的Component子类。
+<img src="/img/post/Unity/dots/exp1.png" alt="exp1">
+其实MonoBehaviour继承关系是这样的,Behaviour-&gt;Component-&gt;Object,这些子类全部加起来的数据、属性可不是以上这么点,有兴趣可以进去看看这些子类都定义了什么数据、属性、方法。<b><font color="red">MonoBehaviour对象过多会导致大量无用数据占据CPU的缓存</font></b>(比如控制transform旋转,里面却有音效、物理、相机等等属性),<b><font color="red">结论是传统引擎的设计思路对CPU缓存不太友好导致利用率不高,出现CPU缺页中断情况会比较频繁</font></b>,下面给出图解：
+<img src="/img/post/Unity/dots/exp2.png" alt="exp2">
+使用Ecs技术对CPU缓存利用率有质的提高,因为保存到CPU缓存的数据都比较纯净(ECS中的实体、组件),这样可以有效降低CPU缺页中断,所以Dots相对于OOP编程有以下优点:</p>
+<ul>
+<li>1.ECS对CPU缓存友好,减少CPU缺页中断,防止CPU获取数据慢,从而CPU出现等待情况。</li>
+<li>2.JobSystem编写多线程代码可以提供高性能,显著提高帧速率和延长移动设备的电池寿命。</li>
+<li>3.Burst Compiler,用于生成高度优化的本地代码。</li>
+</ul>
+<h2 id="3dots官方案例">3.Dots官方案例</h2>
+<p>拉取Unity官方案例<a href="https://github.com/UnityTechnologies/AngryBots_ECS">AngryBots_ECS</a>,博主使用<b><font color="red">Unity2020.2.0a</font></b>打开案例工程,发现一大堆的问题和报错(剩下渲染管线方面问题无法解决,但不影响运行),接下来分析如何一步步解决这些问题。
+<img src="/img/post/Unity/dots/error.png" alt="error">
+首先是Hybrid Renderer版本问题,看报错好像依赖了High Definition RP包(但是下载RP后还是不行),所以这里尝试把Hybrid Renderer更新到最新的版本,于是第一个报错就消失了。出现了以下报错就和接龙一样&hellip;
+<img src="/img/post/Unity/dots/error1.png" alt="error1">
+Job System不存在OnCreateManager接口,可以进入到基类ComponentSystemBase里,发现了OnCreate生命周期函数,可以重写它来代替报错函数。
+<img src="/img/post/Unity/dots/error2.png" alt="error2">
+World.Active去代替World.DefaultGameObjectInjectionWorld,可能Active是老版本的命名方式,GameObjectConversionUtility.ConvertGameObjectHierarchy接口所需参数也不一致,可以改成一下代码段：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> settings <span style="color:#f92672">=</span> GameObjectConversionSettings.<span style="color:#a6e22e">FromWorld</span>(World.<span style="color:#a6e22e">DefaultGameObjectInjectionWorld</span>, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>	manager <span style="color:#f92672">=</span> World.<span style="color:#a6e22e">DefaultGameObjectInjectionWorld</span>.<span style="color:#a6e22e">EntityManager</span>;
+</span></span><span style="display:flex;"><span>	bulletEntityPrefab <span style="color:#f92672">=</span> GameObjectConversionUtility.<span style="color:#a6e22e">ConvertGameObjectHierarchy</span>(bulletPrefab, settings);
+</span></span></code></pre></div><p><img src="/img/post/Unity/dots/error3.png" alt="error3">
+最后TimeData.deltaTime改成大写开头即可,全部报错改好后会发现运行时还有问题,可能是Burst Compiler的问题,重启Unity后所有问题都得到解决了。<br>
+如果你终于走到这步,可能会很高兴。<b><font color="red">但启动游戏后会发现看不到子弹和敌人&hellip;</font></b>不使用Ecs是可以看到子弹的,如下图所示:
+<img src="/img/post/Unity/dots/exp3.png" alt="exp3">
+ps:莫名其妙死亡的话,只是看不到的敌人将主角杀死,上面说过可能是渲染管线的问题,经过在下长时间努力,大概知道问题所在了。<b><font color="red">尝试Edit/Project Settings/Graphics下将Scriptable Render Pipeline Settings设置成none</font></b>,可以看到一下画面(可以看到子弹、敌人)。
+<img src="/img/post/Unity/dots/exp4.png" alt="exp4">
+具体解决方案不太清楚,如果有人知道麻烦下面留言,万分感谢~<br>
+感觉GameObjectConversionSettings或Hybrid Rendering问题,但不知道如何修改。<br>
+<a href="https://www.bilibili.com/video/BV18J411t7G8?from=search&amp;seid=14138962513620957213">案例演示视频</a></p>
+<h2 id="4实战dots技术">4.实战Dots技术</h2>
+<p>使用<b><font color="red">Unity2020.2.0a</font></b>创建新工程后,需要导入hybrid、entities(entities依赖jobs、burst),如下图所示:
+<img src="/img/post/Unity/dots/exp5.png" alt="exp5">
+低版本Unity可能不存在此文件,并且manifest.json也不存在jobs、burst这些依赖包,这时需要手动拉取。接下来讲述下3种拉取方式：</p>
+<ul>
+<li>使用Package Manager拉取需要包(可能搜索不出来)。</li>
+<li>打开Package Manager后,窗口左上角有个加号,点开有三个选项Add package from xxx(有时低版本不出现Package Manager)。</li>
+<li>在manifest.json里添加两个依赖包(最稳定的方法)：<br>
+&ldquo;com.unity.entities&rdquo;: &ldquo;0.14.0-preview.18&rdquo;,<br>
+&ldquo;com.unity.rendering.hybrid&rdquo;: &ldquo;0.8.0-preview.18&rdquo;,</li>
+</ul>
+<p>依赖包全部导入后,接下来先尝试用DOTS技术写多个Cube旋转吧。</p>
+<ul>
+<li>1.创建旋转方块组件:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Entities;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">RotationCubeComponent</span> : IComponentData
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> speed;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>注意必须是结构体,以后文章会分析为什么是结构体,如何才可以使用类,结构体比类的优点等等。</p>
+<ul>
+<li>2.创建旋转方块事件</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Entities;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Mathematics;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Transforms;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Jobs;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RotationCubeSystem</span> : SystemBase
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnUpdate()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> deltaTime = Time.DeltaTime;
+</span></span><span style="display:flex;"><span>        Entities
+</span></span><span style="display:flex;"><span>           .WithName(<span style="color:#e6db74">&#34;RotationCubeSystem&#34;</span>)
+</span></span><span style="display:flex;"><span>           .ForEach((<span style="color:#66d9ef">ref</span> RotationCubeComponent rotationSpeed, <span style="color:#66d9ef">ref</span> Rotation rotation) =&gt;
+</span></span><span style="display:flex;"><span>           {
+</span></span><span style="display:flex;"><span>               rotation.Value = math.mul(
+</span></span><span style="display:flex;"><span>                   math.normalize(rotation.Value),
+</span></span><span style="display:flex;"><span>                   quaternion.AxisAngle(math.up(), rotationSpeed.speed * deltaTime));
+</span></span><span style="display:flex;"><span>           })
+</span></span><span style="display:flex;"><span>           .ScheduleParallel();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>ScheduleParallel已经使用Job System多线程技术了,不使用多线程处理可以自行百度。</p>
+<ul>
+<li>3.创建实体管理器</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Entities;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EntitiesManger</span> : MonoBehaviour, IConvertGameObjectToEntity
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> FloCubeSpeed = <span style="color:#ae81ff">10f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> data = <span style="color:#66d9ef">new</span> RotationCubeComponent { speed = FloCubeSpeed };
+</span></span><span style="display:flex;"><span>        dstManager.AddComponentData(entity,data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>GameObject转Entity,继承IConvertGameObjectToEntity重写Convert函数。</p>
+<ul>
+<li>4.批量生成实体</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Entities;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Mathematics;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> Unity.Transforms;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EntitiesBuilder</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> GameObject cube;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(cube, settings);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> x = <span style="color:#ae81ff">0</span>; x &lt; <span style="color:#ae81ff">100</span>; x++)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> y = <span style="color:#ae81ff">0</span>; y &lt; <span style="color:#ae81ff">100</span>; y++)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">var</span> instance = entityManager.Instantiate(prefab);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">var</span> position = transform.TransformPoint(<span style="color:#66d9ef">new</span> float3(x * <span style="color:#ae81ff">1.3F</span>, noise.cnoise(<span style="color:#66d9ef">new</span> float2(x, y) * <span style="color:#ae81ff">0.21F</span>) * <span style="color:#ae81ff">2</span>, y * <span style="color:#ae81ff">1.3F</span>));
+</span></span><span style="display:flex;"><span>                entityManager.SetComponentData(instance, <span style="color:#66d9ef">new</span> Translation { Value = position });
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>将EntitiesManger和Convert To Entity挂载到Cube之后,制作成Prefab即可。然后将EntitiesBuilder随便挂载到场景的物体。<br>
+具体原理分析和DOTS深度的东西后面文章会说明,至于官方案例子弹为什么不显示,博主知道具体原因也会更新的。</p>
+<h2 id="5总结">5.总结</h2>
+<p>既然DOTS这么牛逼,为啥还没普及?很简单,DOTS现阶段在完成度上就是接近废品的残次品,虽然经过Unity长达近三年的宣传,DOTS到今天完成度依然极低,基本上处于不可用的状态,一款游戏引擎必不可少的部分可简单列为下面八个,要把Dots技术推动起来,游戏引擎要进行大量重构,或者保留传统的MonoBehaviour将Dots技术插接进去,接下来看看Unity对这八大模块完成情况。</p>
+<ul>
+<li><b>Physics-3分</b> 物理自然是游戏引擎不可或缺的部分,DOTS配套的Unity Physics处于非常早期的状态,Authoring工具几乎为零,甚至Joint或者CharacterConroller都要从Sample里找代码,由于它提供了一套新的API,开发过程只能用极难使用来形容,来看看Trigger事件代码就知道了,而使用过程中也是Bug层出不穷,经常会遇到类似Mesh Collider Bake错误,而与之同期宣传的Havok Physics for Unity更是奇妙,在长达半年的时间里,只是单纯引入Havok便会导致HDRP的渲染出问题.而更进阶的布料、粒子、地形等也处于几乎为零的状态。</li>
+<li><b>Graphics-3分</b> DOTS与之配套的是图形系统是Hybrid Renderer,不过目前也只支持Mesh Renderer,什么Particle、Trail、VFX都还没影儿,更可惜的是官方现在优先关注于HDRP兼容性(虽然也不怎么样),URP或者Built-In Pipeline就基本别想了,遇到了问题也只能双手一摊。</li>
+<li><b>Audio-0分</b> Unity目前只开发了底层的 DSP 系统,上层的DOTS Audio说了一两年了连影子都没有,完成度接近于零。</li>
+<li><b>Animation-0分</b> Unity Animation依然处于极早期的开发中,DOTS Sample展示了些最基本的使用,类似 Animator 这样的高层方案现在还没影儿。</li>
+<li><b>Network-2分</b> 也是Unity吹了两年的东西,DOTS Sample中用的NetCode只不过把FPSSample中的部分代码挪过去了,目前版本号 0.0.4,意思就是太早期了别用。</li>
+<li><b>UI-0分</b> IMGUI,UI Element和UGUI三个Unity的产品均不支持DOTS。</li>
+<li><b>AI-0分</b> Navmesh,Ml-Agent,Ai Planner三个Unity的产品均不支持DOTS。</li>
+<li><b>Input-2分</b> 老的Input System相对简单与DOTS没啥关系,可新的Input System居然也不支持DOTS,幸运的是InputSystem相对独立,嫁接进DOTS并不困难。</li>
+</ul>
+<p>对于游戏引擎模块全部改成DOTS是有难度的,不然Unity公司对于DOTS支持程度就不是如此了(毕竟对游戏行业算是革命),在下大胆预言未来有某个天才或Unity公司完全实现了DOTS并且达到可以商用的地方,将会是巨大的利润和商机。<b><font color="red">大家可能比较关心的是目前DOTS能不能接入游戏,只能说部分模块可以使用(某些经典批处理场景),</font></b>个人建议不要把还没成型的技术接入到项目中,现在DOTS还有很多限制,知道有这个东西即可。参考资料和案例：<a href="https://github.com/UnityTechnologies?q=dots">DOTS开源案例</a>、<a href="https://unity.cn/search?q=dots">DOTS参考资料</a>、<a href="https://github.com/Unity-Technologies/EntityComponentSystemSamples">DOTS实用案例</a></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/ETServer%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/ETServer%E6%B6%88%E6%81%AF%E5%88%86%E6%8B%A8%E6%9C%BA%E5%88%B6/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_9.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_8.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            Unity多人聊天室</a>
+                            <p>前言 使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_4.jpg" alt="Unity多人聊天室">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            ScrollCircleMaker-Obsolete教程</a>
+                            <p>前言 ScrollCircleMaker-Obsolete v1.0已经放弃维护，目前基于ScriptableProcessor为核心重写了一版Scrol...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_6.jpg" alt="ScrollCircleMaker-Obsolete教程">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

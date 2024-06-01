@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-UI初探篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1ui%e6%a8%a1%e5%9d%97%e7%9a%84%e4%b8%80%e4%ba%9bapi">
+				                            1.UI模块的一些API
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%a1%86%e6%9e%b6%e5%ae%9e%e7%8e%b0%e4%ba%86%e4%bb%80%e4%b9%88">
+				                            2.框架实现了什么？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3ui%e6%a1%86%e6%9e%b6%e4%bd%bf%e7%94%a8%e6%97%b6%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98">
+				                            3.UI框架使用时遇到的问题
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-UI初探篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-UI初探篇</h1>
+                <div class="stuff">
+                    <span>March 6, 2020</span>
+                    <span>字数 1411</span>
+                                  
+                    <span id="/posts/Gameframework-UI初探篇/" class="leancloud_visitors" data-flag-title="Gameframework-UI初探篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_9.jpg
+cover: https://pics.images.ac.cn/image/5eb54e21e5b55.html-->
+<h2 id="1ui模块的一些api">1.UI模块的一些API</h2>
+<p>首先要知道这个框架常用的UI模块API,我们先找到MenuForm.cs就可以定位UIExtension.cs,这个类是静态拓展UIComponent类,可以看到如下函数表格:</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FadeToAlpha</td>
+<td>界面的透明度渐变的协程</td>
+</tr>
+<tr>
+<td>SmoothValue</td>
+<td>进度条的逐渐达到目标点的协程</td>
+</tr>
+<tr>
+<td>HasUIForm</td>
+<td>是否存在此界面的id</td>
+</tr>
+<tr>
+<td>GetUIForm</td>
+<td>获取挂载到此界面的UGuiForm</td>
+</tr>
+<tr>
+<td>CloseUIForm</td>
+<td>把此界面的UGuiForm脚本作为参数关闭界面</td>
+</tr>
+<tr>
+<td>OpenUIForm</td>
+<td>通过界面的枚举id去打开界面</td>
+</tr>
+<tr>
+<td>OpenDialog</td>
+<td>打开自定义的提示界面</td>
+</tr>
+<tr>
+<td>OpenNativeDialog</td>
+<td>打开原生态的提示界面</td>
+</tr>
+</tbody>
+</table>
+<p>UIComponent里也有一些关于UI模块的函数,比如获取所有视图组等等,UIComponent的API的用处已经被作者注释好了,所以这里就不讲述了。</p>
+<h2 id="2框架实现了什么">2.框架实现了什么？</h2>
+<p>首先生成一个GameForwork.Dll的ui模块的项目依赖图,发现UIManager是核心的类,UI模块启动会伴随着5大事件（关闭界面完成事件,打开界面失败事件,打开界面更新事件,界面打开成功事件,打开界面时加载依赖资源事件）,关系依赖图如下:
+<img src="/img/post/Gameframework/ui/exp1.png" alt="exp1">
+UIManager里面有字典是用来保存已经加载的视图资源,打开界面时会从对象池里面获取到资源,如果获取不到将实例化这个资源然后保存到对象池里,然后对用数据结构进行界面资源信息的增删改查更新,这个脚本主要是提供给使用框架的我们重要的接口,UIForm脚本是打开界面的时候会实例化界面信息然后挂载到界面上的,底层框架的UIManager将需要使用此脚本的函数,这个脚本与我们使用框架的人没有任何关系,此脚本上还有那个界面组的UIGroup类,当然这些东西是UIManager调用,我们调用UIManager的函数就可以了。<br>
+UGuiGroupHelper是界面组辅助器,就是控制界面组的一些API,目前只有深度的控制的函数。<br>
+DefaultUIFormHelper是界面辅助器,就是控制界面的一些API,比如界面的创建和释放等等。<br>
+UIComponent是实际挂载到物体上并且来控制界面的,主要是对UIManager的一层封装,调整参数对这个模块可能进行裁剪,比如是否需要打开界面成功的事件,实例化界面资源的优先级,界面组初始化的个数等。UIComponent在Start的时候主要是对UIManager进行初始化,一般开发的使用我们的界面组可以定义4个叫NormalGroup(基本界面组),PopupGroup(弹窗界面组),HintGroup(提示界面组),ToppestGroup(最高深度组),如图所示:
+<img src="/img/post/Gameframework/ui/exp2.png" alt="exp2"></p>
+<h2 id="3ui框架使用时遇到的问题">3.UI框架使用时遇到的问题</h2>
+<p>首次把工程下载好时点击按钮根本没有反应,于是发现到工程使用自定义CommonButton类去代替unity提供的Button组件,主要是继承了IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler这些接口来模拟Button,但是点击没有触发OnPointerDown函数,经过一段时间测试,发现了那些界面预制体下的Canvas组件和它们的父级UI Group - Default的Canvas组件可能没有关联起来,如图所示:
+<img src="/img/post/Gameframework/ui/exp3.png" alt="exp3">
+为什么呢？因为把MenForm直接拖动到UI下,然后再拖动回去,发现按钮可以触发。不知道是我一个人遇到了这个问题,也不太清楚是不是这个原因导致的问题,准备在GameForwork(UI模块进阶篇)解决这个问题。目前个人想法就是子级的Canvas与它的父级Canvas没有关联起来(有待考证)。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

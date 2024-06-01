@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework架构思路 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%a6%82%e4%bd%95%e4%b8%8b%e6%89%8b">
+				                            1.如何下手
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%90%84%e5%a4%a7%e7%ae%a1%e7%90%86%e5%99%a8%e7%bb%84%e4%bb%b6%e5%8f%88%e6%98%af%e5%b9%b2%e5%98%9b%e7%9a%84">
+				                            2.各大管理器组件又是干嘛的？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e7%ae%a1%e7%90%86%e5%99%a8%e4%ba%8b%e4%bb%b6%e8%a7%a6%e5%8f%91%e6%9c%ba%e5%88%b6">
+				                            3.管理器事件触发机制
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework架构思路</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework架构思路</h1>
+                <div class="stuff">
+                    <span>March 1, 2020</span>
+                    <span>字数 7574</span>
+                                  
+                    <span id="/posts/Gameframework架构思路/" class="leancloud_visitors" data-flag-title="Gameframework架构思路">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_22.jpg
+cover: https://pics.images.ac.cn/image/5eb551871b924.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>这里GF就是Gameframework框架,俗话说得好不想懂底层代码的程序猿,不是好程序猿(那里来的俗话,我也不知道&hellip;),Unity引擎如何搭建的,不懂倒是没有关系,毕竟代码没有开源(就算开源了,我也不会去读的,毕竟在下智商有限),但是GF代码是个人设计基于Unity的框架,你用着封装好的十八大金刚,敲着简单的代码,良心不会痛嘛,而且万一想要往框架封装新模块,@作者去添加模块也不太好,我们也不是这样的人,所以所以,还是看一下作者设计框架时的简单思路。</p>
+</blockquote>
+<h2 id="1如何下手">1.如何下手</h2>
+<p>接触GF差不多有一个月,本来准备拿它马上练手的,去写一个小游戏尝试一下,但是突然思考良久, 不行！作为优秀的程序猿,连框架代码原理都不了解,这么可以如此匆忙的下手（万一和傻子一样手里已经拿着省力杠杆,但还是用手去翘石头,这样也不太好）,所以准备把每个模块仔仔细细了解清楚,然后把搭建GF框架的思路也明明白白给大脑安排一遍,那个时候再去使用省力杠杆,岂不是甚好？知识都是高浓度转向低浓度的,所以只要把脑袋紧贴着电脑屏幕就可以把知识转移到脑子里。在学习GF框架尽量要做到一个目标:你的框架就是我的框架,我的框架还是我的框架。
+<img src="/img/post/Gameframework/summary/look1.png" alt="look1">
+文字水了这么多了,现在应该讨论一下框架应该如何下手学习？当场捕获两个脚本（GameFrameworkEntry和GameEntry）,各位可以先从GameFrameworkEntry脚本,毕竟作者把它备注成游戏框架入口,看看游戏框架入口到底写了什么鬼？具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 游戏框架入口。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameFrameworkEntry</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> GameFrameworkLinkedList&lt;GameFrameworkModule&gt; s_GameFrameworkModules = <span style="color:#66d9ef">new</span> GameFrameworkLinkedList&lt;GameFrameworkModule&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 所有游戏框架模块轮询。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;elapseSeconds&#34;&gt;逻辑流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;realElapseSeconds&#34;&gt;真实流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Update(<span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (GameFrameworkModule module <span style="color:#66d9ef">in</span> s_GameFrameworkModules)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                module.Update(elapseSeconds, realElapseSeconds);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 关闭并清理所有游戏框架模块。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Shutdown()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (LinkedListNode&lt;GameFrameworkModule&gt; current = s_GameFrameworkModules.Last; current != <span style="color:#66d9ef">null</span>; current = current.Previous)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                current.Value.Shutdown();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            s_GameFrameworkModules.Clear();
+</span></span><span style="display:flex;"><span>            ReferencePool.ClearAll();
+</span></span><span style="display:flex;"><span>            GameFrameworkLog.SetLogHelper(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取游戏框架模块。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;typeparam name=&#34;T&#34;&gt;要获取的游戏框架模块类型。&lt;/typeparam&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;要获取的游戏框架模块。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;remarks&gt;如果要获取的游戏框架模块不存在,则自动创建该游戏框架模块。&lt;/remarks&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> T GetModule&lt;T&gt;() <span style="color:#66d9ef">where</span> T : <span style="color:#66d9ef">class</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Type interfaceType = <span style="color:#66d9ef">typeof</span>(T);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!interfaceType.IsInterface)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;You must get module by interface, but &#39;{0}&#39; is not.&#34;</span>, interfaceType.FullName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!interfaceType.FullName.StartsWith(<span style="color:#e6db74">&#34;GameFramework.&#34;</span>))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;You must get a Game Framework module, but &#39;{0}&#39; is not.&#34;</span>, interfaceType.FullName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> moduleName = Utility.Text.Format(<span style="color:#e6db74">&#34;{0}.{1}&#34;</span>, interfaceType.Namespace, interfaceType.Name.Substring(<span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>            Type moduleType = Type.GetType(moduleName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (moduleType == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Can not find Game Framework module type &#39;{0}&#39;.&#34;</span>, moduleName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> GetModule(moduleType) <span style="color:#66d9ef">as</span> T;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取游戏框架模块。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;moduleType&#34;&gt;要获取的游戏框架模块类型。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;要获取的游戏框架模块。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;remarks&gt;如果要获取的游戏框架模块不存在,则自动创建该游戏框架模块。&lt;/remarks&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> GameFrameworkModule GetModule(Type moduleType)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (GameFrameworkModule module <span style="color:#66d9ef">in</span> s_GameFrameworkModules)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (module.GetType() == moduleType)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> module;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> CreateModule(moduleType);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 创建游戏框架模块。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;moduleType&#34;&gt;要创建的游戏框架模块类型。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;要创建的游戏框架模块。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> GameFrameworkModule CreateModule(Type moduleType)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameFrameworkModule module = (GameFrameworkModule)Activator.CreateInstance(moduleType);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (module == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Can not create module &#39;{0}&#39;.&#34;</span>, moduleType.FullName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            LinkedListNode&lt;GameFrameworkModule&gt; current = s_GameFrameworkModules.First;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (current != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (module.Priority &gt; current.Value.Priority)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                current = current.Next;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (current != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                s_GameFrameworkModules.AddBefore(current, module);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                s_GameFrameworkModules.AddLast(module);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> module;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>通过脚本可以获取到需要的管理器,并且也有框架清理释放函数。还有Update函数可以轮询每个管理器的更新函数,有没有发现这个类是静态的,而且在动态链接库里的。所以大胆猜测一定是某个脚本继承了Mono脚本里然后去调用更新函数(虽然查看一下Update函数所有引用就知道了),这样动态链接库里的每个管理器都接入了更新方案。GameFrameworkModule列表是各位在游戏框架入口类里可以看到的,所以如果有什么和游戏相关的管理器需要扩展时,就必须要继承GameFrameworkModule才可以,可以看一下框架有哪些类是继承了模块抽象类的,具体截图如下:
+<img src="/img/post/Gameframework/summary/exp1.png" alt="exp1">
+目测十八大金钢都在,为什么名字有如此多重复？如果有这种疑问的童靴,可以去看一下partial限定字作用,这样就可以知道如何做到把类代码分开实现的。至于为什么作者把这些管理器脚本分成这么多份,因为管理器下面有分成一些功能,如果把代码全部集中在一起太low,而且类代码可能又长又宽, 导致看起来很不清晰。像我这种菜鸟以前都是集中起来,怂什么？干就完事了。还有一点要知道,如果往框架添加游戏模块时,管理器代码集中写问题倒是不大。但是添加新模块时不能引用Unity相关的库,如果发现添加新模块时引用了Unity相关库,在下就锤爆在座各位的狗头🙄。
+<img src="/img/post/Gameframework/summary/look2.jpg" alt="look2">
+这样怎么办呢？动态链接库代码如何做到与Unity中代码进行对接,其实每个管理器可以有很多个代理类,比如资源管理器可以有很多个资源加载代理类,下载管理器可以有很多下载代理类,命名差不多是xxxHelper,通俗的说它们的领导就是这些管理器,各位只需要在动态链接库里拟定一下接口,在Unity中具体实现接口即可,具体是什么意思？各位参照设置管理器(SettingManager)就知道了,首先设置代理接口代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework.Setting
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 游戏配置辅助器接口。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ISettingHelper</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载游戏配置。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> Load();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 保存游戏配置。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> Save();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 检查是否存在指定游戏配置项。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> HasSetting(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 移除指定游戏配置项。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> RemoveSetting(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 清空所有游戏配置项。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> RemoveAllSettings();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取布尔值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> GetBool(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取布尔值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> GetBool(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">bool</span> defaultValue);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定游戏配置项写入布尔值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> SetBool(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取整数值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> GetInt(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取整数值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> GetInt(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">int</span> defaultValue);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定游戏配置项写入整数值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> SetInt(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">int</span> <span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取浮点数值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> GetFloat(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取浮点数值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> GetFloat(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">float</span> defaultValue);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定游戏配置项写入浮点数值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> SetFloat(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">float</span> <span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取字符串值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> GetString(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取字符串值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> GetString(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">string</span> defaultValue);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定游戏配置项写入字符串值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> SetString(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取对象。</span>
+</span></span><span style="display:flex;"><span>        T GetObject&lt;T&gt;(<span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取对象。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">object</span> GetObject(Type objectType, <span style="color:#66d9ef">string</span> settingName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取对象。</span>
+</span></span><span style="display:flex;"><span>        T GetObject&lt;T&gt;(<span style="color:#66d9ef">string</span> settingName, T defaultObj);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定游戏配置项中读取对象。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">object</span> GetObject(Type objectType, <span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">object</span> defaultObj);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定游戏配置项写入对象。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> SetObject&lt;T&gt;(<span style="color:#66d9ef">string</span> settingName, T obj);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定游戏配置项写入对象。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> SetObject(<span style="color:#66d9ef">string</span> settingName, <span style="color:#66d9ef">object</span> obj);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里设置代理接口就是在要打包成动态链接库的解决方案里拟定的,因为每个管理器都需要持有它们的代理类,所以设置管理器类里一定有的参数就是ISettingHelper SettingHelper,继续？看看Unity中如何实现ISettingHelper接口的,部分代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SettingHelperBase</span> : MonoBehaviour, ISettingHelper
+</span></span></code></pre></div><p>所以需要添加其他设置方案时（比如将本地设置保存成byte文件）,继承接口并且去实现即可,作者这里默认实现的设置代理类是对Unity的PlayerPrefs的一层封装,如此去设计GF简直是天才之作(先把作者吹一波),这样就可以具体实现功能的插拔,比如有天不想使用PlayerPrefs去实现设置模块保存数据,这样再额外实现一个设置代理类即可。
+<img src="/img/post/Gameframework/summary/look3.png" alt="look3.png"></p>
+<h2 id="2各大管理器组件又是干嘛的">2.各大管理器组件又是干嘛的？</h2>
+<p>这个故事还是从GameEntry脚本开始吧！盯着电脑屏幕半天,感觉这个脚本和上面开始说的那个脚本简直神似？？？只不过这个脚本在Unity解决方案里的,多了注册模块的函数,用来将管理器组件添加到列表里,缺少了更新函数(想想也对的,都是在Unity中的解决方案了,还要什么更新函数？)。因为组件是挂载到Unity实际对象上的,所以GF框架在Awake时直接去注册了,而动态链接库里是获取管理器时,如果无法找到管理器的话就马上创建管理器然后保存到列表里,还是来看看组件们是如何被注册吧,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> UnityGameFramework.Runtime
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 游戏框架组件抽象类。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameFrameworkComponent</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 游戏框架组件初始化。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameEntry.RegisterComponent(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>只要管理器组件继承了组件抽象类时,就可以在Awake时注册到列表里,当然如果要重写Awake函数时也是没有问题的 ,但是要记住在Awake开头调用写上以下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">base</span>.Awake();
+</span></span></code></pre></div><p>可能各位会说这个就不必多说了,这个不是基础知识嘛,那个那个&hellip;,就随便提一嘴而已,各位接下来就来分析一下各个管理器组件脚本的具体的用处是什么？动态链接库里的管理器总需要有去调用和初始化参数的脚本,这个时候就需要像月老牵线一样,天下情侣都是一对的(如果你们敢说国外有些地方都可以一夫多妻,我只能对各位说渣男！),所以一个管理器组件对应上一个管理器,来看看设置管理器组件到底做了什么事情,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> GameFramework.Resource;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework.Scene
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 场景管理器。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SceneManager</span> : GameFrameworkModule, ISceneManager
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> List&lt;<span style="color:#66d9ef">string</span>&gt; m_LoadedSceneAssetNames;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> List&lt;<span style="color:#66d9ef">string</span>&gt; m_LoadingSceneAssetNames;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> List&lt;<span style="color:#66d9ef">string</span>&gt; m_UnloadingSceneAssetNames;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> LoadSceneCallbacks m_LoadSceneCallbacks;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> UnloadSceneCallbacks m_UnloadSceneCallbacks;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> IResourceManager m_ResourceManager;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> EventHandler&lt;LoadSceneSuccessEventArgs&gt; m_LoadSceneSuccessEventHandler;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> EventHandler&lt;LoadSceneFailureEventArgs&gt; m_LoadSceneFailureEventHandler;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> EventHandler&lt;LoadSceneUpdateEventArgs&gt; m_LoadSceneUpdateEventHandler;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> EventHandler&lt;LoadSceneDependencyAssetEventArgs&gt; m_LoadSceneDependencyAssetEventHandler;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> EventHandler&lt;UnloadSceneSuccessEventArgs&gt; m_UnloadSceneSuccessEventHandler;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> EventHandler&lt;UnloadSceneFailureEventArgs&gt; m_UnloadSceneFailureEventHandler;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 初始化场景管理器的新实例。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> SceneManager()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_LoadedSceneAssetNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            m_LoadingSceneAssetNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            m_UnloadingSceneAssetNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            m_LoadSceneCallbacks = <span style="color:#66d9ef">new</span> LoadSceneCallbacks(LoadSceneSuccessCallback, LoadSceneFailureCallback, LoadSceneUpdateCallback, LoadSceneDependencyAssetCallback);
+</span></span><span style="display:flex;"><span>            m_UnloadSceneCallbacks = <span style="color:#66d9ef">new</span> UnloadSceneCallbacks(UnloadSceneSuccessCallback, UnloadSceneFailureCallback);
+</span></span><span style="display:flex;"><span>            m_ResourceManager = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_LoadSceneSuccessEventHandler = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_LoadSceneFailureEventHandler = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_LoadSceneUpdateEventHandler = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_LoadSceneDependencyAssetEventHandler = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_UnloadSceneSuccessEventHandler = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_UnloadSceneFailureEventHandler = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取游戏框架模块优先级。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;remarks&gt;优先级较高的模块会优先轮询,并且关闭操作会后进行。&lt;/remarks&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">int</span> Priority
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">60</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景成功事件。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> EventHandler&lt;LoadSceneSuccessEventArgs&gt; LoadSceneSuccess
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">add</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneSuccessEventHandler += <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">remove</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneSuccessEventHandler -= <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景失败事件。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> EventHandler&lt;LoadSceneFailureEventArgs&gt; LoadSceneFailure
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">add</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneFailureEventHandler += <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">remove</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneFailureEventHandler -= <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景更新事件。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> EventHandler&lt;LoadSceneUpdateEventArgs&gt; LoadSceneUpdate
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">add</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneUpdateEventHandler += <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">remove</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneUpdateEventHandler -= <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景时加载依赖资源事件。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> EventHandler&lt;LoadSceneDependencyAssetEventArgs&gt; LoadSceneDependencyAsset
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">add</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneDependencyAssetEventHandler += <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">remove</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LoadSceneDependencyAssetEventHandler -= <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 卸载场景成功事件。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> EventHandler&lt;UnloadSceneSuccessEventArgs&gt; UnloadSceneSuccess
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">add</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_UnloadSceneSuccessEventHandler += <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">remove</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_UnloadSceneSuccessEventHandler -= <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 卸载场景失败事件。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> EventHandler&lt;UnloadSceneFailureEventArgs&gt; UnloadSceneFailure
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">add</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_UnloadSceneFailureEventHandler += <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">remove</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_UnloadSceneFailureEventHandler -= <span style="color:#66d9ef">value</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 场景管理器轮询。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;elapseSeconds&#34;&gt;逻辑流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;realElapseSeconds&#34;&gt;真实流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> Update(<span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 关闭并清理场景管理器。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> Shutdown()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span>[] loadedSceneAssetNames = m_LoadedSceneAssetNames.ToArray();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> loadedSceneAssetName <span style="color:#66d9ef">in</span> loadedSceneAssetNames)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (SceneIsUnloading(loadedSceneAssetName))
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                UnloadScene(loadedSceneAssetName);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_LoadedSceneAssetNames.Clear();
+</span></span><span style="display:flex;"><span>            m_LoadingSceneAssetNames.Clear();
+</span></span><span style="display:flex;"><span>            m_UnloadingSceneAssetNames.Clear();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 设置资源管理器。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;resourceManager&#34;&gt;资源管理器。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SetResourceManager(IResourceManager resourceManager)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (resourceManager == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Resource manager is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_ResourceManager = resourceManager;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取场景是否已加载。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;场景是否已加载。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> SceneIsLoaded(<span style="color:#66d9ef">string</span> sceneAssetName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Scene asset name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_LoadedSceneAssetNames.Contains(sceneAssetName);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取已加载场景的资源名称。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;已加载场景的资源名称。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span>[] GetLoadedSceneAssetNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_LoadedSceneAssetNames.ToArray();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取已加载场景的资源名称。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;results&#34;&gt;已加载场景的资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> GetLoadedSceneAssetNames(List&lt;<span style="color:#66d9ef">string</span>&gt; results)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (results == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Results is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            results.Clear();
+</span></span><span style="display:flex;"><span>            results.AddRange(m_LoadedSceneAssetNames);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取场景是否正在加载。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;场景是否正在加载。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> SceneIsLoading(<span style="color:#66d9ef">string</span> sceneAssetName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Scene asset name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_LoadingSceneAssetNames.Contains(sceneAssetName);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取正在加载场景的资源名称。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;正在加载场景的资源名称。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span>[] GetLoadingSceneAssetNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_LoadingSceneAssetNames.ToArray();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取正在加载场景的资源名称。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;results&#34;&gt;正在加载场景的资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> GetLoadingSceneAssetNames(List&lt;<span style="color:#66d9ef">string</span>&gt; results)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (results == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Results is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            results.Clear();
+</span></span><span style="display:flex;"><span>            results.AddRange(m_LoadingSceneAssetNames);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取场景是否正在卸载。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;场景是否正在卸载。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> SceneIsUnloading(<span style="color:#66d9ef">string</span> sceneAssetName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Scene asset name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_UnloadingSceneAssetNames.Contains(sceneAssetName);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取正在卸载场景的资源名称。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;正在卸载场景的资源名称。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span>[] GetUnloadingSceneAssetNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_UnloadingSceneAssetNames.ToArray();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取正在卸载场景的资源名称。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;results&#34;&gt;正在卸载场景的资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> GetUnloadingSceneAssetNames(List&lt;<span style="color:#66d9ef">string</span>&gt; results)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (results == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Results is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            results.Clear();
+</span></span><span style="display:flex;"><span>            results.AddRange(m_UnloadingSceneAssetNames);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadScene(<span style="color:#66d9ef">string</span> sceneAssetName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            LoadScene(sceneAssetName, Constant.DefaultPriority, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;priority&#34;&gt;加载场景资源的优先级。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadScene(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">int</span> priority)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            LoadScene(sceneAssetName, priority, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;userData&#34;&gt;用户自定义数据。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadScene(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            LoadScene(sceneAssetName, Constant.DefaultPriority, userData);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 加载场景。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;priority&#34;&gt;加载场景资源的优先级。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;userData&#34;&gt;用户自定义数据。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadScene(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">int</span> priority, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Scene asset name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_ResourceManager == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;You must set resource manager first.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (SceneIsUnloading(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Scene asset &#39;{0}&#39; is being unloaded.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (SceneIsLoading(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Scene asset &#39;{0}&#39; is being loaded.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (SceneIsLoaded(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Scene asset &#39;{0}&#39; is already loaded.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_LoadingSceneAssetNames.Add(sceneAssetName);
+</span></span><span style="display:flex;"><span>            m_ResourceManager.LoadScene(sceneAssetName, priority, m_LoadSceneCallbacks, userData);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 卸载场景。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> UnloadScene(<span style="color:#66d9ef">string</span> sceneAssetName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            UnloadScene(sceneAssetName, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 卸载场景。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;sceneAssetName&#34;&gt;场景资源名称。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;userData&#34;&gt;用户自定义数据。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> UnloadScene(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Scene asset name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_ResourceManager == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;You must set resource manager first.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (SceneIsUnloading(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Scene asset &#39;{0}&#39; is being unloaded.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (SceneIsLoading(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Scene asset &#39;{0}&#39; is being loaded.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!SceneIsLoaded(sceneAssetName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Scene asset &#39;{0}&#39; is not loaded yet.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_UnloadingSceneAssetNames.Add(sceneAssetName);
+</span></span><span style="display:flex;"><span>            m_ResourceManager.UnloadScene(sceneAssetName, m_UnloadSceneCallbacks, userData);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> LoadSceneSuccessCallback(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">float</span> duration, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_LoadingSceneAssetNames.Remove(sceneAssetName);
+</span></span><span style="display:flex;"><span>            m_LoadedSceneAssetNames.Add(sceneAssetName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_LoadSceneSuccessEventHandler != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                LoadSceneSuccessEventArgs loadSceneSuccessEventArgs = LoadSceneSuccessEventArgs.Create(sceneAssetName, duration, userData);
+</span></span><span style="display:flex;"><span>                m_LoadSceneSuccessEventHandler(<span style="color:#66d9ef">this</span>, loadSceneSuccessEventArgs);
+</span></span><span style="display:flex;"><span>                ReferencePool.Release(loadSceneSuccessEventArgs);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> LoadSceneFailureCallback(<span style="color:#66d9ef">string</span> sceneAssetName, LoadResourceStatus status, <span style="color:#66d9ef">string</span> errorMessage, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_LoadingSceneAssetNames.Remove(sceneAssetName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> appendErrorMessage = Utility.Text.Format(<span style="color:#e6db74">&#34;Load scene failure, scene asset name &#39;{0}&#39;, status &#39;{1}&#39;, error message &#39;{2}&#39;.&#34;</span>, sceneAssetName, status.ToString(), errorMessage);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_LoadSceneFailureEventHandler != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                LoadSceneFailureEventArgs loadSceneFailureEventArgs = LoadSceneFailureEventArgs.Create(sceneAssetName, appendErrorMessage, userData);
+</span></span><span style="display:flex;"><span>                m_LoadSceneFailureEventHandler(<span style="color:#66d9ef">this</span>, loadSceneFailureEventArgs);
+</span></span><span style="display:flex;"><span>                ReferencePool.Release(loadSceneFailureEventArgs);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(appendErrorMessage);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> LoadSceneUpdateCallback(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">float</span> progress, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_LoadSceneUpdateEventHandler != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                LoadSceneUpdateEventArgs loadSceneUpdateEventArgs = LoadSceneUpdateEventArgs.Create(sceneAssetName, progress, userData);
+</span></span><span style="display:flex;"><span>                m_LoadSceneUpdateEventHandler(<span style="color:#66d9ef">this</span>, loadSceneUpdateEventArgs);
+</span></span><span style="display:flex;"><span>                ReferencePool.Release(loadSceneUpdateEventArgs);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> LoadSceneDependencyAssetCallback(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">string</span> dependencyAssetName, <span style="color:#66d9ef">int</span> loadedCount, <span style="color:#66d9ef">int</span> totalCount, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_LoadSceneDependencyAssetEventHandler != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                LoadSceneDependencyAssetEventArgs loadSceneDependencyAssetEventArgs = LoadSceneDependencyAssetEventArgs.Create(sceneAssetName, dependencyAssetName, loadedCount, totalCount, userData);
+</span></span><span style="display:flex;"><span>                m_LoadSceneDependencyAssetEventHandler(<span style="color:#66d9ef">this</span>, loadSceneDependencyAssetEventArgs);
+</span></span><span style="display:flex;"><span>                ReferencePool.Release(loadSceneDependencyAssetEventArgs);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> UnloadSceneSuccessCallback(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_UnloadingSceneAssetNames.Remove(sceneAssetName);
+</span></span><span style="display:flex;"><span>            m_LoadedSceneAssetNames.Remove(sceneAssetName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_UnloadSceneSuccessEventHandler != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                UnloadSceneSuccessEventArgs unloadSceneSuccessEventArgs = UnloadSceneSuccessEventArgs.Create(sceneAssetName, userData);
+</span></span><span style="display:flex;"><span>                m_UnloadSceneSuccessEventHandler(<span style="color:#66d9ef">this</span>, unloadSceneSuccessEventArgs);
+</span></span><span style="display:flex;"><span>                ReferencePool.Release(unloadSceneSuccessEventArgs);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> UnloadSceneFailureCallback(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_UnloadingSceneAssetNames.Remove(sceneAssetName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_UnloadSceneFailureEventHandler != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                UnloadSceneFailureEventArgs unloadSceneFailureEventArgs = UnloadSceneFailureEventArgs.Create(sceneAssetName, userData);
+</span></span><span style="display:flex;"><span>                m_UnloadSceneFailureEventHandler(<span style="color:#66d9ef">this</span>, unloadSceneFailureEventArgs);
+</span></span><span style="display:flex;"><span>                ReferencePool.Release(unloadSceneFailureEventArgs);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Unload scene failure, scene asset name &#39;{0}&#39;.&#34;</span>, sceneAssetName));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>看来组件做的事情也不少,动态链接库里管理器持有代理对象,而管理器组件持有着管理器对象,可能有些人会说为什么就一定要使用动态链接库里去调用,就不能在Unity解决方案里直接写嘛？可以是可以,但是主要的代码写到动态链接里,性能方面会更加好,管理器组件持有管理器去调用方法即可。给大家画个比较简单的GF架构图,让各位更好的理解设计思路。结构思路图如下:
+<img src="/img/post/Gameframework/summary/exp2.png" alt="exp2">
+这样需要添加新管理器时,就可以按照这个思路去设计了,武林秘籍已经倾囊传授给各位了,接下来各位去看看十八模块的事件是如何触发起来的,比如设置成功以后需要有一个成功的回调函数。</p>
+<h2 id="3管理器事件触发机制">3.管理器事件触发机制</h2>
+<p>每个管理器都需要有一定回调函数,通知它是否成功的回调,成功或失败之后总需要干点什么事情,在管理器组件里寥寥无几的事件代码,只需要在Awake里给它添加到一个多播事件里即可,以场景管理器组件(SceneComponent)作为例子,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    m_SceneManager.LoadSceneSuccess += OnLoadSceneSuccess;
+</span></span><span style="display:flex;"><span>    m_SceneManager.LoadSceneFailure += OnLoadSceneFailure;
+</span></span></code></pre></div><p>查找所有引用看一下到底那里调用这个多播事件,先给各位截个图吧,毕竟这个算是一个转折点了,诸君请看下图:
+<img src="/img/post/Gameframework/summary/exp3.png" alt="exp3">
+可以看到事件的回调时放到这个函数里了,但是具体这个函数在那里调用呢？让我们继续查找一下引用,发现一个事件管理器把所有回调函数全部封装到一个对象里了,具体代码段如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>m_LoadSceneCallbacks = <span style="color:#66d9ef">new</span> LoadSceneCallbacks(LoadSceneSuccessCallback, LoadSceneFailureCallback, LoadSceneUpdateCallback, LoadSceneDependencyAssetCallback);
+</span></span></code></pre></div><p>所以需要找到m_LoadSceneCallbacks对象引用即可,最后的最后！！！可以发现的是把对象交给任务池管理器了,添加到任务管理池里面,大概是放到类似列表的数据结构里进行轮回,先给各位看一下跳转到的添加到任务池的代码段。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadScene(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">int</span> priority, LoadSceneCallbacks loadSceneCallbacks, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ResourceInfo? resourceInfo = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span>[] dependencyAssetNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (!CheckAsset(sceneAssetName, <span style="color:#66d9ef">out</span> resourceInfo, <span style="color:#66d9ef">out</span> dependencyAssetNames))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> errorMessage = Utility.Text.Format(<span style="color:#e6db74">&#34;Can not load scene &#39;{0}&#39;.&#34;</span>, sceneAssetName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (loadSceneCallbacks.LoadSceneFailureCallback != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                loadSceneCallbacks.LoadSceneFailureCallback(sceneAssetName, LoadResourceStatus.NotReady, errorMessage, userData);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(errorMessage);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        LoadSceneTask mainTask = LoadSceneTask.Create(sceneAssetName, priority, resourceInfo.Value, dependencyAssetNames, loadSceneCallbacks, userData);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> dependencyAssetName <span style="color:#66d9ef">in</span> dependencyAssetNames)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!LoadDependencyAsset(dependencyAssetName, priority, mainTask, userData))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">string</span> errorMessage = Utility.Text.Format(<span style="color:#e6db74">&#34;Can not load dependency asset &#39;{0}&#39; when load scene &#39;{1}&#39;.&#34;</span>, dependencyAssetName, sceneAssetName);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (loadSceneCallbacks.LoadSceneFailureCallback != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    loadSceneCallbacks.LoadSceneFailureCallback(sceneAssetName, LoadResourceStatus.DependencyError, errorMessage, userData);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(errorMessage);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        m_TaskPool.AddTask(mainTask);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>至于TaskPool里代码确实是在Update里执行,任务池不断的更新,执行任务以后就把任务对象从列表里移除,给各位看一下任务池的Update里是如何执行的,调用截图如下:
+<img src="/img/post/Gameframework/summary/exp4.png" alt="exp4">
+进入任务队列以后,实际调用的函数是通过ProcessRunningTasks,这里又有一个概念就是任务代理类,说起来有点繁琐,这里就先简单的画龙点睛一下,具体的调用原理可以看一下在下写的任务池原理分析,首先给各位看看ProcessRunningTasks函数到底做了那些事情吧！具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> ProcessRunningTasks(<span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        LinkedListNode&lt;ITaskAgent&lt;T&gt;&gt; current = m_WorkingAgents.First;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (current != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            T task = current.Value.Task;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!task.Done)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                current.Value.Update(elapseSeconds, realElapseSeconds);
+</span></span><span style="display:flex;"><span>                current = current.Next;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            LinkedListNode&lt;ITaskAgent&lt;T&gt;&gt; next = current.Next;
+</span></span><span style="display:flex;"><span>            current.Value.Reset();
+</span></span><span style="display:flex;"><span>            m_FreeAgents.Push(current.Value);
+</span></span><span style="display:flex;"><span>            m_WorkingAgents.Remove(current);
+</span></span><span style="display:flex;"><span>            ReferencePool.Release(task);
+</span></span><span style="display:flex;"><span>            current = next;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>到这里的current.Value.Update就是调到管理器需要执行的回调函数(m_LoadSceneCallbacks),各位是不是慢慢忘记了标题&hellip;好像这么调着调着,代码就讲到这里了,不要惊慌！只需要看过任务池文章,你的思路就会渐渐清楚了(虽然写这篇文章时,任务池文章还没有开始写,哈哈哈哈哈哈)。
+<img src="/img/post/Gameframework/summary/look4.jpg" alt="look4">
+这里Update函数具体调用代码给各位看一下,具体是在DefaultLoadResourceAgentHelper里,如图所示:
+<img src="/img/post/Gameframework/summary/exp5.png" alt="exp5">
+到这里算是结束了&hellip;还有一点差点忘记了,就是调用半天了,其实回调函数里只是调用m_EventComponent.Fire函数,这个函数又是什么作用？各位可以到<a href="https://blog.csdn.net/m0_37920739/article/details/104723210">GF事件原理传送门</a>去看看。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

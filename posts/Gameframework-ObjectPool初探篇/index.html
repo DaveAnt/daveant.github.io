@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-ObjectPool初探篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-ObjectPool初探篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-ObjectPool初探篇</h1>
+                <div class="stuff">
+                    <span>March 23, 2020</span>
+                    <span>字数 3072</span>
+                                  
+                    <span id="/posts/Gameframework-ObjectPool初探篇/" class="leancloud_visitors" data-flag-title="Gameframework-ObjectPool初探篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_3.jpg
+cover: https://pics.images.ac.cn/image/5eb54e072b632.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>对象池和引用池的功能是一样的,也是为了防止反复销毁和创建,偏向于游戏实例中的使用,添加了释放事件和更新机制,引用池是偏向代码中反复用到的对象,比如各种任务,事件参数,各种模块信息。</p>
+</blockquote>
+<p>对象池不紧不慢的看了挺多天的,终于慢慢理解作者当时设计GF框架时为什么要这样去编写代码了,所以现在和大家分享一下对象池模块是如何慢慢架构起来的,由于对象池的代码比较多,可以先看看作者提供的GF游戏例是如何使用对象池模块的,于是找到了游戏中血条显示就是使用对象池的,接下来就给截图:
+<img src="/img/post/Gameframework/objectPool/exp1.png" alt="exp1">
+四个地方:创建对象池(CreateSingleSpawnObjectPool)、获取对象 (Spawn)、注册对象(Register)、释放对象(hpBarItem),就先从这四个接口入手,慢慢的小鸡炖蘑菇,这样就可以成功的把对象池的实现原理和使用都理解的明明白白,创建对象池函数连着跳啊跳,找到了以下实现的代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> IObjectPool&lt;T&gt; InternalCreateObjectPool&lt;T&gt;(<span style="color:#66d9ef">string</span> name, <span style="color:#66d9ef">bool</span> allowMultiSpawn,
+</span></span><span style="display:flex;"><span>	         <span style="color:#66d9ef">float</span> autoReleaseInterval, <span style="color:#66d9ef">int</span> capacity, <span style="color:#66d9ef">float</span> expireTime, <span style="color:#66d9ef">int</span> priority) <span style="color:#66d9ef">where</span> T : ObjectBase
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	    TypeNamePair typeNamePair = <span style="color:#66d9ef">new</span> TypeNamePair(<span style="color:#66d9ef">typeof</span>(T), name);
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">if</span> (HasObjectPool&lt;T&gt;(name))
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Already exist object pool &#39;{0}&#39;.&#34;</span>, typeNamePair.ToString()));
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    ObjectPool&lt;T&gt; objectPool = <span style="color:#66d9ef">new</span> ObjectPool&lt;T&gt;(name, allowMultiSpawn, autoReleaseInterval, capacity, expireTime, priority);
+</span></span><span style="display:flex;"><span>	    m_ObjectPools.Add(typeNamePair, objectPool);
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> objectPool;
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>首先把名字和对象类型结合起来作为字典的Key,字典的Value是这个类型的对象池,好像突然明白了什么？我们创建对象池都统一对放到m_ObjectPools总对象池里,参数倒是挺多的,接下来给出表格让大家明白一下这些参数的用处是什么？</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allowMultiSpawn</td>
+<td>是否允许对象被多次获取,如果设置为true,导致对象池中只有一个对象,用于对象参数不变的情况。</td>
+</tr>
+<tr>
+<td>autoReleaseInterval</td>
+<td>对象池自动释放可释放对象的间隔秒数。</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>对象池的容量,如果超过容量会按照上面参数间隙自动释放。</td>
+</tr>
+<tr>
+<td>expireTime</td>
+<td>对象池对象过期秒数,到时间会强制释放。</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>对象池的优先级。</td>
+</tr>
+</tbody>
+</table>
+<p>ObjectPool<T>里有还有多键值对的字典,数据结构具体的实现之后会说明,接下来看一下Spawn函数的作用,这里就是获取到多键值对字典,一个Key有对应着一个Value列表,然后循环查询对象是否使用,如果没有占用就将其返回,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>   <span style="color:#66d9ef">public</span> T Spawn(<span style="color:#66d9ef">string</span> name)
+</span></span><span style="display:flex;"><span>   {
+</span></span><span style="display:flex;"><span>       GameFrameworkLinkedListRange&lt;Object&lt;T&gt;&gt; objectRange = <span style="color:#66d9ef">default</span>(GameFrameworkLinkedListRange&lt;Object&lt;T&gt;&gt;);
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> (m_Objects.TryGetValue(name, <span style="color:#66d9ef">out</span> objectRange))
+</span></span><span style="display:flex;"><span>       {
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">foreach</span> (Object&lt;T&gt; internalObject <span style="color:#66d9ef">in</span> objectRange)
+</span></span><span style="display:flex;"><span>           {
+</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">if</span> (m_AllowMultiSpawn || !internalObject.IsInUse)
+</span></span><span style="display:flex;"><span>               {
+</span></span><span style="display:flex;"><span>                   <span style="color:#66d9ef">return</span> internalObject.Spawn();
+</span></span><span style="display:flex;"><span>               }
+</span></span><span style="display:flex;"><span>           }
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>   }
+</span></span></code></pre></div><p>这里的IsInUse并不是获取对象(Spwn)成功以后把某值设置成true,而是将m_SpawnCount的数里加1,这个参数的意思就是表示对象被占用的次数,这样设计主要是也兼容了m_AllowMultiSpawn参数,知道对象被占用的次数和是否被占用,如果全部对象使用中怎么办呢？导致对象会返回null,这样我们就可以调用Register函数,为其多添加一个对象,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Register(T obj, <span style="color:#66d9ef">bool</span> spawned)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (obj == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>         {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Object is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         Object&lt;T&gt; internalObject = Object&lt;T&gt;.Create(obj, spawned);
+</span></span><span style="display:flex;"><span>         m_Objects.Add(obj.Name, internalObject);
+</span></span><span style="display:flex;"><span>         m_ObjectMap.Add(obj.Target, internalObject);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> (Count &gt; m_Capacity)
+</span></span><span style="display:flex;"><span>         {
+</span></span><span style="display:flex;"><span>              Release();
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这里也可以看到如果超过了设置的容量,就会自动释放所有对象,最后一个就是归还函数（UnSpawn）,大家记得哦！有借有还再借不难,虽然这里你不还对象也没有什么问题,此对象非彼对象。因为设置了对象池容量,作者已经帮我们考虑到了这个问题,如果只获取对象但不归还,对象池将会进行一次清理（这样做并不好,合理设置对象池容量,对象池容量的设计部分原因是为了内存容量考虑,但是不归还对象相当于没有使用对象池优化一样,所以用完对象时必须要进行释放）,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Unspawn(<span style="color:#66d9ef">object</span> target)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (target == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Target is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Object&lt;T&gt; internalObject = GetObject(target);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (internalObject != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            internalObject.Unspawn();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (Count &gt; m_Capacity &amp;&amp; internalObject.SpawnCount &lt;= <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Release();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Can not find target in object pool &#39;{0}&#39;, target type is &#39;{1}&#39;, target value is &#39;{2}&#39;.&#34;</span>, <span style="color:#66d9ef">new</span> TypeNamePair(<span style="color:#66d9ef">typeof</span>(T), Name).ToString(), target.GetType().FullName, target.ToString()));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>经过上述讲解各位一定知道对象池的使用方式了,接下来我们看一下多键值对字典是如何实现的,数据结构继承了.Net的迭代器接口,可以看到这里的Key对应着一个GF框架自身实现的列表,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 游戏框架多值字典类。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;typeparam name=&#34;TKey&#34;&gt;指定多值字典的主键类型。&lt;/typeparam&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;typeparam name=&#34;TValue&#34;&gt;指定多值字典的值类型。&lt;/typeparam&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameFrameworkMultiDictionary</span>&lt;TKey, TValue&gt; : IEnumerable&lt;KeyValuePair&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;&gt;, IEnumerable
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> GameFrameworkLinkedList&lt;TValue&gt; m_LinkedList;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Dictionary&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt; m_Dictionary;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 初始化游戏框架多值字典类的新实例。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> GameFrameworkMultiDictionary()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_LinkedList = <span style="color:#66d9ef">new</span> GameFrameworkLinkedList&lt;TValue&gt;();
+</span></span><span style="display:flex;"><span>            m_Dictionary = <span style="color:#66d9ef">new</span> Dictionary&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取多值字典中实际包含的主键数量。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Count
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> m_Dictionary.Count;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 获取多值字典中指定主键的范围。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;指定的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;指定主键的范围。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> GameFrameworkLinkedListRange&lt;TValue&gt; <span style="color:#66d9ef">this</span>[TKey key]
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                GameFrameworkLinkedListRange&lt;TValue&gt; range = <span style="color:#66d9ef">default</span>(GameFrameworkLinkedListRange&lt;TValue&gt;);
+</span></span><span style="display:flex;"><span>                m_Dictionary.TryGetValue(key, <span style="color:#66d9ef">out</span> range);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> range;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 清理多值字典。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Clear()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_Dictionary.Clear();
+</span></span><span style="display:flex;"><span>            m_LinkedList.Clear();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 检查多值字典中是否包含指定主键。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;要检查的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;多值字典中是否包含指定主键。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> Contains(TKey key)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_Dictionary.ContainsKey(key);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 检查多值字典中是否包含指定值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;要检查的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;value&#34;&gt;要检查的值。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;多值字典中是否包含指定值。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> Contains(TKey key, TValue <span style="color:#66d9ef">value</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameFrameworkLinkedListRange&lt;TValue&gt; range = <span style="color:#66d9ef">default</span>(GameFrameworkLinkedListRange&lt;TValue&gt;);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_Dictionary.TryGetValue(key, <span style="color:#66d9ef">out</span> range))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> range.Contains(<span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 尝试获取多值字典中指定主键的范围。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;指定的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;range&#34;&gt;指定主键的范围。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;是否获取成功。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> TryGetValue(TKey key, <span style="color:#66d9ef">out</span> GameFrameworkLinkedListRange&lt;TValue&gt; range)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_Dictionary.TryGetValue(key, <span style="color:#66d9ef">out</span> range);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 向指定的主键增加指定的值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;指定的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;value&#34;&gt;指定的值。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Add(TKey key, TValue <span style="color:#66d9ef">value</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameFrameworkLinkedListRange&lt;TValue&gt; range = <span style="color:#66d9ef">default</span>(GameFrameworkLinkedListRange&lt;TValue&gt;);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_Dictionary.TryGetValue(key, <span style="color:#66d9ef">out</span> range))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_LinkedList.AddBefore(range.Terminal, <span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                LinkedListNode&lt;TValue&gt; first = m_LinkedList.AddLast(<span style="color:#66d9ef">value</span>);
+</span></span><span style="display:flex;"><span>                LinkedListNode&lt;TValue&gt; terminal = m_LinkedList.AddLast(<span style="color:#66d9ef">default</span>(TValue));
+</span></span><span style="display:flex;"><span>                m_Dictionary.Add(key, <span style="color:#66d9ef">new</span> GameFrameworkLinkedListRange&lt;TValue&gt;(first, terminal));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定的主键中移除指定的值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;指定的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;value&#34;&gt;指定的值。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;是否移除成功。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> Remove(TKey key, TValue <span style="color:#66d9ef">value</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameFrameworkLinkedListRange&lt;TValue&gt; range = <span style="color:#66d9ef">default</span>(GameFrameworkLinkedListRange&lt;TValue&gt;);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_Dictionary.TryGetValue(key, <span style="color:#66d9ef">out</span> range))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (LinkedListNode&lt;TValue&gt; current = range.First; current != <span style="color:#66d9ef">null</span> &amp;&amp; current != range.Terminal; current = current.Next)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (current.Value.Equals(<span style="color:#66d9ef">value</span>))
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (current == range.First)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            LinkedListNode&lt;TValue&gt; next = current.Next;
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">if</span> (next == range.Terminal)
+</span></span><span style="display:flex;"><span>                            {
+</span></span><span style="display:flex;"><span>                                m_LinkedList.Remove(next);
+</span></span><span style="display:flex;"><span>                                m_Dictionary.Remove(key);
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                            {
+</span></span><span style="display:flex;"><span>                                m_Dictionary[key] = <span style="color:#66d9ef">new</span> GameFrameworkLinkedListRange&lt;TValue&gt;(next, range.Terminal);
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                        m_LinkedList.Remove(current);
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 从指定的主键中移除所有的值。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;key&#34;&gt;指定的主键。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;是否移除成功。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> RemoveAll(TKey key)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameFrameworkLinkedListRange&lt;TValue&gt; range = <span style="color:#66d9ef">default</span>(GameFrameworkLinkedListRange&lt;TValue&gt;);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_Dictionary.TryGetValue(key, <span style="color:#66d9ef">out</span> range))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_Dictionary.Remove(key);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                LinkedListNode&lt;TValue&gt; current = range.First;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span> (current != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    LinkedListNode&lt;TValue&gt; next = current != range.Terminal ? current.Next : <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>                    m_LinkedList.Remove(current);
+</span></span><span style="display:flex;"><span>                    current = next;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 返回循环访问集合的枚举数。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;returns&gt;循环访问集合的枚举数。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Enumerator GetEnumerator()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Enumerator(m_Dictionary);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        IEnumerator&lt;KeyValuePair&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;&gt; IEnumerable&lt;KeyValuePair&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;&gt;.GetEnumerator()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> GetEnumerator();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        IEnumerator IEnumerable.GetEnumerator()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> GetEnumerator();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 循环访问集合的枚举数。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Enumerator</span> : IEnumerator&lt;KeyValuePair&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;&gt;, IEnumerator
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">private</span> Dictionary&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;.Enumerator m_Enumerator;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">internal</span> Enumerator(Dictionary&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt; dictionary)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (dictionary == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Dictionary is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                m_Enumerator = dictionary.GetEnumerator();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// 获取当前结点。</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">public</span> KeyValuePair&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt; Current
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> m_Enumerator.Current;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// 获取当前的枚举数。</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">object</span> IEnumerator.Current
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> m_Enumerator.Current;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// 清理枚举数。</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Dispose()
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_Enumerator.Dispose();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// 获取下一个结点。</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;returns&gt;返回下一个结点。&lt;/returns&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> MoveNext()
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> m_Enumerator.MoveNext();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// 重置枚举数。</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">void</span> IEnumerator.Reset()
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                ((IEnumerator&lt;KeyValuePair&lt;TKey, GameFrameworkLinkedListRange&lt;TValue&gt;&gt;&gt;)m_Enumerator).Reset();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果不太清楚<a href="https://blog.csdn.net/m0_37920739/article/details/104478904">迭代器模式</a>为何物的可以去学习一下。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Procedure%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

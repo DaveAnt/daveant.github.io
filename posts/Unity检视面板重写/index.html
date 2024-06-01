@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Unity检视面板重写 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e8%87%aa%e5%8a%a8%e8%af%86%e5%88%ab%e8%84%9a%e6%9c%ac">
+				                            1.自动识别脚本
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%8a%b1%e9%87%8c%e8%83%a1%e5%93%a8%e7%9a%84%e6%a3%80%e8%a7%86inspector%e7%95%8c%e9%9d%a2">
+				                            2.花里胡哨的检视(Inspector)界面
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%bd%a9%e8%9b%8bunity%e7%9a%84ugui%e6%ba%90%e4%bb%a3%e7%a0%81">
+				                            3.彩蛋(Unity的UGUI源代码)
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Unity检视面板重写</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Unity检视面板重写</h1>
+                <div class="stuff">
+                    <span>March 20, 2020</span>
+                    <span>字数 3074</span>
+                                  
+                    <span id="/posts/Unity检视面板重写/" class="leancloud_visitors" data-flag-title="Unity检视面板重写">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Unity/wallhaven_1.jpg
+cover: https://pics.images.ac.cn/image/5eb552f34b350.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>使用GF框架时,有没有发现很神奇的情况,继承任何模块的辅助器基类脚本(Helper)都会被检视面板自动识别,这里以GF框架为例讲述一下如何做到自动识别脚本的。</p>
+</blockquote>
+<h2 id="1自动识别脚本">1.自动识别脚本</h2>
+<p>不知道GF框架是何物的,也不影响这篇文章的观看,这里先讲述一下具体效果,按照框架模块中的本地化模块为例,分析GF框架是如何更新检视面板下的辅助器枚举,首先看到以下截图:
+<img src="/img/post/Unity/Inspector/exp1.png" alt="exp1">
+Localization Helper下的枚举就是自动识别的,创建出的脚本继承了DefaultLocalizationHelper,并且脚本的路径在Asset下,它这里选项自动添加刚刚创建的脚本,amazing！！！怎么做到的这个功能的,也太神奇了。
+<img src="/img/post/Unity/Inspector/look1.jpg" alt="look1">
+在下表示不服,为什么之前Unity就做不到(难道是长得不够帅？？？),GF框架确可以自动识别,Unity应该学乖了,可以自动去开发游戏了。来看看GF框架到底做了什么妖？功夫不负有心人,当场抓获以下脚本,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEditor;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityGameFramework.Runtime;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> UnityGameFramework.Editor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [CustomEditor(typeof(LocalizationComponent))]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LocalizationComponentInspector</span> : GameFrameworkInspector
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> SerializedProperty m_EnableLoadDictionaryUpdateEvent = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> SerializedProperty m_EnableLoadDictionaryDependencyAssetEvent = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> HelperInfo&lt;LocalizationHelperBase&gt; m_LocalizationHelperInfo = <span style="color:#66d9ef">new</span> HelperInfo&lt;LocalizationHelperBase&gt;(<span style="color:#e6db74">&#34;Localization&#34;</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnInspectorGUI()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnInspectorGUI();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            serializedObject.Update();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            LocalizationComponent t = (LocalizationComponent)target;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                EditorGUILayout.PropertyField(m_EnableLoadDictionaryUpdateEvent);
+</span></span><span style="display:flex;"><span>                EditorGUILayout.PropertyField(m_EnableLoadDictionaryDependencyAssetEvent);
+</span></span><span style="display:flex;"><span>                m_LocalizationHelperInfo.Draw();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            EditorGUI.EndDisabledGroup();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (EditorApplication.isPlaying &amp;&amp; IsPrefabInHierarchy(t.gameObject))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                EditorGUILayout.LabelField(<span style="color:#e6db74">&#34;Language&#34;</span>, t.Language.ToString());
+</span></span><span style="display:flex;"><span>                EditorGUILayout.LabelField(<span style="color:#e6db74">&#34;System Language&#34;</span>, t.SystemLanguage.ToString());
+</span></span><span style="display:flex;"><span>                EditorGUILayout.LabelField(<span style="color:#e6db74">&#34;Dictionary Count&#34;</span>, t.DictionaryCount.ToString());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            serializedObject.ApplyModifiedProperties();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Repaint();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnCompileComplete()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnCompileComplete();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            RefreshTypeNames();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnEnable()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_EnableLoadDictionaryUpdateEvent = serializedObject.FindProperty(<span style="color:#e6db74">&#34;m_EnableLoadDictionaryUpdateEvent&#34;</span>);
+</span></span><span style="display:flex;"><span>            m_EnableLoadDictionaryDependencyAssetEvent = serializedObject.FindProperty(<span style="color:#e6db74">&#34;m_EnableLoadDictionaryDependencyAssetEvent&#34;</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_LocalizationHelperInfo.Init(serializedObject);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            RefreshTypeNames();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> RefreshTypeNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_LocalizationHelperInfo.Refresh();
+</span></span><span style="display:flex;"><span>            serializedObject.ApplyModifiedProperties();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>GameFrameworkInspector是继承了UnityEditor.Editor,封装了编译开始和完成的事件,部分代码段如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> m_IsCompiling = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/// 绘制事件。</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnInspectorGUI()
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">if</span> (m_IsCompiling &amp;&amp; !EditorApplication.isCompiling)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        m_IsCompiling = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>	        OnCompileComplete();  <span style="color:#75715e">//虚函数没有任何实现</span>
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (!m_IsCompiling &amp;&amp; EditorApplication.isCompiling)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        m_IsCompiling = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>	        OnCompileStart();     <span style="color:#75715e">//虚函数没有任何实现 </span>
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>首次接触Unity的Editor模块编程,可能会看不懂上面的代码,所以先整理出一下表格,描述经常使用接口的具体功能,表格如下:</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EditorGUILayout.LabelField</td>
+<td>CustomEditor指定的GameObject脚本的检查器面板下显示标签</td>
+</tr>
+<tr>
+<td>EditorGUILayout.PropertyField</td>
+<td>制作用于显示SerializedProperty属性字段的方式,如果FindProperty是布尔型就显示勾选,字符串型就显示文本输入框。</td>
+</tr>
+<tr>
+<td>EditorGUILayout.Popup</td>
+<td>弹出选择菜单</td>
+</tr>
+<tr>
+<td>EditorApplication.isPlayingOrWillChangePlaymode</td>
+<td>是否正在显示或即将切换到检查器面板显示。</td>
+</tr>
+<tr>
+<td>EditorApplication.isPlaying</td>
+<td>编译器已经启动正在运行时返回true。</td>
+</tr>
+<tr>
+<td>BeginDisabledGroup,EndDisabledGroup</td>
+<td>它提供了更安全的范围划分机制,当条件为true时会触发执行,这里使用是一种优化的方案,当查看到脚本才会进行绘画。</td>
+</tr>
+<tr>
+<td>Editor.Repaint</td>
+<td>重绘显示在这个编辑器的任何检视面板,一般用于面板属性有更新变动时。</td>
+</tr>
+<tr>
+<td>serializedObject.ApplyModifiedProperties</td>
+<td>应用修改的属性。</td>
+</tr>
+<tr>
+<td>serializedObject.FindProperty</td>
+<td>CustomEditor指定的GameObject脚本中获取对象以在检查器中显示。</td>
+</tr>
+<tr>
+<td>serializedObject.Update</td>
+<td>更新序列化对象的表示形式。</td>
+</tr>
+</tbody>
+</table>
+<p>代码含义是先获取(FindProperty)LocalizationComponent需要设置的属性,然后显示获取到的属性,额外显示了当前使用的语言、系统的语言、语言字典的数量。应用属性的变化之后进行重画,就这样一直循环刷新,这里有HelperInfo脚本就是用来显示辅助器脚本的,进入看看它到底怎么实现了自动识别脚本的,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> GameFramework;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Text.RegularExpressions;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEditor;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> UnityGameFramework.Editor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HelperInfo</span>&lt;T&gt; <span style="color:#66d9ef">where</span> T : MonoBehaviour
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> CustomOptionName = <span style="color:#e6db74">&#34;&lt;Custom&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> <span style="color:#66d9ef">string</span> m_Name;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> SerializedProperty m_HelperTypeName;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> SerializedProperty m_CustomHelper;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span>[] m_HelperTypeNames;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_HelperTypeNameIndex;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> HelperInfo(<span style="color:#66d9ef">string</span> name)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_Name = name;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_HelperTypeName = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_CustomHelper = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_HelperTypeNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            m_HelperTypeNameIndex = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Init(SerializedObject serializedObject)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_HelperTypeName = serializedObject.FindProperty(Utility.Text.Format(<span style="color:#e6db74">&#34;m_{0}HelperTypeName&#34;</span>, m_Name));
+</span></span><span style="display:flex;"><span>            m_CustomHelper = serializedObject.FindProperty(Utility.Text.Format(<span style="color:#e6db74">&#34;m_Custom{0}Helper&#34;</span>, m_Name));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Draw()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> displayName = FieldNameForDisplay(m_Name);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> selectedIndex = EditorGUILayout.Popup(Utility.Text.Format(<span style="color:#e6db74">&#34;{0} Helper&#34;</span>, displayName), m_HelperTypeNameIndex, m_HelperTypeNames);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (selectedIndex != m_HelperTypeNameIndex)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_HelperTypeNameIndex = selectedIndex;
+</span></span><span style="display:flex;"><span>                m_HelperTypeName.stringValue = (selectedIndex &lt;= <span style="color:#ae81ff">0</span> ? <span style="color:#66d9ef">null</span> : m_HelperTypeNames[selectedIndex]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_HelperTypeNameIndex &lt;= <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                EditorGUILayout.PropertyField(m_CustomHelper);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_CustomHelper.objectReferenceValue == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    EditorGUILayout.HelpBox(Utility.Text.Format(<span style="color:#e6db74">&#34;You must set Custom {0} Helper.&#34;</span>, displayName), MessageType.Error);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Refresh()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            List&lt;<span style="color:#66d9ef">string</span>&gt; helperTypeNameList = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                CustomOptionName
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            helperTypeNameList.AddRange(Type.GetTypeNames(<span style="color:#66d9ef">typeof</span>(T)));
+</span></span><span style="display:flex;"><span>            m_HelperTypeNames = helperTypeNameList.ToArray();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_HelperTypeNameIndex = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!<span style="color:#66d9ef">string</span>.IsNullOrEmpty(m_HelperTypeName.stringValue))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_HelperTypeNameIndex = helperTypeNameList.IndexOf(m_HelperTypeName.stringValue);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_HelperTypeNameIndex &lt;= <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    m_HelperTypeNameIndex = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>                    m_HelperTypeName.stringValue = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> FieldNameForDisplay(<span style="color:#66d9ef">string</span> fieldName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(fieldName))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">string</span>.Empty;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> str = Regex.Replace(fieldName, <span style="color:#e6db74">@&#34;^m_&#34;</span>, <span style="color:#66d9ef">string</span>.Empty);
+</span></span><span style="display:flex;"><span>            str = Regex.Replace(str, <span style="color:#e6db74">@&#34;((?&lt;=[a-z])[A-Z]|[A-Z](?=[a-z]))&#34;</span>, <span style="color:#e6db74">@&#34; $1&#34;</span>).TrimStart();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> str;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>看到这里就知道其原由,脚本是通过Type.GetTypeNames去获取解决方案下所有继承于辅助器基类的脚本,然后弹出选择菜单进行名字选定(EditorGUILayout.Popup),框架启动时通过反射将创建出本地化辅助器实例,如此一来就实现自定义和扩展框架功能了,是不是感觉屌炸天了。
+<img src="/img/post/Unity/Inspector/look2.png" alt="look2"></p>
+<h2 id="2花里胡哨的检视inspector界面">2.花里胡哨的检视(Inspector)界面</h2>
+<p>看到Unity自带的组件检视界面是如此花里胡哨的(比如Button,Material这些花里胡哨检视界面),用时并且想模仿出类似的检视界面,有这个想法的话就已经成功一半了,毕竟只要想模仿才是迈出成功的第一步,首先看一下按钮组件的检视界面长啥样,虽然没有吃过猪肉起码看过猪跑,为了和模拟出来的界面进行比较,还是把自带按钮的检视界面给各位放出来看看。
+<img src="/img/post/Unity/Inspector/exp2.png" alt="exp2">
+标准按钮组件的检视界面就是长成这样的,接下来模拟一下按钮组件的检视界面样式,经过一段时间猛如虎的操作,再展示模拟出的按钮检视界面效果之前,各位看官注意拿好手机或抱好电脑屏幕,具体图片如下:
+<img src="/img/post/Unity/Inspector/exp3.png" alt="exp3">
+雌兔脚扑朔,雄兔眼迷离。可能会说狗贼别拿Photoshop以后的效果来唬弄,这里是分享知识的地方,怎么就被玷污了,这百分百是p出来的。对不起各位看官！这个确实靠重写OnInspectorGUI函数得到的效果。
+<img src="/img/post/Unity/Inspector/look3.jpg" alt="look3">
+接下来展示一下TButtonInspector代码,悟空的分身术到底是如何实现的,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEditor;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">[CustomEditor(typeof(TButton))]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TButtonInspector</span> :UnityEditor.Editor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SerializedProperty OnClick = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    SerializedProperty Interactable = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> Transition
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        None,
+</span></span><span style="display:flex;"><span>        ColorTint,
+</span></span><span style="display:flex;"><span>        SpriteSwap,
+</span></span><span style="display:flex;"><span>        Animation
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GameObject graphic;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Transition transition = Transition.ColorTint;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnInspectorGUI()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            EditorGUILayout.PropertyField(Interactable);         
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EnumPopup(<span style="color:#e6db74">&#34;Transition&#34;</span>, transition);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.BeginHorizontal();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.BeginVertical(GUILayout.Width(<span style="color:#ae81ff">6</span>));
+</span></span><span style="display:flex;"><span>            EditorGUILayout.Space();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EndVertical();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.BeginVertical();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.ObjectField(<span style="color:#e6db74">&#34;Target graphic&#34;</span>, graphic, <span style="color:#66d9ef">typeof</span>(GameObject), <span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (graphic == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                EditorGUILayout.HelpBox(<span style="color:#e6db74">&#34;You must have Target graphic&#34;</span>, MessageType.Warning);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.ColorField(<span style="color:#e6db74">&#34;Normal Color&#34;</span>,Color.white);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.ColorField(<span style="color:#e6db74">&#34;Highlighted Color&#34;</span>, Color.white);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.ColorField(<span style="color:#e6db74">&#34;Pressed Color&#34;</span>, Color.gray);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.ColorField(<span style="color:#e6db74">&#34;Disabled Color&#34;</span>, Color.gray);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.Slider(<span style="color:#e6db74">&#34;Color Multiplier&#34;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.FloatField(<span style="color:#e6db74">&#34;Fade Duration&#34;</span>, <span style="color:#ae81ff">0.1f</span>);
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EnumPopup(<span style="color:#e6db74">&#34;Navigation&#34;</span>, transition);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            EditorGUILayout.BeginHorizontal();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.BeginVertical(GUILayout.Width(<span style="color:#ae81ff">180</span>));
+</span></span><span style="display:flex;"><span>            EditorGUILayout.Space();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EndVertical();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.BeginVertical();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (GUILayout.Button(<span style="color:#e6db74">&#34;Visualize&#34;</span>))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Debug.Log(<span style="color:#e6db74">&#34;检测到点击了&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EndVertical();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EndHorizontal();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EndVertical();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.EndHorizontal();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.Space();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.Space();
+</span></span><span style="display:flex;"><span>            EditorGUILayout.PropertyField(OnClick);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        EditorGUI.EndDisabledGroup();
+</span></span><span style="display:flex;"><span>        serializedObject.ApplyModifiedProperties();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnEnable()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Interactable = serializedObject.FindProperty(<span style="color:#e6db74">&#34;Interactable&#34;</span>);
+</span></span><span style="display:flex;"><span>        OnClick = serializedObject.FindProperty(<span style="color:#e6db74">&#34;onClick&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>TButton代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine.Events;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">[DisallowMultipleComponent]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TButton</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> Interactable = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> OnClick onClick;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">[Serializable]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OnClick</span> : UnityEvent { }
+</span></span></code></pre></div><p>想不到吧！最后就是脚本图标的替换,<b><font color="red">Assets下命名一个Gizmos文件夹,把图片放到此文件夹里,然后把图片命名成脚本名+空格+Icon</font></b>,Unity会自动去帮你替换脚本图标, 以上脚本只是模仿检视界面,没有任何实际的功能,俗话说的好花瓶虽然好看,但&hellip;
+<img src="/img/post/Unity/Inspector/look4.jpg" alt="look4"></p>
+<h2 id="3彩蛋unity的ugui源代码">3.彩蛋(Unity的UGUI源代码)</h2>
+<p>花瓶好看却是毫无实际功能,怎么办呢？接下来就给出一份厚礼,记得关注投币喂食三连,不对不对,禁止投食&hellip;<br>
+Unity官方下载的<a href="https://bitbucket.org/Unity-Technologies/ui/downloads/?tab=tags">UGUI源代码链接</a>
+网速属实太慢的话,上传到<a href="https://download.csdn.net/download/m0_37920739/12229964">CSDN的链接</a><br>
+工程下载好以后,迫不及待的开始部署UIGUI到Unity里进行学习吧,先查看下载过来的压缩包有那些东西,看到文件夹内容截图如下:
+<img src="/img/post/Unity/Inspector/exp4.png" alt="exp4">
+把UnityEngine.UI放到Unity下即可,再把UnityEditor.UI、UnityEngine.UI-Editor放到Assets/Editor路径。记住文件夹下所有代码不相关的东西都可以删掉,还要移除掉Editor\Data\UnityExtensions\Unity\GUISystem文件夹,然后创建UnityEditor.UI和UnityEngine.UI的Assembly Denfinition,查看打印什么错误给它们添加上缺失的引用,具体的引用添加如下图:
+<img src="/img/post/Unity/Inspector/exp5.png" alt="exp5">
+Unity2018以上有一个坑爹的地方就是Packages里的有一个TestMeshPro引用了UnityEngine.UI,但是这个包的所有文件是不让修改的,无法给它添加上引用,如图所示:
+<img src="/img/post/Unity/Inspector/exp6.png" alt="exp6">
+直接通过Window下的Package Manager选项移除掉这个包,具体界面如下:
+<img src="/img/post/Unity/Inspector/exp7.png" alt="exp7">
+之后可以调试UGUI模块了,如果有好的想法需要添加集成到Unity的UGUI模块里,生成Dll替换GUISystem文件夹下所有文件,自行定制UGUI模块就这样实现了,具体截图如下:
+<img src="/img/post/Unity/Inspector/exp8.png" alt="exp8">
+最后Unity是mdb文件而不是pdb,需要工具将pdb转成mdb,所有pdb都需要转换。Unity有自带的转换工具交pdb2mdb.exe,通过命令行执行这个程序,具体执行界面如下:
+<img src="/img/post/Unity/Inspector/exp9.png" alt="exp9">
+输入pdb2mdb.exe后,将Dll直接拖动到命令行下,路径就会自动出来,<a href="https://download.csdn.net/download/m0_37920739/12230644">pdb2mdb下载链接</a>和<a href="https://download.csdn.net/download/m0_37920739/12230641">UGUI部署好的工程链接</a>。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Transform%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Shader%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_9.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_8.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            Unity多人聊天室</a>
+                            <p>前言 使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_4.jpg" alt="Unity多人聊天室">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            Unity的Dots技术入门</a>
+                            <p>前言 看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_7.jpg" alt="Unity的Dots技术入门">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            ScrollCircleMaker-Obsolete教程</a>
+                            <p>前言 ScrollCircleMaker-Obsolete v1.0已经放弃维护，目前基于ScriptableProcessor为核心重写了一版Scrol...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_6.jpg" alt="ScrollCircleMaker-Obsolete教程">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

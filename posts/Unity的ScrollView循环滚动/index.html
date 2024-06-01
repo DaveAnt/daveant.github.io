@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Unity的ScrollView循环滚动 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%b8%b8%e6%88%8f%e4%b8%ad%e7%9a%84%e9%9c%80%e6%b1%82">
+				                            1.游戏中的需求
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%80%9d%e8%80%83%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88">
+				                            2.思考解决方案
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%ae%9e%e7%8e%b0%e5%be%aa%e7%8e%af%e6%bb%91%e5%8a%a8">
+				                            3.实现循环滑动
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Unity的ScrollView循环滚动</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Unity的ScrollView循环滚动</h1>
+                <div class="stuff">
+                    <span>May 3, 2020</span>
+                    <span>字数 3462</span>
+                                  
+                    <span id="/posts/Unity的ScrollView循环滚动/" class="leancloud_visitors" data-flag-title="Unity的ScrollView循环滚动">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Unity/wallhaven_5.jpg
+cover: https://pics.images.ac.cn/image/5eb55307aed2d.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>当ScrollView中存在大量Item时,很明显不可能实例化出这么多Item,Unity引擎也没有提供优化的手段,所以需要自行想办法降低DrawCall。</p>
+</blockquote>
+<h2 id="1游戏中的需求">1.游戏中的需求</h2>
+<p>这里给出王者荣耀的英雄查看界面为例,荣耀游戏中应该已经存在上百个英雄人物了(PS:博主已经好久没有玩荣耀了),这里给出网图来分析荣耀是如何做到英雄查看界面不卡顿的,是不是突然来了兴趣呢。
+<img src="/img/post/Unity/scrollview/exp1.jpg" alt="exp1">
+很明显不可能把这个UI的Prefab下的100多个英雄信息实例化到ScrollView下,并且购买新英雄时,这个英雄查看界面就需要热更新(要不就先直接实例化出所有英雄人物信息,然后将没有人物先隐藏),如下图所示：
+<img src="/img/post/Unity/scrollview/exp2.jpg" alt="exp1">
+当购买了赵云时,就可以将Hero2显示出来(假设Hero2就是赵云相关信息),算是个比较low的解决方案(但是估计这样的程序猿会被杀了祭天吧&hellip;)。</p>
+<h2 id="2思考解决方案">2.思考解决方案</h2>
+<p>在以上荣耀截图界面中可以发现展示了10个英雄人物,然后循环这些Item即可,但是10个item就足够了吗？很明显是不足够的,还需要多加一行或一列,看界面到底是上下滑动的还是左右滑动的,如下图所示：
+<img src="/img/post/Unity/scrollview/exp3.jpg" alt="exp3">
+按照上面分析也可以得到以下公式：<br>
+<font color="red"><b>Num<sub>最大数量</sub> = Num<sub>屏幕最少显示数</sub> + Num<sub>行或列数</sub></b></font><br>
+然后当第一行移出屏幕时,将其放置第四行位置,其次类推即可,所有事情思考起来都是简单的,其实还存在一个问题是滑动到第四行看到的还是第一行的样式,比如经过循环又看到了韩信、李白、花木兰、赵云、马可波罗。所以数据和实体要分离开来,通过判断当前实例行列去刷新实例样式,必定有类似保存Item最大数和所有数据的代码,如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List&lt;T&gt; _dataSet;<span style="color:#75715e">//所有数据</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List&lt;ItemBase&gt; _funcMap;<span style="color:#75715e">//将物体映射上对应的刷新函数</span>
+</span></span></code></pre></div><p>由于数据的结构是未知的,需要使用泛型或Object进行数据拆箱和装箱。如果使用泛型可以完成功能,就避免使用Object进行拆箱和装箱,这里可以尝试使用泛型,实在完成不了就走回头路使用Object。为了工具更加强大和方便,应该实现全自动化,比如告诉它上下左右间距、数据存量、单个Item长宽、滑动方向,剩下的一切事情就不需要程序猿操心,内部都将其完成了。</p>
+<h2 id="3实现循环滑动">3.实现循环滑动</h2>
+<p>首先ItemBase抽象类就是英雄信息框,它已经被循环滑动辅助器持有了,所以要给它添加初始化组件、初始化事件和更新视图的方法,其实初始化组件和初始化事件方法都在Start函数调用一次的,为什么还要分开实现的原因就是让逻辑看上去清楚(当然想要简单点,保留初始化组件函数即可),接下来就是更新视图函数了,每次位置发生变幻都需要将更新数据传递到更新视图函数里用来改变样式,可以通过注册ScrollView的onValueChanged来监听是否发生滚动。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ItemBase</span>&lt;T&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Transform _self;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> InitComponents();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> InitEvents();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> UpdateView(T data);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>大概可以把Itembase写成以上这样。接下来就要实现今天的主角循环滑动辅助器了,比较复杂的逻辑就是监听函数OnRefreshHandler里了,各位自行去品味代码具体含义(PS:很久之前写的了,博主也忘记了&hellip;),接下来就直接上代码。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine.UI;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScrollCircleHelper</span>&lt;T&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">enum</span> ScrollMode
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        TopToBottom,
+</span></span><span style="display:flex;"><span>        BottomToTop,
+</span></span><span style="display:flex;"><span>        LeftToRight,
+</span></span><span style="display:flex;"><span>        RightToLeft,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List&lt;T&gt; _dataSet;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List&lt;ItemBase&lt;T&gt;&gt; _funcMap;<span style="color:#75715e">//将物体映射上对应的刷新函数</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ScrollRect _scrollRect;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GridLayoutGroup _gridGroup;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Func&lt;ItemBase&lt;T&gt;&gt; _dataHandler;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> RectTransform _contentTrans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> _itemIdx = <span style="color:#ae81ff">0</span>, _dataIdx = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> RectTransform _itemRect;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> GameObject _item;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> ScrollMode _mode;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//设置偏移量</span>
+</span></span><span style="display:flex;"><span>    Vector3 itemPos, singleOffest, groupOffset;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Vector2 _maxSpan, _viewPortSize;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> maxRow, maxColumn, maxNum;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isRoll = <span style="color:#66d9ef">true</span>;<span style="color:#75715e">//支持滚动</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> offset;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> ScrollCircleHelper(Transform scrollTrans, GameObject item, Func&lt;ItemBase&lt;T&gt;&gt; dataHandler)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        _item = item;
+</span></span><span style="display:flex;"><span>        _itemRect = item.transform.GetComponent&lt;RectTransform&gt;();
+</span></span><span style="display:flex;"><span>        _contentTrans = scrollTrans.GetChild(<span style="color:#ae81ff">0</span>).GetChild(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        _gridGroup = _contentTrans.GetComponent&lt;GridLayoutGroup&gt;();
+</span></span><span style="display:flex;"><span>        _scrollRect = scrollTrans.GetComponent&lt;ScrollRect&gt;();
+</span></span><span style="display:flex;"><span>        _dataHandler = dataHandler;
+</span></span><span style="display:flex;"><span>        _dataSet = <span style="color:#66d9ef">new</span> List&lt;T&gt;();
+</span></span><span style="display:flex;"><span>        _funcMap = <span style="color:#66d9ef">new</span> List&lt;ItemBase&lt;T&gt;&gt;();
+</span></span><span style="display:flex;"><span>        _gridGroup.enabled = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        InitScrollCircleData();
+</span></span><span style="display:flex;"><span>        _scrollRect.onValueChanged.AddListener(OnRefreshHandler);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//计算可以显示的最大行列</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitScrollCircleData()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//maxColumn 最大列 maxRow 最大行</span>
+</span></span><span style="display:flex;"><span>        RectTransform _viewPortTrans = _contentTrans.parent <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        _viewPortSize = <span style="color:#66d9ef">new</span> Vector2(_viewPortTrans.rect.width, _viewPortTrans.rect.height);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (_contentTrans.anchorMin.x == <span style="color:#ae81ff">0</span> &amp;&amp; _contentTrans.anchorMin.y == <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            &amp;&amp; _contentTrans.anchorMax.x == <span style="color:#ae81ff">1</span> &amp;&amp; _contentTrans.anchorMax.y == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            _contentTrans.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            _mode = ScrollMode.TopToBottom;
+</span></span><span style="display:flex;"><span>            singleOffest = <span style="color:#66d9ef">new</span> Vector3(_itemRect.rect.width + _gridGroup.spacing.x, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>            groupOffset = <span style="color:#66d9ef">new</span> Vector3(_gridGroup.padding.left, -_itemRect.rect.height - _gridGroup.spacing.y);
+</span></span><span style="display:flex;"><span>            itemPos = <span style="color:#66d9ef">new</span> Vector3(_gridGroup.padding.left, -_gridGroup.padding.top);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (_contentTrans.anchorMin.x == <span style="color:#ae81ff">0</span> &amp;&amp; _contentTrans.anchorMin.y == <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>              &amp;&amp; _contentTrans.anchorMax.x == <span style="color:#ae81ff">1</span> &amp;&amp; _contentTrans.anchorMax.y == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            _contentTrans.pivot = Vector2.zero;
+</span></span><span style="display:flex;"><span>            _mode = ScrollMode.BottomToTop;
+</span></span><span style="display:flex;"><span>            singleOffest = <span style="color:#66d9ef">new</span> Vector3(_itemRect.rect.width + _gridGroup.spacing.x, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>            groupOffset = <span style="color:#66d9ef">new</span> Vector3(_gridGroup.padding.left, _itemRect.rect.height + _gridGroup.spacing.y);
+</span></span><span style="display:flex;"><span>            itemPos = <span style="color:#66d9ef">new</span> Vector3(_gridGroup.padding.left, _gridGroup.padding.bottom);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (_contentTrans.anchorMin.x == <span style="color:#ae81ff">0</span> &amp;&amp; _contentTrans.anchorMin.y == <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>              &amp;&amp; _contentTrans.anchorMax.x == <span style="color:#ae81ff">0</span> &amp;&amp; _contentTrans.anchorMax.y == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            _contentTrans.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            _mode = ScrollMode.LeftToRight;
+</span></span><span style="display:flex;"><span>            singleOffest = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">0</span>, -_itemRect.rect.height - _gridGroup.spacing.y);
+</span></span><span style="display:flex;"><span>            groupOffset = <span style="color:#66d9ef">new</span> Vector3(_itemRect.rect.width + _gridGroup.spacing.x, -_gridGroup.padding.top);
+</span></span><span style="display:flex;"><span>            itemPos = <span style="color:#66d9ef">new</span> Vector3(_gridGroup.padding.left, -_gridGroup.padding.top);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (_contentTrans.anchorMin.x == <span style="color:#ae81ff">1</span> &amp;&amp; _contentTrans.anchorMin.y == <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>              &amp;&amp; _contentTrans.anchorMax.x == <span style="color:#ae81ff">1</span> &amp;&amp; _contentTrans.anchorMax.y == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            _contentTrans.pivot = Vector2.one;
+</span></span><span style="display:flex;"><span>            _mode = ScrollMode.RightToLeft;
+</span></span><span style="display:flex;"><span>            singleOffest = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">0</span>, -_itemRect.rect.height - _gridGroup.spacing.y);
+</span></span><span style="display:flex;"><span>            groupOffset = <span style="color:#66d9ef">new</span> Vector3(-_itemRect.rect.width - _gridGroup.spacing.x, -_gridGroup.padding.top);
+</span></span><span style="display:flex;"><span>            itemPos = <span style="color:#66d9ef">new</span> Vector3(-_gridGroup.padding.right, -_gridGroup.padding.top);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            Debug.LogError(<span style="color:#e6db74">&#34;Cotent需要设置正确的Stretch&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (_mode == ScrollMode.TopToBottom || _mode == ScrollMode.BottomToTop)<span style="color:#75715e">//上下滑动</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            maxColumn = (<span style="color:#66d9ef">int</span>)((_viewPortTrans.rect.width - _gridGroup.padding.left - _gridGroup.padding.right +
+</span></span><span style="display:flex;"><span>                                _gridGroup.spacing.x) / (_itemRect.rect.width + _gridGroup.spacing.x));
+</span></span><span style="display:flex;"><span>            maxRow = (<span style="color:#66d9ef">int</span>)(_viewPortTrans.rect.height / (_itemRect.rect.height + _gridGroup.spacing.y)) + <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>            _scrollRect.horizontal = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>            _scrollRect.vertical = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//初始化刷新Item的参数</span>
+</span></span><span style="display:flex;"><span>            _maxSpan = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0</span>, groupOffset.y * maxRow);
+</span></span><span style="display:flex;"><span>            offset = Math.Abs(itemPos.y);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (_mode == ScrollMode.LeftToRight || _mode == ScrollMode.RightToLeft)<span style="color:#75715e">//左右滑动</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            maxColumn = (<span style="color:#66d9ef">int</span>)(_viewPortTrans.rect.width / (_itemRect.rect.width + _gridGroup.spacing.x)) + <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>            maxRow = (<span style="color:#66d9ef">int</span>)((_viewPortTrans.rect.height - _gridGroup.padding.top - _gridGroup.padding.bottom +
+</span></span><span style="display:flex;"><span>                            _gridGroup.spacing.y) / (_itemRect.rect.height + _gridGroup.spacing.y));
+</span></span><span style="display:flex;"><span>            _scrollRect.horizontal = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            _scrollRect.vertical = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//初始化刷新Item的参数</span>
+</span></span><span style="display:flex;"><span>            _maxSpan = <span style="color:#66d9ef">new</span> Vector2(groupOffset.x * maxColumn, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>            offset = Math.Abs(itemPos.x);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        maxNum = maxColumn * maxRow;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (maxColumn == <span style="color:#ae81ff">0</span> || maxRow == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            Debug.LogError(<span style="color:#e6db74">&#34;行列可以包含的最大个数不能是0&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnRefreshHandler(Vector2 v2)<span style="color:#75715e">//刷新Item的移动</span>
+</span></span><span style="display:flex;"><span>    { 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//不需要刷新</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (!isRoll) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//过滤边界</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (_mode)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.TopToBottom:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (_contentTrans.anchoredPosition.y &lt; <span style="color:#ae81ff">0</span> || _contentTrans.anchoredPosition.y + _viewPortSize.y &gt; _contentTrans.rect.height)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.BottomToTop:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (-_contentTrans.anchoredPosition.y &lt; <span style="color:#ae81ff">0</span> || -_contentTrans.anchoredPosition.y + _viewPortSize.y &gt; _contentTrans.rect.height)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.LeftToRight:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (-_contentTrans.anchoredPosition.x &lt; <span style="color:#ae81ff">0</span> || -_contentTrans.anchoredPosition.x + _viewPortSize.x &gt; _contentTrans.rect.width)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.RightToLeft:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (_contentTrans.anchoredPosition.x &lt; <span style="color:#ae81ff">0</span> || _contentTrans.anchoredPosition.x + _viewPortSize.x &gt; _contentTrans.rect.width)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (_mode)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.TopToBottom:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.BottomToTop:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">float</span> itemPos_y = _funcMap[_itemIdx]._self.localPosition.y;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (Mathf.Abs(_contentTrans.anchoredPosition.y) &gt;
+</span></span><span style="display:flex;"><span>                    Mathf.Abs(itemPos_y) + _itemRect.rect.height) <span style="color:#75715e">//表示向下刷新</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; maxColumn; ++i)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        ItemBase&lt;T&gt; itemBase = _funcMap[i + _itemIdx];
+</span></span><span style="display:flex;"><span>                        itemBase._self.localPosition += (Vector3)_maxSpan;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (_dataIdx + i + maxNum &gt;= _dataSet.Count)
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.zero;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (itemBase._self.localScale == Vector3.zero)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.one;
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i + maxNum]);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i + maxNum]);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    _dataIdx += maxColumn;
+</span></span><span style="display:flex;"><span>                    _itemIdx = _itemIdx + maxColumn &gt;= maxNum ?
+</span></span><span style="display:flex;"><span>                        <span style="color:#ae81ff">0</span> : _itemIdx + maxColumn;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (Mathf.Abs(_contentTrans.anchoredPosition.y) + Mathf.Abs(offset) &lt;
+</span></span><span style="display:flex;"><span>                        Mathf.Abs(itemPos_y) - _gridGroup.spacing.y)<span style="color:#75715e">//表示向上刷新</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    _itemIdx = _itemIdx - maxColumn &lt; <span style="color:#ae81ff">0</span> ? maxNum - maxColumn : _itemIdx - maxColumn;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; maxColumn; ++i)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        ItemBase&lt;T&gt; itemBase = _funcMap[i + _itemIdx];
+</span></span><span style="display:flex;"><span>                        itemBase._self.localPosition -= (Vector3)_maxSpan;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (_dataIdx + i - maxColumn &lt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.zero;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (itemBase._self.localScale == Vector3.zero)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.one;
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i - maxColumn]);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i - maxColumn]);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    _dataIdx -= maxColumn;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.RightToLeft:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.LeftToRight:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">float</span> itemPos_x = _funcMap[_itemIdx]._self.localPosition.x;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (Mathf.Abs(_contentTrans.anchoredPosition.x) &gt;
+</span></span><span style="display:flex;"><span>                    Mathf.Abs(itemPos_x) + _itemRect.rect.width) <span style="color:#75715e">//表示向下刷新</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; maxRow; ++i)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        ItemBase&lt;T&gt; itemBase = _funcMap[i + _itemIdx];
+</span></span><span style="display:flex;"><span>                        itemBase._self.localPosition += (Vector3)_maxSpan;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (_dataIdx + i + maxNum &gt;= _dataSet.Count)
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.zero;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (itemBase._self.localScale == Vector3.zero)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.one;
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i + maxNum]);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i + maxNum]);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    _dataIdx += maxRow;
+</span></span><span style="display:flex;"><span>                    _itemIdx = _itemIdx + maxRow &gt;= maxNum ?
+</span></span><span style="display:flex;"><span>                        <span style="color:#ae81ff">0</span> : _itemIdx + maxRow;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (Mathf.Abs(_contentTrans.anchoredPosition.x) + Mathf.Abs(offset) &lt;
+</span></span><span style="display:flex;"><span>                        Mathf.Abs(itemPos_x) - _gridGroup.spacing.x)<span style="color:#75715e">//表示向上刷新</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    _itemIdx = _itemIdx - maxRow &lt; <span style="color:#ae81ff">0</span> ? maxNum - maxRow : _itemIdx - maxRow;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; maxRow; ++i)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        ItemBase&lt;T&gt; itemBase = _funcMap[i + _itemIdx];
+</span></span><span style="display:flex;"><span>                        itemBase._self.localPosition -= (Vector3)_maxSpan;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (_dataIdx + i - maxRow &lt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.zero;
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (itemBase._self.localScale == Vector3.zero)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            itemBase._self.localScale = Vector3.one;
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i - maxRow]);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                            itemBase.UpdateView(_dataSet[_dataIdx + i - maxRow]);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    _dataIdx -= maxRow;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Transform trans;
+</span></span><span style="display:flex;"><span>        ItemBase&lt;T&gt; itemBase;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (_mode)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.TopToBottom:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.BottomToTop:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> len = _dataSet.Count % maxColumn == <span style="color:#ae81ff">0</span> ? _dataSet.Count / maxColumn : _dataSet.Count / maxColumn + <span style="color:#ae81ff">1</span>;<span style="color:#75715e">//向上取整</span>
+</span></span><span style="display:flex;"><span>                Vector2 sizeDelta = _contentTrans.sizeDelta;
+</span></span><span style="display:flex;"><span>                sizeDelta.y = _gridGroup.padding.bottom + _gridGroup.padding.top
+</span></span><span style="display:flex;"><span>                    + len * _itemRect.rect.height + (len - <span style="color:#ae81ff">1</span>) * _gridGroup.spacing.y;
+</span></span><span style="display:flex;"><span>                _contentTrans.sizeDelta = sizeDelta;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.LeftToRight:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ScrollMode.RightToLeft:
+</span></span><span style="display:flex;"><span>                len = _dataSet.Count % maxRow == <span style="color:#ae81ff">0</span> ? _dataSet.Count / maxRow : _dataSet.Count / maxRow + <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                sizeDelta = _contentTrans.sizeDelta;
+</span></span><span style="display:flex;"><span>                sizeDelta.x = _gridGroup.padding.left + _gridGroup.padding.right
+</span></span><span style="display:flex;"><span>                    + len * _itemRect.rect.width + (len - <span style="color:#ae81ff">1</span>) * _gridGroup.spacing.x;
+</span></span><span style="display:flex;"><span>                _contentTrans.sizeDelta = sizeDelta;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">1</span>; i &lt;= maxNum; ++i)<span style="color:#75715e">//初始化可显示区域</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i &gt; _dataSet.Count)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                isRoll = <span style="color:#66d9ef">false</span>;<span style="color:#75715e">//不支持滚动</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            itemBase = _dataHandler();
+</span></span><span style="display:flex;"><span>            trans = GameObject.Instantiate(_item, _contentTrans).transform;
+</span></span><span style="display:flex;"><span>            RectTransform rect = trans <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>            rect.anchorMax = rect.anchorMin = rect.pivot = _contentTrans.pivot;
+</span></span><span style="display:flex;"><span>            trans.localPosition = itemPos;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (_mode)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> ScrollMode.BottomToTop:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> ScrollMode.TopToBottom:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (i % maxColumn == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                        itemPos = <span style="color:#66d9ef">new</span> Vector3(groupOffset.x, itemPos.y + groupOffset.y);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                        itemPos += singleOffest;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> ScrollMode.LeftToRight:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> ScrollMode.RightToLeft:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (i % maxRow == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                        itemPos = <span style="color:#66d9ef">new</span> Vector3(itemPos.x + groupOffset.x, groupOffset.y);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                        itemPos += singleOffest;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            itemBase._self = trans;
+</span></span><span style="display:flex;"><span>            itemBase.InitComponents();
+</span></span><span style="display:flex;"><span>            itemBase.InitEvents();
+</span></span><span style="display:flex;"><span>            itemBase.UpdateView(_dataSet[i - <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>            _funcMap.Add(itemBase);<span style="color:#75715e">//将实体与代码绑定</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        _scrollRect.onValueChanged.RemoveListener(OnRefreshHandler);
+</span></span><span style="display:flex;"><span>        _dataSet.Clear();
+</span></span><span style="display:flex;"><span>        _funcMap.Clear();
+</span></span><span style="display:flex;"><span>        _dataSet = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        _funcMap = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Add(T data)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        _dataSet.Add(data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Clear()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        _dataSet.Clear();
+</span></span><span style="display:flex;"><span>        _funcMap.Clear();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这样应该如何使用呢？首先可以通过设置Cotent下的锚点来决定滑动方向,如下图所示:
+<img src="/img/post/Unity/scrollview/exp5.jpg" alt="exp5">
+接下来通过设置Grid Layout Group下的Spacing调整上下左右间距(这里博主偷懒了,其实这个组件主要是为了设置参数用的,完全没有必要,可以自行参数设置脚本),然后需要继承Itembase类完成初始化组件函数、更新视图函数等,通过以下图片分析得到有两个Image和一个Test需要刷新样式。
+<img src="/img/post/Unity/scrollview/exp4.jpg" alt="exp4">
+这里为了方便示范就简单更新Test组件当作演示即可,<b><font color="red">切记_self是根Transformt通过它可以获取所有子物体信息</font></b>,接下来就是实现英雄框的逻辑了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Hero</span> : ItemBase&lt;<span style="color:#66d9ef">int</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Text content;<span style="color:#75715e">//名字</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Image HeroImage; 图片</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Image Range; 熟练度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> InitComponents()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        content = _self.Find(<span style="color:#e6db74">&#34;Text&#34;</span>).GetComponent&lt;Text&gt;();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//HeroImage = _self.Find(&#34;HeroImage&#34;).GetComponent&lt;Image&gt;();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//Range = _self.Find(&#34;Range&#34;).GetComponent&lt;Image&gt;();</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> InitEvents()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> UpdateView(<span style="color:#66d9ef">int</span> data)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        content.text = data.ToString();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>万事俱备只欠东风,最后直接来看看如何使用循环滑动辅助器实现循环滚动的效果,初始化循环辅助器需要传递两个参数：1.英雄框实体;2.创建Hero类的委托;这里注意必须是创建类的委托,之后初始化装载数据(直接使用i当作数据了,通常是结构体)。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">demo</span> : MonoBehaviour {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ScrollCircleHelper&lt;<span style="color:#66d9ef">int</span>&gt; tanData = <span style="color:#66d9ef">new</span> ScrollCircleHelper&lt;<span style="color:#66d9ef">int</span>&gt;(
+</span></span><span style="display:flex;"><span>            transform,transform.parent.Find(<span style="color:#e6db74">&#34;Image&#34;</span>).gameObject,()=&gt;{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Hero();});
+</span></span><span style="display:flex;"><span>        tanData.Clear();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">1</span>; i &lt;= <span style="color:#ae81ff">1000</span>; ++i)
+</span></span><span style="display:flex;"><span>            tanData.Add(i);
+</span></span><span style="display:flex;"><span>        tanData.Start();
+</span></span><span style="display:flex;"><span>    }  	
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>tanData和Hero泛型必须指定相同类型,虽然初始化的实体只有15个,但表现出的效果是好像存在1000个实体(循环滑动达到的效果)。
+<img src="https://img-blog.csdnimg.cn/20200511014955899.gif" alt="exp6">
+<a href="https://download.csdn.net/download/m0_37920739/11186683">项目工程</a>积分比较高并不是博主调整的,如果需要工程参考可以评论留下邮箱,会通过邮件形式提供给各位。工程里其实使用了Object拆箱和装箱(很久之前写的),为了提高性能可以按照本文调整成泛型即可。还有几个Bug和缺点就是滑动过快会导致区域空白;使用了不必要的组件;功能还是不够强大,下次会调整和修复(下次一定,下次一定),其实已经开始动手编写简单、高效、功能较全的插件了(各位敬请期待吧)~</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_9.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_8.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            Unity多人聊天室</a>
+                            <p>前言 使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_4.jpg" alt="Unity多人聊天室">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            Unity的Dots技术入门</a>
+                            <p>前言 看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_7.jpg" alt="Unity的Dots技术入门">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            ScrollCircleMaker-Obsolete教程</a>
+                            <p>前言 ScrollCircleMaker-Obsolete v1.0已经放弃维护，目前基于ScriptableProcessor为核心重写了一版Scrol...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_6.jpg" alt="ScrollCircleMaker-Obsolete教程">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

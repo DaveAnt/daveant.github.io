@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Shader入门教程 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e4%bb%80%e4%b9%88%e6%98%af%e6%b8%b2%e6%9f%93%e6%b5%81%e6%b0%b4%e7%ba%bf">
+				                            1.什么是渲染流水线？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2shader%e8%af%ad%e6%b3%95%e5%9f%ba%e7%a1%80">
+				                            2.Shader语法基础
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e7%bc%96%e5%86%99surface-shader">
+				                            3.编写Surface Shader
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#shader%e7%9a%84%e9%80%89%e6%8b%a9%e6%89%a9%e5%b1%95%e8%af%ad%e5%bd%95">
+				                            Shader的选择(扩展语录)
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Shader入门教程</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Shader入门教程</h1>
+                <div class="stuff">
+                    <span>March 20, 2020</span>
+                    <span>字数 4435</span>
+                                  
+                    <span id="/posts/Shader入门教程/" class="leancloud_visitors" data-flag-title="Shader入门教程">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_1.jpg
+cover: https://pics.images.ac.cn/image/5eb5521b55b8e.html-->
+<h2 id="1什么是渲染流水线">1.什么是渲染流水线？</h2>
+<p>渲染流水线通俗的来说就是一个三维场景出发、生成一张二维图像,也就是说计算器需要从一系列的顶点数据、纹理等信息出发,把这些信息最终转换成一张人眼可以看到的图像,这个工作是由CPU和GPU协同完成的。渲染流程大致分成三个阶段:应用阶段、几何阶段、光栅化阶段。接下来就简单的描述一下这些阶段具体的作用。</p>
+<ul>
+<li>应用阶段-CPU处理<br>
+应用阶段是开发者完全可控的,这个阶段通俗的来说就是场景、模型的制作(光源、模型、Shader、材质的组合),渲染图元在这个阶段会传递给几何阶段,在这个之前需要把游戏相机照不到的地方进行剪裁,Unity提供了基本的aabb剪裁和遮挡剔除,这样就可以去掉不必要的渲染图元交给几何阶段了。</li>
+<li>几何阶段-GPU处理<br>
+几何阶段负责每个渲染图元进行打交道,进行逐顶点、逐多边形的操作,通俗的来说就是把三维空间转变成二维的坐标(把顶点坐标从模型空间转换到齐次剪裁空间),然后把顶点对应的深度和着色信息交给下一个阶段。</li>
+<li>光栅化阶段-GPU处理<br>
+这个阶段是是由上个阶段传递过来的数据最终生成屏幕上的像素,并绘制出图像到屏幕上,也就是说光栅化阶段决定每个像素在屏幕上绘制的位置。<br>
+接下里给出Unity中的截图来说明什么渲染图元和渲染状态。
+<img src="/img/post/Shader/summary/exp1.png" alt="exp1">
+渲染图元也就是游戏中的模型(由点、线、面),渲染状态是材质、Shader、材质的统称。
+几何阶比较重要步骤就是顶点着色器、光栅化阶段比较重要步骤就是逐片元操作:</li>
+<li>顶点着色器
+顶点着色器有两个任务:坐标变换、逐顶点光照。顾名思义就是将顶点位置进行某个变化,顶点着色器在这个步骤改变顶点的位置,这个顶点动画是非常有用的,例如可以通过改变顶点位置来模拟水面、布料等等效果,但是需要注意的是在顶点着色器中这么改变顶点的位置,一个顶点着色器最基本的工作就是顶点坐标从模型空间转换成齐次剪裁空间。</li>
+<li>逐片元操作
+这个阶段也有两个任务:测试片元可见性、通过测试的片元和已经存储在颜色缓存区中的颜色进行混合。这个就好比考面试,一个片元只有通过了所有的考试,才可以让GPU进行混合操作,如果没有通过某个测试,那样片元将得不到Offer(会被舍弃掉),之前为这个片元所做得全部工作将是白费,测试一共有两个模板测试和深度测试,模板测试通俗的来说就是剪裁画面的显示(比如画面只显示圆形外观,圆形外面的都是黑色的),深度测试通俗的来说就是剔除被遮挡的片元(正常情况下,如果Unity引擎开启了遮挡剔除功能,那样深度测试所有片元理论上都可以通过测试,因为在这个之前,应用阶段已经把模型剪裁掉了),具体的逐片元操作如下:
+<img src="/img/post/Shader/summary/exp2.jpg" alt="exp2">
+最后颜色混合以后把像素输出到屏幕上,当然不开启混合的话,颜色就会直接被覆盖,相当于jpg和png的差别(jpg是没有开启混合的,png是开启了混合的)。所以什么是Shader？在渲染管线中Shader被称为渲染状态,在应用阶段可以高度编程的,有一些特定的着色器,比如顶点着色器,片元着色器,依靠着着色器去控制流水线的渲染细节,比如用顶点着色器进行顶点变换和数据传递,用片元着色器来进行逐像素的渲染。</li>
+</ul>
+<h2 id="2shader语法基础">2.Shader语法基础</h2>
+<p>Shader本质其实是一个文本文件,首先Unity上创建出一个Surface Shader,来看一下还没有进行任何操作时,Shader的属性面板到底长什么样子,具体如下图所示:
+<img src="/img/post/Shader/summary/exp3.jpg" alt="exp3">
+在Unity里编写Shader时,需要知道一个东西就是SahderLab,ShaderLab是Unity提供的编写Unity Shader的一种说明性的语言,这篇文章的基础语法就在这里了,如果对前面概念性的东西理解起来比较吃力的话(已经很尽力去解释了),这里开始就很容易理解了(毕竟在座的都是程序猿),首先需要知道三个语义:Properties、SubShader、Fallback。</p>
+<ul>
+<li>Properties<br>
+属性的用处是为材质和Shader搭建起桥梁,相当于现实中的媒婆,属性的基本语法如下:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Properties{
+</span></span><span style="display:flex;"><span>	Name(<span style="color:#e6db74">&#34;display name&#34;</span>, PropertieType) <span style="color:#f92672">=</span> DefaultValue
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Name是属性名字(随便命名,一般由下划线开始),dispaly name是材质属性面板上显示的名字,PropertyType是变量的类型,接下来给出表格来说明有哪些。</p>
+<table>
+<thead>
+<tr>
+<th>属性类型</th>
+<th>默认值的定义语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Int</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Range(min,max)</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>(number,number,number,number)</td>
+</tr>
+<tr>
+<td>Vector</td>
+<td>(number,number,number,number)</td>
+</tr>
+<tr>
+<td>2D</td>
+<td>&ldquo;defaulttexture&rdquo;{}</td>
+</tr>
+<tr>
+<td>Cube</td>
+<td>&ldquo;defaulttexture&rdquo;{}</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>&ldquo;defaulttexture&rdquo;{}</td>
+</tr>
+</tbody>
+</table>
+<p>默认材质值定义可能比较复杂,要不是字符串为空,要不使用Unity内置的材质名(比如black,white)。</p>
+<ul>
+<li>SubShader<br>
+每个Shader可以有多个SubShader,但最少需要一个。Unity会扫描所有SubShader,如果都不支持的话,就会FallBack调用Unity默认的Shader,Unity提供这种特性的主要原因是:不同显卡具有不同的能力,更高级的显卡有更多的指令数,可以表现出更加出色的画面。SubShader的基本语法如下:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>SubShader{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//可选的</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>Tags<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//可选的</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>RenderSetup<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Pass{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>RenderSetup是渲染状态的设置,这些指令可以用来设置显卡的各种状态(例如是否开启混合/深度测试等等),在SubShader下直接设置渲染状态,将应用于所有的Pass,如果渲染状态设置在Pass里面,就是这个Pass单独使用这个渲染状态(Subshader下的渲染状态是特定的,虽然语法是一样的,但SubShader下的渲染状态和Pass下不是一个),接下来给出常用的渲染状态的表格:</p>
+<table>
+<thead>
+<tr>
+<th>状态名称</th>
+<th>设置指令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cull</td>
+<td>Cull Back/Front/Off</td>
+<td>设置剔除模式:剔除背面/正面/关闭剔除</td>
+</tr>
+<tr>
+<td>ZTest</td>
+<td>ZTest Less Greater/LEqual/GEqual/Equal/NotEqual/Always</td>
+<td>设置深度测试使用的函数</td>
+</tr>
+<tr>
+<td>ZWrite</td>
+<td>ZWrite On/Off</td>
+<td>开启/关闭深度写入</td>
+</tr>
+<tr>
+<td>Blend</td>
+<td>Blend SrcFactor DstFactor</td>
+<td>开启并设置混合模式</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Tags<br>
+标签是一个键值对(Key/Value Pair),它的键值都是通过字符串类型,标签是用来告诉游戏引擎,怎么样去渲染这个模型。标签的具体结构如下:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Tags { <span style="color:#e6db74">&#34;TagName1&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value1&#34;</span> <span style="color:#e6db74">&#34;TagName2&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value2&#34;</span> }
+</span></span></code></pre></div><p>接下来给出SubShader支持的标签类型表格。</p>
+<table>
+<thead>
+<tr>
+<th>标签类型</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Queue</td>
+<td>控制渲染顺序,指定该物体属于哪个渲染队列,通过这种方式可以保证所有透明物体在所有不透明物体后面渲染,也可以自定义使用的渲染队列来控制物体的渲染顺序。</td>
+<td>Tags{&ldquo;Queue&rdquo;=&ldquo;Transparent&rdquo;}</td>
+</tr>
+<tr>
+<td>RenderType</td>
+<td>对着色器进行分类,例如这个是不透明的着色器,或是一个透明的着色器等,这个可以用于着色器替换功能</td>
+<td>Tags{&ldquo;RenderType&rdquo;=&ldquo;Opaque&rdquo;}</td>
+</tr>
+<tr>
+<td>DisableBatching</td>
+<td>SubShader在使用Unity的批处理功能时候会出现问题(例如使用了模型空间下的坐标进行顶点动画),这时可以通过该标签来直接指明是否对该SubShader使用批处理</td>
+<td>Tags{&ldquo;DisableBatching&rdquo; = &ldquo;True&rdquo;}</td>
+</tr>
+<tr>
+<td>ForceNoShadowCasting</td>
+<td>控制使用该SubShader物体是否会投射阴影</td>
+<td>Tags{&ldquo;ForceNoShadowCasting&rdquo; = &ldquo;True&rdquo;}</td>
+</tr>
+<tr>
+<td>IgnoreProjector</td>
+<td>如果该标签值为&quot;True&quot;,那么SubShader的物体将不会受到投影(Projector)的影响,通常用于半透明物体</td>
+<td>Tags{&ldquo;IgnoreProjector&rdquo; = &ldquo;True&rdquo;}</td>
+</tr>
+<tr>
+<td>CanUseSpriteAtlas</td>
+<td>当Shader用于图片(Sprite)时,请将标签设置为False</td>
+<td>Tags{&ldquo;CanUseSpriteAtlas&rdquo; = &ldquo;False&rdquo;}</td>
+</tr>
+<tr>
+<td>PreviewType</td>
+<td>&ldquo;材质面板如何预览材质,默认是球形,可以设置成Plane、SkyBox来改变预览类型。</td>
+<td>Tags{&ldquo;PreviewType&rdquo;=&ldquo;Plane&rdquo;}</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Pass<br>
+上面说过每个Pass可以单独定义标签和渲染状态,虽然名字一样但不是一个东西,Pass语义块包含的语义如下：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Pass {
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>Name<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>Tags<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">[</span>RenderSetup<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>比起SubShader多了一个对Pass命名的标签,通过名称使用UsePass来直接使用其他Shader下的Pass,这样就可以让Shader代码更好的复用性,由于Unity内部会把所有Pass转换成大写的,所以在UsePss &ldquo;SubShader/PASS&quot;需要这样写,每个Pass都可以设置渲染状态和标签,只不过Pass标签类型是以下表格:</p>
+<table>
+<thead>
+<tr>
+<th>标签类型</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LightMode</td>
+<td>定义Pass在Unity的渲染流水线中的光照的模式(Always、ForwardBase、ForwardAdd、Deferred、ShadowCaster、MotionVectors、PrepassBase、PrepassFinal、Vertex、VertexLMRGBM、VertexLM。</td>
+<td>Tags{ &ldquo;LightMode&rdquo; = &ldquo;ForwardBase&rdquo; }</td>
+</tr>
+<tr>
+<td>RequireOptions</td>
+<td>用于指定当满足某些条件时才渲染该Pass,目前只有SoftVegetation,通过设置Settings Quality下决定</td>
+<td>Tags{&ldquo;RequireOptions&rdquo; = &ldquo;SoftVegetation&rdquo;}</td>
+</tr>
+</tbody>
+</table>
+<p>UsePass用于复用其他Shader下的Pass。<br>
+GrabPass用于抓取屏幕将结果保存到一张纹理上,可让之后的Pass进行处理。</p>
+<ul>
+<li>Fallback<br>
+给错误留一条退路,如果定义的SubShader都不可以使用,那就是使用最低级的Shader去渲染,比如你可以尝试以下语义:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Fallback <span style="color:#e6db74">&#34;name&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Fallback Off
+</span></span></code></pre></div><p>当然可以选择Off,那就是渲染不了就不管它了,一般这个情况可能会出现紫色(假想的,因为每次编写Shader出错时就这样&hellip;)。</p>
+<h2 id="3编写surface-shader">3.编写Surface Shader</h2>
+<p>经过上面描述,应该知道Shader并没有什么特别神奇的地方,它只是一段规定好输入(颜色,贴图等)和输出(渲染器能够读懂的点和颜色的对应关系)的程序。而Shader开发者要做的就是根据输入,进行计算变换,产生输出而已。接下来尝试编写简单的Shader:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span> {
+</span></span><span style="display:flex;"><span>    Properties {
+</span></span><span style="display:flex;"><span>        _MainTex (<span style="color:#e6db74">&#34;Base (RGB)&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
+</span></span><span style="display:flex;"><span>        LOD 200
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        CGPROGRAM
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>pragma surface surf Lambert
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        struct Input {
+</span></span><span style="display:flex;"><span>            float2 uv_MainTex;
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">surf</span> (Input IN, inout SurfaceOutput o) {
+</span></span><span style="display:flex;"><span>            half4 c <span style="color:#f92672">=</span> tex2D (_MainTex, IN.<span style="color:#a6e22e">uv_MainTex</span>);
+</span></span><span style="display:flex;"><span>            o.<span style="color:#a6e22e">Albedo</span> <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>            o.<span style="color:#a6e22e">Alpha</span> <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">a</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ENDCG
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Unit推崇使用表面着色器,创建了着色器代码类,所以它需要的代码量很少,Unity在背后做了很多事情,导致渲染代价会比较大,当使用表面着色器时,它背后还是会转换成对应的顶点/片元着色器,表面着色器相当于更加高级抽象(比如C#和C语言这样子),有了它很多光照细节就不必操心了,因为兼容各种平台会导致性能问题,手游上如果考虑性能的话可以少用Surface Shader。<br>
+接下来讲解一下语法具体的用处:</p>
+<table>
+<thead>
+<tr>
+<th>语义</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CGPROGRAM和ENDCG</td>
+<td>CG程序开始和结束</td>
+</tr>
+<tr>
+<td>pragma surface surf Lambert</td>
+<td>surface-声明是表面着色器,surf-着色器代码的方法名字,Lambert-使用的光照模型</td>
+</tr>
+<tr>
+<td>sampler2D _MainTex</td>
+<td>在Properties里声明的_MainTex是独立的,在CG代码需要访问外部变量,必须使用和之前变量相同的名字进行声明</td>
+</tr>
+<tr>
+<td>struct Input</td>
+<td>表面着色器函数规定参数格式(Input IN, inout SurfaceOutput o),inout没有权利修改,input可拟定,把需要的数据传递到Input里。</td>
+</tr>
+<tr>
+<td>float2 uv_MainTex</td>
+<td>栗子里的代码是_MainTex,前面加上uv表示可提取贴图上的点到二维坐标。</td>
+</tr>
+<tr>
+<td>half4 c = tex2D (_MainTex, IN.uv_MainTex)</td>
+<td>CG程序对贴图上的点进行采样,返回float4,用half去接受,是因为精度比float低,但是性能会比较好。</td>
+</tr>
+<tr>
+<td>o.Albedo = c.rgb</td>
+<td>赋予输出的像素颜色。</td>
+</tr>
+<tr>
+<td>o.Alpha = c.a</td>
+<td>赋予输出的透明度。</td>
+</tr>
+</tbody>
+</table>
+<p>上面表面着色器的意思是:找到贴图上对应的uv点,然后使用颜色信息进行着色,over。有没有感觉简单的指令就把事情说清楚,模型就这样贴上了图。之后会使用表面着色器或直接使用顶点/片元着色器实现一些Shader,进一步对Shader进行学习。看到这里已经挺不容易了,不管会不会Shader,相信大家对这个东西会有一定的认识和理解了。</p>
+<h2 id="shader的选择扩展语录">Shader的选择(扩展语录)</h2>
+<ul>
+<li>模型受到光照影响较少,建议使用顶点/片元着色器。</li>
+<li>模型受到光照影响较多(比如有萤火虫、月亮、篝火的场景),光照处理起来麻烦,就直接使用表面着色器。</li>
+<li>如果是比较老旧的机型使用固定函数着色器,高版本的Unity其实还是转换成了顶点、片元着色器,所以本质上已经不算是固定函数着色器。</li>
+</ul>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E6%A3%80%E8%A7%86%E9%9D%A2%E6%9D%BF%E9%87%8D%E5%86%99/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

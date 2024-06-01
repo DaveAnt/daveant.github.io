@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-Scene初探篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1scenemanager%e6%8e%a5%e5%8f%a3">
+				                            1.SceneManager接口
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2scene%e6%a8%a1%e5%9d%97%e5%8e%9f%e7%90%86">
+				                            2.Scene模块原理
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3scene%e5%92%8cprefab%e7%9a%84%e9%80%89%e6%8b%a9">
+				                            3.Scene和Prefab的选择
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-Scene初探篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-Scene初探篇</h1>
+                <div class="stuff">
+                    <span>April 18, 2020</span>
+                    <span>字数 2009</span>
+                                  
+                    <span id="/posts/Gameframework-Scene初探篇/" class="leancloud_visitors" data-flag-title="Gameframework-Scene初探篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_17.jpg
+cover: https://pics.images.ac.cn/image/5eb55145ca129.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,Scene其实可以使用Prefab来代替,但是建议那种大型地图场景还是使用Scene来实现。</p>
+</blockquote>
+<h2 id="1scenemanager接口">1.SceneManager接口</h2>
+<p>讲述GF框架的Scene模块之前,先给出Unity中SceneManager接口表格方便查阅。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sceneCount</td>
+<td>当前加载的场景总数。</td>
+</tr>
+<tr>
+<td>sceneCountInBuildSettings</td>
+<td>构建设置中的场景数。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CreateScene</td>
+<td>在运行时使用给定名称创建一个空的新场景。</td>
+</tr>
+<tr>
+<td>GetActiveScene</td>
+<td>获取当前活动的场景。</td>
+</tr>
+<tr>
+<td>GetSceneAt</td>
+<td>在SceneManager的已加载场景列表中的索引处获取场景。</td>
+</tr>
+<tr>
+<td>GetSceneByBuildIndex</td>
+<td>从构建索引获取一个Scene结构。</td>
+</tr>
+<tr>
+<td>GetSceneByName</td>
+<td>在加载的场景中搜索具有给定名称的场景。</td>
+</tr>
+<tr>
+<td>GetSceneByPath</td>
+<td>在所有加载的场景中搜索具有给定资源路径的场景。</td>
+</tr>
+<tr>
+<td>LoadScene</td>
+<td>通过其名称或“构建设置”中的索引加载场景。</td>
+</tr>
+<tr>
+<td>LoadSceneAsync</td>
+<td>在后台异步加载Scene。</td>
+</tr>
+<tr>
+<td>MergeScenes</td>
+<td>这会将源场景合并到destinationScene中。</td>
+</tr>
+<tr>
+<td>MoveGameObjectToScene</td>
+<td>将GameObject从其当前场景移动到新场景。</td>
+</tr>
+<tr>
+<td>SetActiveScene</td>
+<td>将场景设置为活动状态。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>可订阅事件</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UnloadSceneAsync</td>
+<td>销毁与给定场景关联的所有GameObject，并从SceneManager中删除场景。</td>
+</tr>
+<tr>
+<td>activeSceneChanged</td>
+<td>订阅此事件以在活动场景已更改时得到通知。</td>
+</tr>
+<tr>
+<td>SceneLoaded</td>
+<td>向其添加委托以在场景已加载时获取通知。</td>
+</tr>
+<tr>
+<td>sceneUnloaded</td>
+<td>向场景添加委托以获得场景卸载后的通知。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2scene模块原理">2.Scene模块原理</h2>
+<p>在Editor模式下是直接调用LoadAssetAsync进行场景加载的,在这之前先进行Scenes In Build设置,其实调用LoadAssetAsync时就会发现问题所在,接口只需要传递Scene名即可,而不是整个路径传递到函数中。
+<img src="/img/post/Gameframework/scene/exp1.jpg" alt="exp1">
+其实只是使用GF框架来说只需要查看模块Component脚本即可,但是需要深入学习GF框架的伙伴,还是需要研究一下GF框架底层原理的,Editor模式下的脚本是EditorResourceComponent,接下来展示加载场景函数分析原理。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadScene(<span style="color:#66d9ef">string</span> sceneAssetName, <span style="color:#66d9ef">int</span> priority, LoadSceneCallbacks loadSceneCallbacks, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(sceneAssetName))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Log.Error(<span style="color:#e6db74">&#34;Scene asset name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (!sceneAssetName.StartsWith(<span style="color:#e6db74">&#34;Assets/&#34;</span>) || !sceneAssetName.EndsWith(<span style="color:#e6db74">&#34;.unity&#34;</span>))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Log.Error(<span style="color:#e6db74">&#34;Scene asset name &#39;{0}&#39; is invalid.&#34;</span>, sceneAssetName);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (loadSceneCallbacks == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Log.Error(<span style="color:#e6db74">&#34;Load scene callbacks is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (!HasFile(sceneAssetName))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Log.Error(<span style="color:#e6db74">&#34;Scene &#39;{0}&#39; is not exist.&#34;</span>, sceneAssetName);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#if</span> UNITY_5_5_OR_NEWER
+</span></span><span style="display:flex;"><span>    AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneAssetName, LoadSceneMode.Additive);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#else</span>
+</span></span><span style="display:flex;"><span>    AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(SceneComponent.GetSceneName(sceneAssetName), LoadSceneMode.Additive);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (asyncOperation == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    m_LoadSceneInfos.AddLast(<span style="color:#66d9ef">new</span> LoadSceneInfo(asyncOperation, sceneAssetName, priority, DateTime.Now, loadSceneCallbacks, userData));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>场景通过LoadSceneAsync函数进行异步加载的,异步加载需要知道何时加载完成,GF框架直接把回调函数集合、AsyncOperation、场景名称等等信息放到m_LoadSceneInfos里,不断去轮询列表来进行加载结果的进一步处理。接下来改成非Editor模式的场景加载,此模式不需要进行cenes In Build设置,把Scene打包到AB包提前进行加载,再使用LoadSceneAsync函数就不会出现任何异常。下面同样给出加载场景代码用来分析。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadAsset(<span style="color:#66d9ef">string</span> assetName, Type assetType, <span style="color:#66d9ef">int</span> priority, LoadAssetCallbacks loadAssetCallbacks, <span style="color:#66d9ef">object</span> userData)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ResourceInfo? resourceInfo = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">string</span>[] dependencyAssetNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (!CheckAsset(assetName, <span style="color:#66d9ef">out</span> resourceInfo, <span style="color:#66d9ef">out</span> dependencyAssetNames))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> errorMessage = Utility.Text.Format(<span style="color:#e6db74">&#34;Can not load asset &#39;{0}&#39;.&#34;</span>, assetName);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (loadAssetCallbacks.LoadAssetFailureCallback != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            loadAssetCallbacks.LoadAssetFailureCallback(assetName, LoadResourceStatus.NotReady, errorMessage, userData);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(errorMessage);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    LoadAssetTask mainTask = LoadAssetTask.Create(assetName, assetType, priority, resourceInfo.Value, dependencyAssetNames, loadAssetCallbacks, userData);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> dependencyAssetName <span style="color:#66d9ef">in</span> dependencyAssetNames)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (!LoadDependencyAsset(dependencyAssetName, priority, mainTask, userData))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> errorMessage = Utility.Text.Format(<span style="color:#e6db74">&#34;Can not load dependency asset &#39;{0}&#39; when load asset &#39;{1}&#39;.&#34;</span>, dependencyAssetName, assetName);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (loadAssetCallbacks.LoadAssetFailureCallback != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                loadAssetCallbacks.LoadAssetFailureCallback(assetName, LoadResourceStatus.DependencyError, errorMessage, userData);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(errorMessage);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    m_TaskPool.AddTask(mainTask);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上函数其实并非在ResourceComponent中的,而是存在ResourceManager.ResourceLoader脚本中的,其实通过一步步调用进入到这里的,调用到这个函数之前也没有写其他逻辑,主要是场景加载的异常判断,所以直接分析以上代码即可。代码里不存在场景加载相关函数,而是创建加载资源的任务存放到了任务池中,任务池会进行不断的轮询,最后会执行到DefaultLoadResourceAgentHelper下的LoadAsset函数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> LoadAsset(<span style="color:#66d9ef">object</span> resource, <span style="color:#66d9ef">string</span> assetName, Type assetType, <span style="color:#66d9ef">bool</span> isScene)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (m_LoadResourceAgentHelperLoadCompleteEventHandler == <span style="color:#66d9ef">null</span> || m_LoadResourceAgentHelperUpdateEventHandler == <span style="color:#66d9ef">null</span> || m_LoadResourceAgentHelperErrorEventHandler == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Log.Fatal(<span style="color:#e6db74">&#34;Load resource agent helper handler is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    AssetBundle assetBundle = resource <span style="color:#66d9ef">as</span> AssetBundle;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (assetBundle == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        LoadResourceAgentHelperErrorEventArgs loadResourceAgentHelperErrorEventArgs = LoadResourceAgentHelperErrorEventArgs.Create(LoadResourceStatus.TypeError, <span style="color:#e6db74">&#34;Can not load asset bundle from loaded resource which is not an asset bundle.&#34;</span>);
+</span></span><span style="display:flex;"><span>        m_LoadResourceAgentHelperErrorEventHandler(<span style="color:#66d9ef">this</span>, loadResourceAgentHelperErrorEventArgs);
+</span></span><span style="display:flex;"><span>        ReferencePool.Release(loadResourceAgentHelperErrorEventArgs);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(assetName))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        LoadResourceAgentHelperErrorEventArgs loadResourceAgentHelperErrorEventArgs = LoadResourceAgentHelperErrorEventArgs.Create(LoadResourceStatus.AssetError, <span style="color:#e6db74">&#34;Can not load asset from asset bundle which child name is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>        m_LoadResourceAgentHelperErrorEventHandler(<span style="color:#66d9ef">this</span>, loadResourceAgentHelperErrorEventArgs);
+</span></span><span style="display:flex;"><span>        ReferencePool.Release(loadResourceAgentHelperErrorEventArgs);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    m_AssetName = assetName;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isScene)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sceneNamePositionStart = assetName.LastIndexOf(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sceneNamePositionEnd = assetName.LastIndexOf(<span style="color:#e6db74">&#39;.&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (sceneNamePositionStart &lt;= <span style="color:#ae81ff">0</span> || sceneNamePositionEnd &lt;= <span style="color:#ae81ff">0</span> || sceneNamePositionStart &gt; sceneNamePositionEnd)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            LoadResourceAgentHelperErrorEventArgs loadResourceAgentHelperErrorEventArgs = LoadResourceAgentHelperErrorEventArgs.Create(LoadResourceStatus.AssetError, Utility.Text.Format(<span style="color:#e6db74">&#34;Scene name &#39;{0}&#39; is invalid.&#34;</span>, assetName));
+</span></span><span style="display:flex;"><span>            m_LoadResourceAgentHelperErrorEventHandler(<span style="color:#66d9ef">this</span>, loadResourceAgentHelperErrorEventArgs);
+</span></span><span style="display:flex;"><span>            ReferencePool.Release(loadResourceAgentHelperErrorEventArgs);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> sceneName = assetName.Substring(sceneNamePositionStart + <span style="color:#ae81ff">1</span>, sceneNamePositionEnd - sceneNamePositionStart - <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        m_AsyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (assetType != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_AssetBundleRequest = assetBundle.LoadAssetAsync(assetName, assetType);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_AssetBundleRequest = assetBundle.LoadAssetAsync(assetName);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里没有把AsyncOperation变量存放到列表中,而是直接赋值给脚本中的变量。在Resource文章讲过如果资源代理器都处于处理中,任务将会被挂起、等待,所以需要设置合理的资源代理器数量,后面功能和Editor模式下是差不多的,到这里就把场景模块讲述完成了。</p>
+<h2 id="3scene和prefab的选择">3.Scene和Prefab的选择</h2>
+<p>小节一已经说明大型场景还是建议使用Scene的,这里就来简单分析一下使用Scene的优缺点。</p>
+<ul>
+<li>1.Scene可以很方便的设置Fog、环境光、天空盒。</li>
+<li>2.在切换场景时会自动进行无引用资源的释放,如果Prefab的话全程要自行控制资源的释放。</li>
+<li>3.Scene更方便地管理整个游戏的流程、Scene相当于文件夹,Prefab相当于文件。</li>
+</ul>
+<p>Scene可以实现场景的叠加并且通过Set Active Scene来申明当前操作响应的场景,Scene设置窗口路径(Window/Rendering/LightingSettings),设置参数可实现出的效果(自行探究)。
+<img src="/img/post/Gameframework/scene/exp2.jpg" alt="exp2"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%B1%9E%E6%80%A7%E4%BA%A4%E4%BA%92/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

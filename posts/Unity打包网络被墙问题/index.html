@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Unity打包网络被墙问题 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%88%86%e6%9e%90%e5%87%ba%e9%94%99%e5%8e%9f%e5%9b%a0">
+				                            1.分析出错原因
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98">
+				                            2.解决问题
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Unity打包网络被墙问题</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Unity打包网络被墙问题</h1>
+                <div class="stuff">
+                    <span>April 11, 2020</span>
+                    <span>字数 1318</span>
+                                  
+                    <span id="/posts/Unity打包网络被墙问题/" class="leancloud_visitors" data-flag-title="Unity打包网络被墙问题">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Unity/wallhaven_3.jpg
+cover: https://pics.images.ac.cn/image/5eb552ffbf05b.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>本篇文章主要写了博主遇到问题时的解决思路(以Unity打包事件来讲述),毕竟求人不如求己,如果只想了解如何解决问题可以从文章末尾处开始查阅。</p>
+</blockquote>
+<h2 id="1分析出错原因">1.分析出错原因</h2>
+<p>Could not resolve all files for configuration&rsquo;:lintClassPath&rsquo;出现这个错误时比较烦躁,没有仔细看控制台的打印,直接把错误抛给百度,说什么jdk版本不对或者是AS软件出现这个问题怎么去修改build.gradle,但是基本试过了网上所有的方法,最后还是没有成功,于是准备仔细看控制台的打印,准备耐心去解决问题。查看控制台时看到Could not download字样,大概知道网络原因导致的打包异常,后面还有一些链接的地址,好像是无法从url下载到一些jar包,估计是在国内被墙了,无法访问到国外的谷歌,知道是什么原因就可以解决问题了。</p>
+<h2 id="2解决问题">2.解决问题</h2>
+<p>首先把控制台输出的url链接复制下来,使用浏览器访问链接会下载jar包,但是下载速度基本没有,想到的第一个办法就是翻墙,百度翻墙软件,但是国家法律规定,也查找不到一些可用的翻墙软件。</p>
+<ul>
+<li>修改hosts文件<br>
+问题不大,国内应该有镜像或仓库网站的,经过百度发现网站是阿里云的maven.aliyun.com,作为对网络开发略懂小白,准备去修改电脑的hosts文件,如果Unity去访问国外仓库网址时直接转向国内的仓库网址即可,问题是要知道maven.aliyun.com的ip地址,毕竟也是学过网页开发的,这个还是难不倒博主的,如下图所示：
+<img src="/img/post/Unity/loadres/exp1.png" alt="exp1">
+请求网站时看到数据是来自这个网址的,ip地址记录下来以后,准备去修改电脑的hosts文件。ip地址是182.92.29.54,后面空格再加上jcenter 远程仓库网址,本地DNS映射完成以后,准备再次打包尝试,结果还是不行。可能是两个网站目录结构不同导致的,或者这种方式修改本来就是毫无作用的。</li>
+<li>手动放置资源<br>
+在国内仓库网址把打包所需的jar包下载过来放置到相应位置,思考一下资源文件一般不会下载到创建出来的工程目录下,因为如果在工程目录下的话每次创建新工程岂不是需要重新下载？这样一定放在Unity的安装目录里。经过一番盘查,目录是Unity 2019.1.0a8\Editor\Data\PlaybackEngines\AndroidPlayer\Tools\gradle\lib,将控制台打印的所有jar包在国内仓库网址下载过来,然后直接放到上面目录里,这样问题确实得到解决了。</li>
+<li>修改下载链接<br>
+如果Unity没有使用配置文件,而是直接把下载链接写在代码中就真的让人太失望了,所以抱着希望去查看安装目录下有没有配置文件来修改下载链接,可以使用sublime打开Unity安装目录,然后全局搜索相关字眼,这样有利于文件的查找,所以博主最后锁定到的文件夹路径是Unity2019.1.0a8\Editor\Data\PlaybackEngines\AndroidPlayer\Tools\GradleTemplates,如下图所示：
+<img src="/img/post/Unity/loadres/exp2.png" alt="exp2">
+把mainTemplate.gradle文件下buildscript、allprojects标签前面添加以下路径即可：<br>
+maven{ url &lsquo;<a href="http://maven.aliyun.com/nexus/content/groups/public/'%7D">http://maven.aliyun.com/nexus/content/groups/public/'}</a><br>
+maven{ url &lsquo;<a href="http://maven.aliyun.com/nexus/content/repositories/jcenter'%7D">http://maven.aliyun.com/nexus/content/repositories/jcenter'}</a><br>
+再次尝试打包就会成功啦~</li>
+</ul>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_9.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_8.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            Unity多人聊天室</a>
+                            <p>前言 使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_4.jpg" alt="Unity多人聊天室">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            Unity的Dots技术入门</a>
+                            <p>前言 看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_7.jpg" alt="Unity的Dots技术入门">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            ScrollCircleMaker-Obsolete教程</a>
+                            <p>前言 ScrollCircleMaker-Obsolete v1.0已经放弃维护，目前基于ScriptableProcessor为核心重写了一版Scrol...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_6.jpg" alt="ScrollCircleMaker-Obsolete教程">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

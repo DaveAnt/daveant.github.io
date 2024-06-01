@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>XLua开发环境搭建 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e4%b8%8b%e8%bd%bdxlua%e5%b7%a5%e7%a8%8b">
+				                            1.下载Xlua工程
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%89%a7%e8%a1%8chello-world">
+				                            2.执行hello world
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e8%a7%a3%e5%86%b3%e5%b0%8f%e7%96%91%e9%97%ae">
+				                            3.解决小疑问
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        XLua开发环境搭建</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                XLua开发环境搭建</h1>
+                <div class="stuff">
+                    <span>March 20, 2020</span>
+                    <span>字数 1296</span>
+                                  
+                    <span id="/posts/XLua开发环境搭建/" class="leancloud_visitors" data-flag-title="XLua开发环境搭建">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/XLua/wallhaven_1.jpg
+cover: https://pics.images.ac.cn/image/5eb5532d7469c.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>xlua是腾讯给出的热更新方案,已经有很多成功的案例了,这里把xlua工程下载过来,成功执行到hello world表示对xlua环境搭建成功,毕竟学习一门技术或语言都是从hello world开始的,虽然环境搭建下载过来即可,没有任何的坑。</p>
+</blockquote>
+<h2 id="1下载xlua工程">1.下载Xlua工程</h2>
+<p>到这里对<a href="https://github.com/Tencent/xLua/releases">xlua</a>进行下载,建议选择xlua_lua5.3 or Higher版本的工程,以后所有关于xlua热更新方案都使用lua5.3 or Higher版本的解释器,不会去使用luajit解释器,后面会出一篇文章来对比说明lua5.3和luajit区别,这里就不过多解释了,跳转到github下载第一个压缩包即可,具体如图所示:
+<img src="/img/post/XLua/summary/exp1.png" alt="exp1">
+解压缩以后,只需要2个文件夹,Plugins和XLua,直接到这2个文件夹拖到Unity工程下,到这里XLua的开发环境其实就算是搭建好了,Unity工程目录图如下:
+<img src="/img/post/XLua/summary/exp2.png" alt="exp2"></p>
+<h2 id="2执行hello-world">2.执行hello world</h2>
+<p>xlua目录下有Examples子文件夹,首个demo就是hello_world的运行,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> XLuaTest
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Helloworld</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Use this for initialization</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            LuaEnv luaenv = <span style="color:#66d9ef">new</span> LuaEnv();
+</span></span><span style="display:flex;"><span>            luaenv.DoString(<span style="color:#e6db74">&#34;CS.UnityEngine.Debug.Log(&#39;hello world&#39;)&#34;</span>);
+</span></span><span style="display:flex;"><span>            luaenv.Dispose();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>luaenv建议使用全局静态,避免频繁创建和释放,写成这样的hello world是不能热更新,虽然hello world的打印是通过lua调用c#出现的,接下来实现一个可热更新的hello world,所谓的热更新其实就是创建lua脚本文件,需要热更新时通过远程下载替换lua脚本文件即可,这里就在XLua/Resources创建一个名字叫hello_world.lua.txt,里面的具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Lua" data-lang="Lua"><span style="display:flex;"><span>hello_world <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> this <span style="color:#f92672">=</span> hello_world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello world&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">this</span>.<span style="color:#a6e22e">PrintHelloWorld</span>()
+</span></span><span style="display:flex;"><span>     print(str)	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>this.PrintHelloWorld()
+</span></span></code></pre></div><p>学习过lua语言都知道它没有class的概念,所以实现类似class编程时,都可以通过lua的table去模拟,包括类继承等等,并且这样更好的防止变量名的冲突,也可以起到c#的namespace作用,算是奇技吧。然后修改一下c#中hello world的代码,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> XLuaTest
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Helloworld</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Use this for initialization</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            LuaEnv luaenv = <span style="color:#66d9ef">new</span> LuaEnv();
+</span></span><span style="display:flex;"><span>            luaenv.DoString(<span style="color:#e6db74">&#34;require &#39;hello_world&#39;&#34;</span>);
+</span></span><span style="display:flex;"><span>            luaenv.Dispose();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>真实游戏项目应该把require相关代码全部放到单个lua脚本里,然后Unity工程只需要require这个lua脚本即可。原因很简单,如果有天新增加的lua脚本,写在C#里的require代码已经不能热更新,只能替换游戏的客户端,而写到单个lua脚本里可以做到热更新。</p>
+<h2 id="3解决小疑问">3.解决小疑问</h2>
+<ul>
+<li>.lua.txt和.lua后缀的区别?</li>
+</ul>
+<blockquote>
+<p>其实什么后缀都可以,如果想以TextAsset打包到安装包(比如放到Resources目录),Unity不认lua后缀,这是Unity的规则。如果不打包到安装包,就没有后缀的限制:比如自行下载到某个目录（这也是热更的正确姿势）,然后通过CustomLoader或者设置package.path去读这个目录。xLua本身带的lua源码也都是txt结尾,是因为xLua本身就一个库,不含下载功能,也不方便运行时去某个地方下载代码,通过TextAsset是较简单的方式。</p>
+</blockquote>
+<ul>
+<li>require路径问题
+路径是可以额外添加的,这样xlua工程识别的路径是那些？只需要传入不存在文件即可查看,具体如图所示:
+<img src="/img/post/XLua/summary/exp3.png" alt="exp3"></li>
+</ul>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Transform%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

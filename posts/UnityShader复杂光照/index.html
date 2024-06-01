@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader复杂光照 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%85%89%e6%ba%90%e7%b1%bb%e5%9e%8b">
+				                            1.光源类型
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%ae%9e%e6%88%98%e6%b8%b2%e6%9f%93%e4%b8%8d%e5%90%8c%e5%85%89%e6%ba%90">
+				                            2.实战渲染不同光源
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3unity%e7%9a%84%e5%85%89%e7%85%a7%e8%a1%b0%e5%87%8f">
+				                            3.Unity的光照衰减
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e6%89%a9%e5%b1%95%e7%9f%a5%e8%af%86">
+				                            扩展知识
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader复杂光照</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader复杂光照</h1>
+                <div class="stuff">
+                    <span>May 2, 2020</span>
+                    <span>字数 2784</span>
+                                  
+                    <span id="/posts/UnityShader复杂光照/" class="leancloud_visitors" data-flag-title="UnityShader复杂光照">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_17.jpg
+cover: https://pics.images.ac.cn/image/5eb552bc57f95.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要掌握更复杂的光照渲染。</p>
+</blockquote>
+<h2 id="1光源类型">1.光源类型</h2>
+<p>光源属性有光源的位置、方向(到某点的方向)、颜色、强度以及衰减(到某点的衰减,与该点到光源距离有关)五个属性,这样不同的光源类型会给Shader碰撞出什么不一样的火花呢？接下里就简单讲述每个光源的概念。</p>
+<ul>
+<li>平行光<br>
+它的几何定义最简单,也是Unity最常用的光源类型,它可以照亮的范围时没有限制,在引擎中通常扮演太阳这样的角色。<b><font color="red">它是唯一没有位置概念的光源,由于没有位置的概念所有也没有衰减的概念,它的几何属性只有方向。</font></b></li>
+<li>点光源<br>
+它照亮空间是定义成球体的,由点光源中心向所有方向延伸的光,球体半径可以通过Range属性来调整。所以点光源是存在位置和衰减的概念,点光源中心光照强度最大,球体边缘为0,衰减值可以由有关函数定义,它可以扮演火柴堆光源等等。</li>
+<li>聚光灯<br>
+聚光灯是光源中最复杂的一种,它的照亮空间是定义成锥形区域的,通过Range属性决定锥形区域半径,而锥体的张开角度由Spot Angle属性决定。在锥体顶点处光照强度最强,在锥形边界强度为0,其中衰减值可以由一个函数定义,这个函数相对于点光源衰减计算公式更加复杂,需要判断点是否在锥形范围内,它可以扮演手电筒或路灯光源等等。</li>
+<li>区域光源<br>
+这个光源性能是最高的,因为区域光在“实时光照”模式下是无效的,仅在“烘焙光照”模式下有用。区域光源可以设置作用区域样式,区域光会均匀的照亮作用区域,虽然区域光没有范围属性可以调整,但是光强度也是会随着距离光源越远而递减,它可以扮演手摄影用的柔光灯。</li>
+</ul>
+<h2 id="2实战渲染不同光源">2.实战渲染不同光源</h2>
+<p>接下来就来看看UnityShader中如何它们五个属性：位置、方向、颜色、强度以及衰减,使用前向渲染来实现平行光和点光源共同照亮物体。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Unity Shaders Book/Chapter 9/Forward Rendering&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Diffuse (<span style="color:#e6db74">&#34;Diffuse&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_Specular (<span style="color:#e6db74">&#34;Specular&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_Gloss (<span style="color:#e6db74">&#34;Gloss&#34;</span>, Range(8.<span style="color:#a6e22e">0</span>, 256)) <span style="color:#f92672">=</span> 20
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Pass for ambient light &amp; first pixel light (directional light)</span>
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Apparently need to add this declaration </span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma multi_compile_fwdbase	
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Diffuse;
+</span></span><span style="display:flex;"><span>			fixed4 _Specular;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _Gloss;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(_WorldSpaceLightPos0.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>			 	fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Diffuse.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			 	fixed3 viewDir <span style="color:#f92672">=</span> normalize(_WorldSpaceCameraPos.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">-</span> i.<span style="color:#a6e22e">worldPos</span>.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span>			 	fixed3 halfDir <span style="color:#f92672">=</span> normalize(worldLightDir <span style="color:#f92672">+</span> viewDir);
+</span></span><span style="display:flex;"><span>			 	fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> pow(max(0, dot(worldNormal, halfDir)), _Gloss);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				fixed atten <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> (diffuse <span style="color:#f92672">+</span> specular) <span style="color:#f92672">*</span> atten, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Pass for other pixel lights</span>
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardAdd&#34;</span> }
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			Blend One One
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Apparently need to add this declaration</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma multi_compile_fwdadd
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;AutoLight.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Diffuse;
+</span></span><span style="display:flex;"><span>			fixed4 _Specular;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _Gloss;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">#</span>ifdef USING_DIRECTIONAL_LIGHT
+</span></span><span style="display:flex;"><span>					fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(_WorldSpaceLightPos0.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>					fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(_WorldSpaceLightPos0.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">-</span> i.<span style="color:#a6e22e">worldPos</span>.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">#</span>endif
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Diffuse.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 viewDir <span style="color:#f92672">=</span> normalize(_WorldSpaceCameraPos.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">-</span> i.<span style="color:#a6e22e">worldPos</span>.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span>				fixed3 halfDir <span style="color:#f92672">=</span> normalize(worldLightDir <span style="color:#f92672">+</span> viewDir);
+</span></span><span style="display:flex;"><span>				fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> pow(max(0, dot(worldNormal, halfDir)), _Gloss);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">#</span>ifdef USING_DIRECTIONAL_LIGHT
+</span></span><span style="display:flex;"><span>					fixed atten <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>					<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">if</span> defined (POINT)
+</span></span><span style="display:flex;"><span>				        float3 lightCoord <span style="color:#f92672">=</span> mul(unity_WorldToLight, float4(i.<span style="color:#a6e22e">worldPos</span>, 1)).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				        fixed atten <span style="color:#f92672">=</span> tex2D(_LightTexture0, dot(lightCoord, lightCoord).<span style="color:#a6e22e">rr</span>).<span style="color:#a6e22e">UNITY_ATTEN_CHANNEL</span>;
+</span></span><span style="display:flex;"><span>				    <span style="color:#960050;background-color:#1e0010">#</span>elif <span style="color:#a6e22e">defined</span> (SPOT)
+</span></span><span style="display:flex;"><span>				        float4 lightCoord <span style="color:#f92672">=</span> mul(unity_WorldToLight, float4(i.<span style="color:#a6e22e">worldPos</span>, 1));
+</span></span><span style="display:flex;"><span>				        fixed atten <span style="color:#f92672">=</span> (lightCoord.<span style="color:#a6e22e">z</span> <span style="color:#f92672">&gt;</span> 0) <span style="color:#f92672">*</span> tex2D(_LightTexture0, lightCoord.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">/</span> lightCoord.<span style="color:#a6e22e">w</span> <span style="color:#f92672">+</span> 0.<span style="color:#a6e22e">5</span>).<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span> tex2D(_LightTextureB0, dot(lightCoord, lightCoord).<span style="color:#a6e22e">rr</span>).<span style="color:#a6e22e">UNITY_ATTEN_CHANNEL</span>;
+</span></span><span style="display:flex;"><span>				    <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>				        fixed atten <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span>				    <span style="color:#960050;background-color:#1e0010">#</span>endif
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">#</span>endif
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fixed4</span>((diffuse <span style="color:#f92672">+</span> specular) <span style="color:#f92672">*</span> atten, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Specular&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>第一个Pass使用Base Pass,并且为了可以获取到正确的光照变量,需要使用了#pragma multi_complie_fwdbase指令。在Base Pass中处理场景中的环境光和平行光等等,<b><font color="red">如果场景存在多个平行光,Unity会选择最亮平行光进行逐像素处理,其他会按照逐顶点或Additional Pass中按逐像素方式处理,不存在光源就当全黑处理。</font></b>,可以通过_WorldSpaceLightPos0来得到平行光方向,_LightColor0来得到它的颜色和强度(它已经是颜色和强度相乘结果)。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#75715e">//计算环境光</span>
+</span></span><span style="display:flex;"><span>fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//计算漫反射</span>
+</span></span><span style="display:flex;"><span>fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span><span style="color:#f92672">*</span>_Diffuse.<span style="color:#a6e22e">rgb</span><span style="color:#f92672">*</span>max(0,dot(worldNormal,worldLightDir));
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//计算高光</span>
+</span></span><span style="display:flex;"><span>fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span><span style="color:#f92672">*</span>_Specular.<span style="color:#a6e22e">rgb</span><span style="color:#f92672">*</span>pow(max(0,dot(worldNormal,halfDir)),_Gloss);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//衰减因子</span>
+</span></span><span style="display:flex;"><span>fixed3 atten <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> fixed3(ambient <span style="color:#f92672">+</span> (diffuse<span style="color:#f92672">+</span>specular)<span style="color:#f92672">*</span>atten,1.<span style="color:#a6e22e">0</span>);
+</span></span></code></pre></div><p>接下来就是为场景中其他逐像素光源定义Additional Pass,建议先去看看<a href="https://daveant.gitee.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/">渲染路径</a>,这里的混合系数使用的Blend One One不是必须的,常见还可用Blend SrcAlpha One。接下来查看如何计算不同光源方向：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>ifdef USING_DIRECTIONAL_LIGHT
+</span></span><span style="display:flex;"><span>	fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(_WorldSpaceLightPos0.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(_WorldSpaceLightPos0.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">-</span> i.<span style="color:#a6e22e">worldPosition</span>.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>endif
+</span></span></code></pre></div><p>光源方向可以直接由_WorldSpaceLightPos0.xyz,这值在平行光类型是方向,其他光源表示世界空间下的光源位置,需要得到光源方向的话,需要这个位置减去世界空间下的顶点位置。最后就是处理不同光源的衰减。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>ifdef USING_DIRECTIONAL_LIGHT
+</span></span><span style="display:flex;"><span>	fixed atten <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	float3 lightCoord <span style="color:#f92672">=</span> mul(_LightMatrix0,float4(i.<span style="color:#a6e22e">worldPosition</span>,1)).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>	fixed atten <span style="color:#f92672">=</span> tex2D(_LightTexture0,dot(lightCoord,lightCoord).<span style="color:#a6e22e">rr</span>).<span style="color:#a6e22e">UNITY_ATTEN_CHANNEL</span>;
+</span></span></code></pre></div><p>可以通过USING_DIRECTIONAL_LIGHT来决定处理光源类型。</p>
+<h2 id="3unity的光照衰减">3.Unity的光照衰减</h2>
+<p>在Unity中可以使用衰减纹理而避免依赖数学公式的复杂性,只需要对纹理进行采样即可,这个是典型的空间换时间的策略,但是会存在一些弊端：需要预处理得到采用纹理,而纹理大小也会影响衰减精度;不直观给,同时也不方便,把数据存储到查找表中,就无法使用其他数学公式来计算衰减。<br>
+Unity默认就是采用衰减纹理(_LightTexture0)来提高点光源、聚光源的性能,如果对该光源使用了cookie那么衰减纹理就是_LightTextureB0,<b><font color="red">通常只关心_LightTexture0对角线上的纹理颜色值,这些值表明了在光源空间中不同位置的点衰减值</font></b>。比如(0,0)点表明与光源位置重合点的衰减值,而(1,1)点表明在光源空间中所关心的距离最远点的衰减值。<br>
+为了对_LightTexture0纹理采样得到给定点到该光源的衰减值,首先需要得到该点在光源空间中的位置,这是通过_LightMatrix0变换矩阵得到的,接下来只需要把_LightMatrix0和世界空间中的顶点坐标相乘即可得到光源空间中的相应位置。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>float3 lightCoord <span style="color:#f92672">=</span> mul(_LightMatrix0,float4(i,_worldPosition,1)).<span style="color:#a6e22e">xyz</span>;
+</span></span></code></pre></div><p>然后可以使用坐标模的平方对衰减纹理进行采样得到衰减值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>fixed atten <span style="color:#f92672">=</span> tex2D(_LightTexture0,dot(lightCoord,lightCoord).<span style="color:#a6e22e">rr</span>).<span style="color:#a6e22e">UNITY_ATTEN_CHANNEL</span>;
+</span></span></code></pre></div><p>使用光源空间中顶点距离的平方进行纹理采样,之所以没有使用距离值来采样是因为这种方法可以避免开方操作。然后使用宏定义UNITY_ATTEN_CHANNEL来得到衰减纹理中的衰减值所在的分量,以得到最终的衰减值。尽管纹理采样方式可以减少计算衰减的复杂度,但有时还是希望可以在代码中利用公式来计算光源的衰减,接下来就是计算衰减的公式。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> distance <span style="color:#f92672">=</span> length(_WorldSpaceLightPos0.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">-</span> i.<span style="color:#a6e22e">worldPosition</span>.<span style="color:#a6e22e">xyz</span>);
+</span></span><span style="display:flex;"><span>atten <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span> <span style="color:#f92672">/</span> distance;
+</span></span></code></pre></div><p>Unity文档没有给出内置衰减计算的公式,而且UnityShader无法得到光源范围、聚光灯朝向、张开角度等信息,因此无法得到满意的效果,只期待未来UnityShader可以开发更多变量给开发者使用。</p>
+<h2 id="扩展知识">扩展知识</h2>
+<p>创建光源默认情况下的Render Mode是Auto,这意味着Unity会在背后判断那些光源会按逐像素处理,而哪些按逐顶点或SH方式处理。<b><font color="red">默认情况下物体接受除最亮的平行光外的四个逐像素光照(在Edit/Project Settings/Quality/Pixel Light Count设置逐像素数目)</font></b>。<br>
+在渲染事件中,Unity会首先清除颜色、深度和模板缓冲,为后面渲染做准备,然后依次执行Pass将光源应用到物体上得到最终的渲染结果(可以打开Unity的帧调式器查看渲染事件),Unity会按照某个规则对其进行重要程度的排序(比如光源远近),当把场景中的光源全部设置成Not Important,物体就仅仅会受到环境光的影响。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84ScrollView%E5%BE%AA%E7%8E%AF%E6%BB%9A%E5%8A%A8/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

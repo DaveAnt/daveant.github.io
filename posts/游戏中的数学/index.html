@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>游戏中的数学 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%b8%b8%e6%88%8f%e4%b8%ad%e7%9a%84%e7%9f%a2%e9%87%8f">
+				                            1.游戏中的矢量
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%b8%b8%e6%88%8f%e4%b8%ad%e7%9a%84%e7%9f%a9%e9%98%b5">
+				                            2.游戏中的矩阵
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%9c%a8unity%e4%b8%ad%e5%ae%9e%e6%88%98">
+				                            3.在Unity中实战
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e8%a7%a3%e5%86%b3%e7%96%91%e9%97%ae">
+				                            解决疑问
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        游戏中的数学</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                游戏中的数学</h1>
+                <div class="stuff">
+                    <span>April 3, 2020</span>
+                    <span>字数 1835</span>
+                                  
+                    <span id="/posts/游戏中的数学/" class="leancloud_visitors" data-flag-title="游戏中的数学">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Must/wallhaven_2.jpg
+cover: https://pics.images.ac.cn/image/5eb551da3de16.html-->
+<h2 id="1游戏中的矢量">1.游戏中的矢量</h2>
+<ul>
+<li>矢量的加减</li>
+</ul>
+<p>公式：</p>
+<blockquote>
+<p>a+b=(a₁+b₁,a₂+b₂,a₃+b₃)<br>
+a-b=(a₁-b₁,a₂-b₂,a₃+b₃)</p>
+</blockquote>
+<p>示意图：
+<img src="/img/post/Must/math/exp1.jpg" alt="exp1">
+作用：游戏中可用于计算玩家a到怪物b的位移。</p>
+<ul>
+<li>矢量的点积</li>
+</ul>
+<p>公式：</p>
+<blockquote>
+<p>a.b=(a₁,a₂,a₃).(b₁,b₂,b₃)=a₁b₁+a₂b₂+a₃b₃<br>
+a.b=|a||b|cosθ</p>
+</blockquote>
+<p>示意图：
+<img src="/img/post/Must/math/exp2.jpg" alt="exp2"></p>
+<p>作用：由结果而言,a.b就是a在b方向上的投影,公式2发现小于90度,点积大于0;等于90度,点积等于0;大于90度,点积小于0。所以通过点积可以判断游戏对象的朝向关系(比如接近面对面或背对背说明点积是小于0的)。</p>
+<ul>
+<li>矢量的叉积</li>
+</ul>
+<p>公式:</p>
+<blockquote>
+<p>a.b=(a₁,a₂,a₃)X(b₁,b₂,b₃)=(a₂b₃-a₃b₂,a₃b₁-a₁b₃,a₁b₂-a₂b₁)<br>
+a.b=|a||b|sinθ</p>
+</blockquote>
+<p>示意图：
+<img src="/img/post/Must/math/exp3.jpg" alt="exp3"></p>
+<p>作用：可得到平面的法向量(也就是垂直向量),如果构不成平面,向量就是平行关系。在游戏中点积可以做到的,叉积都可以实现,并且比点积用处更多(因为点积返回的是标量,叉积返回的是法向量)。</p>
+<h2 id="2游戏中的矩阵">2.游戏中的矩阵</h2>
+<ul>
+<li>矩阵类别<br>
+方块矩阵:行列数相同的矩阵。<br>
+对角矩阵:M<sub>xy</sub>矩阵下x!=y都是0,不然随意。<br>
+单位矩阵:M<sub>xy</sub>矩阵下x==y都是1,不然都是0。<br>
+倒置矩阵:Mᵗ上标t用来表示矩阵倒置,经过倒置第n行变成第n列。<br>
+逆矩阵:矩阵与它的逆矩阵相乘可以得到单位矩阵,说明矩阵可逆,行列不为0的矩阵都有它的逆矩阵。<br>
+正交矩阵:矩阵与它的倒置矩阵相乘可以得到单位矩阵,说明矩阵是正交矩阵。</li>
+<li>矩阵的意义<br>
+矩阵的几何意义就是变换,点和矢量都可以画出来,这样矩阵可以画出来嘛,画是画不出来的,但是可以表现出来,比如Unity中对模型进行缩放、移动、旋转操作,第一个反应就是这些操作就是矩阵变换。3*3的矩阵可以用来表示所有的线性变换(可以保留矢量加和标量乘的变换就是线性变换),旋转和缩放就是线性变换,但是平移是没有办法表示。所以就出现齐次坐标给它扩展出一个维度,这个变换称为仿射变换(合并了线性变换和平移变换的变换),齐次坐标其实没有这么神奇,简单的来说只是为了统一处理缩放、移动、旋转,方便计算的一种表示方式而已。Unity内部用到矢量都会转换成列矩阵,所以本篇文章的矢量都用列矩阵来表示。<br>
+平移矩阵示意图：
+<img src="/img/post/Must/math/exp4.jpg" alt="exp4">
+缩放矩阵示意图:
+<img src="/img/post/Must/math/exp5.jpg" alt="exp5">
+旋转矩阵示意图:<br>
+x轴旋转θ-&gt;
+<img src="/img/post/Must/math/exp6.jpg" alt="exp6">
+y轴旋转θ-&gt;
+<img src="/img/post/Must/math/exp7.jpg" alt="exp7">
+z轴旋转θ-&gt;
+<img src="/img/post/Must/math/exp8.jpg" alt="exp8"></li>
+</ul>
+<h2 id="3在unity中实战">3.在Unity中实战</h2>
+<p>讲了这么多理论上的东西,没有实际上的表现,是比较难理解的或比较枯燥的,接下来就在Unity中进行实现,今天的主角就是小白块,不通过Unity提供接口去实现小白块的缩放、移动、旋转(直接使用矩阵变换去实现),具体代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MatrixOfCube</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Matrix4x4 matrix4X4;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Start is called before the first frame update</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        matrix4X4.SetTRS(transform.position,
+</span></span><span style="display:flex;"><span>                         transform.rotation,
+</span></span><span style="display:flex;"><span>                         transform.localScale);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        MatrixTranslate();<span style="color:#75715e">//矩阵平移</span>
+</span></span><span style="display:flex;"><span>        transform.position = matrix4X4.GetColumn(<span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        MatrixScale();<span style="color:#75715e">//矩阵缩放</span>
+</span></span><span style="display:flex;"><span>        transform.localScale = <span style="color:#66d9ef">new</span> Vector3(matrix4X4.m00, matrix4X4.m11, matrix4X4.m22);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//MatrixRotation();//矩阵旋转与60度对比一下即可理解</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> MatrixTranslate()<span style="color:#75715e">//矩阵平移</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//构建平移(3，4，5)的矩阵</span>
+</span></span><span style="display:flex;"><span>        Matrix4x4 tmp = Matrix4x4.identity;
+</span></span><span style="display:flex;"><span>        tmp.m03 = <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>        tmp.m13 = <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>        tmp.m23 = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        matrix4X4 = matrix4X4 * tmp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> MatrixScale()<span style="color:#75715e">//矩阵缩放</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//构建8倍的矩阵</span>
+</span></span><span style="display:flex;"><span>        Matrix4x4 tmp = Matrix4x4.identity;
+</span></span><span style="display:flex;"><span>        tmp.m00 = <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>        tmp.m11 = <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>        tmp.m22 = <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        matrix4X4 = matrix4X4 * tmp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> MatrixRotation()<span style="color:#75715e">//矩阵旋转</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//构建x轴旋转60度的矩阵</span>
+</span></span><span style="display:flex;"><span>        Matrix4x4 tmp = Matrix4x4.identity;
+</span></span><span style="display:flex;"><span>        tmp.m00 = <span style="color:#ae81ff">1</span>; 
+</span></span><span style="display:flex;"><span>        tmp.m11 = Mathf.Cos(<span style="color:#ae81ff">60f</span> * Mathf.Deg2Rad);
+</span></span><span style="display:flex;"><span>        tmp.m12 = -Mathf.Sin(<span style="color:#ae81ff">60f</span> * Mathf.Deg2Rad);
+</span></span><span style="display:flex;"><span>        tmp.m21 = Mathf.Sin(<span style="color:#ae81ff">60f</span> * Mathf.Deg2Rad);
+</span></span><span style="display:flex;"><span>        tmp.m22 = Mathf.Cos(<span style="color:#ae81ff">60f</span> * Mathf.Deg2Rad);
+</span></span><span style="display:flex;"><span>        tmp.m33 = <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        matrix4X4 = matrix4X4 * tmp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>把脚本挂载到cube上,运行一下就可以知道矩阵变换在游戏中的原由了。</p>
+<h2 id="解决疑问">解决疑问</h2>
+<p>1.为什么缩放、移动、旋转需要使用矩阵变换呢？<br>
+不通过矩阵变换也是可以实现这些操作的,比如平移直接改变它的x,y,z即可,对于旋转来说需要确定旋转方向、旋转角度、旋转轴,将三个参数传递给定义好的接口然后实现旋转(可能接口内部会有比较复杂的if-else),这样为什么需要用到矩阵变换呢？因为我们都没有写过游戏引擎(如果有大佬写过,估计不会看这篇文章了),有这些疑问还是很正常的。首先用矩阵变换的原因是处理起来更加便捷(比如需要旋转,直接使用旋转矩阵即可,不需要三个参数和接口实现的复杂化),其次是为了统一处理(平移就使用平移矩阵,缩放使用缩放矩阵,性能上也没有任何区别,所以统一使用矩阵来表示各种变换)。<br>
+2.为什么3D空间的平移不能用3*3的矩阵？<br>
+问题本质和(n)D空间为什么不能用n*n的矩阵是一样的,有疑问的童靴可以尝试使用3*3矩阵计算一下平移变换,这里给出简单的图,用矩阵公式验证一下就知道了：
+<img src="/img/post/Must/math/exp9.jpg" alt="exp9"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/64%E4%BD%8D%E5%92%8C32%E4%BD%8D%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            编码解码和协议分析</a>
+                            <p>前言 计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,A...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_1.jpg" alt="编码解码和协议分析">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            CSharp特性详解</a>
+                            <p>前言 CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_7.jpg" alt="CSharp特性详解">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            Socket基础知识</a>
+                            <p>前言 所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_5.jpg" alt="Socket基础知识">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            CSharp中的多线程</a>
+                            <p>1.相关概念 进程 是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_6.jpg" alt="CSharp中的多线程">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            坐标空间变换</a>
+                            <p>前言 这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_4.jpg" alt="坐标空间变换">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

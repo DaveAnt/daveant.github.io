@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-Procedure进阶篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%b5%81%e7%a8%8b%e6%b7%b1%e5%b1%82%e5%8e%9f%e7%90%86">
+				                            1.流程深层原理
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%b7%bb%e5%8a%a0%e6%b5%81%e7%a8%8b%e9%94%81">
+				                            2.添加流程锁
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e6%80%9d%e8%80%83%e9%ab%98%e6%b7%b1%e6%89%a9%e5%b1%95">
+				                            3.思考高深扩展
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-Procedure进阶篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-Procedure进阶篇</h1>
+                <div class="stuff">
+                    <span>March 25, 2020</span>
+                    <span>字数 4412</span>
+                                  
+                    <span id="/posts/Gameframework-Procedure进阶篇/" class="leancloud_visitors" data-flag-title="Gameframework-Procedure进阶篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_5.jpg
+cover: https://pics.images.ac.cn/image/5eb54e0ce18b8.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>在流程初探篇里说过给流程模块加个锁的概念,好处已经在初探里已经说明了,因为流程跳转的相关逻辑确实应该封装到流程管理器里,而且可以不需要额外声明变量去处理。</p>
+</blockquote>
+<h2 id="1流程深层原理">1.流程深层原理</h2>
+<p>初探篇里已经和各位简单说明流程的生命周期和使用方式,但是详细原理没有和各位介绍清楚,所以这里就把各位安排的明明白白,我们去看一下流程组件(ProcedureComponent)启动的时候到底做了些什么？具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> IEnumerator Start()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ProcedureBase[] procedures = <span style="color:#66d9ef">new</span> ProcedureBase[m_AvailableProcedureTypeNames.Length];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; m_AvailableProcedureTypeNames.Length; i++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Type procedureType = Utility.Assembly.GetType(m_AvailableProcedureTypeNames[i]);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (procedureType == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Log.Error(<span style="color:#e6db74">&#34;Can not find procedure type &#39;{0}&#39;.&#34;</span>, m_AvailableProcedureTypeNames[i]);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        procedures[i] = (ProcedureBase)Activator.CreateInstance(procedureType);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (procedures[i] == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Log.Error(<span style="color:#e6db74">&#34;Can not create procedure instance &#39;{0}&#39;.&#34;</span>, m_AvailableProcedureTypeNames[i]);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (m_EntranceProcedureTypeName == m_AvailableProcedureTypeNames[i])
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_EntranceProcedure = procedures[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (m_EntranceProcedure == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Log.Error(<span style="color:#e6db74">&#34;Entrance procedure is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    m_ProcedureManager.Initialize(GameFrameworkEntry.GetModule&lt;IFsmManager&gt;(), procedures);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> WaitForEndOfFrame();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    m_ProcedureManager.StartProcedure(m_EntranceProcedure.GetType());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以看到启动的时候,会把所有流程组通过反射原理创建出来,然后调用流程管理器的初始化函数将流程组传递进去 ,流程组最后会保存到字典中（Key是流程的Type,Value是流程实例）,然后将解析过的字典再保存到另外字典的Value中,这个字典的Key是流程管理器Type、名字组合对象,这个两个字典定义如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Dictionary&lt;Type, FsmState&lt;T&gt;&gt; m_States;<span style="color:#75715e">//解析完成的流程</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Dictionary&lt;TypeNamePair, FsmBase&gt; m_Fsms;<span style="color:#75715e">//Key是对应的管理器Type,Value是包含着流程组的对象</span>
+</span></span></code></pre></div><p>所以流程管理器持有了所有需要被管理的流程对象,然后流程对象每个函数调用时,第一个形参都是它们的管理器(也就是它们的上级领导,哈哈哈哈),流程基类代码给各位看一下就知道什么意思了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> ProcedureOwner = GameFramework.Fsm.IFsm&lt;GameFramework.Procedure.IProcedureManager&gt;;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework.Procedure
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 流程基类。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProcedureBase</span> : FsmState&lt;IProcedureManager&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 状态初始化时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;procedureOwner&#34;&gt;流程持有者。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnInit(ProcedureOwner procedureOwner)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnInit(procedureOwner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ......
+</span></span></code></pre></div><p>如果各位还是比较好奇m_AvailableProcedureTypeNames这个参数根本没有设置过它,为什么继承流程基类（ProcedureBase）就会自动识别出来？而且m_AvailableProcedureTypeNames自动保存工程下的所有流程名字,具体实现原理的<a href="https://blog.csdn.net/m0_37920739/article/details/104726612">传送门</a>。</p>
+<h2 id="2添加流程锁">2.添加流程锁</h2>
+<p>知道流程的基本原理以后,把流程锁到底加到那里比较好呢？有两个选项:1.加到有限状态机类里。2.加到流程基类里。加到有限状态机（FsmState脚本）里以后继承它的类都会有跳转锁的概念（比如流程基类就是继承FsmState脚本）,如果加到流程基类里面（只有流程模块会有锁的概念）,所以经过思考以后直接修改一下有限状态机的代码比较好。
+<img src="/img/post/Gameframework/procedure/look1.png" alt="look1">
+因为要提供给用户外部访问的接口,需要修改流程组件的Inspector脚本,可以为每个流程类选项后面添加个ToggleLeft,经过小弟一段时间的操作,so good!!! ,修改好的流程组件效果如图所示:
+<img src="/img/post/Gameframework/procedure/exp3.png" alt="exp3">
+可以看到每个流程后面出现了锁定选项,ProcedureMenu是主菜单显示的流程,所以我们需要勾选锁定,使其禁止自动跳转到其他流程,建议Update函数里只处理流程跳转相关的逻辑,不要把其他更新逻辑写到里面去（如果大家一定要在流程里写更新相关代码,这样建议不要动Update函数,我们可以给它加个函数叫OnChange函数,这个函数专门负责流程跳转相关逻辑的代码,这里就直接去锁定Update函数）,因为被锁定的流程是调不起来Update函数的,只有调用(UnLock)函数把锁解开以后才会触发Update函数,流程跳转后会把锁状态重置,不必担心锁是不是要自己控制,具体的代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> GameFramework.Procedure;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Linq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEditor;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityGameFramework.Runtime;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> UnityGameFramework.Editor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [CustomEditor(typeof(ProcedureComponent))]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProcedureComponentInspector</span> : GameFrameworkInspector
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> SerializedProperty m_AvailableProcedureTypeNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> SerializedProperty m_EntranceProcedureTypeName = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span>[] m_ProcedureTypeNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> List&lt;<span style="color:#66d9ef">string</span>&gt; m_CurrentAvailableProcedureTypeNames = <span style="color:#66d9ef">null</span>;<span style="color:#75715e">//流程名字@流程是否启用(0 or 1)@流程是否加锁(0 or 1)  使用&#39;@&#39;拆分</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> List&lt;<span style="color:#66d9ef">string</span>&gt; m_CacheAvailableProcedureTypeNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> List&lt;<span style="color:#66d9ef">string</span>&gt; m_SelectedAvailableProcedureTypeNames = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_EntranceProcedureIndex = -<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnInspectorGUI()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnInspectorGUI();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            serializedObject.Update();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            ProcedureComponent t = (ProcedureComponent)target;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(m_EntranceProcedureTypeName.stringValue))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                EditorGUILayout.HelpBox(<span style="color:#e6db74">&#34;Entrance procedure is invalid.&#34;</span>, MessageType.Error);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (EditorApplication.isPlaying)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                EditorGUILayout.LabelField(<span style="color:#e6db74">&#34;Current Procedure&#34;</span>, t.CurrentProcedure == <span style="color:#66d9ef">null</span> ? <span style="color:#e6db74">&#34;None&#34;</span> : t.CurrentProcedure.GetType().ToString());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                GUILayout.Label(<span style="color:#e6db74">&#34;Available Procedures&#34;</span>, EditorStyles.boldLabel);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_ProcedureTypeNames.Length &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    EditorGUILayout.BeginVertical(<span style="color:#e6db74">&#34;box&#34;</span>);
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">bool</span> canWrite = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>                        m_CacheAvailableProcedureTypeNames.Clear();
+</span></span><span style="display:flex;"><span>                        m_SelectedAvailableProcedureTypeNames.Clear();
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> procedureTypeName <span style="color:#66d9ef">in</span> m_ProcedureTypeNames)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            EditorGUILayout.BeginHorizontal(<span style="color:#e6db74">&#34;box&#34;</span>);
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">string</span> procedureInfo = IsProcedureNameContains(procedureTypeName);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">if</span> (procedureInfo != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                            {
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">bool</span> isSelected = procedureInfo.Split(<span style="color:#e6db74">&#39;@&#39;</span>)[<span style="color:#ae81ff">1</span>] == <span style="color:#e6db74">&#34;1&#34;</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">bool</span> isLocking = procedureInfo.Split(<span style="color:#e6db74">&#39;@&#39;</span>)[<span style="color:#ae81ff">2</span>] == <span style="color:#e6db74">&#34;1&#34;</span>;
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">bool</span> selectedChange = EditorGUILayout.ToggleLeft(procedureTypeName, isSelected) != isSelected;
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">bool</span> lockingChnage = EditorGUILayout.ToggleLeft(<span style="color:#e6db74">&#34;锁定&#34;</span>, isLocking) != isLocking;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">if</span> (selectedChange || lockingChnage)
+</span></span><span style="display:flex;"><span>                                {
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">if</span> (selectedChange &amp;&amp; isSelected &amp;&amp; m_EntranceProcedureTypeName.stringValue == procedureTypeName)<span style="color:#75715e">//拦截被选择的脚本</span>
+</span></span><span style="display:flex;"><span>                                    {
+</span></span><span style="display:flex;"><span>                                        m_CacheAvailableProcedureTypeNames.Add(procedureInfo);
+</span></span><span style="display:flex;"><span>                                        m_SelectedAvailableProcedureTypeNames.Add(procedureTypeName);
+</span></span><span style="display:flex;"><span>                                        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                                    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                                    m_CacheAvailableProcedureTypeNames.Add(procedureTypeName + <span style="color:#66d9ef">string</span>.Format(<span style="color:#e6db74">&#34;@{0}@{1}&#34;</span>,
+</span></span><span style="display:flex;"><span>                                        selectedChange ? (!isSelected ? <span style="color:#ae81ff">1</span> : <span style="color:#ae81ff">0</span>) : (isSelected ? <span style="color:#ae81ff">1</span> : <span style="color:#ae81ff">0</span>), lockingChnage ? (!isLocking ? <span style="color:#ae81ff">1</span> : <span style="color:#ae81ff">0</span>) : (isLocking ? <span style="color:#ae81ff">1</span> : <span style="color:#ae81ff">0</span>)));
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">if</span>((selectedChange&amp;&amp;!isSelected) || (!selectedChange &amp;&amp; isSelected))
+</span></span><span style="display:flex;"><span>                                        m_SelectedAvailableProcedureTypeNames.Add(procedureTypeName);
+</span></span><span style="display:flex;"><span>                                    canWrite = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                                }
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                                {
+</span></span><span style="display:flex;"><span>                                    m_CacheAvailableProcedureTypeNames.Add(procedureInfo);
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">if</span>(isSelected)
+</span></span><span style="display:flex;"><span>                                        m_SelectedAvailableProcedureTypeNames.Add(procedureTypeName);
+</span></span><span style="display:flex;"><span>                                }                                   
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                            {
+</span></span><span style="display:flex;"><span>                                EditorGUILayout.ToggleLeft(procedureTypeName, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>                                EditorGUILayout.ToggleLeft(<span style="color:#e6db74">&#34;锁定&#34;</span>, <span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>                                m_CacheAvailableProcedureTypeNames.Add(procedureTypeName + <span style="color:#e6db74">&#34;@1@0&#34;</span>);
+</span></span><span style="display:flex;"><span>                                m_SelectedAvailableProcedureTypeNames.Add(procedureTypeName);
+</span></span><span style="display:flex;"><span>                                canWrite = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                            EditorGUILayout.EndHorizontal();
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (canWrite)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            m_CurrentAvailableProcedureTypeNames.Clear();
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> str <span style="color:#66d9ef">in</span> m_CacheAvailableProcedureTypeNames)
+</span></span><span style="display:flex;"><span>                                m_CurrentAvailableProcedureTypeNames.Add(str);
+</span></span><span style="display:flex;"><span>                            WriteAvailableProcedureTypeNames();
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                            
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    EditorGUILayout.EndVertical();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    EditorGUILayout.HelpBox(<span style="color:#e6db74">&#34;There is no available procedure.&#34;</span>, MessageType.Warning);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_SelectedAvailableProcedureTypeNames.Count &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    EditorGUILayout.Separator();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                    m_EntranceProcedureIndex = m_SelectedAvailableProcedureTypeNames.IndexOf(m_EntranceProcedureTypeName.stringValue);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> selectedIndex = EditorGUILayout.Popup(<span style="color:#e6db74">&#34;Entrance Procedure&#34;</span>, m_EntranceProcedureIndex, m_SelectedAvailableProcedureTypeNames.ToArray());
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (selectedIndex != m_EntranceProcedureIndex)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        m_EntranceProcedureIndex = selectedIndex;
+</span></span><span style="display:flex;"><span>                        m_EntranceProcedureTypeName.stringValue = m_SelectedAvailableProcedureTypeNames[selectedIndex];
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    EditorGUILayout.HelpBox(<span style="color:#e6db74">&#34;Select available procedures first.&#34;</span>, MessageType.Info);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            EditorGUI.EndDisabledGroup();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            serializedObject.ApplyModifiedProperties();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Repaint();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnCompileComplete()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnCompileComplete();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            RefreshTypeNames();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnEnable()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_AvailableProcedureTypeNames = serializedObject.FindProperty(<span style="color:#e6db74">&#34;m_AvailableProcedureTypeNames&#34;</span>);
+</span></span><span style="display:flex;"><span>            m_EntranceProcedureTypeName = serializedObject.FindProperty(<span style="color:#e6db74">&#34;m_EntranceProcedureTypeName&#34;</span>);
+</span></span><span style="display:flex;"><span>            RefreshTypeNames();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> RefreshTypeNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_ProcedureTypeNames = Type.GetTypeNames(<span style="color:#66d9ef">typeof</span>(ProcedureBase));
+</span></span><span style="display:flex;"><span>            ReadAvailableProcedureTypeNames();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> oldCount = m_CurrentAvailableProcedureTypeNames.Count;
+</span></span><span style="display:flex;"><span>            m_CurrentAvailableProcedureTypeNames = m_CurrentAvailableProcedureTypeNames.Where(x =&gt; m_ProcedureTypeNames.Contains(x.Split(<span style="color:#e6db74">&#39;@&#39;</span>)[<span style="color:#ae81ff">0</span>])).ToList();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_CurrentAvailableProcedureTypeNames.Count != oldCount)
+</span></span><span style="display:flex;"><span>                WriteAvailableProcedureTypeNames();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (!m_ProcedureTypeNames.Contains(m_EntranceProcedureTypeName.stringValue))<span style="color:#75715e">//如果脚本被删</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_EntranceProcedureIndex = -<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                m_EntranceProcedureTypeName.stringValue = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            serializedObject.ApplyModifiedProperties();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> ReadAvailableProcedureTypeNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_CacheAvailableProcedureTypeNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            m_CurrentAvailableProcedureTypeNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            m_SelectedAvailableProcedureTypeNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> count = m_AvailableProcedureTypeNames.arraySize;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; count; i++)
+</span></span><span style="display:flex;"><span>                m_CurrentAvailableProcedureTypeNames.Add(m_AvailableProcedureTypeNames.GetArrayElementAtIndex(i).stringValue);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> WriteAvailableProcedureTypeNames()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_AvailableProcedureTypeNames.ClearArray();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_CurrentAvailableProcedureTypeNames == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_CurrentAvailableProcedureTypeNames.Sort();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> count = m_CurrentAvailableProcedureTypeNames.Count;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; count; i++)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_AvailableProcedureTypeNames.InsertArrayElementAtIndex(i);
+</span></span><span style="display:flex;"><span>                m_AvailableProcedureTypeNames.GetArrayElementAtIndex(i).stringValue = m_CurrentAvailableProcedureTypeNames[i];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> IsProcedureNameContains(<span style="color:#66d9ef">string</span> procedureTypeName)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> str <span style="color:#66d9ef">in</span> m_CurrentAvailableProcedureTypeNames)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (str.Substring(<span style="color:#ae81ff">0</span>, str.Length - <span style="color:#ae81ff">4</span>).Equals(procedureTypeName))
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> str;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>m_CurrentAvailableProcedureTypeNames的列表数据变成了工程下的所有流程,格式是流程名+@(1 or 0 表示流程是否启用)+@（1 or 0 表示流程是否锁定）,m_AvailableProcedureTypeNames序列化对象保存的数据就是此列表的数据,所以流程组件的Start函数需要重写了,需要解析这个数据格式进行判断那些是启用的或加锁的,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> IEnumerator Start()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_SelectedAvailableProcedureTypeNames = <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; m_AvailableProcedureTypeNames.Length; ++i)   <span style="color:#75715e">//选出启用的流程</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_AvailableProcedureTypeNames[i].Split(<span style="color:#e6db74">&#39;@&#39;</span>)[<span style="color:#ae81ff">1</span>] == <span style="color:#e6db74">&#34;1&#34;</span>)
+</span></span><span style="display:flex;"><span>                    m_SelectedAvailableProcedureTypeNames.Add(m_AvailableProcedureTypeNames[i]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            ProcedureBase[] procedures = <span style="color:#66d9ef">new</span> ProcedureBase[m_SelectedAvailableProcedureTypeNames.Count];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; m_SelectedAvailableProcedureTypeNames.Count; i++)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">string</span> m_AvailableProcedureTypeName = m_SelectedAvailableProcedureTypeNames[i].Split(<span style="color:#e6db74">&#39;@&#39;</span>)[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">bool</span> m_lockProcedureState = m_SelectedAvailableProcedureTypeNames[i].Split(<span style="color:#e6db74">&#39;@&#39;</span>)[<span style="color:#ae81ff">2</span>] == <span style="color:#e6db74">&#34;1&#34;</span>;
+</span></span><span style="display:flex;"><span>                Type procedureType = Utility.Assembly.GetType(m_AvailableProcedureTypeName);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (procedureType == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    Log.Error(<span style="color:#e6db74">&#34;Can not find procedure type &#39;{0}&#39;.&#34;</span>, m_AvailableProcedureTypeName);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                procedures[i] = (ProcedureBase)((ProcedureBase)Activator.CreateInstance(procedureType))?.InitFsmState(m_lockProcedureState);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (procedures[i] == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    Log.Error(<span style="color:#e6db74">&#34;Can not create procedure instance &#39;{0}&#39;.&#34;</span>, m_AvailableProcedureTypeName);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_EntranceProcedureTypeName == m_AvailableProcedureTypeName)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    m_EntranceProcedure = procedures[i];
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_EntranceProcedure == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Log.Error(<span style="color:#e6db74">&#34;Entrance procedure is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_ProcedureManager.Initialize(GameFrameworkEntry.GetModule&lt;IFsmManager&gt;(), procedures);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> WaitForEndOfFrame();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            m_ProcedureManager.StartProcedure(m_EntranceProcedure.GetType());
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>通过Split(&rsquo;@&rsquo;)将保存的字符串数据进行拆分,然后筛选出启用的流程,再将其是否锁定的信息传递进去即可,所以还需要修改两个脚本,FsmManager脚本里去加个锁定判断条件,FsmState脚本里给加上锁变量和开锁函数,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework.Fsm
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 有限状态机状态基类。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;typeparam name=&#34;T&#34;&gt;有限状态机持有者类型。&lt;/typeparam&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FsmState</span>&lt;T&gt; <span style="color:#66d9ef">where</span> T : <span style="color:#66d9ef">class</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">bool</span> m_IsLocking = <span style="color:#66d9ef">false</span>,m_UseLocking = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 初始化有限状态机锁定状态。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">bool</span> IsLocking
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> m_UseLocking;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 初始化有限状态机状态基类的新实例。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> FsmState()
+</span></span><span style="display:flex;"><span>        {           
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 有限状态机状态开锁。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Unlock()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!m_UseLocking)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            m_UseLocking = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">virtual</span> FsmState&lt;T&gt; InitFsmState(<span style="color:#66d9ef">bool</span> m_IsLocking)
+</span></span><span style="display:flex;"><span>        { 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.m_IsLocking = m_IsLocking;
+</span></span><span style="display:flex;"><span>            m_UseLocking = m_IsLocking;      
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 有限状态机状态初始化时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> OnInit(IFsm&lt;T&gt; fsm)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 有限状态机状态进入时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> OnEnter(IFsm&lt;T&gt; fsm)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 有限状态机状态轮询时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;elapseSeconds&#34;&gt;逻辑流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;realElapseSeconds&#34;&gt;真实流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> OnUpdate(IFsm&lt;T&gt; fsm, <span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 有限状态机状态离开时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;isShutdown&#34;&gt;是否是关闭有限状态机时触发。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> OnLeave(IFsm&lt;T&gt; fsm, <span style="color:#66d9ef">bool</span> isShutdown)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>           m_UseLocking = m_IsLocking;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 有限状态机状态销毁时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> OnDestroy(IFsm&lt;T&gt; fsm)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 切换当前有限状态机状态。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;typeparam name=&#34;TState&#34;&gt;要切换到的有限状态机状态类型。&lt;/typeparam&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> ChangeState&lt;TState&gt;(IFsm&lt;T&gt; fsm) <span style="color:#66d9ef">where</span> TState : FsmState&lt;T&gt;
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Fsm&lt;T&gt; fsmImplement = (Fsm&lt;T&gt;)fsm;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (fsmImplement == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;FSM is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            fsmImplement.ChangeState&lt;TState&gt;();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 切换当前有限状态机状态。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;fsm&#34;&gt;有限状态机引用。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;stateType&#34;&gt;要切换到的有限状态机状态类型。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> ChangeState(IFsm&lt;T&gt; fsm, Type stateType)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Fsm&lt;T&gt; fsmImplement = (Fsm&lt;T&gt;)fsm;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (fsmImplement == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;FSM is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (stateType == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;State type is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!<span style="color:#66d9ef">typeof</span>(FsmState&lt;T&gt;).IsAssignableFrom(stateType))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;State type &#39;{0}&#39; is invalid.&#34;</span>, stateType.FullName));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            fsmImplement.ChangeState(stateType);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>有限状态机管理器(FsmManager)脚本里的Update函数里添加锁的判断,局部代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fsm.IsDestroyed || fsm.IsLocking)
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    fsm.Update(elapseSeconds, realElapseSeconds);
+</span></span></code></pre></div><p>这个IsLocking属性在Fsm脚本里是没有的,所以现在再给Fsm脚本添加上这个属性,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 获取有限状态机是否锁定。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">bool</span> IsLocking
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> m_CurrentState?.IsLocking ?? <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>到这里为止流程加锁的功能就基本完成,虽然大家可能感觉这个功能好像很鸡肋,没什么太大的用处（对对对,就是你赶紧滚出去）,这个小修改怎么说呢？如果写的游戏大部分流程都是需要某些条件才可以流程跳转的,这样的话加上这个功能还是不错的选择,因为你只需要调用Unlock函数即可跳转流程,其他都不用你去关心。</p>
+<h2 id="3思考高深扩展">3.思考高深扩展</h2>
+<p>上面提到过跳转代码最好写到OnChange函数里,这个函数专门负责流程跳转相关逻辑,我们可以仔细思考亿下,是不是可以把跳转流程的相关逻辑变的可以配置,到底什么意思呢？大家应该知道Unity的动画状态机,可以用动画状态机和大家深度讨论一下流程组件还可以改成什么样子。
+<img src="/img/post/Gameframework/procedure/exp4.png" alt="exp4">
+可以看到Unity的动画状态机大概就是这样的,每个状态都有一个或多个跳转目标,它们的跳转都有自身的变量去判断是否可以执行(通过调用SetTrigger即可跳转到指定目标点),所以我们也可以尝试一下,把流程跳转的代码变得可配置,之后也可以通过调用类似SetTrigger函数去实现跳转,可以在流程组件的检视窗口下加个按钮,来弹出跳转流程的配置窗口,然后工程启动时去读取配置文件,去完成流程跳转相关逻辑。大家是不是感觉很激动人心,接下来要看操作方式了？虽然这个跳转流程变得可配以后,跳转流程相关逻辑就可以热更新了(不用xlua、ilruntime,只需要替换配置文件即可),哇咔咔,感觉简直不要太厉害,但是各位放心,这个功能太复杂了,在下实在没有时间和本事去写这个模块,所以这个功能就交给优秀的各位了,这篇文章的小节三就当作投石问路了。(可能有空会去尝试一下这个模块如何去实现,或者感觉这个功能确实不错的话,可以直接去@作者去搞定,哈哈哈哈哈)。
+<img src="/img/post/Gameframework/procedure/look2.jpg" alt="look2"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Procedure%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Sound%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>需知录 on 星空城下无君王</title>
+    <link>https://daveant.github.io/categories/%E9%9C%80%E7%9F%A5%E5%BD%95/</link>
+    <description>Recent content in 需知录 on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 10 Aug 2020 10:13:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/categories/%E9%9C%80%E7%9F%A5%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编码解码和协议分析</title>
+      <link>https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 10 Aug 2020 10:13:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/</guid>
+      <description>前言 计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,A</description>
+    </item>
+    <item>
+      <title>CSharp特性详解</title>
+      <link>https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Mon, 10 Aug 2020 10:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/</guid>
+      <description>前言 CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让</description>
+    </item>
+    <item>
+      <title>Socket基础知识</title>
+      <link>https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Mon, 04 May 2020 15:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <description>前言 所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字</description>
+    </item>
+    <item>
+      <title>CSharp中的多线程</title>
+      <link>https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Fri, 17 Apr 2020 20:16:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>1.相关概念 进程 是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在</description>
+    </item>
+    <item>
+      <title>坐标空间变换</title>
+      <link>https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/</link>
+      <pubDate>Fri, 10 Apr 2020 10:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/</guid>
+      <description>前言 这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间</description>
+    </item>
+    <item>
+      <title>游戏中的数学</title>
+      <link>https://daveant.github.io/posts/%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6/</link>
+      <pubDate>Fri, 03 Apr 2020 13:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6/</guid>
+      <description>1.游戏中的矢量 矢量的加减 公式： a+b=(a₁+b₁,a₂+b₂,a₃+b₃) a-b=(a₁-b₁,</description>
+    </item>
+    <item>
+      <title>64位和32位程序的区别</title>
+      <link>https://daveant.github.io/posts/64%E4%BD%8D%E5%92%8C32%E4%BD%8D%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 03 Apr 2020 10:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/64%E4%BD%8D%E5%92%8C32%E4%BD%8D%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>前言 记得很久以前老大和我说:小明(这里的小明不是课本上的小明)你把这个功能迁移到64位的程序上(ps</description>
+    </item>
+  </channel>
+</rss>

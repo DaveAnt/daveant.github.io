@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>坐标空间变换 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e4%b8%ba%e4%bd%95%e9%9c%80%e8%a6%81%e5%a4%9a%e7%a7%8d%e5%9d%90%e6%a0%87%e7%a9%ba%e9%97%b4">
+				                            1.为何需要多种坐标空间？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%9d%90%e6%a0%87%e7%b3%bb%e5%8f%98%e6%8d%a2">
+				                            2.坐标系变换
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%9d%90%e6%a0%87%e7%a9%ba%e9%97%b4%e5%8f%98%e6%8d%a2%e7%9a%84%e5%ba%94%e7%94%a8">
+				                            3.坐标空间变换的应用
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        坐标空间变换</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                坐标空间变换</h1>
+                <div class="stuff">
+                    <span>April 10, 2020</span>
+                    <span>字数 2386</span>
+                                  
+                    <span id="/posts/坐标空间变换/" class="leancloud_visitors" data-flag-title="坐标空间变换">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: cover: /img/title/Must/wallhaven_4.jpg
+cover: https://pics.images.ac.cn/image/5eb551ea6c993.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间、世界空间、观察空间、剪裁空间等等,它们都涉及到坐标系转换,但是为什么要这么定义如此多的坐标系呢?全部使用世界坐标系不就可以解决这些麻烦事了,如果存在这些疑问的小老板,恭喜你来对地方了,现在就帮你安排的明明白白。</p>
+</blockquote>
+<h2 id="1为何需要多种坐标空间">1.为何需要多种坐标空间？</h2>
+<p>如果坐标空间只能存在一个,那么一定是世界坐标空间,毕竟可以把万物都包含进来的坐标空间只有世界坐标,既然世界坐标空间可以表示万物,为何需要这么多杂七杂八的坐标空间呢？先打个比方吧,刚入职的同事问你：你好,知道我们公司的食堂在那里吗？回答就是几几楼。总不可能这样回答他：以北京故宫为全宇宙的原点,南xxx米再往东xxx米,有一个叫xxx的公司的xxx楼层出电梯右拐走xxx米有一个叫xxx的食堂,那里有一个xxx的饭,特别好吃~,相信各位应该不能这样玩吧！不然的话&hellip;
+<img src="/img/post/Must/coordinate/look1.jpg" alt="look1">
+所以需要使用相对路径,不然的话表述起来也太累了(好心和同事说的仔仔细细明明白白,确被当成了傻子了,我能怎么办？),在游戏开发中和介绍现实中位置是一样的,为了更加方便表示当前模型的位置,需要选择合适的坐标空间。所以离不开这些坐标空间,也避免不了对这些坐标空间的使用,接下来就是介绍今天的主角了,坐标空间变换,既然避免不了多种多样坐标空间的使用,就需要有方法把它们关联起来。</p>
+<h2 id="2坐标系变换">2.坐标系变换</h2>
+<p>世界上所有东西都是相对的,每个空间都有父坐标空间,避免不了多种坐标空间的使用,所以必须要学习坐标系的变换,当然两个坐标系不是父子关系也是可能的,这样就比较麻烦了,需要找到它们共同的父坐标系,然后你们懂的&hellip;,这里就来介绍一下子坐标空间转换为父坐标空间的方式(只需要解出一个即可,知道了子坐标空间转换为父坐标空间的矩阵,反过来的就是逆矩阵~),现在假设子坐标系c上有点(a,b,c),如何确定父坐标系p上的该点呢？最初数学公式表示成以下样子。
+<img src="/img/post/Must/coordinate/exp2.png" alt="exp2">
+直接给出矩阵变换的推导公式图：
+<img src="/img/post/Must/coordinate/exp1.jpg" alt="exp1">
+由此得到子空间到父空间的矩阵变换Mc→p,既然子空间到父空间的矩阵变换公式已经推倒出来了,这样就可以通过逆矩阵的方式得出Mp→c,这里简单的证明一下为什么是逆矩阵？<br>
+Ap=Mc→p⋅(Mp→c⋅Ap)<br>
+Ap=(Mc→p⋅Mp→c)⋅Ap<br>
+​Mp→c=(Mc→p)⁻¹</p>
+<h2 id="3坐标空间变换的应用">3.坐标空间变换的应用</h2>
+<p>在游戏引擎中不知道具体的应用的话,这些公式将变得无趣和枯燥,所以来聊聊在游戏引擎中用到的坐标空间变换,在渲染流水线中每个顶点上的像素要经过多个坐标空间的变换才能被画到屏幕上,在最开始的模型空间中定义的模型最后会转换到屏幕空间上的像素,这里就来仔细讲述下游戏引擎中每个空间含义。</p>
+<ul>
+<li>模型空间<br>
+模型空间的原点和坐标轴都是由美术人员在建模软件上确定好的,可以在顶点着色器中访问模型的顶点信息,其中包含了每个顶点的坐标。这些坐标基本上都相对于模型空间中的原点(美术通常把它定义在模型重心),来看一下模型放在Unity中所谓的模型空间吧！
+<img src="/img/post/Must/coordinate/exp3.jpg" alt="exp3">
+使用游戏引擎做3D游戏开发的伙伴眼睛应该都看腻了吧,图中的坐标轴就是模型空间。</li>
+<li>世界空间<br>
+世界空间是特殊的坐标空间,因为它实际建立是我们所关心的最大空间,可以说它没有父空间坐标(当然它可以有父坐标空间,但没有必要),所有坐标空间的祖宗坐标空间都是世界空间,以王者荣耀游戏为例,这个游戏的世界空间就是峡谷吧,应该没有人物可以出峡谷吧,就算可以跑出去,世界之外没有什么世外桃源,只是空空如也的一片~,在渲染中的顶点变换第一步就是从模型空间变换成世界空间中,这个变换叫做模型变换,这里模拟一下将模型进行缩放,旋转,平移,然后转换到世界坐标。
+<img src="/img/post/Must/coordinate/exp4.png" alt="exp4">
+接下来通过刚刚说到的坐标空间变换,将模型空间变换到世间坐标。<br>
+P.world = M.modsl P.modsl<br>
+使用游戏引擎开发的人员来说世界空间其实完全不需要关心,只需要把场地导入到游戏引擎中,具体的世界空间大小会由游戏引擎确定,其实就是scene里可以把所有模型都包含进来的最大长宽高。</li>
+<li>观察空间<br>
+观察空间也被称为摄像机空间,听名字就知道是特别的模型空间,在所有模型中特殊的模型就是摄像机,摄像机位置和旋转决定游戏渲染的使用视角,在观察空间中,摄像机就是原点,顶点变换第二步就是观察空间到屏幕空间,这个变换叫做观察变换,为了得到顶点在观察空间的位置,可以计算出观察空间2个坐标轴在世界空间下的表示,然后构建出观察空间变换到世界空间的变换矩阵,再对该矩阵求出逆矩阵得到从世界空间变换到观察空间的变换矩阵。当然可以直接想象平移整个观察空间,让摄像机原点位于世界坐标的原点,坐标轴与世界空间中的坐标轴完全对齐即可,这2个思路得到的矩阵变换是一样的。</li>
+<li>剪裁空间<br>
+顶点接下来要从观察空间转换到剪裁空间就是投影,这里的变换矩阵称为投影矩阵。投影比起之前的矩阵变换来说是最后步骤,是把三维空间转换成二维坐标前做准备,剪裁空间目标是能够对渲染图元进行剪裁,完全位于这块空间内部的图元将会保留,完全在空间外面的会被剔除,而与这块空间边界相交的图元将会剪裁。
+在Unity可以设置剪裁空间大小和视椎体的投影类型,一种是正交投影,一种是透视投影。<br>
+透视投影样式如下(Prespective)。
+<img src="/img/post/Must/coordinate/exp5.jpg" alt="exp5">
+正交投影样式如下(Orthographic)。
+<img src="/img/post/Must/coordinate/exp6.jpg" alt="exp6">
+透视投影的视椎体是金字塔形(3D游戏经常选择的类型),正交投影是长方体(2D游戏或界面经常选择的类型),想要判断顶点是不是存在剪裁空间内是比较麻烦的,所以需要使用更加通用、方便、整体的方式进行剪裁工作,这种方式通过投影矩阵把顶点转换到剪裁空间中。投影矩阵目的有两个,首先是为了投影做准备(投影含义可理解为空间降维,会在屏幕映射前发生,通过齐次除法得到二维坐标),其次是x、y、z分量进行缩放,经过投影矩阵缩放后,可以直接使用w分量作为范围值,如果x、y、z都位于范围内,说明顶点位于剪裁空间内。</li>
+</ul>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            编码解码和协议分析</a>
+                            <p>前言 计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,A...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_1.jpg" alt="编码解码和协议分析">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            CSharp特性详解</a>
+                            <p>前言 CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_7.jpg" alt="CSharp特性详解">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            Socket基础知识</a>
+                            <p>前言 所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_5.jpg" alt="Socket基础知识">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            CSharp中的多线程</a>
+                            <p>1.相关概念 进程 是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_6.jpg" alt="CSharp中的多线程">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

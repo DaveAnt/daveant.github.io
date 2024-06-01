@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>享元模式 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1-%e4%b8%80%e8%88%ac%e5%9c%b0%e5%9b%be%e6%95%b0%e6%8d%ae%e6%a0%bc%e5%bc%8f">
+				                            1. 一般地图数据格式
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%ba%ab%e5%85%83%e6%a8%a1%e5%bc%8f%e4%bc%98%e5%8c%96%e5%9c%b0%e5%9b%be%e5%a4%a7%e5%b0%8f">
+				                            2.享元模式优化地图大小
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e6%80%bb%e7%bb%93">
+				                            总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e4%ba%ab%e5%85%83%e6%a8%a1%e5%bc%8f%e7%9a%84%e4%bc%98%e7%bc%ba%e7%82%b9">
+				                            1.享元模式的优缺点
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%ba%ab%e5%85%83%e6%a8%a1%e5%bc%8f%e7%9a%84%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">
+				                            2.享元模式的使用场景
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        享元模式</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                享元模式</h1>
+                <div class="stuff">
+                    <span>March 13, 2020</span>
+                    <span>字数 916</span>
+                                  
+                    <span id="/posts/享元模式/" class="leancloud_visitors" data-flag-title="享元模式">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/DesignPattern/wallhaven_3.jpg
+cover: https://pics.images.ac.cn/image/5eb5199287084.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>看到享元模式,想到了在工作时写的地图编辑器就可以使用此模式去优化一下内存,享元模式主要减少创建对象数量,以减少内存占用,简直优化游戏内存利器啊。</p>
+</blockquote>
+<h2 id="1-一般地图数据格式">1. 一般地图数据格式</h2>
+<p>一般2D地图都是使用二维数组去表示的,数组里面存着结构体,结构体里的字段可能碰撞信息,图片信息等等,一般地图资源的情况,我们用代码模拟一下即可,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> CollisionType:<span style="color:#66d9ef">byte</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Stop,<span style="color:#75715e">//完全阻挡</span>
+</span></span><span style="display:flex;"><span>        Walk,<span style="color:#75715e">//所以通过</span>
+</span></span><span style="display:flex;"><span>        Fly,<span style="color:#75715e">//只能飞</span>
+</span></span><span style="display:flex;"><span>        Swim,<span style="color:#75715e">//可游可飞</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MapData</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">uint</span> ImgLib;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">uint</span> ImgIndex;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">byte</span> PlaySpeed;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">byte</span> FrameCount;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> CollisionType CollisionType;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这样再定义一个MapData的二维数组即可,MapData[,] MapArray = new MapData[MapInfo.Width, MapInfo.Height];这样就搞定了,主要拿着这个二维数组的数据拿去渲染地图。但是！！！地图上可能有大量重复利用的图片资源,比如有相同的树,相同的草地,也就是说MapData的二维数组里可能存在大量相同的数据,多余的占领着内存空间,所以可以使用享元模式优化这个二维数组。</p>
+<h2 id="2享元模式优化地图大小">2.享元模式优化地图大小</h2>
+<p>享元模式是把资源存到哈希表里,然后一个资源有唯一对应的Key,这样就不需要创造重复的对象了,具体实现代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MapFactory</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> ResNum;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Dictionary&lt;<span style="color:#66d9ef">uint</span>,MapData&gt; MapDataSet;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> MapFactory()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            ResNum = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            MapDataSet = <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">uint</span>, MapData&gt;();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> GetMapKey(MapData tmpData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">var</span> mapData <span style="color:#66d9ef">in</span> MapDataSet)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (mapData.Value.Equals(tmpData))
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> mapData.Key;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            MapDataSet.Add(ResNum,tmpData);
+</span></span><span style="display:flex;"><span>            ResNum = ResNum + <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> ResNum - <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> MapData? GetMapValue(<span style="color:#66d9ef">uint</span> index)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                MapData tmpData;
+</span></span><span style="display:flex;"><span>                MapDataSet.TryGetValue(index, <span style="color:#66d9ef">out</span> tmpData);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> tmpData;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> (Exception e)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(e);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>经过以上的处理,数组变成了int[,] MapArray = new int[MapInfo.Width, MapInfo.Height];。当我们需要具体数据渲染时,调用GetMapValue即可,然后读取地图文件时通过GetMapKey去把地图二维数组构建出来。享元模式确实做到了优化内存的功能,但是它也是有挺多缺点的,接下是时候总结一下享元模式的优缺点和使用场景。</p>
+<h2 id="总结">总结</h2>
+<h2 id="1享元模式的优缺点">1.享元模式的优缺点</h2>
+<p>优点:大大减少对象的创建,降低系统的内存,使重复利用率提高,减少对象数量从而改善应用所需的对象结构的方式。<br>
+缺点:虽然降低内存的使用,但是性能方面增加消耗,因为增加了哈希表添加,查询等操作。还有创建的对象状态会变化时就不能使用。比如很多玩家喜欢玩剑客,剑客这个角色开始的状态是一样的,但是玩家们让角色穿戴不同装备等等一系列操作就发生了变化。</p>
+<h2 id="2享元模式的使用场景">2.享元模式的使用场景</h2>
+<p>1）优化游戏地图的内存占用。<br>
+2）多线程池的底层原理。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            迭代器模式</a>
+                            <p>前言 C#中数据结构都实现了迭代器的功能,具体是如何实现的,接下来就由此篇文章去介绍一下C#是如何实现...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_24.jpg" alt="迭代器模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            代理模式</a>
+                            <p>前言 代理模式主要是用来对目标对象访问权限的控制,比如游戏商城里购买道具时,通过代理类去判断玩家是否可...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_4.jpg" alt="代理模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            单例模式</a>
+                            <p>前言 单例模式有二种,饿汉模式和懒汉模式。这里将去实现单例模式的这些例子,然后分析它们的优缺点和使用场...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_5.jpg" alt="单例模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            原型模式</a>
+                            <p>前言 原型模式是用于创建重复的对象,当类里有很多复杂参数的时候,我们可以避免使用拷贝(赋值)构造函数,...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_19.jpg" alt="原型模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            命令模式</a>
+                            <p>前言 命令模式可以实现操作的前进和回滚,经常使用P图软件的用户一定知道软件提供了对操作前进和回滚的功能...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_7.jpg" alt="命令模式">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

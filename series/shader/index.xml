@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shader on 星空城下无君王</title>
+    <link>https://daveant.github.io/series/shader/</link>
+    <description>Recent content in Shader on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 02 May 2020 00:32:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/series/shader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UnityShader复杂光照</title>
+      <link>https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/</link>
+      <pubDate>Sat, 02 May 2020 00:32:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/</guid>
+      <description>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要</description>
+    </item>
+    <item>
+      <title>UnityShader渲染路径</title>
+      <link>https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Fri, 01 May 2020 22:32:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/</guid>
+      <description>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需</description>
+    </item>
+    <item>
+      <title>UnityShader透明效果-扩展篇</title>
+      <link>https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/</link>
+      <pubDate>Fri, 01 May 2020 10:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/</guid>
+      <description>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说</description>
+    </item>
+    <item>
+      <title>UnityShader透明效果</title>
+      <link>https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/</link>
+      <pubDate>Thu, 30 Apr 2020 10:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/</guid>
+      <description>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通</description>
+    </item>
+    <item>
+      <title>UnityShader遮罩纹理</title>
+      <link>https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/</link>
+      <pubDate>Wed, 29 Apr 2020 10:28:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/</guid>
+      <description>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加</description>
+    </item>
+    <item>
+      <title>UnityShader渐变纹理-卡通渲染</title>
+      <link>https://daveant.github.io/posts/UnityShader%E6%B8%90%E5%8F%98%E7%BA%B9%E7%90%86-%E5%8D%A1%E9%80%9A%E6%B8%B2%E6%9F%93/</link>
+      <pubDate>Tue, 28 Apr 2020 16:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E6%B8%90%E5%8F%98%E7%BA%B9%E7%90%86-%E5%8D%A1%E9%80%9A%E6%B8%B2%E6%9F%93/</guid>
+      <description>前言 渐变纹理通常是用来控制漫反射结果的,也可以得到插画、卡通风格的渲染效果,使用这种技术可以保证物体</description>
+    </item>
+    <item>
+      <title>UnityShader凹凸映射</title>
+      <link>https://daveant.github.io/posts/UnityShader%E5%87%B9%E5%87%B8%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Mon, 27 Apr 2020 16:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E5%87%B9%E5%87%B8%E6%98%A0%E5%B0%84/</guid>
+      <description>前言 在游戏世界中实现凹凸不平的表面。通常有两种方式,建模时直接进行细节处理,或使用Shader让地面</description>
+    </item>
+    <item>
+      <title>UnityShader基本纹理</title>
+      <link>https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E7%BA%B9%E7%90%86/</link>
+      <pubDate>Fri, 24 Apr 2020 16:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E7%BA%B9%E7%90%86/</guid>
+      <description>前言 纹理最初目的就是使用图片来控制模型的外观,使用纹理映射技术,把一张图“黏”在模型表面。逐纹素(与</description>
+    </item>
+    <item>
+      <title>UnityShader基本光照</title>
+      <link>https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E5%85%89%E7%85%A7/</link>
+      <pubDate>Tue, 21 Apr 2020 16:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E5%85%89%E7%85%A7/</guid>
+      <description>前言 一切物体都受到光照的影响,游戏要模拟出现实世界的光照,自然而然出现很多关于光照的理论和知识,当然</description>
+    </item>
+    <item>
+      <title>UnityShader调式</title>
+      <link>https://daveant.github.io/posts/UnityShader%E8%B0%83%E5%BC%8F/</link>
+      <pubDate>Tue, 21 Apr 2020 00:03:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E8%B0%83%E5%BC%8F/</guid>
+      <description>前言 每个程序员的愿望就是写的程序不会出现任何BUG,因为有时候Debug还是很困难的,至于Shade</description>
+    </item>
+    <item>
+      <title>UnityShader语义</title>
+      <link>https://daveant.github.io/posts/UnityShader%E8%AF%AD%E4%B9%89/</link>
+      <pubDate>Mon, 20 Apr 2020 10:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E8%AF%AD%E4%B9%89/</guid>
+      <description>前言 通俗来说语义就是可以让Shader知道从哪里读取数据,并把数据输出到哪里。 1.什么是语义？ 语义实</description>
+    </item>
+    <item>
+      <title>UnityShader属性交互</title>
+      <link>https://daveant.github.io/posts/UnityShader%E5%B1%9E%E6%80%A7%E4%BA%A4%E4%BA%92/</link>
+      <pubDate>Sun, 19 Apr 2020 10:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E5%B1%9E%E6%80%A7%E4%BA%A4%E4%BA%92/</guid>
+      <description>前言 看过Hello Shader篇章的知道为了实现炫酷的Shader效果,靠基础的Shader知识完全</description>
+    </item>
+    <item>
+      <title>Hello-Shader</title>
+      <link>https://daveant.github.io/posts/Hello-Shader/</link>
+      <pubDate>Wed, 15 Apr 2020 10:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Hello-Shader/</guid>
+      <description>前言 每个语言都是从Hello World开始的,这篇文章就来Hello一下Shader,使用CG编写最</description>
+    </item>
+    <item>
+      <title>UnityShader基本运算</title>
+      <link>https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97/</link>
+      <pubDate>Tue, 14 Apr 2020 13:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97/</guid>
+      <description>1.UnityShader内置变量 在了解UnityShader基本运算接口之前,先要知道Unity有</description>
+    </item>
+    <item>
+      <title>什么是DrawCall？</title>
+      <link>https://daveant.github.io/posts/%E4%BB%80%E4%B9%88%E6%98%AFDrawCall/</link>
+      <pubDate>Sat, 28 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E4%BB%80%E4%B9%88%E6%98%AFDrawCall/</guid>
+      <description>前言 游戏开发圈里的人一定听过优化游戏要降低DrawCall,这样到底什么是DrawCall呢？Uni</description>
+    </item>
+    <item>
+      <title>Shader入门教程</title>
+      <link>https://daveant.github.io/posts/Shader%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Fri, 20 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Shader%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</guid>
+      <description>1.什么是渲染流水线？ 渲染流水线通俗的来说就是一个三维场景出发、生成一张二维图像,也就是说计算器需要</description>
+    </item>
+  </channel>
+</rss>

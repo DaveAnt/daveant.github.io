@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mode on 星空城下无君王</title>
+    <link>https://daveant.github.io/series/mode/</link>
+    <description>Recent content in Mode on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 23 Mar 2020 23:23:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/series/mode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>迭代器模式</title>
+      <link>https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 23 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 C#中数据结构都实现了迭代器的功能,具体是如何实现的,接下来就由此篇文章去介绍一下C#是如何实现</description>
+    </item>
+    <item>
+      <title>代理模式</title>
+      <link>https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sat, 21 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 代理模式主要是用来对目标对象访问权限的控制,比如游戏商城里购买道具时,通过代理类去判断玩家是否可</description>
+    </item>
+    <item>
+      <title>单例模式</title>
+      <link>https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 20 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 单例模式有二种,饿汉模式和懒汉模式。这里将去实现单例模式的这些例子,然后分析它们的优缺点和使用场</description>
+    </item>
+    <item>
+      <title>原型模式</title>
+      <link>https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 19 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 原型模式是用于创建重复的对象,当类里有很多复杂参数的时候,我们可以避免使用拷贝(赋值)构造函数,</description>
+    </item>
+    <item>
+      <title>命令模式</title>
+      <link>https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 18 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 命令模式可以实现操作的前进和回滚,经常使用P图软件的用户一定知道软件提供了对操作前进和回滚的功能</description>
+    </item>
+    <item>
+      <title>备忘录模式</title>
+      <link>https://daveant.github.io/posts/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 17 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 不知诸君有没有看过在下写的命令模式实现操作前进和回滚的文章,其实备忘录模式的主要目的也是这个,但</description>
+    </item>
+    <item>
+      <title>外观模式</title>
+      <link>https://daveant.github.io/posts/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 16 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 外观模式就相当于服务员,比如去餐厅吃饭时,服务员首先会给你菜单让你点菜,给你端茶递菜,然后清理桌</description>
+    </item>
+    <item>
+      <title>工厂模式</title>
+      <link>https://daveant.github.io/posts/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sun, 15 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</guid>
+      <description>1.简单工厂模式 简单工厂模式的缺点,把矛盾集中在简单工厂类中,使工厂类高耦合,而且进行修改和添加的时</description>
+    </item>
+    <item>
+      <title>建造模式</title>
+      <link>https://daveant.github.io/posts/%E5%BB%BA%E9%80%A0%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sat, 14 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E5%BB%BA%E9%80%A0%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 最近在写一个功能考虑到不同配置去自动调整渲染,以适应不同机型或者是让用户自己去选择高,中,低的渲</description>
+    </item>
+    <item>
+      <title>MVC模式</title>
+      <link>https://daveant.github.io/posts/MVC%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 13 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/MVC%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 MVC模式是视图层、控制层、模型层代码进行分层开发,视图层只关心UI的变化,控制层获取模型对象,</description>
+    </item>
+    <item>
+      <title>中介者模式</title>
+      <link>https://daveant.github.io/posts/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 13 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 当看到一个类有很多复杂的对象引用和相互调用时,导致代码变得很乱,这个时候就可以使用中介者模式去解</description>
+    </item>
+    <item>
+      <title>享元模式</title>
+      <link>https://daveant.github.io/posts/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 13 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 看到享元模式,想到了在工作时写的地图编辑器就可以使用此模式去优化一下内存,享元模式主要减少创建对</description>
+    </item>
+    <item>
+      <title>桥接模式</title>
+      <link>https://daveant.github.io/posts/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 13 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 这篇文章介绍Untiy中一套动作通用多个模型原理和画图软件一些模块原理,桥接模式就这样登场了。 1</description>
+    </item>
+    <item>
+      <title>模板方法模式</title>
+      <link>https://daveant.github.io/posts/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 12 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 模板方法模式和空对象模式刚刚相反,是经常使用的模式,可能经常用到也不知道它原来叫模板方法模式。 1</description>
+    </item>
+    <item>
+      <title>状态模式</title>
+      <link>https://daveant.github.io/posts/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 11 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 当类的某个属性发生改变时允许改变其内部的行为,可以减少分支语言和选择开关的集中。 1.Unity动</description>
+    </item>
+    <item>
+      <title>空对象模式</title>
+      <link>https://daveant.github.io/posts/%E7%A9%BA%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 10 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E7%A9%BA%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 空对象模式基本很少用到,空对象去取代空引用,主要目的是当数据是空引用时提供一种默认的处理方式。 1</description>
+    </item>
+    <item>
+      <title>策略模式</title>
+      <link>https://daveant.github.io/posts/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 09 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 不知道各位有没有玩过三国杀,这里将用策略模式去模拟三国杀游戏,各位看完一定会感觉很生动形象,最后</description>
+    </item>
+    <item>
+      <title>组合模式</title>
+      <link>https://daveant.github.io/posts/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sun, 08 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 组合模式称为整体部分模式,主要是表现对象层次具备整体和部分,呈树形结构,且要求具备统一行为。 1.</description>
+    </item>
+    <item>
+      <title>装饰器模式</title>
+      <link>https://daveant.github.io/posts/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sat, 07 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 装饰器模式可以动态的给对象添加额外的职责,增加新的功能,思考一下和对象适配器的模式到底存在那些区</description>
+    </item>
+    <item>
+      <title>观察者模式</title>
+      <link>https://daveant.github.io/posts/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 06 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 这篇文章讲述消息监听方案的发展史,来阐述观察者模式的优点。本篇文章的故事纯属虚构,如有雷同只是巧</description>
+    </item>
+    <item>
+      <title>解释器模式</title>
+      <link>https://daveant.github.io/posts/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 05 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 在游戏中需要生成json的存档文件时(比如游戏中音效大小的存储),就可以使用解释器模式来生成此文</description>
+    </item>
+    <item>
+      <title>访问者模式</title>
+      <link>https://daveant.github.io/posts/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 04 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 如果对象中的数据是稳定不变,但访问数据方式可能易变的或需扩展的。可以使用访问者模式,主要是为了对</description>
+    </item>
+    <item>
+      <title>责任链模式</title>
+      <link>https://daveant.github.io/posts/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 03 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 不知道各位有没有看过在下写的过滤器模式文章,这篇文章主要是用责任链模式去重构之前文章中组合过滤器</description>
+    </item>
+    <item>
+      <title>过滤器模式</title>
+      <link>https://daveant.github.io/posts/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 02 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 网上对过滤器的解释已经很多了,而且这个模式的概念理解起来不算很难,但是发现网上提供的Demo代码</description>
+    </item>
+    <item>
+      <title>适配器模式</title>
+      <link>https://daveant.github.io/posts/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sun, 01 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</guid>
+      <description>前言 适配器模式从实现方式上分为三种,类适配器和对象适配器还有缺省适配器,它们区别在于实现方式和实际使</description>
+    </item>
+  </channel>
+</rss>

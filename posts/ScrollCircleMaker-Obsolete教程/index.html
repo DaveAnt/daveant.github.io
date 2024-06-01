@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>ScrollCircleMaker-Obsolete教程 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1-%e5%a6%82%e4%bd%95%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b">
+				                            1. 如何快速上手？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%8f%92%e4%bb%b6%e6%8e%a5%e5%8f%a3%e5%b1%9e%e6%80%a7%e8%af%b4%e6%98%8e">
+				                            2.插件接口、属性说明
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e4%bd%bf%e7%94%a8%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">
+				                            3.使用注意事项
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        ScrollCircleMaker-Obsolete教程</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                ScrollCircleMaker-Obsolete教程</h1>
+                <div class="stuff">
+                    <span>May 12, 2020</span>
+                    <span>字数 2337</span>
+                                  
+                    <span id="/posts/ScrollCircleMaker-Obsolete教程/" class="leancloud_visitors" data-flag-title="ScrollCircleMaker-Obsolete教程">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Unity/wallhaven_6.jpg
+cover: https://pics.images.ac.cn/image/5eb5530e0df7e.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p><b><font color="red">ScrollCircleMaker-Obsolete v1.0</font></b>已经放弃维护，目前基于ScriptableProcessor为核心重写了一版ScrollCircleMaker。所以没有必要继续往下查看，建议关注后续上架到Unity商店的版本，或者可能进行开源，耽误各位时间了~</p>
+</blockquote>
+<h2 id="1-如何快速上手">1. 如何快速上手？</h2>
+<p>使用ScrollCircleMaker v1.0-Obsolete只需要关心数据装载和单个物品的更新逻辑，并且为了尽可能简化插件的使用过程，博主附带写了滑动解决方案脚本生成器，首先需要在ScrollView的Content下挂载上循环滑动组件ScrollCircleComponent，然后使用滑动解决方案脚本生成器选择需要的辅助器输入对应的参数生成滑动解决方案(挂载脚本可能存在问题，建议下图所示生成ScrollCircleView)。
+<img src="https://img-blog.csdnimg.cn/20200820100331920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3OTIwNzM5,size_16,color_FFFFFF,t_70" alt="exp0">
+之后ScrollCircleComponent组件的ScrollMaker选项就会出现刚刚生成的解决方案，然后选定这个滑动解决方案即可，把制作好的Item拖动到组件的BaseItem选项上，到这里就离成功还差10%了，大家可能会听的云里雾里的，所以请看下面截图：
+<img src="https://img-blog.csdnimg.cn/20200729180744532.png" alt="exp1">
+可能各位会说是不是吹牛呢?啥也没有做就好了？这个博主是不是傻逼,咱们散了吧！嗯&hellip;这个当然是不可能就好了的,还需要写一点点代码,先来看看生成的滑动解决方案基本样子,MakerName填的是Demo,ItemName填的是Demo,TypeName填的是int,选择CircleHelper是多行规则辅助器,然后生成的脚本如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ScrollCircleMaker v1.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Copyright © 2020 DaveAnt. All rights reserved.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Homepage: https://daveant.gitee.io/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Github: https://github.com/DaveAnt/ScollCircleMaker</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine.UI;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> UIPlugs.ScrollCircleMaker
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [MakerHandle(MakerHandle.MultipleRectCircleHelper)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DemoMaker</span> : BaseDirectMaker&lt;<span style="color:#66d9ef">int</span>&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnStart(Transform transform)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            baseHelper = <span style="color:#66d9ef">new</span> MultipleRectCircleHelper&lt;<span style="color:#66d9ef">int</span>&gt;(transform,()=&gt; {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DemoItem();
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//How to load data?</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//How to update item?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DemoItem</span> : BaseItem&lt;<span style="color:#66d9ef">int</span>&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> InitComponents()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> InitEvents()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>			          
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>			         
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> UpdateView(<span style="color:#66d9ef">int</span> data, <span style="color:#66d9ef">int</span> globalSeat)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        	<span style="color:#66d9ef">base</span>.UpdateView(data, globalSeat);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上面展示的代码就是解决方案生成器生成的,TypeName正常来说应该填写的是结构体,这里写的是int方便测试,接下来需要添加模拟的数据,然后再把辅助器启动,可以通过调用AddItem接口,也可以直接在OnStart时传入数据列表,具体代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">1000</span>; ++i)
+</span></span><span style="display:flex;"><span>    baseHelper.AddItem(i);
+</span></span><span style="display:flex;"><span>baseHelper.OnStart();
+</span></span></code></pre></div><p>数据填充完毕以后,需要具体完善DemoItem类的更新逻辑,上面可以看到有四个函数等待被完善,下面给出表格来说明,每个函数应该完成的任务。</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>函数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InitComponents</td>
+<td>找到对应孩子组件</td>
+</tr>
+<tr>
+<td>InitEvents</td>
+<td>注册按钮事件</td>
+</tr>
+<tr>
+<td>OnDestroy</td>
+<td>销毁函数</td>
+</tr>
+<tr>
+<td>UpdateView</td>
+<td>刷新物品样式</td>
+</tr>
+<tr>
+<td>OnUpdate</td>
+<td>持续更新物品样式</td>
+</tr>
+</tbody>
+</table>
+<p>InitComponents、InitEvents在实例化时会调用一次,UpdateView是每次开始循环复用时调用,所以不要再UpdateView里面去找对应孩子组件和注册按钮事件,让它们各司其职保存良好的代码习惯。接下来展示完善的Item代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DemoItem</span> : BaseItem&lt;<span style="color:#66d9ef">int</span>&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Text text;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> InitComponents()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        text = _transform.Find(<span style="color:#e6db74">&#34;Text&#34;</span>).GetComponent&lt;Text&gt;();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> InitEvents()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> UpdateView(<span style="color:#66d9ef">int</span> data, <span style="color:#66d9ef">int</span> globalSeat)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        text.text = data.ToString();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>到这里就完成了所有的步骤,至于上下左右间距和Item之间的间距,是否支持循环成圈等等,只需要在ScrollCircleComponent可视面板下简单设置即可。</p>
+<h2 id="2插件接口属性说明">2.插件接口、属性说明</h2>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+插件接口说明：
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>函数作用</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnStart</td>
+<td>启动插件</td>
+<td>物品数据列表</td>
+</tr>
+<tr>
+<td>OnDestroy</td>
+<td>释放插件</td>
+<td>无</td>
+</tr>
+<tr>
+<td>ResetItems</td>
+<td>重置插件</td>
+<td>无</td>
+</tr>
+<tr>
+<td>OnSlideLockout</td>
+<td>锁定滑动</td>
+<td>是否滑动</td>
+</tr>
+<tr>
+<td>DelItem</td>
+<td>移除物品数据</td>
+<td>物品索引</td>
+</tr>
+<tr>
+<td>DelItem</td>
+<td>移除物品数据</td>
+<td>匹配物品函数,移除物品数据</td>
+</tr>
+<tr>
+<td>AddItem</td>
+<td>添加物品数据</td>
+<td>物品数据,物品索引</td>
+</tr>
+<tr>
+<td>UpdateItem</td>
+<td>更新物品样式</td>
+<td>物品数据,物品索引</td>
+</tr>
+<tr>
+<td>SwapItem</td>
+<td>交换物品位置</td>
+<td>被交换物品索引,交换物品索引</td>
+</tr>
+<tr>
+<td>SwapItem</td>
+<td>交换物品位置</td>
+<td>匹配物品函数,被交换物品数据,交换物品数据</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>真实位置定位</td>
+<td>真实位置值,是否存在定位动画过程</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>数据索引定位</td>
+<td>数据索引,是否存在定位动画过程</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>数据匹配定位</td>
+<td>匹配物品函数,是否存在定位动画过程</td>
+</tr>
+<tr>
+<td>ToTop</td>
+<td>置顶定位</td>
+<td>是否存在定位动画过程</td>
+</tr>
+<tr>
+<td>ToBottom</td>
+<td>置底定位</td>
+<td>是否存在定位动画过程</td>
+</tr>
+</tbody>
+</table>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+插件属性说明：
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>属性含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toLocationEvent</td>
+<td>定位动画结束回调</td>
+</tr>
+<tr>
+<td>sProperty</td>
+<td>插件的设置参数</td>
+</tr>
+<tr>
+<td>itemCore</td>
+<td>物品中心索引</td>
+</tr>
+<tr>
+<td>viewCore</td>
+<td>视图中心索引</td>
+</tr>
+<tr>
+<td>dataCount</td>
+<td>物品数据数量</td>
+</tr>
+<tr>
+<td>itemCount</td>
+<td>物品实例数量</td>
+</tr>
+</tbody>
+</table>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+以上是插件所有公开接口、属性,使用插件出现问题希望可以联系到博主,在插件工程里存在9大Demo场景,可以完美说明插件可实现出的滚动效果（并不是局限于这些Demo）。
+<table>
+<thead>
+<tr>
+<th>Demo名字</th>
+<th>Demo作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01-Loadrunner-Demo</td>
+<td>性能测试场景</td>
+</tr>
+<tr>
+<td>02-Simple-Demo</td>
+<td>简单的使用场景</td>
+</tr>
+<tr>
+<td>03-Click-Demo</td>
+<td>按钮点击场景</td>
+</tr>
+<tr>
+<td>04-IsCircleAndUpdate-Demo</td>
+<td>循环成圈并且每帧更新Item样式场景</td>
+</tr>
+<tr>
+<td>05-CenterMin-Demo</td>
+<td>中间物品最小场景</td>
+</tr>
+<tr>
+<td>06-CURD-Demo</td>
+<td>运行时增删改换场景</td>
+</tr>
+<tr>
+<td>07-PageSlide-Demo</td>
+<td>翻页式滑动场景</td>
+</tr>
+<tr>
+<td>08-Chat-Demo</td>
+<td>不规则长度聊天模块场景</td>
+</tr>
+<tr>
+<td>09-Custom-Demo</td>
+<td>自定义位置场景</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3使用注意事项">3.使用注意事项</h2>
+<p>因为是循环复用Item,还是存在很多限制的,接下来讲述下博主可以预见到的问题和如何避免比较坑爹的地方：</p>
+<ul>
+<li>不存在很多Item,不建议使用此插件,因为完全没有必要,插件会按照视图情况和参数设置最优实例化出所需Item数量。</li>
+<li>使用循环成圈时（勾选了IsCircleEnable）小心使用删除接口,可能会出现问题。</li>
+<li>使用自定义位置辅助器时,尽量合理设置,用最少的ItemPos来表现出想要的排版。</li>
+<li>使用自定义位置时,Item位置不能横纵重叠,这样刷新的时候会出现异常表现,具体查看demo-09.</li>
+<li>单行不规则长度辅助器的BaseItem必须是最小高宽,什么意思呢？就是<b><font color="red">在UpdateView改变高宽时只能比它大,不能比它小</font></b>,而且辅助器只判断根节点的高宽,<b><font color="red">UpdateView修改子组件高宽是无法识别的</font></b>,具体查看demo-08。</li>
+<li>目前插件不支持滑动条,存在滑动条时插件会启动异常的。(可以自行添加滑动条,按照content的高宽和坐标)。</li>
+</ul>
+<p>将工程导入后可能会因为Unity版本号不一样,会存在某些依插件包会报错(TextMeshPro报错,在下见过很多次了),基本上升级或移除相关插件包即可,实在不知道如何解决的小白,<b><font color="red">可以尝试将工程下的Packages文件夹下所有.json文件删除。</font></b><br>
+开源地址：https://github.com/DaveAnt/ScrollCircleMaker-Obsolete</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_9.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_8.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            Unity多人聊天室</a>
+                            <p>前言 使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_4.jpg" alt="Unity多人聊天室">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            Unity的Dots技术入门</a>
+                            <p>前言 看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_7.jpg" alt="Unity的Dots技术入门">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

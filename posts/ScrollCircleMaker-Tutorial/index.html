@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>ScrollCircleMaker Tutorial &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#scrollcirclemaker">
+				                            ScrollCircleMaker
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1introduce">
+				                            1.Introduce
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2examples">
+				                            2.Examples
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3document">
+				                            3.Document
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#4design-concept">
+				                            4、Design concept
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        ScrollCircleMaker Tutorial</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                ScrollCircleMaker Tutorial</h1>
+                <div class="stuff">
+                    <span>May 5, 2024</span>
+                    <span>字数 775</span>
+                                  
+                    <span id="/posts/ScrollCircleMaker Tutorial/" class="leancloud_visitors" data-flag-title="ScrollCircleMaker Tutorial">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <h1 id="scrollcirclemaker">ScrollCircleMaker</h1>
+<h1 id="1introduce">1.Introduce</h1>
+<p>ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on the ScriptableProcessor plugin, it can completely replace Unity&rsquo;s ScrollRect or layout components.</p>
+<h1 id="2examples">2.Examples</h1>
+<p>Next, we will show some video examples of test cases.</p>
+<ul>
+<li>ChatPanel</li>
+</ul>
+<p><img src="/img/post/Unity/scrollcirclemaker/ChatPanel.png" alt="InspectorWin"></p>
+<ul>
+<li>NearHoverPanel</li>
+</ul>
+<p><img src="/img/post/Unity/scrollcirclemaker/NearHoverPanel.png" alt="InspectorWin"></p>
+<ul>
+<li>DemoPanel</li>
+</ul>
+<p><img src="/img/post/Unity/scrollcirclemaker/DemoPanel.png" alt="InspectorWin"></p>
+<p>Here, we will demonstrate the process of writing the logic code for the final video.</p>
+<pre tabindex="0"><code>public class SampleScene : MonoBehaviour
+{
+    bool sss,sss2;
+    public ScrollCircleRect scroller;
+
+    public TMP_InputField InputLayoutId;
+    public TMP_InputField InputDataId;
+
+    public Button addItemBtn;
+    public Button delItemBtn;
+    public Button delGroupBtn;
+    public Button updateItemBtn;
+    public Button swapItemBtn;
+    public Button locateItemBtn;
+    public Button clearAllItmes;
+
+    public int layoutId
+    {
+        get
+        {
+            return Convert.ToInt32(InputLayoutId.text);
+        }
+    }
+
+    public int dataId
+    {
+        get
+        {
+            return Convert.ToInt32(InputDataId.text);
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        scroller.OnBindItemEvents(&#34;SampleItem&#34;, (itemData) =&gt;
+        {
+            TextMeshProUGUI test = itemData.Find&lt;TextMeshProUGUI&gt;(&#34;Text (TMP)&#34;);
+            test.text = itemData.itemId.ToString();
+        });
+
+        scroller.OnBindItemEvents(&#34;SampleItem2&#34;, (itemData) =&gt;
+        {
+            TextMeshProUGUI test = itemData.Find&lt;TextMeshProUGUI&gt;(&#34;Text (TMP)&#34;);
+            test.text = itemData.itemId.ToString();
+        }
+        , (itemData) =&gt;
+        {
+            Button btn = itemData.Find&lt;Button&gt;(&#34;Image&#34;);
+            btn.onClick.AddListener(() =&gt;
+            {
+                if(itemData.itemId == 1)
+                {
+                    sss = !sss;
+                    scroller.parser.UpdateItem(1);
+                }
+                else
+                {
+                    scroller.parser.AddItem(0);
+                }
+            });
+        });
+
+        addItemBtn.onClick.AddListener(() =&gt; {
+            scroller.parser.AddItem(dataId, layoutId);
+        });
+        delItemBtn.onClick.AddListener(() =&gt; {
+            scroller.parser.DelItem(dataId, layoutId);
+        });
+        delGroupBtn.onClick.AddListener(() =&gt; {
+            scroller.parser.DelGroup(dataId, layoutId);
+        });
+        updateItemBtn.onClick.AddListener(() =&gt; {
+            sss2 = !sss2;
+            scroller.parser.UpdateItem(dataId, layoutId);
+        });
+        swapItemBtn.onClick.AddListener(() =&gt; {
+            scroller.parser.SwapItem(0,1);
+        });
+        locateItemBtn.onClick.AddListener(() =&gt; {
+           scroller.parser.LocateItem(dataId, layoutId, 1f);
+        });
+        clearAllItmes.onClick.AddListener(() =&gt; {
+            scroller.parser.ClearAllItmes(layoutId);
+        });
+
+        scroller.parser[0].FetchItemType = FetchItemType;
+        //scroller.parser[0].FetchFixedSet = FetchFixedSet;
+        scroller.parser[0].GetItemSize = GetItemSize;
+        scroller.parser[0].FetchGroupDist = FetchGroupDist;
+        scroller.ItemAnimEvents[OpsSign.Start] = StartItemAnimEvent;
+        scroller.parser.DoItemAnim(OpsSign.Start,30f);
+        scroller.OnInit();
+    }
+
+    public void StartItemAnimEvent(ItemData itemData,LayoutOps ops, Rect? current, Rect? target)
+    {
+        float deltaTime = Time.time - ops.startTime - itemData.dataId * 0.05f;
+        if(deltaTime &gt;= 0 &amp;&amp; deltaTime &lt; 0.4f)
+        {
+            itemData.itemTrans.localScale = Vector3.one * (deltaTime / 0.4f);
+        }
+        else if(deltaTime &gt;= 0.4f)
+        {
+            itemData.itemTrans.localScale = Vector3.one;
+        }
+        else
+        {
+            itemData.itemTrans.localScale = Vector3.zero;
+        }
+    }
+
+    public Vector2? GetItemSize(IndexData indexData, ItemData itemData)
+    {
+        if (indexData.dataId == 1 &amp;&amp; sss)
+            return new Vector2(400, 400);
+        if (indexData.dataId == 5 &amp;&amp; sss2)
+            return new Vector2(600, 600);
+        return null;
+    }
+
+    public Vector2 FetchGroupDist(IndexData indexData, Vector2 groupRest)
+    {
+        float dist = (float)(Math.Sin((indexData.groupId * 30 * Math.PI) / 180));
+        //return new Vector2(dist * 200, (indexData.groupId % 10)*20);
+        return new Vector2((indexData.groupId % 10) * 20, dist * 200);
+    }
+
+    public int FetchFixedSet(IndexData indexData)
+    {
+        return (indexData.dataId % 5) + 1;
+    }
+
+    public byte FetchItemType(IndexData indexData)
+    {
+        return (byte)(indexData.dataId % 2);
+    }
+}
+</code></pre><h1 id="3document">3.Document</h1>
+<p><b>Callback Interface Documentation Table</b></p>
+<table>
+<thead>
+<tr>
+<th>Function name</th>
+<th>Parameter desc</th>
+<th>Function Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetItemSize</td>
+<td>indexData、itemData、Vector2(return)</td>
+<td>indexData contains DataId, GroupId, ItemId, and itemData contains gameobject, return the size of the item.</td>
+</tr>
+<tr>
+<td>FetchItemDist</td>
+<td>indexData、Vector2(return)</td>
+<td>Return the spacing between items.</td>
+</tr>
+<tr>
+<td>FetchGroupDist</td>
+<td>indexData、Vector2、Vector2(return)</td>
+<td>Parameter two is the remaining space (for example, when vertically scrolling, the remaining horizontal space after placing this group), return the spacing between groups.</td>
+</tr>
+<tr>
+<td>FetchItemType</td>
+<td>indexData、byte(return)</td>
+<td>Return the type of the item.</td>
+</tr>
+<tr>
+<td>FetchFixedSet</td>
+<td>indexData、int(return)</td>
+<td>Return the fixed length.</td>
+</tr>
+<tr>
+<td>FetchDataCount</td>
+<td>None</td>
+<td>Return the number of data.</td>
+</tr>
+</tbody>
+</table>
+<p><b>Operation Interface Documentation Table</b></p>
+<table>
+<thead>
+<tr>
+<th>Function name</th>
+<th>Parameter desc</th>
+<th>Function Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AddItem</td>
+<td>dataId、layoutId</td>
+<td>Add an item with dataId in the layout.</td>
+</tr>
+<tr>
+<td>DelItem</td>
+<td>dataId、layoutId</td>
+<td>Remove the item with dataId from the layout.</td>
+</tr>
+<tr>
+<td>DelGroup</td>
+<td>groupId、layoutId</td>
+<td>Remove the group with groupId from the layout.</td>
+</tr>
+<tr>
+<td>SwapItem</td>
+<td>toId、fromId、toLayout、fromLayout</td>
+<td>Swap the items with toId in toLayout and fromId in fromLayout.</td>
+</tr>
+<tr>
+<td>UpdateItem</td>
+<td>dataId、layoutId</td>
+<td>Update the dataId item in the layout</td>
+</tr>
+<tr>
+<td>ClearAllItmes</td>
+<td>layoutId</td>
+<td>Clear all items under the layout with layoutId.</td>
+</tr>
+<tr>
+<td>LocateItem</td>
+<td>dataId、layoutId、animTime</td>
+<td>Locate the item with the specified dataId.</td>
+</tr>
+<tr>
+<td>DoItemAnim</td>
+<td>OpsSign、animTime</td>
+<td>Execute the animation effect for a certain operation.</td>
+</tr>
+</tbody>
+</table>
+<p>Syntax for binding events related to Item.</p>
+<pre tabindex="0"><code>ScrollCircleRect.OnBindItemEvents(&#34;SampleItem2&#34;, UpdateItemEvent,InitItemEvent,DestroyItemEvent,GetItemEvent,ReleaseItemEvent);
+</code></pre><p>Normally, only the UpdateItemEvent needs to be specified. The GetItemEvent and ReleaseItemEvent can be replaced with other generic methods using the following approach.</p>
+<pre tabindex="0"><code>ScrollCircleRect.parser.itemHavior = ItemHavior.Out;//Move out of view, move into view
+</code></pre><ul>
+<li>Out Move out of view, move into view</li>
+<li>Scale Scale=0，Scale=1</li>
+<li>Alpha CanvasGroup.alpha=0，CanvasGroup.alpha=1</li>
+<li>Active SetActive(false)，SetActive(true)</li>
+</ul>
+<p>The following is the only mounted component of the plugin. The first half is similar to ScrollRect, and the second half is a layout module completed through the ScriptableProcessor plugin. <font color='red'>The plugin utilizes various built-in pooling techniques in Unity, supports preview in the Editor, supports animations (even for items that are recycled in a loop), and supports multiple layout combinations.</font> Layout adjustments can be made by inheriting from LayoutDataBase to override the layout or directly rewriting various callback functions.</p>
+<p><img src="/img/post/Unity/scrollcirclemaker/InspectorWin.png" alt="InspectorWin"></p>
+<h1 id="4design-concept">4、Design concept</h1>
+<p><img src="/img/post/Unity/scrollcirclemaker/Design.png" alt="Design">
+Here is the overall design concept of the plugin. Various modules utilize object pools and reference pools, so you don&rsquo;t have to worry about frequent garbage collection. However, if you have irregular items, please avoid enabling the &ldquo;repeat&rdquo; option because it uses compressed storage for GroupData, which may cause issues.</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" rel="prev">上一篇</a>
+                    
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            Unity多人聊天室</a>
+                            <p>前言 使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="Unity多人聊天室">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_4.jpg" alt="Unity多人聊天室">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            Unity的Dots技术入门</a>
+                            <p>前言 看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_7.jpg" alt="Unity的Dots技术入门">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            ScrollCircleMaker-Obsolete教程</a>
+                            <p>前言 ScrollCircleMaker-Obsolete v1.0已经放弃维护，目前基于ScriptableProcessor为核心重写了一版Scrol...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_6.jpg" alt="ScrollCircleMaker-Obsolete教程">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

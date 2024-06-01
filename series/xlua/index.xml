@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xlua on 星空城下无君王</title>
+    <link>https://daveant.github.io/series/xlua/</link>
+    <description>Recent content in Xlua on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 20 Mar 2020 23:23:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/series/xlua/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>XLua开发环境搭建</title>
+      <link>https://daveant.github.io/posts/XLua%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Fri, 20 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/XLua%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>前言 xlua是腾讯给出的热更新方案,已经有很多成功的案例了,这里把xlua工程下载过来,成功执行到h</description>
+    </item>
+  </channel>
+</rss>

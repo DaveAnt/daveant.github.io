@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 星空城下无君王</title>
+    <link>https://daveant.github.io/categories/</link>
+    <description>Recent content in Categories on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 05 May 2024 18:16:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unity引擎</title>
+      <link>https://daveant.github.io/categories/Unity%E5%BC%95%E6%93%8E/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/Unity%E5%BC%95%E6%93%8E/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ET框架</title>
+      <link>https://daveant.github.io/categories/ET%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/ET%E6%A1%86%E6%9E%B6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>需知录</title>
+      <link>https://daveant.github.io/categories/%E9%9C%80%E7%9F%A5%E5%BD%95/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/%E9%9C%80%E7%9F%A5%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shader编程</title>
+      <link>https://daveant.github.io/categories/Shader%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/Shader%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GF框架</title>
+      <link>https://daveant.github.io/categories/GF%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/GF%E6%A1%86%E6%9E%B6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>设计模式</title>
+      <link>https://daveant.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>XLua框架</title>
+      <link>https://daveant.github.io/categories/XLua%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/categories/XLua%E6%A1%86%E6%9E%B6/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

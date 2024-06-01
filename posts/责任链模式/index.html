@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>责任链模式 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e4%b9%8b%e5%89%8d%e8%bf%87%e6%bb%a4%e5%99%a8%e7%9a%84%e7%bc%ba%e7%82%b9">
+				                            1.之前过滤器的缺点
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%b4%a3%e4%bb%bb%e9%93%be%e6%a8%a1%e5%bc%8f%e5%ae%9e%e7%8e%b0%e8%bf%87%e6%bb%a4%e9%93%be">
+				                            2.责任链模式实现过滤链
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e8%b4%a3%e4%bb%bb%e9%93%be%e5%bf%85%e9%a1%bb%e7%94%a8%e9%80%92%e5%bd%92">
+				                            3.责任链必须用递归？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e6%80%bb%e7%bb%93">
+				                            总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e8%b4%a3%e4%bb%bb%e9%93%be%e7%9a%84%e4%bc%98%e7%bc%ba%e7%82%b9">
+				                            1.责任链的优缺点
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%b4%a3%e4%bb%bb%e9%93%be%e7%9a%84%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">
+				                            2.责任链的使用场景
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        责任链模式</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                责任链模式</h1>
+                <div class="stuff">
+                    <span>March 3, 2020</span>
+                    <span>字数 1812</span>
+                                  
+                    <span id="/posts/责任链模式/" class="leancloud_visitors" data-flag-title="责任链模式">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/DesignPattern/wallhaven_22.jpg
+cover: https://pics.images.ac.cn/image/5eb54ced9a474.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>不知道各位有没有看过在下写的过滤器模式文章,这篇文章主要是用责任链模式去重构之前文章中组合过滤器实现的方式,来讲解责任链模式的优点。</p>
+</blockquote>
+<h2 id="1之前过滤器的缺点">1.之前过滤器的缺点</h2>
+<p>建议没有看过如何实现<a href="https://blog.csdn.net/m0_37920739/article/details/104377144">组合过滤器</a>的人去看一下,主要去关注一下ToMergeFilter函数是如何实现的,不知道各位是不是发现那里怪了,简直是菜鸡写的代码（虽然在下确实是菜鸡,但是为了这篇文章埋下伏笔,不知道各位看官是否相信🙃）,首先把局部代码放出来,然后分析一下问题到底出在那里。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> List&lt;T&gt; ToFilter&lt;T, T1&gt;(List&lt;T&gt; dataSet, T1 condition)    <span style="color:#75715e">//单条件过滤</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        List&lt;T&gt; tmp = <span style="color:#66d9ef">new</span> List&lt;T&gt;();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> (T data <span style="color:#66d9ef">in</span> dataSet)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (CompareFun.Invoke(data, condition))
+</span></span><span style="display:flex;"><span>                tmp.Add(data);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tmp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List&lt;T&gt; ToMergeFilter&lt;T, T1&gt;(List&lt;IFilter&gt; filterSet, List&lt;T&gt; dataSet, T1 condition)  <span style="color:#75715e">//组合过滤</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        List&lt;T&gt; tmp = dataSet;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> (IFilter filter <span style="color:#66d9ef">in</span> filterSet)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            tmp = filter.ToFilter(tmp, condition);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tmp;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>调用ToMergeFilter函数时,调用了ToFilter去过滤出层层数据,看似没有问题,有问题的代码是ToFilter里的List<T> tmp = new List<T>();,调用一次过滤器就new一个列表,你可能会想平时用C#根本不用垃圾释放啊,其实高级语言都有GC机制,去自动帮你释放不必要的内存数据,所以这样明显会增加GC压力。我们是祖国美好的花朵这么可以莫名其妙就去增加GC的压力呢,如果还不明白为何会增加GC压力,下面将给出示意图:
+<img src="/img/post/DesignPattern/chain/exp1.png" alt="exp1">
+这个缺点还是可以被弥补的,就是不要new列表去过滤出数据,而是使用Remove的方式层层过滤出数据。但是使用责任链可以把ToMergeFilter函数去掉,用ToFilter函数就是实现单个或者多个条件的过滤,其实你发现单个条件和多个条件过滤本质是一样的,使用责任链让它们更加协调和各司其职,其实在IFilter抽象类里没有定义组合过滤的函数,是因为感觉这个组合过滤函数其实和过滤器类本身是没有任何关系的。</p>
+<h2 id="2责任链模式实现过滤链">2.责任链模式实现过滤链</h2>
+<p>接下来就可以去重写之前的组合过滤器。用责任链模式会形成一个过滤链,就是一个过滤器包含着另外一个过滤器,这样层层过滤下去实现过滤链的效果,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IFilter</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">readonly</span> IFilter nextFilter;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">object</span> condition;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Func&lt;<span style="color:#66d9ef">object</span>, <span style="color:#66d9ef">object</span>, <span style="color:#66d9ef">bool</span>&gt; CompareFun;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> IFilter(Func&lt;<span style="color:#66d9ef">object</span>, <span style="color:#66d9ef">object</span>, <span style="color:#66d9ef">bool</span>&gt; CompareFun, <span style="color:#66d9ef">object</span> condition, IFilter nextFilter = <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.nextFilter = nextFilter;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.CompareFun = CompareFun;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.condition = condition;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> List&lt;T&gt; ToFilter&lt;T&gt;(List&lt;T&gt; dataSet);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FilterFactory</span> : IFilter
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> FilterFactory(Func&lt;<span style="color:#66d9ef">object</span>, <span style="color:#66d9ef">object</span>, <span style="color:#66d9ef">bool</span>&gt; CompareFun,<span style="color:#66d9ef">object</span> condition, IFilter nextFilter = <span style="color:#66d9ef">null</span>) 
+</span></span><span style="display:flex;"><span>            : <span style="color:#66d9ef">base</span>(CompareFun, condition, nextFilter)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> List&lt;T&gt; ToFilter&lt;T&gt;(List&lt;T&gt; dataSet)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = dataSet.Count - <span style="color:#ae81ff">1</span>; i &gt;= <span style="color:#ae81ff">0</span>; --i)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (!CompareFun.Invoke(dataSet[i], condition))
+</span></span><span style="display:flex;"><span>                    dataSet.Remove(dataSet[i]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> != nextFilter)
+</span></span><span style="display:flex;"><span>                nextFilter.ToFilter(dataSet);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> dataSet;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>然后尝试一下调用过滤链会不会出现问题,调用的具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    List&lt;People&gt; Humans = <span style="color:#66d9ef">new</span> List&lt;People&gt;();
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;Robert&#34;</span>, <span style="color:#ae81ff">19</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#ae81ff">20</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;Laura&#34;</span>, <span style="color:#ae81ff">51</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#ae81ff">16</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#ae81ff">30</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;Bobby&#34;</span>, <span style="color:#ae81ff">9</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FilterFactory ageFilter= <span style="color:#66d9ef">new</span> FilterFactory(<span style="color:#66d9ef">delegate</span> (<span style="color:#66d9ef">object</span> data, <span style="color:#66d9ef">object</span> condition)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ((People)data).age &gt; (<span style="color:#66d9ef">int</span>)condition;
+</span></span><span style="display:flex;"><span>    }, <span style="color:#ae81ff">18</span>);
+</span></span><span style="display:flex;"><span>    FilterFactory name_ageFilter = <span style="color:#66d9ef">new</span> FilterFactory(<span style="color:#66d9ef">delegate</span> (<span style="color:#66d9ef">object</span> data, <span style="color:#66d9ef">object</span> condition)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ((People)data).name.Equals(condition.ToString());
+</span></span><span style="display:flex;"><span>    }, <span style="color:#e6db74">&#34;John&#34;</span>,ageFilter);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    List&lt;People&gt; tmPeoples = name_ageFilter.ToFilter(Humans);
+</span></span></code></pre></div><p>是不是发现了责任链模式很多优秀的地方,比如你可以随意组合想要的过滤方案(创建不同的过滤链),简直不要太优秀,比起之前使用传递过滤器列表实现组合过滤强太多了。</p>
+<h2 id="3责任链必须用递归">3.责任链必须用递归？</h2>
+<p>本来是没有小节三分析的,但是发布文章之后,无意发现一个博主写的文章说责任链不必使用递归去实现(他说网上大部分代码都是递归实现是一个误区&hellip;)。首先我完全不赞同这位博主的想法,并且分析为什么责任链无法用循环去替换递归。虽然没有给博主留言,还是希望博主有朝一日发现此文章,首先思考循环去实现责任链是原来的效果吗？大概代码段如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    List&lt;IFilter&gt; Filters = <span style="color:#66d9ef">new</span> List&lt;IFilter&gt;();
+</span></span><span style="display:flex;"><span>    List&lt;People&gt; Humans = <span style="color:#66d9ef">new</span> List&lt;People&gt;();
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;Robert&#34;</span>, <span style="color:#ae81ff">19</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#ae81ff">20</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;Laura&#34;</span>, <span style="color:#ae81ff">51</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#ae81ff">16</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;John&#34;</span>, <span style="color:#ae81ff">30</span>));
+</span></span><span style="display:flex;"><span>    Humans.Add(<span style="color:#66d9ef">new</span> People(<span style="color:#e6db74">&#34;Bobby&#34;</span>, <span style="color:#ae81ff">9</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FilterFactory ageFilter= <span style="color:#66d9ef">new</span> FilterFactory(<span style="color:#66d9ef">delegate</span> (<span style="color:#66d9ef">object</span> data, <span style="color:#66d9ef">object</span> condition)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ((People)data).age &gt; (<span style="color:#66d9ef">int</span>)condition;
+</span></span><span style="display:flex;"><span>    }, <span style="color:#ae81ff">18</span>);
+</span></span><span style="display:flex;"><span>    FilterFactory nameFilter = <span style="color:#66d9ef">new</span> FilterFactory(<span style="color:#66d9ef">delegate</span> (<span style="color:#66d9ef">object</span> data, <span style="color:#66d9ef">object</span> condition)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ((People)data).name.Equals(condition.ToString());
+</span></span><span style="display:flex;"><span>    }, <span style="color:#e6db74">&#34;John&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Filters.Add(ageFilter);
+</span></span><span style="display:flex;"><span>    Filters.Add(nameFilter);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> (IFilter filter <span style="color:#66d9ef">in</span> Filters)
+</span></span><span style="display:flex;"><span>        Humans = Filters.ToFilter(Humans);
+</span></span></code></pre></div><p>就是把对象放到列表里,用这个方法去表示责任链 。想一下责任链的定义是什么？责任链是让多个对象都有可能接收请求,将这些对象连接成一条链,并且沿着这条链把请求的数据传递下去,直到遇到递归弹栈的条件。循环如何去实现把参数传递下去,并且这么判断对象是否需要响应此请求还有请求数据的关联性,循环实现的对象之前是没有任何关联的,难道用临时变量去存储返回值然后传递给下一个对象？递归明明有这个特性,为什么要花里胡哨的循环去实现？(就算实现出的效果可能达到类似,难道没有感觉蹩脚嘛&hellip;)虽然递归确实没有循环快,而且有可能出现栈溢出,因为没有把弹栈条件写好,但是责任链到链底部是百分百弹栈的,责任链示意图如下:
+<img src="/img/post/DesignPattern/chain/exp2.png" alt="exp2"></p>
+<h2 id="总结">总结</h2>
+<h2 id="1责任链的优缺点">1.责任链的优缺点</h2>
+<p>优点:1、简化了对象,使得对象不需要知道链子的结构,只关注自身的功能。 2、增强给对象指派职责的灵活性,通过改变链内的成员或者调动它们的次序,允许动态地新增或者删除责任。<br>
+缺点: 1、系统性能将受到一定影响,而且在进行代码调试时不太方便,可能会造成死递归。 2、可能不容易观察运行时的特征,有碍于除错。</p>
+<h2 id="2责任链的使用场景">2.责任链的使用场景</h2>
+<p>1.有多个对象负责同一个请求,具体哪个对象处理该请求由运行时刻自动确定。<br>
+2.Tomcat 过滤器中的责任链模式。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            迭代器模式</a>
+                            <p>前言 C#中数据结构都实现了迭代器的功能,具体是如何实现的,接下来就由此篇文章去介绍一下C#是如何实现...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_24.jpg" alt="迭代器模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            代理模式</a>
+                            <p>前言 代理模式主要是用来对目标对象访问权限的控制,比如游戏商城里购买道具时,通过代理类去判断玩家是否可...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_4.jpg" alt="代理模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            单例模式</a>
+                            <p>前言 单例模式有二种,饿汉模式和懒汉模式。这里将去实现单例模式的这些例子,然后分析它们的优缺点和使用场...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_5.jpg" alt="单例模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            原型模式</a>
+                            <p>前言 原型模式是用于创建重复的对象,当类里有很多复杂参数的时候,我们可以避免使用拷贝(赋值)构造函数,...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_19.jpg" alt="原型模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            命令模式</a>
+                            <p>前言 命令模式可以实现操作的前进和回滚,经常使用P图软件的用户一定知道软件提供了对操作前进和回滚的功能...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_7.jpg" alt="命令模式">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

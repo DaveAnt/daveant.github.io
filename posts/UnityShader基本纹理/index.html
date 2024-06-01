@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader基本纹理 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e7%ba%b9%e7%90%86%e7%9a%84%e6%bc%ab%e5%8f%8d%e5%b0%84">
+				                            1.纹理的漫反射
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e7%ba%b9%e7%90%86%e5%b1%9e%e6%80%a7">
+				                            2.纹理属性
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%b0%8f%e7%9f%a5%e8%af%86%e6%89%a9%e5%b1%95%e5%b0%8f%e8%8a%82">
+				                            3.小知识(扩展小节)
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader基本纹理</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader基本纹理</h1>
+                <div class="stuff">
+                    <span>April 24, 2020</span>
+                    <span>字数 3150</span>
+                                  
+                    <span id="/posts/UnityShader基本纹理/" class="leancloud_visitors" data-flag-title="UnityShader基本纹理">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_14.jpg
+cover: https://pics.images.ac.cn/image/5eb5529adb049.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>纹理最初目的就是使用图片来控制模型的外观,使用纹理映射技术,把一张图“黏”在模型表面。逐纹素(与像素区分)进行控制模型颜色。</p>
+</blockquote>
+<h2 id="1纹理的漫反射">1.纹理的漫反射</h2>
+<p>美术人员在建模时,通常会在建模软件中利用纹理展开技术把纹理映射坐标存储每个顶点上。纹理映射坐标定义了该顶点在纹理中对应的2D坐标,这些坐标使用二维变量(u,v)来表示,其中u是横向坐标,而v是纵向坐标,因此纹理映射坐标被称为uv坐标。尽管纹理大小可以多种多样,但顶点uv坐标范围通常都被归一化[0,1]范围内,需要注意:纹理采样时使用的纹理坐标不一定是在[0,1]范围内。实际上不在[0,1]范围内的纹理坐标有时会非常有用。与之关系紧密的是纹理的平铺模式,它将决定渲染引擎在遇到不在[0,1]范围内的纹理坐标如何进行纹理采样。大多数游戏通常情况都会使用纹理去代替物体的漫反射颜色,接下来就尝试如何使用UnityShader中的单张纹理来模拟出漫反射的颜色。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/TextureShader&#34;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Properties
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        _Color (<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (1,1,1,1)
+</span></span><span style="display:flex;"><span>        _MainTex (<span style="color:#e6db74">&#34;Albedo (RGB)&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>        _Gloss (<span style="color:#e6db74">&#34;Gloss&#34;</span>, Range(8.<span style="color:#a6e22e">0</span>,256)) <span style="color:#f92672">=</span> 20
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Specular</span> (<span style="color:#e6db74">&#34;Specular&#34;</span>,Color) <span style="color:#f92672">=</span> (1,1,1,1)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>         pass
+</span></span><span style="display:flex;"><span>         {
+</span></span><span style="display:flex;"><span>            Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span>}
+</span></span><span style="display:flex;"><span>            LOD 200
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            CGPROGRAM
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 _Color;
+</span></span><span style="display:flex;"><span>            sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>            float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>            float4 _Specular;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> _Gloss;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>            struct a2v{
+</span></span><span style="display:flex;"><span>               float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>               float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>               float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            struct v2f{
+</span></span><span style="display:flex;"><span>                float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>                float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>                float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>                float2 uv  : TEXCOORD2;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            v2f <span style="color:#a6e22e">vert</span>(a2v v)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                v2f o;
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span>  UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);<span style="color:#75715e">//把法线从模型空间转换到世界空间中</span>
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld,v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> v.<span style="color:#a6e22e">texcoord</span>.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*</span> _MainTex_ST.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">+</span> _MainTex_ST.<span style="color:#a6e22e">zw</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>                fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                fixed3 albedo <span style="color:#f92672">=</span> tex2D(_MainTex,i.<span style="color:#a6e22e">uv</span>).<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>                fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>                fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0,dot(worldNormal,worldLightDir));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                fixed3 viewDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceViewDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>                fixed3 halfDir <span style="color:#f92672">=</span> normalize(worldLightDir <span style="color:#f92672">+</span> viewDir);
+</span></span><span style="display:flex;"><span>                fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> pow(max(0,dot(worldNormal,halfDir)),_Gloss);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse <span style="color:#f92672">+</span> specular,1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ENDCG
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Fallback <span style="color:#e6db74">&#34;Specular&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里简单分析一下以上Shader代码段的含义,为纹理类型的属性声明了float4类型的_MainTex_ST变量,这个变量名字不是任意起的。在Unity中需要使用纹理名字_ST的方式来声明某个纹理的属性,ST是缩放(scale)和平移(translation)的缩写,可以让变量_MainTex_ST.xy存储缩放值,而_MainTex_ST.zw来存储偏移值。这些参数可以通过材质面板进行修改,如下图所示:
+<img src="/img/post/Shader/texture_base/exp1.jpg" alt="exp1">
+在a2v结构体中使用TEXCOORD0语义声明了新的变量texcoord,这样Unity就会将模型的第一组纹理坐标保存到该变量中。然后在v2f结构体中添加用于存储纹理坐标的变量uv,以便在片元着色器中使用该坐标进行纹理采样。<br>
+接下来在顶点着色器中,通过_MainTex_ST来对顶点纹理坐标进行变换得到最终的纹理(uv)坐标,其实可以使用Unity内置宏TRANSFORM_TEX来代替以上公式的计算,TRANSFORM_TEX是在UnityCG.cginc中定义的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>define <span style="color:#a6e22e">TRANSFORM_TEX</span>(tex,name) (tex.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*</span> name<span style="color:#960050;background-color:#1e0010">##</span>_ST.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">+</span> name<span style="color:#960050;background-color:#1e0010">##</span>_ST.<span style="color:#a6e22e">zw</span>)
+</span></span></code></pre></div><p>从宏定义得知_ST果然不是随意命名的,<b><font color="red">使用Unity内置函数必须命名成_ST(不使用内置函数可随意命名,但命名规范是良好习惯)</font></b>,命名不规范的程序员可是要被祭天的。接下来在片元着色器中计算世界空间下的法线方向和光照方向,然后使用CG的tex2D函数对纹理进行采样。它的参数是需要被采样的纹理和float2类型的纹理坐标,它将返回计算得到的纹素值。使用采样结果和颜色属性_Color的乘积来作为反射率albedo,并把它和环境光照相乘得到环境光部分,最后使用albedo来计算漫反射光照的结果,并和环境光照、高光反射光照相加之后返回。</p>
+<h2 id="2纹理属性">2.纹理属性</h2>
+<p>基本的纹理映射描述的很简单,声明纹理变量再使用tex2D函数采样,实际上在渲染流水线中纹理映射远比想象的复杂,这里就来讲述Unity中必须要知道的纹理属性,首先把图片放到Unity中会出现以下界面。
+<img src="/img/post/Shader/texture_base/exp2.jpg" alt="exp2">
+这里选择法线纹理(normal表示法线,map是纹理),选择后会出现更多选型(低版本Unity可能有Texture类型,选择统一使用法线纹理),之所以选择合适类型,是因为这样才可以让Unity知道纹理的意图,为UnityShader传递正确的纹理,并在某些情况下可以让Unity对该纹理进行优化。<br>
+Warp Mode是纹理属性里非常重要的选项。它决定了当纹理坐标超过[0,1]范围后将会如何被平铺。Wrap Mode有五种模式:</p>
+<ul>
+<li>1.Repeat:如果纹理坐标超过1,那么它的整数部分将会被舍弃,而直接使用小数部分进行采样,这样就会导致纹理将会不断重复;</li>
+<li>2.Clamp:如果纹理坐标大于1,那么将会截取到1。如果小于0,那么将会截取到0;</li>
+<li>3.Mirror:平铺纹理通过在每个整数边界处进行镜像来创建重复图案;</li>
+<li>4.MirrorOnce:镜像一次纹理然后钳制到边缘像素。这样可以有效地在零UV坐标附近镜像纹理,并在[-1..1]范围之外时重复边缘像素值;</li>
+<li>5.Per-axis:分别对U,V方向进行不同的Wrap Mode设置;</li>
+</ul>
+<p>详细含义可参考<a href="https://docs.unity3d.com/ScriptReference/TextureWrapMode.html">Unity官网帮助手册</a>,具体效果如下所示。
+<img src="/img/post/Shader/texture_base/exp3.jpg" alt="exp3">
+需要注意的是想要得到以上效果,Shader必须使用纹理属性(比如上面代的_MainTex_ST变量)在UnityShader中对顶点纹理坐标进行相应的变换,也就是以下代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> v.<span style="color:#a6e22e">texcoord</span>.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*</span> _MainTex_ST.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">+</span> _MainTex_ST.<span style="color:#a6e22e">zw</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//or just use function</span>
+</span></span><span style="display:flex;"><span>o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX(v.<span style="color:#a6e22e">texcoord</span>,_MainTex);
+</span></span></code></pre></div><p>Wrap Mode下面一个属性就是Filter Mode属性,它决定当前纹理由于变换而出现拉伸时将采用那种滤波模式。Filter Mode支持三种模式：Point,Bilinear以及Trilinear。得到的滤波效果会依次提升,但需要消耗的性能也是依次变大。纹理滤波会影响放大或缩小时得到图片的质量,具体效果如下所示。
+<img src="/img/post/Shader/texture_base/exp4.jpg" alt="exp4">
+图片上看的不是很明显,需要放大对比一下(这里已经截图了放大也不会有用的),各位可以自行到Unity里设置和对比,反正滤波效果越好的,放大以后就越看不到马赛克像素(如果实在脑补不出来就当成位图和矢量图的效果即可)。</p>
+<h2 id="3小知识扩展小节">3.小知识(扩展小节)</h2>
+<p>其实纹理的缩放比放大处理起来更加复杂,因为多个像素将会对应成一个像素,而且还需要处理抗锯齿的问题,最常用到的技术就是多级渐远纹理(mipmapping)技术,它的意思就是在小空间中保存许多东西,多级渐远纹理技术将原纹理提前用滤波效果处理得到很多更小图像,形成图片金字塔,每层都是对上层图像采样结果。这样就可以实时运行时得到像素结果,这个是典型的空间换时间的方式,通常会多占用33%的内存空间。<b><font color="red">找到纹理导入模板下的Generate Mip Maps来开启多级渐远纹理技术</font></b>(默认已经开启,在当代内存配置越来越高,这样做是划算的)。<br>
+滤波的原理是对于每个目标像素找到4个相邻像素,然后进行线性插值混合后得到最后像素,因此会图像看起来比较模糊(所以和矢量图还是不一样的),不需要这个效果时就使用Point(比如象棋游戏中的网格或者像素风格的游戏),Trilinear和Bilinear其实效果是差不多的,只是Trilinear会在多级渐远纹理是进行混合(性能更好,内存占据更大),所以通常选择Bilinear模式即可。<br>
+最后就是纹理的最大尺寸和纹理模式,当在不同平台发布一些事,需要考虑合适的纹理尺寸和质量问题,Unity允许为不同平台设置不同分辨率。如下图所示：
+<img src="/img/post/Shader/texture_base/exp5.jpg" alt="exp5">
+博主只部署安卓平台,所以只能看到两个选项,如果导入纹理大小超过了Max Texture Size的设置值,那么游戏引擎会自动缩放到最大分辨率。理想情况下导入的纹理可以是非正方形,但是最好满足长宽2的幂次方,原因是使用非2幂次方大小的纹理,往往会占据更多内存和降低GPU读取纹理的速度,而且有些平台会不支持这种纹理,这时Unity内部会把它缩放成最近的2的幂次方大小,所以为了性能考虑让美术尽量给2的幂次方大小的图片。纹理要选择合适的texture tpye,如果选择比较不合适的纹理类型可能会导致内存占据空间越大,再加上勾选了多级渐远纹理技术可能内存一下子就上来了(虽然现在手机配置都比较高,还是稍微注意一下),texture tpye的具体功能可以参考<a href="https://docs.unity3d.com/Manual/TextureTypes.html">unity官网帮助手册</a>。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E5%85%89%E7%85%A7/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%87%B9%E5%87%B8%E6%98%A0%E5%B0%84/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

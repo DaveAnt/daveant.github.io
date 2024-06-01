@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gf on 星空城下无君王</title>
+    <link>https://daveant.github.io/series/gf/</link>
+    <description>Recent content in Gf on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 19 Apr 2020 15:10:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/series/gf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gameframework-TaskPool初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Sun, 19 Apr 2020 15:10:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>构思中&amp;hellip;</description>
+    </item>
+    <item>
+      <title>Gameframework-Scene初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Sat, 18 Apr 2020 10:10:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S</description>
+    </item>
+    <item>
+      <title>Gameframework-Config进阶篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
+      <pubDate>Mon, 13 Apr 2020 00:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
+      <description>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls</description>
+    </item>
+    <item>
+      <title>Gameframework-Resource热更新</title>
+      <link>https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/</link>
+      <pubDate>Sat, 11 Apr 2020 13:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/</guid>
+      <description>正在构思中&amp;hellip;</description>
+    </item>
+    <item>
+      <title>Gameframework-Config初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Mon, 06 Apr 2020 13:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统</description>
+    </item>
+    <item>
+      <title>Gameframework-Resource初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Resource%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Fri, 27 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Resource%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 Unity资源的热更新就是AssetBundle,这是手游开发的初学者必经之路。而且Unity官</description>
+    </item>
+    <item>
+      <title>Gameframework-ReferencePool初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-ReferencePool%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Thu, 26 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-ReferencePool%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 可能刚学编程的会不知道引用类型和值类型是什么意思？导致可能会不明白框架给出的引用池到底是什么用来</description>
+    </item>
+    <item>
+      <title>Gameframework-Sound初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Sound%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Thu, 26 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Sound%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>1.Sound模块的一些API 首先要知道这个框架常用的Sound模块API,我们先找到Setting</description>
+    </item>
+    <item>
+      <title>Gameframework-Procedure进阶篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Procedure%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
+      <pubDate>Wed, 25 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Procedure%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
+      <description>前言 在流程初探篇里说过给流程模块加个锁的概念,好处已经在初探里已经说明了,因为流程跳转的相关逻辑确实</description>
+    </item>
+    <item>
+      <title>Gameframework-Procedure初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Procedure%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Tue, 24 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Procedure%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 流程是Gameframework里的一种概念,刚刚使用这个框架时可能比较晕,流程其实是继承了有限</description>
+    </item>
+    <item>
+      <title>Gameframework-ObjectPool初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-ObjectPool%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Mon, 23 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-ObjectPool%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 对象池和引用池的功能是一样的,也是为了防止反复销毁和创建,偏向于游戏实例中的使用,添加了释放事件</description>
+    </item>
+    <item>
+      <title>Gameframework-Localization初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Localization%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Sun, 22 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Localization%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 此模块是用于语言本地化,可以让开发出的游戏走向国际化,接下就来看看Gameframework是如</description>
+    </item>
+    <item>
+      <title>Gameframework-Event初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-Event%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Sat, 21 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-Event%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>前言 对于刚入门的小白来说GF的事件模块理解起来还是比较困难的,但是写的确实挺棒的,所以文章就来详细分</description>
+    </item>
+    <item>
+      <title>Gameframework-UI进阶篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-UI%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
+      <pubDate>Tue, 10 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-UI%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
+      <description>前言 UI模块初探里发现的小问题,按钮点击没有反应和每个界面都添加了Canvas,所以准备调整一下。 1</description>
+    </item>
+    <item>
+      <title>Gameframework-UI初探篇</title>
+      <link>https://daveant.github.io/posts/Gameframework-UI%E5%88%9D%E6%8E%A2%E7%AF%87/</link>
+      <pubDate>Fri, 06 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework-UI%E5%88%9D%E6%8E%A2%E7%AF%87/</guid>
+      <description>1.UI模块的一些API 首先要知道这个框架常用的UI模块API,我们先找到MenuForm.cs就可</description>
+    </item>
+    <item>
+      <title>Gameframework架构思路</title>
+      <link>https://daveant.github.io/posts/Gameframework%E6%9E%B6%E6%9E%84%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Sun, 01 Mar 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework%E6%9E%B6%E6%9E%84%E6%80%9D%E8%B7%AF/</guid>
+      <description>前言 这里GF就是Gameframework框架,俗话说得好不想懂底层代码的程序猿,不是好程序猿(那里</description>
+    </item>
+    <item>
+      <title>Gameframework开发环境搭建</title>
+      <link>https://daveant.github.io/posts/Gameframework%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Fri, 28 Feb 2020 23:23:34 +0800</pubDate>
+      <guid>https://daveant.github.io/posts/Gameframework%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>前言 最近发现基于Unity的GF框架,是集成了很多模块的游戏开发框架,近期准备深度学习GF框架,之后</description>
+    </item>
+  </channel>
+</rss>

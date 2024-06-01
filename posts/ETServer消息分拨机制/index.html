@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>ETServer消息分拨机制 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e9%bb%91%e7%9b%92%e5%88%86%e6%9e%90">
+				                            1.黑盒分析
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%88%86%e6%9e%90%e6%ba%90%e4%bb%a3%e7%a0%81">
+				                            2.分析源代码
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        ETServer消息分拨机制</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                ETServer消息分拨机制</h1>
+                <div class="stuff">
+                    <span>August 26, 2020</span>
+                    <span>字数 701</span>
+                                  
+                    <span id="/posts/ETServer消息分拨机制/" class="leancloud_visitors" data-flag-title="ETServer消息分拨机制">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/ETServer/wallhaven_1.jpg
+cover: https://pics.images.ac.cn/image/5eb54dd270262.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>用过ET框架的都知道,只需要创建消息句柄类,客户端发起对应消息请求时就直接进入到消息句柄里执行逻辑了,看上去好像有点智能的,接下来深入分析ET框架如何做到的。在此之前建议各位去看看<a href="https://daveant.gitee.io/posts/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a>。</p>
+</blockquote>
+<h2 id="1黑盒分析">1.黑盒分析</h2>
+<p>小节1讲解遇到问题时的解决思路,对于C#不太熟悉可以看一下,首先展示测试消息句柄类的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> ETModel;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> ETHotfix
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">	[MessageHandler(AppType.Gate)]</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C2G_TestMessageHandler</span> : AMRpcHandler&lt;C2G_TestMessage, G2C_TestMessage&gt;
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">async</span> ETTask Run(Session session, C2G_TestMessage request, G2C_TestMessage response, Action reply)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			response.Message = <span style="color:#e6db74">&#34;前端的朋友,消息收到了&lt;&lt;==&#34;</span>;
+</span></span><span style="display:flex;"><span>			reply();
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上面类特别的地方就是有[]修饰,经过百度得知原来它叫<a href="https://daveant.gitee.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/">CSharp特性</a>,把特性删掉后无法处理消息协议(<b><font color="red">注意5.0版本只要Hotfix有改动,就需要重新生成Hotfix解决方案</font></b>),如下图报错：
+<img src="/img/post/ETServer/messagehandler/exp1.png" alt="exp1">
+所以就是特性搞的鬼,<b><font color="red">大胆猜测通过反射得到所有MessageHandler特性类</font></b>,然后保存到列表或字典中。</p>
+<h2 id="2分析源代码">2.分析源代码</h2>
+<p>首先全局查找MessageHandlerAttribute关键字,可以找到以下比较有用的代码段：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MessageDispatcherComponentHelper</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Load(<span style="color:#66d9ef">this</span> MessageDispatcherComponent self)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			self.Handlers.Clear();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			AppType appType = StartConfigComponent.Instance.StartConfig.AppType;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			List&lt;Type&gt; types = Game.EventSystem.GetTypes(<span style="color:#66d9ef">typeof</span>(MessageHandlerAttribute));
+</span></span><span style="display:flex;"><span>			...
+</span></span></code></pre></div><p>发现通过Game.EventSystem.GetTypes可以得到所有消息句柄的Type,而函数通过this.types查询对应特性的List<Type>,查询types引用得到this.types.Add代码段位置,最后得知EventSystem的Add函数通过特性加载所有消息句柄类,如下图所示:
+<img src="/img/post/ETServer/messagehandler/exp2.png" alt="exp2">
+Program类最先开始执行的就是加载所有特性,如下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	Game.EventSystem.Add(DLLType.Model, <span style="color:#66d9ef">typeof</span>(Game).Assembly);
+</span></span><span style="display:flex;"><span>	Game.EventSystem.Add(DLLType.Hotfix, DllHelper.GetHotfixAssembly());
+</span></span></code></pre></div><p>通过GetHotfixAssembly函数,得知为什么Hotfix改动时,必须重新生成Hotfix解决方案,<b><font color="red">ET6.0版本在编译器模式下不需要重新生成Hotfix解决方案。</font></b></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E5%A4%9A%E4%BA%BA%E8%81%8A%E5%A4%A9%E5%AE%A4/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ETServer%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" title="ETServer开发环境">
+                            ETServer开发环境</a>
+                            <p>前言 ET偏向服务器端框架,可自行查看框架简介,了解框架具体有多强大,简单说明部署ET框架的步骤。 1....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ETServer%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" title="ETServer开发环境">
+                            <img class="relateimg" src="/img/title/ETServer/wallhaven_1.jpg" alt="ETServer开发环境">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

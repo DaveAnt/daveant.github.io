@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader基本运算 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1unityshader%e5%86%85%e7%bd%ae%e5%8f%98%e9%87%8f">
+				                            1.UnityShader内置变量
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2cg%e4%b8%ad%e5%9f%ba%e6%9c%ac%e8%bf%90%e7%ae%97">
+				                            2.CG中基本运算
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3cg%e5%86%85%e7%bd%ae%e5%87%bd%e6%95%b0">
+				                            3.CG内置函数
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader基本运算</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader基本运算</h1>
+                <div class="stuff">
+                    <span>April 14, 2020</span>
+                    <span>字数 4471</span>
+                                  
+                    <span id="/posts/UnityShader基本运算/" class="leancloud_visitors" data-flag-title="UnityShader基本运算">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_3.jpg
+cover: https://pics.images.ac.cn/image/5eb5522a84e07.html-->
+<h2 id="1unityshader内置变量">1.UnityShader内置变量</h2>
+<p>在了解UnityShader基本运算接口之前,先要知道Unity有那些内置的变量,使用Unity编写Shader时,内置变量提供了大量的便捷,不必开发人员去计算常用的变换矩阵、摄像机参数、屏幕参数,下面是UnityShader内置变换矩阵的表格。</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UNITY_MATRIX_MVP</td>
+<td>当前模式.观察.投影矩阵,用于将顶点/方向矢量从模型空间变换到剪裁空间,5.6版本以上使用UnityObjectToClipPos。</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_MV</td>
+<td>当前模式.观察矩阵,用于将顶点/方向矢量从模型空间变换到观察空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_V</td>
+<td>当前观察矩阵,用于将顶点/方向矢量从世界空间变换到观察空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_P</td>
+<td>当前投影矩阵,用于将顶点/方向矢量从观察空间变换到剪裁空间,5.6版本以上使用UnityViewToClipPos。</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_VP</td>
+<td>当前观察.投影矩阵,用于将顶点/方向矢量从世界空间变换到剪裁空间,5.6版本以上使用UnityWorldToClipPos。</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_T_MV</td>
+<td>UNITY_MATRIX_MV的倒置矩阵</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_IT_MV</td>
+<td>UNITY_MATRIX_MV的逆倒置矩阵,用于将法线从模型空间变换到观察者空间,得到UNITY_MATRIX_MV的逆矩阵</td>
+</tr>
+<tr>
+<td>_Object2World</td>
+<td>当前的模型矩阵,用于将顶点/方向矢量从模型空间变换到世界空间</td>
+</tr>
+<tr>
+<td>_World2Object</td>
+<td>_Object2World的逆矩阵,用于将顶点/方向矢量从世界空间变换到模型空间</td>
+</tr>
+</tbody>
+</table>
+<p>UnityShader也提供了一些内置变量用来访问正在渲染摄像机的参数信息。这些参数信息实际上是对应着摄像机上的Camera组件中的属性值,下面是UnityShader内置摄像机参数的表格。</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_WorldSpaceCameraPos</td>
+<td>float3</td>
+<td>该摄像机在世界空间中的位置</td>
+</tr>
+<tr>
+<td>_ProjectionParams</td>
+<td>float4</td>
+<td>x=1.0(或-1.0,如果使用翻转的投影矩阵进行渲染),y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近剪裁面和远剪裁面到摄像机的距离</td>
+</tr>
+<tr>
+<td>_ScreenParams</td>
+<td>float4</td>
+<td>x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标(render target)的像素宽度和高度。</td>
+</tr>
+<tr>
+<td>_ZBufferParams</td>
+<td>float4</td>
+<td>x=1-Far/Near,z=x/Far,w=y/Far。该变量用于线性化z缓存中的深度值。</td>
+</tr>
+<tr>
+<td>unity_OrthoParams</td>
+<td>float4</td>
+<td>x=width,y=height,z没有定义,w=1.0(正交摄像机)或w=0.0(透视摄像机),其中width和height是正交投影摄像机的宽度和高度。</td>
+</tr>
+<tr>
+<td>unity_CameraProjection</td>
+<td>float4x4</td>
+<td>该摄像机的投影矩阵。</td>
+</tr>
+<tr>
+<td>unity_CameraInvProjection</td>
+<td>float4x4</td>
+<td>该摄像机的投影矩阵的逆矩阵。</td>
+</tr>
+<tr>
+<td>unity_CameraWorldClipPlanes[6]</td>
+<td>float4</td>
+<td>该摄像机的6个剪裁平面在世界空间下的等式,按如下顺序:左右上下近远剪裁平面。</td>
+</tr>
+</tbody>
+</table>
+<p>Unity中的屏幕坐标：ComputeScreenPos、VPOS、WPOS,这些语义当时获取屏幕坐标相关的,下面是这些语义的具体含义。</p>
+<table>
+<thead>
+<tr>
+<th>语义</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPOS</td>
+<td>float4</td>
+<td>HLSL中对屏幕坐标的语义。</td>
+</tr>
+<tr>
+<td>WPOS</td>
+<td>float4</td>
+<td>CG中对屏幕坐标的语义。</td>
+</tr>
+<tr>
+<td>ComputeScreenPos</td>
+<td>float4</td>
+<td>CG里的语义,通过两步骤可以得到视口空间下的坐标。</td>
+</tr>
+</tbody>
+</table>
+<p>VPOS、WPOS在Unity中是等价的,x、y是屏幕分辨率的大小,x范围是[0.5,0.5+ScreenWidth],y范围是[0.5,0.5+ScreenHeight];z的范围是[0,1],单位化的近剪裁面到远剪裁面;如果是透视投影的话,w分量是[1/Near,1/Far],正交投影的话,w是1。ComputeScreenPos主要通过以下两步骤得到视口空间的坐标:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>struct vertOut{
+</span></span><span style="display:flex;"><span>    float4 pos:SV_POSITION;
+</span></span><span style="display:flex;"><span>    float4 scrPos:TEXCOORD0;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vertOut <span style="color:#a6e22e">vert</span>(appdata_base v){
+</span></span><span style="display:flex;"><span>    vertOut o;
+</span></span><span style="display:flex;"><span>    o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> mul(UNITY_MATRIX_MVP,v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//第一步：把ComputeScreenPos的结果保存到scrPos中</span>
+</span></span><span style="display:flex;"><span>    o.<span style="color:#a6e22e">scrPos</span> <span style="color:#f92672">=</span> ComputeScreenPos(o.<span style="color:#a6e22e">pos</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fixed4 <span style="color:#a6e22e">frag</span>(vertOut i) : SV_Target
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//第二步：用scrPos.xy除以sccrPos.w得到视口空间中的坐标</span>
+</span></span><span style="display:flex;"><span>    float2 wcoord <span style="color:#f92672">=</span> (i.<span style="color:#a6e22e">scrPos</span>.<span style="color:#a6e22e">xy</span><span style="color:#f92672">/</span>i.<span style="color:#a6e22e">scrPos</span>.<span style="color:#a6e22e">w</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> fixed4(wcoord,0.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="2cg中基本运算">2.CG中基本运算</h2>
+<p>通常在UnityShader中使用CG作为着色器语言。在CG变量类型有很多种,现在开始解释这些类型进行数据运算,这里主要以float家族的变量来做说明。在CG中,矩阵类型是由float3x3、float4x4等关键词进行声明和定义的,而对于float3、float4等类型的变量,可以把它当成一个矢量,也可以把它当作行矩阵或列矩阵,当float4进行点积时相当于矢量的含义,如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>float4 a <span style="color:#f92672">=</span> float4(1.<span style="color:#a6e22e">0</span>,2.<span style="color:#a6e22e">0</span>,3.<span style="color:#a6e22e">0</span>,4.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>float4 b <span style="color:#f92672">=</span> float4(1.<span style="color:#a6e22e">0</span>,2.<span style="color:#a6e22e">0</span>,3.<span style="color:#a6e22e">0</span>,4.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//对两个矢量进行点积操作</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> result <span style="color:#f92672">=</span> dot(a,b);
+</span></span></code></pre></div><p>但在进行矩阵乘法时,参数的位置将决定时按列矩阵还是行矩阵进行乘法。在CG中矩阵乘法通过mul函数实现的,如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>float4 v = float4(<span style="color:#ae81ff">1.0</span>,<span style="color:#ae81ff">2.0</span>,<span style="color:#ae81ff">3.0</span>,<span style="color:#ae81ff">4.0</span>);
+</span></span><span style="display:flex;"><span>floa4x4 M = float4x4(<span style="color:#ae81ff">1.0</span>,<span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">0.0</span>,
+</span></span><span style="display:flex;"><span>                     <span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">1.0</span>,<span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">0.0</span>,
+</span></span><span style="display:flex;"><span>                     <span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">1.0</span>,<span style="color:#ae81ff">0.0</span>,
+</span></span><span style="display:flex;"><span>                     <span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">0.0</span>,<span style="color:#ae81ff">1.0</span>,);
+</span></span><span style="display:flex;"><span>float4 column_mul_result = mul(M,v);<span style="color:#75715e">//右乘  v表示列矩阵</span>
+</span></span><span style="display:flex;"><span>float4 row_mul_result = mul(v,M);<span style="color:#75715e">//左乘  v表示行矩阵</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//所以column_mul_result != row_mul_result</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//mul(M,v) == mul(v,tranpose(M))</span>
+</span></span></code></pre></div><p>使用CG时需要知道初始化矩阵数据时,是优秀按行方式进行填充的。</p>
+<h2 id="3cg内置函数">3.CG内置函数</h2>
+<p>小节二里简单的介绍了dot和mul,CG里的函数还是超级多的,所以不一一介绍了。这里就直接整理出表格,用来帮助各位查阅。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abs(x)</td>
+<td>返回输入参数的绝对值。</td>
+</tr>
+<tr>
+<td>acos(x)</td>
+<td>反余切函数,输入参数范围为[-1,1], 返回[0,π]区间的角度值。</td>
+</tr>
+<tr>
+<td>all(x)</td>
+<td>如果输入参数均不为0,则返回ture;否则返回flase。&amp;&amp;运算。</td>
+</tr>
+<tr>
+<td>any(x)</td>
+<td>输入参数只要有其中一个不为0,则返回true。</td>
+</tr>
+<tr>
+<td>asin(x)</td>
+<td>反正弦函数。</td>
+</tr>
+<tr>
+<td>atan(x)</td>
+<td>反正切函数。</td>
+</tr>
+<tr>
+<td>atan2(y,x)</td>
+<td>计算y/x的反正切值。实际上和atan(x)函数功能完全一样,至少输入参数不同。atan(x) = atan2(x, float(1))。</td>
+</tr>
+<tr>
+<td>ceil(x)</td>
+<td>对输入参数向上取整。例如：ceil(float(1.3)) ,其返回值为2.0。</td>
+</tr>
+<tr>
+<td>clamp(x,a,b)</td>
+<td>如果x值小于a,则返回a;如果x值大于b,返回b;否则,返回x。</td>
+</tr>
+<tr>
+<td>cos(x)</td>
+<td>返回弧度x的余弦值。</td>
+</tr>
+<tr>
+<td>cosh(x)</td>
+<td>双曲余弦(hyperbolic cosine)函数,计算x的双曲余弦值。</td>
+</tr>
+<tr>
+<td>cross(A,B)</td>
+<td>返回两个三元向量的叉积(cross product)。注意,输入参数必须是三元向量。</td>
+</tr>
+<tr>
+<td>degrees(x)</td>
+<td>输入参数为弧度值(radians),函数将其转换为角度值(degrees)。</td>
+</tr>
+<tr>
+<td>determinant(m)</td>
+<td>计算矩阵的行列式因子。</td>
+</tr>
+<tr>
+<td>dot(A,B)</td>
+<td>返回A和B的点积(dot product)。参数A和B可以是标量,也可以是向量(输入参数方面,点积和叉积函数有很大不同)。</td>
+</tr>
+<tr>
+<td>exp(x)</td>
+<td>返回e的x次方的值,e=2.71828182845904523536。</td>
+</tr>
+<tr>
+<td>exp2(x)</td>
+<td>返回e*2的x次方的值,e=2.71828182845904523536。</td>
+</tr>
+<tr>
+<td>floor(x)</td>
+<td>对输入参数向下取整。例如floor(float(1.3))返回的值为1.0;但是floor(float(-1.3))返回的值为-2.0。该函数与ceil(x)函数相对应。</td>
+</tr>
+<tr>
+<td>fmod(x,y)</td>
+<td>返回x/y的余数。如果y为0,结果不可预料。</td>
+</tr>
+<tr>
+<td>frac(x)</td>
+<td>返回标量或矢量的小数。</td>
+</tr>
+<tr>
+<td>frexp(x, out i)</td>
+<td>将浮点数x分解为尾数和指数,即, 返回m,并将指数存入i中;如果x为0,则尾数和指数都返回0。</td>
+</tr>
+<tr>
+<td>isfinite(x)</td>
+<td>判断标量或者向量中的每个数据是否是有限数,如果是返回true;否则返回false;</td>
+</tr>
+<tr>
+<td>isinf(x)</td>
+<td>判断标量或者向量中的每个数据是否是无限,如果是返回true;否则返回false;</td>
+</tr>
+<tr>
+<td>isnan(x)</td>
+<td>判断标量或者向量中的每个数据是否是非数据(not-a-number NaN),如果是返回true;否则返回false;</td>
+</tr>
+<tr>
+<td>ldexp(x, n)</td>
+<td>返回x乘以2的n次方(次幂)的值。</td>
+</tr>
+<tr>
+<td>lerp(a, b, f)</td>
+<td>计算或者的值。即在下限a和上限b之间进行插值,f表示权值。注意,如果a和b是向量,则权值f必须是标量或者等长的向量。</td>
+</tr>
+<tr>
+<td>lit(NdotL, NdotH, m)</td>
+<td>N表示法向量;L表示入射光向量;H表示半角向量;M表示高光系数; 函数计算环境光、散射光、镜面光的贡献,返回的4元向量;X位表示环境光的贡献;Y位代表散射光的贡献;Z位代表镜面光的贡献;W位始终位1.0;</td>
+</tr>
+<tr>
+<td>log(x)</td>
+<td>计算的值,x必须大于0。</td>
+</tr>
+<tr>
+<td>log2(x)</td>
+<td>计算的值,x必须大于0。</td>
+</tr>
+<tr>
+<td>log10(x)</td>
+<td>计算的值,x必须大于0。</td>
+</tr>
+<tr>
+<td>max(a, b)</td>
+<td>比较两个标量或等长向量元素,返回最大值。</td>
+</tr>
+<tr>
+<td>min(a,b)</td>
+<td>比较两个标量或等长向量元素,返回最小值。</td>
+</tr>
+<tr>
+<td>modf(x, out ip)</td>
+<td>把x分解成整数和分数两部分,每部分都和x有着相同的符号,整数部分被保存在ip中,分数部分由函数返回。</td>
+</tr>
+<tr>
+<td>mul(M, N)</td>
+<td>矩阵M和矩阵N的积。</td>
+</tr>
+<tr>
+<td>mul(M, v)</td>
+<td>矩阵M和列向量v的积。</td>
+</tr>
+<tr>
+<td>mul(v, M)</td>
+<td>行向量v和矩阵M的积。</td>
+</tr>
+<tr>
+<td>noise(x)</td>
+<td>根据它的参数类型,这个函数可以是一元、二元或三元噪音函数。返回的值在0和1之间,并且通常与给定的输入值一样。</td>
+</tr>
+<tr>
+<td>pow(x, y)</td>
+<td>计算并返回 x 的 y 次方。</td>
+</tr>
+<tr>
+<td>radians(x)</td>
+<td>函数将角度值转换为弧度值。</td>
+</tr>
+<tr>
+<td>round(x)</td>
+<td>返回四舍五入值。</td>
+</tr>
+<tr>
+<td>rsqrt(x)</td>
+<td>x的平方根的倒数,x必须大于0。</td>
+</tr>
+<tr>
+<td>saturate(x)</td>
+<td>把x限制到[0,1]之间。</td>
+</tr>
+<tr>
+<td>sign(x)</td>
+<td>如果则返回1;否则返回0。</td>
+</tr>
+<tr>
+<td>sin(x)</td>
+<td>输入参数为弧度,计算正弦值,返回值范围 为[-1,1]。</td>
+</tr>
+<tr>
+<td>sincos(float x, out s, out c)</td>
+<td>该函数是同时计算x的sin值和cos值,其中s=sin(x),c=cos(x)。该函数用于“同时需要计算sin值和cos值的情况”,比分别运算要快很多。</td>
+</tr>
+<tr>
+<td>sinh(x)</td>
+<td>计算x的双曲正弦。</td>
+</tr>
+<tr>
+<td>smoothstep(min, max, x)</td>
+<td>值x位于min、max区间中。如果x=min,返回0;如果x=max,返回1;如果x在两者之间,按照下列公式返回数据。</td>
+</tr>
+<tr>
+<td>step(a, x)</td>
+<td>如果,返回0;否则,返回1。</td>
+</tr>
+<tr>
+<td>sqrt(x)</td>
+<td>求x的平方根,x必须大于0。</td>
+</tr>
+<tr>
+<td>tan(x)</td>
+<td>计算x正切值。</td>
+</tr>
+<tr>
+<td>tanh(x)</td>
+<td>计算x的双曲线切线。</td>
+</tr>
+<tr>
+<td>transpose(M)</td>
+<td>矩阵M的转置矩阵,如果M是一个AxB矩阵,M的转置是一个BxA矩阵,它的第一列是M的第一行,第二列是M的第二行,第三列是M的第三行,等等。</td>
+</tr>
+<tr>
+<td>distance(pt1, pt2)</td>
+<td>两点之间的欧几里德距离(Euclidean distance)。</td>
+</tr>
+<tr>
+<td>faceforward(N,I,Ng)</td>
+<td>如果,返回N;否则返回-N。</td>
+</tr>
+<tr>
+<td>length(v)</td>
+<td>返回一个向量的模,即sqrt(dot(v,v))。</td>
+</tr>
+<tr>
+<td>normalize(v)</td>
+<td>返回v向量的单位向量。</td>
+</tr>
+<tr>
+<td>reflect(I, N)</td>
+<td>根据入射光纤方向I和表面法向量N计算反射向量,仅对三元向量有效。</td>
+</tr>
+<tr>
+<td>refract(I,N,eta)</td>
+<td>根据入射光线方向I,表面法向量N和折射相对系数eta,计算折射向量。如果对给定的eta,I和N之间的角度太大,返回(0,0,0)。只对三元向量有效。</td>
+</tr>
+<tr>
+<td>tex1D(sampler1D tex, float s)</td>
+<td>一维纹理查询。</td>
+</tr>
+<tr>
+<td>tex1D(sampler1D tex, float s, float dsdx, float dsdy)</td>
+<td>使用导数值(derivatives)查询一维纹理。</td>
+</tr>
+<tr>
+<td>Tex1D(sampler1D tex, float2 sz)</td>
+<td>一维纹理查询,并进行深度值比较。</td>
+</tr>
+<tr>
+<td>Tex1D(sampler1D tex, float2 sz, float dsdx,float dsdy)</td>
+<td>使用导数值(derivatives)查询一维纹理, 并进行深度值比较。</td>
+</tr>
+<tr>
+<td>Tex1Dproj(sampler1D tex, float2 sq)</td>
+<td>一维投影纹理查询。</td>
+</tr>
+<tr>
+<td>Tex1Dproj(sampler1D tex, float3 szq)</td>
+<td>一维投影纹理查询,并比较深度值。</td>
+</tr>
+<tr>
+<td>Tex2D(sampler2D tex, float2 s)</td>
+<td>二维纹理查询。</td>
+</tr>
+<tr>
+<td>Tex2D(sampler2D tex, float2 s, float2 dsdx, float2 dsdy)</td>
+<td>使用导数值(derivatives)查询二维纹理。</td>
+</tr>
+<tr>
+<td>Tex2D(sampler2D tex, float3 sz)</td>
+<td>二维纹理查询,并进行深度值比较。</td>
+</tr>
+<tr>
+<td>Tex2D(sampler2D tex, float3 sz, float2 dsdx,float2 dsdy)</td>
+<td>使用导数值(derivatives)查询二维纹理,并进行深度值比较。</td>
+</tr>
+<tr>
+<td>Tex2Dproj(sampler2D tex, float3 sq)</td>
+<td>二维投影纹理查询。</td>
+</tr>
+<tr>
+<td>Tex2Dproj(sampler2D tex, float4 szq)</td>
+<td>二维投影纹理查询,并进行深度值比较。</td>
+</tr>
+<tr>
+<td>texRECT(samplerRECT tex, float2 s)</td>
+<td>二维非投影矩形纹理查询(OpenGL独有)。</td>
+</tr>
+<tr>
+<td>texRECT (samplerRECT tex, float3 sz, float2 dsdx,float2 dsdy)</td>
+<td>二维非投影使用导数的矩形纹理查询(OpenGL独有)。</td>
+</tr>
+<tr>
+<td>texRECT (samplerRECT tex, float3 sz)</td>
+<td>二维非投影深度比较矩形纹理查询(OpenGL独有)。</td>
+</tr>
+<tr>
+<td>texRECT (samplerRECT tex, float3 sz, float2 dsdx,float2 dsdy)</td>
+<td>二维非投影深度比较并使用导数的矩形纹理查询(OpenGL独有)。</td>
+</tr>
+<tr>
+<td>texRECT proj(samplerRECT tex, float3 sq)</td>
+<td>二维投影矩形纹理查询(OpenGL独有)。</td>
+</tr>
+<tr>
+<td>texRECT proj(samplerRECT tex, float3 szq)</td>
+<td>二维投影矩形纹理深度比较查询(OpenGL独有)。</td>
+</tr>
+<tr>
+<td>Tex3D(sampler3D tex, float s)</td>
+<td>三维纹理查询。</td>
+</tr>
+<tr>
+<td>Tex3D(sampler3D tex, float3 s, float3 dsdx, float3 dsdy)</td>
+<td>结合导数值(derivatives)查询三维纹理。</td>
+</tr>
+<tr>
+<td>Tex3Dproj(sampler3D tex, float4 szq)</td>
+<td>查询三维投影纹理,并进行深度值比较。</td>
+</tr>
+<tr>
+<td>texCUBE(samplerCUBE tex, float3 s)</td>
+<td>查询立方体纹理。</td>
+</tr>
+<tr>
+<td>texCUBE (samplerCUBE tex, float3 s, float3 dsdx, float3 dsdy)</td>
+<td>结合导数值(derivatives)查询立方体纹理。</td>
+</tr>
+<tr>
+<td>texCUBEproj (samplerCUBE tex, float4 sq)</td>
+<td>查询投影立方体纹理。</td>
+</tr>
+<tr>
+<td>ddx(a)</td>
+<td>近似a关于屏幕空间x轴的偏导数。</td>
+</tr>
+<tr>
+<td>ddy(a)</td>
+<td>近似a关于屏幕空间y轴的偏导数。</td>
+</tr>
+<tr>
+<td>void debug(float4 x)</td>
+<td>如果在编译时设置了DEBUG,片段着色程序中调用该函数可以将值x作为COLOR语义的最终输出;否则该函数什么也不做。</td>
+</tr>
+</tbody>
+</table>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Hello-Shader/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

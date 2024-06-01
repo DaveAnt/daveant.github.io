@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>组合模式 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%9e%b6%e6%9e%84%e5%bc%95%e6%93%8e%e6%97%b6%e7%9a%84%e7%bb%84%e5%90%88%e6%a8%a1%e5%bc%8f">
+				                            1.架构引擎时的组合模式
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e5%8f%af%e8%a7%86%e5%8c%96%e9%85%8d%e7%bd%ae">
+				                            2.如何实现可视化配置
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e6%80%bb%e7%bb%93">
+				                            总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e9%80%8f%e6%98%8e%e5%ae%89%e5%85%a8%e7%bb%84%e5%90%88%e6%a8%a1%e5%bc%8f%e7%9a%84%e4%bc%98%e7%bc%ba%e7%82%b9">
+				                            1.透明,安全组合模式的优缺点
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e7%bb%84%e5%90%88%e6%a8%a1%e5%bc%8f%e7%9a%84%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">
+				                            2.组合模式的使用场景
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        组合模式</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                组合模式</h1>
+                <div class="stuff">
+                    <span>March 8, 2020</span>
+                    <span>字数 1242</span>
+                                  
+                    <span id="/posts/组合模式/" class="leancloud_visitors" data-flag-title="组合模式">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/DesignPattern/wallhaven_17.jpg
+cover: https://pics.images.ac.cn/image/5eb54ccad4db1.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>组合模式称为整体部分模式,主要是表现对象层次具备整体和部分,呈树形结构,且要求具备统一行为。</p>
+</blockquote>
+<h2 id="1架构引擎时的组合模式">1.架构引擎时的组合模式</h2>
+<p>架构游戏引擎是离不开组合模式的,这里以Unity为例子,用组合模式简单表达一下如何架构出游戏引擎,首先我们定义出抽象组件类,组件类里应该有位置和锚点等等,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Global</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">uint</span> index = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Size</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> y;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Point</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> y;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> Anchor:<span style="color:#66d9ef">byte</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        LeftTop,
+</span></span><span style="display:flex;"><span>        CenterTop,
+</span></span><span style="display:flex;"><span>        RightTop,
+</span></span><span style="display:flex;"><span>        LeftCenter,
+</span></span><span style="display:flex;"><span>        Center,
+</span></span><span style="display:flex;"><span>        RightCenter,
+</span></span><span style="display:flex;"><span>        LeftBottom,
+</span></span><span style="display:flex;"><span>        CenterBottom,
+</span></span><span style="display:flex;"><span>        RightBottom
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameComponent</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">uint</span> index;<span style="color:#75715e">//组件编号</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">string</span> name;<span style="color:#75715e">//组件名字</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Point point;<span style="color:#75715e">//位置</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Size size;<span style="color:#75715e">//大小</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Anchor anchor;<span style="color:#75715e">//锚点</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> List&lt;GameComponent&gt; gameComponents;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> GameComponent(<span style="color:#66d9ef">string</span> name,Point point,Size size,Anchor anchor)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.index = Global.index;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.name = name;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.point = point;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.size = size;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.anchor = anchor;
+</span></span><span style="display:flex;"><span>            gameComponents = <span style="color:#66d9ef">new</span> List&lt;GameComponent&gt;();
+</span></span><span style="display:flex;"><span>            Global.index = Global.index + <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ShowGameComponent()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> HideGameComponent()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Show()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            ShowGameComponent();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (GameComponent gameComponent <span style="color:#66d9ef">in</span> gameComponents)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                gameComponent.Show();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Hide()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            HideGameComponent();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (GameComponent gameComponent <span style="color:#66d9ef">in</span> gameComponents)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                gameComponent.Hide();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> AddGameComponent(GameComponent gameComponent)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            gameComponents.Add(gameComponent);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RemoveGameComponent(<span style="color:#66d9ef">uint</span> index)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (GameComponent gameComponent <span style="color:#66d9ef">in</span> gameComponents)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (gameComponent.index == index)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        gameComponents.Remove(gameComponent);
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">catch</span> (Exception e)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        Console.WriteLine(e);
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">throw</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RemoveGameComponent(GameComponent gameComponent)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                gameComponents.Remove(gameComponent);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> (Exception e)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(e);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ButtonComponent</span>:ImageComponent
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Action OnClick;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Action OnHover;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Action OnExit;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> ButtonComponent(Action OnClick, Action OnHover, Action OnExit, <span style="color:#66d9ef">string</span>                 
+</span></span><span style="display:flex;"><span>           name, Point point, Size size,Anchor anchor) : <span style="color:#66d9ef">base</span>(name, point, size, anchor)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.OnClick = OnClick;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.OnHover = OnHover;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.OnExit = OnExit;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ImageComponent</span>:GameComponent
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> ImageData imageData;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> ImageComponent(ImageData imageData, <span style="color:#66d9ef">string</span>                 
+</span></span><span style="display:flex;"><span>           name, Point point, Size size,Anchor anchor) : <span style="color:#66d9ef">base</span>(name, point, size, anchor)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.imageData = imageData;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这里只是简单的讲解了实现原理,接下来使用框架模拟出一个界面,伪代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    FormComponent root = <span style="color:#66d9ef">new</span> FormComponent(.....);
+</span></span><span style="display:flex;"><span>    MenuComponent menu = <span style="color:#66d9ef">new</span> MenuComponent(.....);
+</span></span><span style="display:flex;"><span>    menu.AddGameComponent(<span style="color:#66d9ef">new</span> Button(.....));
+</span></span><span style="display:flex;"><span>    menu.AddGameComponent(<span style="color:#66d9ef">new</span> Button(.....));
+</span></span><span style="display:flex;"><span>    menu.AddGameComponent(<span style="color:#66d9ef">new</span> Button(.....));
+</span></span><span style="display:flex;"><span>    root.AddGameComponent(<span style="color:#66d9ef">new</span> Button(.....));
+</span></span><span style="display:flex;"><span>    root.AddGameComponent(<span style="color:#66d9ef">new</span> Image(.....));
+</span></span><span style="display:flex;"><span>    root.AddGameComponent(<span style="color:#66d9ef">new</span> Image(.....));
+</span></span><span style="display:flex;"><span>    root.AddGameComponent(menu);
+</span></span><span style="display:flex;"><span>    root.Show();
+</span></span></code></pre></div><p>设计的时候建议把所有组件共有的部分写在GameComponent,但是按钮组件就需要另外加一些事件,所以要另外加一个ButtonComponent抽象类,这个方式在组合模式里叫做安全组合模式。有安全组合模式这个名字说明组合模式不仅仅只有一种,把所有接口都定义在GameComponent里叫透明组合模式。</p>
+<h2 id="2如何实现可视化配置">2.如何实现可视化配置</h2>
+<p>可能大家看到这里,会说这个也太low了,Unity是可视化界面去创建出不同的界面,可视化配置说明代码里是没有把界面写死的,说明我们在使用Unity的时候,可能背地里生成了一个配置文件,读取这个临时的配置文件创建出不同的界面,伪代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NodeComponentData</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> ComponentType componentType;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">string</span> name;<span style="color:#75715e">//组件名字</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Point point;<span style="color:#75715e">//位置</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Size size;<span style="color:#75715e">//大小</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> Anchor anchor;<span style="color:#75715e">//锚点</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> List&lt;NodeComponentData&gt; nodeComponentDatas;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> GameComponent InitGameComponents()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameComponent rootComponent = <span style="color:#66d9ef">new</span> GameComponentFactory(componentType, name, point, size, anchor);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (NodeComponentData nodeComponentData <span style="color:#66d9ef">in</span> nodeComponentDatas)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                rootComponent.AddGameComponent(nodeComponentData.InitGameComponents());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> rootComponent;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            NodeComponentData tmpData = ConfigMgr.Load();
+</span></span><span style="display:flex;"><span>            tmpData.InitGameComponents();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>其实从配置文件转换成这个NodeComponentData类时,应该把这个类也设计成完全组合的模式,这里只是简单的介绍一下大概的思想,然后我们调用InitGameComponents就可以把界面的层级关系创建出来了,InitGameComponents函数就是使用递归的思想去把组件层级表达出来的。</p>
+<h2 id="总结">总结</h2>
+<h2 id="1透明安全组合模式的优缺点">1.透明,安全组合模式的优缺点</h2>
+<p>系统绝大多数层次具备相同的公共行为时,采用透明组合模式也许会更好（代价:为剩下少数层次节点引入不需要的方法）；而如果当系统各个层次差异性行为较多或者树节点层次相对稳定（健壮）时,采用安全组合模式,所以安全组合模式符合接口最小,透明组合模式符合里氏替换原则。</p>
+<h2 id="2组合模式的使用场景">2.组合模式的使用场景</h2>
+<p>1)游戏公会里面复杂的玩家职位关系。<br>
+2)游戏引擎组件之间的设计方式。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            迭代器模式</a>
+                            <p>前言 C#中数据结构都实现了迭代器的功能,具体是如何实现的,接下来就由此篇文章去介绍一下C#是如何实现...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_24.jpg" alt="迭代器模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            代理模式</a>
+                            <p>前言 代理模式主要是用来对目标对象访问权限的控制,比如游戏商城里购买道具时,通过代理类去判断玩家是否可...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_4.jpg" alt="代理模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            单例模式</a>
+                            <p>前言 单例模式有二种,饿汉模式和懒汉模式。这里将去实现单例模式的这些例子,然后分析它们的优缺点和使用场...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_5.jpg" alt="单例模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            原型模式</a>
+                            <p>前言 原型模式是用于创建重复的对象,当类里有很多复杂参数的时候,我们可以避免使用拷贝(赋值)构造函数,...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_19.jpg" alt="原型模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            命令模式</a>
+                            <p>前言 命令模式可以实现操作的前进和回滚,经常使用P图软件的用户一定知道软件提供了对操作前进和回滚的功能...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_7.jpg" alt="命令模式">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

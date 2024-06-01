@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Hello-Shader &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%9c%80%e7%ae%80%e5%8d%95%e7%9a%84%e7%9d%80%e8%89%b2%e5%99%a8">
+				                            1.最简单的着色器
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%a8%a1%e5%9e%8b%e6%95%b0%e6%8d%ae%e6%9d%a5%e8%87%aa">
+				                            2.模型数据来自？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e9%a1%b6%e7%82%b9%e7%9d%80%e8%89%b2%e5%99%a8%e5%92%8c%e7%89%87%e5%85%83%e7%9d%80%e8%89%b2%e5%99%a8%e9%80%9a%e4%bf%a1">
+				                            3.顶点着色器和片元着色器通信
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e8%a7%a3%e5%86%b3%e7%96%91%e9%97%ae">
+				                            解决疑问
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Hello-Shader</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Hello-Shader</h1>
+                <div class="stuff">
+                    <span>April 15, 2020</span>
+                    <span>字数 2914</span>
+                                  
+                    <span id="/posts/Hello-Shader/" class="leancloud_visitors" data-flag-title="Hello-Shader">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_4.jpg
+cover: https://pics.images.ac.cn/image/5eb552195dd0a.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>每个语言都是从Hello World开始的,这篇文章就来Hello一下Shader,使用CG编写最简单的顶点/片元着色器,对UnityShader学习踏上第一步的征程。</p>
+</blockquote>
+<h2 id="1最简单的着色器">1.最简单的着色器</h2>
+<p>Shader入门教程讲解了每个语义块的含义,直接在Pass语义块里开始编写CG,具体Shader代码如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/SimpleShader&#34;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SubShader{
+</span></span><span style="display:flex;"><span>        Pass{
+</span></span><span style="display:flex;"><span>            CGPROGRAM
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            float4 <span style="color:#a6e22e">vert</span>(float4 v : POSITION) : SV_POSITION{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> UnityObjectToClipPos(v);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 <span style="color:#a6e22e">frag</span>() : SV_Target{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> fixed4(1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ENDCG
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>首先需要保持良好的命名习惯,这样为材质指定Shader时就可以快速找到自定义的Shader了,然后可以看到Properties属性语义块不是必须的,在Pass里同样没有进行任何自定义的渲染设置或标签设置,最简单的Shader就一切从简吧！接着,就是由CGPROGRAM和ENDCG所包围的CG代码片段,首先最开始发现比较主要的三个编译指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert  <span style="color:#75715e">//vert指定的顶点函数名,随意命名</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag  <span style="color:#75715e">//frag指定的片元函数名,随意命名</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>  <span style="color:#75715e">//将UnityCG.cginc导入,其实不写也会默认导入的</span>
+</span></span></code></pre></div><p>顶点函数和片元函数基本都会命名成以上形式,这样命名很直观,pragma和include编译指令学过C语言都知道其实含义是类似的,UnityObjctToClipPos接口和下面语义是相同的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>    mul(UNITY_MATRIX_MVP,v);
+</span></span></code></pre></div><p>对于这个变换矩阵不知道具体含义的,可以去看看本站的UnityShader运算,意思就是将模型空间上的顶点转换到剪裁空间的顶点,之后就是投影到二维的屏幕,当然不使用接口直接写成mul(UNITY_MATRIX_MVP,v)也是可以的,只不过5.6版本以上会强制转换成UnityObjectToClipPos,Unity还是很贴心的嘛。有些伙伴可能会有疑问：老子就不转换会怎么样？各位可以尝试一下return v会出现什么效果,圆形会变成椭圆形的(球体在摄像机剪裁空间之内,就会居中显示椭圆形)。
+<img src="/img/post/Shader/simple/exp1.jpg" alt="exp1">
+POSITION和SV_POSITION都是CG/HLSL中的语义,它们是不可省略,POSITION表示Unity输入是模型空间上的坐标,SV_POSITION表示Unity输出是剪裁空间中的坐标。接下来就是片元函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>    fiexd4 <span style="color:#a6e22e">frag</span>() : SV_Target{
+</span></span><span style="display:flex;"><span>    	<span style="color:#66d9ef">return</span> fixed4(1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这个片元函数没有输入,它的输出是一个fixed4类型的变量,并且使用了SV_Target语义也是HLSL中的系统语义,它等同于告诉渲染器,把用户输出颜色存储到渲染目标(render target)中,这里将输出到默认的帧缓存中,片元着色器中的代码很简单,返回表示白色的fixed4类型变量,片元着色器输出的颜色每个分量范围在[0,1],其中(0,0,0)表示黑色,而(1,1,1)表示白色,可以对应调式这些值改变出任意颜色(r/256,b/256,g/256)。</p>
+<h2 id="2模型数据来自">2.模型数据来自？</h2>
+<p>从上面例子可以看到使用POSITION语义可以得到模型顶点位置,那么想要更多模型数据怎么办呢？比如想要得到模型上每个顶点的纹理坐标和法线方向。这个要求其实很常见的,使用纹理坐标来访问纹理,而法线可用于计算光照。因此需要为顶点着色器定义新的输入参数,这个输入参数不再是简单的数据类型,而是一个结构体。修改以后代码如下所示:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/SimpleShader&#34;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SubShader{
+</span></span><span style="display:flex;"><span>        Pass{
+</span></span><span style="display:flex;"><span>            CGPROGRAM
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//使用vert函数和frag函数  </span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//使用结构体来定义顶点着色器的输入</span>
+</span></span><span style="display:flex;"><span>            struct a2v {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// POSITION语义告诉Unity,用于模型空间的顶点坐标填充vertex变量</span>
+</span></span><span style="display:flex;"><span>            float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// NORMAL语义告诉Unity,用模型空间按的法线方向填充normal变量</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> normal : NORMAL;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//TEXCOORD0语义告诉Unity，用模型的第一套纹理坐标填充texcoord变量</span>
+</span></span><span style="display:flex;"><span>            float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            float4 <span style="color:#a6e22e">vert</span>(a2v v) : SV_POSITION{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 <span style="color:#a6e22e">frag</span>() : SV_Target{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> fixed4(1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ENDCG
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在上面声明了新的结构体a2v,它包含了顶点着色器需要的模型数据。在a2v的定义中,用到了更多Unity支持的语义,如NORMAL和TEXCOORD0,当它们作为顶点着色器的输入时都有特定含义的,因为Unity会根据这些语义来填充这个结构体。对于顶点着色器的输出。Unity的支持的语义有:POSITION,TANGENT,NORMAL,TEXCOORD0,TEXCOORD1,TEXCOORD2,TEXCOORD3,COLOR等。为了创建自定义结构体,必须使用如下格式来定义：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>struct StructName{
+</span></span><span style="display:flex;"><span>	Type Name <span style="color:#960050;background-color:#1e0010">：</span> Semantic;
+</span></span><span style="display:flex;"><span>	Tytpe Name <span style="color:#960050;background-color:#1e0010">：</span> Semantic;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>命名成a2v,a表示应用,v表示顶点着色器,a2v就是从应用阶段传递到顶点着色器中,至于填充到POSITION、TANGENT、NORMAL这些语义中的数据究竟是从那里来的呢？在Unity中,它们是由使用材质的Mesh Render组件提供的。在每次调用DrawCall时,Mesh Render组件会把它负责渲染的模型数据发送给Unity Shader,模型通常包含一组三角面片,每个三角面片由3个顶点构成,而每个顶点又包含着了一些数据,例如顶点位置、法线、切线、纹理坐标、顶点颜色等,通过上面方法,就可以在顶点着色器中访问顶点的这些模型数据。</p>
+<h2 id="3顶点着色器和片元着色器通信">3.顶点着色器和片元着色器通信</h2>
+<p>在实践中,往往希望从顶点着色器输出一些数据到片元着色器,例如把模型的法线、纹理坐标等传递给片元着色器。这就涉及到顶点着色器和片元着色器之间的通信。为此需要定义出新的结构体。修改后的代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/SimpleShader&#34;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SubShader{
+</span></span><span style="display:flex;"><span>        Pass{
+</span></span><span style="display:flex;"><span>            CGPROGRAM
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//使用vert函数和frag函数  </span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//使用结构体来定义顶点着色器的输入</span>
+</span></span><span style="display:flex;"><span>            struct a2v {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// POSITION语义告诉Unity,用于模型空间的顶点坐标填充vertex变量</span>
+</span></span><span style="display:flex;"><span>                float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// NORMAL语义告诉Unity,用模型空间按的法线方向填充normal变量</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">float</span> normal : NORMAL;
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">//TEXCOORD0语义告诉Unity，用模型的第一套纹理坐标填充texcoord变量</span>
+</span></span><span style="display:flex;"><span>                float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            struct v2f {
+</span></span><span style="display:flex;"><span>                float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>                fixed3 color : COLOR0;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            v2f <span style="color:#a6e22e">vert</span>(a2v v){
+</span></span><span style="display:flex;"><span>                v2f o;
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> v.<span style="color:#a6e22e">normal</span> <span style="color:#f92672">*</span> 0.<span style="color:#a6e22e">5</span> <span style="color:#f92672">+</span> fixed3(0.<span style="color:#a6e22e">9</span>, 0.<span style="color:#a6e22e">1</span>, 0.<span style="color:#a6e22e">5</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 <span style="color:#a6e22e">frag</span>(v2f o) : SV_Target{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> fixed4(o.<span style="color:#a6e22e">color</span>,0.<span style="color:#a6e22e">8</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ENDCG
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里定义的v2f表示用于在顶点着色器和片元着色器之间传递信息的,同样的,v2f中也需要指定每个变量的语义,在本例中(这里的v2f指定了SV_POSITION和COLOR0语义),在顶点着色器必须包含的语义是SV_POSITION,否则渲染器将无法得到剪裁空间中的顶点坐标,也无法把顶点坐标渲染到屏幕上。CLOLR0语义中的数据则可以由用户自行定义的,但一般都是存储颜色,例如逐顶点的漫反射颜色或逐顶点的高光反射颜色。类似语义还有COLOR1等。最后需要注意的是:顶点着色器是逐顶点调用,片元着色器是逐片元调用。片元着色器中的输入实际上是把顶点着色器的输出进行插值后得到的结果。</p>
+<h2 id="解决疑问">解决疑问</h2>
+<ul>
+<li>模型空间直接投影为什么椭圆？<br>
+直接使用模型空间进行屏幕投影,会发现任何模型都会居中变扁。这里分析一下为什么会出现这种效果,首先模型空间基本上是模型的重心坐标系,导致不进行转换的模型顶点必然是居中的,其实说白了这个效果其实就是模型放在相机近剪裁面的原点,然后横向拉伸。</li>
+<li>片元、顶点着色器关联方式<br>
+了解渲染流水线的,都知道顶点着色器是在片元着色器之前的,所以顶点着色器返回的数据就是片元着色器可以获取到的数据(顶点着色器返回的必须包含剪裁后的坐标空间),顶点着色器返回数据以后,可以选择顶点着色器返回的数据输入,也可以选择不填写任何东西。</li>
+</ul>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

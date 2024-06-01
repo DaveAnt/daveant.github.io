@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader透明效果-扩展篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%b7%b1%e5%ba%a6%e5%86%99%e5%85%a5%e7%9a%84%e5%8d%8a%e9%80%8f%e6%98%8e">
+				                            1.深度写入的半透明
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%8f%8c%e9%9d%a2%e6%b8%b2%e6%9f%93%e7%9a%84%e9%80%8f%e6%98%8e%e6%95%88%e6%9e%9c">
+				                            2.双面渲染的透明效果
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader透明效果-扩展篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader透明效果-扩展篇</h1>
+                <div class="stuff">
+                    <span>May 1, 2020</span>
+                    <span>字数 2685</span>
+                                  
+                    <span id="/posts/UnityShader透明效果-扩展篇/" class="leancloud_visitors" data-flag-title="UnityShader透明效果-扩展篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_16.jpg
+cover: https://pics.images.ac.cn/image/5eb552b8e3507.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说明原因了,所以这里就尝试几种解决方案。</p>
+</blockquote>
+<h2 id="1深度写入的半透明">1.深度写入的半透明</h2>
+<p>说过解决的方案就是分割Mesh,理论上Mesh分割的越细就可以解决这种情况,但有时是不切实际的,这时就需要重新打开深度写入,让模型可以像半透明物体一样进行淡入淡出。<br>
+解决方案：使用两个Pass来渲染模型,第一个Pass开启深度写,但不输出颜色,目的仅仅是把该模型的深度值写入深度缓冲中;第二个Pass开启深度写入,由于上个Pass得到了逐像素的正确深度信息,按照这个像素深度进行透明渲染。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Alpha Blending With ZWrite&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_MainTex (<span style="color:#e6db74">&#34;Main Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_AlphaScale (<span style="color:#e6db74">&#34;Alpha Scale&#34;</span>, Range(0, 1)) <span style="color:#f92672">=</span> 1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Tags {<span style="color:#e6db74">&#34;Queue&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Transparent&#34;</span> <span style="color:#e6db74">&#34;IgnoreProjector&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;True&#34;</span> <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Transparent&#34;</span>}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Extra pass that renders to depth buffer only</span>
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			ZWrite On
+</span></span><span style="display:flex;"><span>			ColorMask 0
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ZWrite Off
+</span></span><span style="display:flex;"><span>			Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			fixed _AlphaScale;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX(v.<span style="color:#a6e22e">texcoord</span>, _MainTex);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed4 texColor <span style="color:#f92672">=</span> tex2D(_MainTex, i.<span style="color:#a6e22e">uv</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> texColor.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse, texColor.<span style="color:#a6e22e">a</span> <span style="color:#f92672">*</span> _AlphaScale);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Transparent/VertexLit&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>得到的效果图如下所示：
+<img src="/img/post/Shader/transparent-ext/exp1.jpg" alt="exp1">
+使用了新的渲染命令(ColorMask),在ShaderLab中ColorMask用于设置颜色通道的写入掩饰码,语义如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>ColorMask RGB <span style="color:#f92672">|</span> A <span style="color:#f92672">|</span> 0 <span style="color:#f92672">|</span>其他任何R<span style="color:#960050;background-color:#1e0010">、</span>G<span style="color:#960050;background-color:#1e0010">、</span>B<span style="color:#960050;background-color:#1e0010">、</span>A的组合
+</span></span></code></pre></div><p>当ColorMask设为0时,意味着该Pass不写进入任何颜色通道,即不会输出任何颜色,下面给出ShaderLab支持的混合因子表格。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One</td>
+<td>因子为1。</td>
+</tr>
+<tr>
+<td>Zero</td>
+<td>因子为0。</td>
+</tr>
+<tr>
+<td>SrcColor</td>
+<td>因子为源颜色值,当用于混合RGB等式时,使用SrcColor的RGB分量作为混合因子;当用于混合A的混合等式,使用SrcColor的A分量作为混合因子。</td>
+</tr>
+<tr>
+<td>SrcAlpha</td>
+<td>因子为源颜色的透明度值(A通道)。</td>
+</tr>
+<tr>
+<td>DstColor</td>
+<td>因子为源颜色值。当用于混合RGB通道的等式时,使用DstColor的RGB分量作为混合因子;当用于混合A的混合等式时,使用结果A分量作为混合因子。</td>
+</tr>
+<tr>
+<td>DstAlpha</td>
+<td>因子为目标颜色的透明度值(A通道)。</td>
+</tr>
+<tr>
+<td>OneMinusSrcColor</td>
+<td>因子为(1-源颜色),当用于混合RGB等式时,使用DstColor的RGB分量作为混合因子;当用于混合A通道的混合等式时,使用DstColor的A分量作为混合因子。</td>
+</tr>
+<tr>
+<td>OneMinuseSrcAlpha</td>
+<td>因子为(1-源颜色的透明度值)。</td>
+</tr>
+<tr>
+<td>OneMinuseDstColor</td>
+<td>因子为(1-目标颜色)。当用于混合RGB等式,使用结果的RGB分量作为混合因子,当用于混合A的混合等式时,使用结果A分量作为混合因子。</td>
+</tr>
+<tr>
+<td>OneMinuseDstAlpha</td>
+<td>因子(1-目标颜色的透明度值)。</td>
+</tr>
+</tbody>
+</table>
+<p>如果想要在混合后,输出颜色的透明度值就是源颜色透明度,可以尝试以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Blend SrcAlpha OneMinusSrcAlpha, One Zero
+</span></span></code></pre></div><p>源颜色和目标颜色与对应混合因子相乘后,都是把它们结果加起来输出颜色的,其实可以使用ShaderLab的BlendOp BlendOperation其他命令。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add</td>
+<td>将混合后的源颜色和目的颜色相加。默认的混合操作。使用的混合等式是：</br><b>O<sub>rgb</sub>=SrcFactor*S<sub>rbg</sub>+DstFactor*D<sub>rgb</sub></br>O<sub>a</sub>=SrcFactorA*S<sub>a</sub>+DstFactorA*D<sub>a</sub></b></td>
+</tr>
+<tr>
+<td>Sub</td>
+<td>用混合后的源颜色减去混合后的目标颜色。使用混合等式：</br><b>O<sub>rgb</sub>=SrcFactor*S<sub>rbg</sub>-DstFactor*D<sub>rgb</sub></br>O<sub>a</sub>=SrcFactorA*S<sub>a</sub>-DstFactorA*D<sub>a</sub></b></td>
+</tr>
+<tr>
+<td>RevSub</td>
+<td>用混合后的源颜色减去混合后的目标颜色。使用混合等式：</br><b>O<sub>rgb</sub>=DstFactor*D<sub>rgb</sub>-SrcFactor*S<sub>rbg</sub></br>O<sub>a</sub>=DstFactorA*D<sub>a</sub>-SrcFactorA*S<sub>a</sub></b></td>
+</tr>
+<tr>
+<td>Min</td>
+<td>使用源颜色和目标颜色较小值,是逐分量比较的。使用的混合等式：</br><b>O<sub>rgb</sub>=(min(S<sub>r</sub>,D<sub>r</sub>),min(S<sub>b</sub>,D<sub>b</sub>),min(S<sub>g</sub>,D<sub>g</sub>),min(S<sub>a</sub>,D<sub>a</sub>))</b></td>
+</tr>
+<tr>
+<td>Max</td>
+<td>使用源颜色和目标颜色较大值,是逐分量比较的。使用的混合等式：</br><b>O<sub>rgb</sub>=(max(S<sub>r</sub>,D<sub>r</sub>),max(S<sub>b</sub>,D<sub>b</sub>),max(S<sub>g</sub>,D<sub>g</sub>),max(S<sub>a</sub>,D<sub>a</sub>))</b></td>
+</tr>
+</tbody>
+</table>
+<p>混合操作命令通常是与混合因子命令一起工作的,默认的混合操作种类是Add。需要注意：使用Max或Min混合操作时,混合因子实际上时不起任何作用的,它们仅会判断原始的源颜色和目的颜色之间比较结果。接下来就是常见的混合操作种类表格,Photoshop里有类似混合模式的效果。</p>
+<table>
+<thead>
+<tr>
+<th>混合操作种类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Blend SrcAlpha OneMinusSrcAlpha</td>
+<td>正常(normal),即透明度混合</td>
+</tr>
+<tr>
+<td>Blend DstColor Zero</td>
+<td>正片叠底(multiply),即相乘</td>
+</tr>
+<tr>
+<td>Blend DstColor SrcColor</td>
+<td>两倍相乘(2* multiply)</td>
+</tr>
+<tr>
+<td>BlendOp Min</td>
+<td>变暗(darken)</td>
+</tr>
+<tr>
+<td>BlendOp Max</td>
+<td>变亮(lightten)</td>
+</tr>
+<tr>
+<td>BlendOne One OneMinusDstColor</br>Blend OneMinusDstColor One</td>
+<td>滤色</td>
+</tr>
+<tr>
+<td>Blend One One</td>
+<td>线性减淡</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2双面渲染的透明效果">2.双面渲染的透明效果</h2>
+<p>实际上更加逼真的透明效果是可以看到模型内部整体和背面的,但上面实现的透明度效果无法出现这种效果,原因是默认情况下渲染引擎会剔除物体背面的渲染图元,而仅仅渲染了模型的正面,要得到很逼真的透明效果,必须执行CUll指令防止剔除,记住这样会导致图元成倍增加,因此有必须的需求时可以尝试双面渲染,不然从性能方面考虑建议不要这样做。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Cull Back<span style="color:#f92672">|</span>Front<span style="color:#f92672">|</span>Off
+</span></span></code></pre></div><ul>
+<li>透明度测试的双面渲染</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Alpha Test With Both Side&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_MainTex (<span style="color:#e6db74">&#34;Main Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_Cutoff (<span style="color:#e6db74">&#34;Alpha Cutoff&#34;</span>, Range(0, 1)) <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">5</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Tags {<span style="color:#e6db74">&#34;Queue&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;AlphaTest&#34;</span> <span style="color:#e6db74">&#34;IgnoreProjector&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;True&#34;</span> <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;TransparentCutout&#34;</span>}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>			Cull Off	
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			fixed _Cutoff;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX(v.<span style="color:#a6e22e">texcoord</span>, _MainTex);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed4 texColor <span style="color:#f92672">=</span> tex2D(_MainTex, i.<span style="color:#a6e22e">uv</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				clip (texColor.<span style="color:#a6e22e">a</span> <span style="color:#f92672">-</span> _Cutoff);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> texColor.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Transparent/Cutout/VertexLit&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>得到的效果图如下：
+<img src="/img/post/Shader/transparent-ext/exp2.jpg" alt="exp2"></p>
+<ul>
+<li>透明度混合的双面渲染<br>
+透明度混合的双面渲染会更加复杂,自从关闭深度写入之后,一切混乱的开端就是开始了,因为无法保证同个物体的正面和背面图元按照顺序渲染。
+为此双面渲染的工作分成两个Pass,第一个Pass只渲染背面,第二个渲染正面,由于Unity会安装顺序去执行各个Pass,从而达到渲染顺序正确得到需求。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Alpha Blend With Both Side&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_MainTex (<span style="color:#e6db74">&#34;Main Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_AlphaScale (<span style="color:#e6db74">&#34;Alpha Scale&#34;</span>, Range(0, 1)) <span style="color:#f92672">=</span> 1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Tags {<span style="color:#e6db74">&#34;Queue&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Transparent&#34;</span> <span style="color:#e6db74">&#34;IgnoreProjector&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;True&#34;</span> <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Transparent&#34;</span>}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// First pass renders only back faces </span>
+</span></span><span style="display:flex;"><span>			Cull Front
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ZWrite Off
+</span></span><span style="display:flex;"><span>			Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			fixed _AlphaScale;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX(v.<span style="color:#a6e22e">texcoord</span>, _MainTex);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed4 texColor <span style="color:#f92672">=</span> tex2D(_MainTex, i.<span style="color:#a6e22e">uv</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> texColor.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse, texColor.<span style="color:#a6e22e">a</span> <span style="color:#f92672">*</span> _AlphaScale);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Second pass renders only front faces </span>
+</span></span><span style="display:flex;"><span>			Cull Back
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ZWrite Off
+</span></span><span style="display:flex;"><span>			Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			fixed _AlphaScale;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX(v.<span style="color:#a6e22e">texcoord</span>, _MainTex);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed4 texColor <span style="color:#f92672">=</span> tex2D(_MainTex, i.<span style="color:#a6e22e">uv</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> texColor.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse, texColor.<span style="color:#a6e22e">a</span> <span style="color:#f92672">*</span> _AlphaScale);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Transparent/VertexLit&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>得到的效果图如下：
+<img src="/img/post/Shader/transparent-ext/exp3.jpg" alt="exp3"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

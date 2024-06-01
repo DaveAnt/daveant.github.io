@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-ReferencePool初探篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%80%bc%e7%b1%bb%e5%9e%8b%e5%92%8c%e5%bc%95%e7%94%a8%e7%b1%bb%e5%9e%8b%e5%8c%ba%e5%88%ab">
+				                            1.值类型和引用类型区别
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-ReferencePool初探篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-ReferencePool初探篇</h1>
+                <div class="stuff">
+                    <span>March 26, 2020</span>
+                    <span>字数 1967</span>
+                                  
+                    <span id="/posts/Gameframework-ReferencePool初探篇/" class="leancloud_visitors" data-flag-title="Gameframework-ReferencePool初探篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_6.jpg
+cover: https://pics.images.ac.cn/image/5eb54dffd44ea.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>可能刚学编程的会不知道引用类型和值类型是什么意思？导致可能会不明白框架给出的引用池到底是什么用来干嘛的,为什么创建对象必须调用引用池给出的接口Acquire函数,才会对游戏性能有所优化。</p>
+</blockquote>
+<h2 id="1值类型和引用类型区别">1.值类型和引用类型区别</h2>
+<p>学习Gameframework的引用池之前,先要详细了解一下值类型和引用类型的概念,这里就和各位简单的介绍一下,值类型保存在栈上,引用类型保存在堆上。就这么多了,大家可以出门右转了（这样说好像有点过分了）,所以还是准备介绍清楚点,值类型的是int、char、float、struct,引用类型是string、class,值类型的性能比引用类型好很多,所以考虑性能方面的时候,并且不需要继承,偏向于数据的组合。我们就可以使用结构体去替换类的实现,可能大家会思考为什么值类型就比引用类型块？
+<img src="/img/post/Gameframework/referencePool/look1.jpg" alt="look1">
+因为值类型在栈上的,可以直接获取使用,而引用类型在栈上存了一个指向堆地址的变量,如果你要访问引用类型的变量时,它会先去获取到地址,通过这个地址去访问堆上的数据,给大家图解一下:
+<img src="/img/post/Gameframework/referencePool/exp1.png" alt="exp1">
+哇·咔咔,在下画的图简直不要太强,简简单单就解决了各位的疑惑（强行自我吹嘘一波）, C#其实可以靠以下代码去判断此对象到底是值类型还是引用类型,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(xxx.GetType().IsValueType)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.Write(<span style="color:#e6db74">&#34;值类型&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.Write(<span style="color:#e6db74">&#34;引用类型&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>还有值类型出作用域以后就会自动释放（其实不是释放,算是指针往下移,新数据直接往上覆盖的）,所以值类型是按照顺序去控制释放的,引用类型对象虽然也是保存在栈上,然后也是按照顺序释放的。但是指向的堆上的数据是靠GC去控制的,可以去参考一下<a href="https://blog.csdn.net/m0_37920739/article/details/103745310">垃圾回收机制</a>
+2.引用池讲解
+引用池设计出来的目的是防止堆上数据频繁的创建和释放,从而达到优化游戏的。一般情况下如果引用对象出作用域以后,栈上的地址就会被移除掉,但是堆上的占用的空间会等待C#的GC机制去控制释放,这里所谓的引用池子就是字典,Key是类Type,Value是引用类型队列和其他参数,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	<span style="color:#75715e">//作为引用池的字典</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> Dictionary&lt;Type, ReferenceCollection&gt; s_ReferenceCollections = <span style="color:#66d9ef">new</span> Dictionary&lt;Type, ReferenceCollection&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//字典的Value</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReferenceCollection</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Queue&lt;IReference&gt; m_References;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Type m_ReferenceType;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_UsingReferenceCount;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_AcquireReferenceCount;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_ReleaseReferenceCount;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_AddReferenceCount;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> m_RemoveReferenceCount;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> ReferenceCollection(Type referenceType)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        m_References = <span style="color:#66d9ef">new</span> Queue&lt;IReference&gt;();
+</span></span><span style="display:flex;"><span>	        m_ReferenceType = referenceType;
+</span></span><span style="display:flex;"><span>	        m_UsingReferenceCount = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	        m_AcquireReferenceCount = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	        m_ReleaseReferenceCount = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	        m_AddReferenceCount = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	        m_RemoveReferenceCount = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> Type ReferenceType
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_ReferenceType;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> UnusedReferenceCount
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_References.Count;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> UsingReferenceCount
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_UsingReferenceCount;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> AcquireReferenceCount
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_AcquireReferenceCount;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> ReleaseReferenceCount
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_ReleaseReferenceCount;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> AddReferenceCount
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_AddReferenceCount;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> RemoveReferenceCount
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_RemoveReferenceCount;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> T Acquire&lt;T&gt;() <span style="color:#66d9ef">where</span> T : class, IReference, <span style="color:#66d9ef">new</span>()
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span>(T) != m_ReferenceType)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Type is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	        m_UsingReferenceCount++;
+</span></span><span style="display:flex;"><span>	        m_AcquireReferenceCount++;
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">if</span> (m_References.Count &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                <span style="color:#66d9ef">return</span> (T)m_References.Dequeue();
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	        m_AddReferenceCount++;
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> T();
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> IReference Acquire()
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        m_UsingReferenceCount++;
+</span></span><span style="display:flex;"><span>	        m_AcquireReferenceCount++;
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">if</span> (m_References.Count &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                <span style="color:#66d9ef">return</span> m_References.Dequeue();
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	        m_AddReferenceCount++;
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">return</span> (IReference)Activator.CreateInstance(m_ReferenceType);
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Release(IReference reference)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        reference.Clear();
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">if</span> (m_EnableStrictCheck &amp;&amp; m_References.Contains(reference))
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;The reference has been released.&#34;</span>);
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	            m_References.Enqueue(reference);
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	        m_ReleaseReferenceCount++;
+</span></span><span style="display:flex;"><span>	        m_UsingReferenceCount--;
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Add&lt;T&gt;(<span style="color:#66d9ef">int</span> count) <span style="color:#66d9ef">where</span> T : class, IReference, <span style="color:#66d9ef">new</span>()
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span>(T) != m_ReferenceType)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(<span style="color:#e6db74">&#34;Type is invalid.&#34;</span>);
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            m_AddReferenceCount += count;
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">while</span> (count-- &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                m_References.Enqueue(<span style="color:#66d9ef">new</span> T());
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Add(<span style="color:#66d9ef">int</span> count)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            m_AddReferenceCount += count;
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">while</span> (count-- &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                m_References.Enqueue((IReference)Activator.CreateInstance(m_ReferenceType));
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Remove(<span style="color:#66d9ef">int</span> count)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">if</span> (count &gt; m_References.Count)
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                count = m_References.Count;
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	            m_RemoveReferenceCount += count;
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">while</span> (count-- &gt; <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	            {
+</span></span><span style="display:flex;"><span>	                m_References.Dequeue();
+</span></span><span style="display:flex;"><span>	            }
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RemoveAll()
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">lock</span> (m_References)
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            m_RemoveReferenceCount += m_References.Count;
+</span></span><span style="display:flex;"><span>	            m_References.Clear();
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>看到Value里的队列(Queue<IReference>),我们就知道会有限制了,要使用这个引用池组件的引用类型必须要继承IReference接口,然后才可以通过Acquire函数去获取对象,其实看到Acquire函数之后,我们就会知道限制的不单单是要继承IReference接口,还必须要是引用类型和类要包含无参构造函数,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> T Acquire&lt;T&gt;() <span style="color:#66d9ef">where</span> T : class, IReference, <span style="color:#66d9ef">new</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> GetReferenceCollection(<span style="color:#66d9ef">typeof</span>(T)).Acquire&lt;T&gt;();
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>各位如果很少用到这种写法,而不知具体什么意思的话,这里给大家整理出了一个表格,用来简述一下写法功能。</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>where T: struct</td>
+<td>此类型参数必须是值类型,除了Nullable类型的所有类型都可以。</td>
+</tr>
+<tr>
+<td>where T: class</td>
+<td>此类型参数必须是引用类型。</td>
+</tr>
+<tr>
+<td>where T: new()</td>
+<td>此类型参数必须有一个公有的无参构造函数。当和其它约束参数一起使用时,new()约束必须放在最后。</td>
+</tr>
+<tr>
+<td>where T:base</td>
+<td>此类型参数必须是或者继承自指定的基类。</td>
+</tr>
+<tr>
+<td>where T:interface</td>
+<td>此类型参数必须是或者实现了指定的接口。</td>
+</tr>
+<tr>
+<td>where T: U</td>
+<td>类型参数T必须是或者继承于类型参数。</td>
+</tr>
+</tbody>
+</table>
+<p>大概的意思就是通过函数获取引用类型时,如果没有这个引用类型将会去创建出这个引用类型,如果存在这个引用类型而且有多余的引用类型可使用,就返回保存在队列里的引用类型(只不过使用对象时需要重新初始化的),但是用着感觉就是限制太多了,又要继承指定接口,又要必须含有无参构造函数等等,作为一个尊崇着自由的单身狗,实在用着有点不喜欢,所以准备在引用池进阶篇里准备想办法调整这个模块,这里就不和各位扩展了。接下来看一下ReferencePoolComponent组件有什么参数暴露出来给用户,只发现了Enable Strict Check选项,如图所示:
+<img src="/img/post/Gameframework/referencePool/exp2.png" alt="exp2">
+这个值具体什么意思呢？查看对应的代码就可以知道了, 这个值主要是用来判断是否要检查引用类型是否规范的,如果引用类型异常会抛出异常,一般建议发布正式版本时选择Always Disable选项,其他场合就把它一直开着方便查看报错,易于调式。
+<img src="/img/post/Gameframework/referencePool/look2.png" alt="look2"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Sound%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>观察者模式 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%be%88%e4%b9%85%e4%bb%a5%e5%89%8d%e7%9a%84%e6%b6%88%e6%81%af%e7%9b%91%e5%90%ac%e6%96%b9%e6%a1%88">
+				                            1.很久以前的消息监听方案
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f%e9%87%8d%e6%9e%84%e6%b6%88%e6%81%af%e6%a8%a1%e5%9d%97">
+				                            2.观察者模式重构消息模块
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%ad%97%e5%85%b8%e7%9a%84value%e6%94%b9%e6%88%90%e5%a7%94%e6%89%98">
+				                            3.字典的value改成委托
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e6%80%bb%e7%bb%93">
+				                            总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f%e4%bc%98%e7%bc%ba%e7%82%b9">
+				                            1.观察者模式优缺点
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">
+				                            2.观察者模式使用场景
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        观察者模式</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                观察者模式</h1>
+                <div class="stuff">
+                    <span>March 6, 2020</span>
+                    <span>字数 3274</span>
+                                  
+                    <span id="/posts/观察者模式/" class="leancloud_visitors" data-flag-title="观察者模式">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/DesignPattern/wallhaven_6.jpg
+cover: https://pics.images.ac.cn/image/5eb5199d92c4a.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>这篇文章讲述消息监听方案的发展史,来阐述观察者模式的优点。本篇文章的故事纯属虚构,如有雷同只是巧合,前排拿好瓜子和板凳准备开始了。</p>
+</blockquote>
+<h2 id="1很久以前的消息监听方案">1.很久以前的消息监听方案</h2>
+<p>记得很久很久以前,一群程序员准备构建游戏网络模块的框架时,思考了良久,他们终于决定把全部监听消息的操作都集中在SocketManager类里,相当于使用中介者模式去实现消息分拨功能,然后他们满意的点点头开始写代码了,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> CsProtocol:<span style="color:#66d9ef">uint</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cs_login_result =  <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        cs_register_result = <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        cs_exchange_result = <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        cs_chat_result = <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>        cs_purchase_result = <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">GmMessage</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> CsProtocol Protocol;<span style="color:#75715e">//协议</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span> Code;<span style="color:#75715e">//状态码</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> oParam;<span style="color:#75715e">//扩展参数1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> tParam;<span style="color:#75715e">//扩展参数2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Binary;<span style="color:#75715e">//字节流</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoginUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.LoginUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.LoginUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveLoginSuccess(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;登陆模块成功消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveLoginFailed(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;登陆模块失败消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RegisterUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.RegisterUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.RegisterUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveRegisterSuccess(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;注册模块成功消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveRegisterFailed(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;注册模块失败消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameShopUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.GameShopUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.GameShopUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceivePurchaseSuccess(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;购买模块成功消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceivePurchaseFailed(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;购买模块失败消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChatRoomUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ChatRoomUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ChatRoomUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveChatResut(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;聊天模块消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExchangeGoodsUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ExchangeGoodsUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ExchangeGoodsUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveExchangeSuccess(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;兑换模块成功消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveExchangeFailed(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;兑换模块失败消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Globe</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> LoginUIForm LoginUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> RegisterUIForm RegisterUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> GameShopUIForm GameShopUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ChatRoomUIForm ChatRoomUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ExchangeGoodsUIForm ExchangeGoodsUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SocketManager</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> SocketManager instance = <span style="color:#66d9ef">new</span> SocketManager();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)<span style="color:#75715e">//消息监听主入口</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (gmMessage.Protocol)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CsProtocol.cs_chat_result:
+</span></span><span style="display:flex;"><span>                    Globe.ChatRoomUiForm?.ReceiveChatResut(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CsProtocol.cs_exchange_result:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(gmMessage.Code == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                        Globe.ExchangeGoodsUiForm?.ReceiveExchangeFailed(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(gmMessage.Code == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        Globe.ExchangeGoodsUiForm?.ReceiveExchangeSuccess(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CsProtocol.cs_login_result:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                        Globe.LoginUiForm?.ReceiveLoginFailed(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        Globe.LoginUiForm?.ReceiveLoginSuccess(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CsProtocol.cs_purchase_result:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                        Globe.GameShopUiForm?.ReceivePurchaseFailed(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        Globe.GameShopUiForm?.ReceivePurchaseSuccess(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CsProtocol.cs_register_result:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                        Globe.RegisterUiForm?.ReceiveRegisterFailed(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        Globe.RegisterUiForm?.ReceiveRegisterSuccess(gmMessage);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>可是随着项目越来越大,消息管理器里代码越来越多,看上去越来越乱,而且每次有新的消息都要改动消息管理器。终于有个程序员实在看不下去了,他看到这里的代码就像大碗面一样的又长又宽,实在忍无可忍了。俗话说得好不在沉默中爆发就在沉默中灭亡。
+<img src="/img/post/DesignPattern/observer/look1.jpg" alt="look1">
+有些人忍着忍着一辈子就过去,很明显今天的主角不是这样的人。于是乎,他怀着雄心壮志准备把这里的代码换个设计模式,想到使用观察者模式将消息分拨改成消息监听的方式。</p>
+<h2 id="2观察者模式重构消息模块">2.观察者模式重构消息模块</h2>
+<p>准备将消息协议当作Key,Value是具有接受消息功能的对象,这样字典的key-value就思考清楚了,想要监听协议时就去注册什么协议,他心里美滋滋的开始写起了代码,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> CsProtocol:<span style="color:#66d9ef">uint</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cs_login_result =  <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        cs_register_result = <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        cs_exchange_result = <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        cs_chat_result = <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>        cs_purchase_result = <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">GmMessage</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> CsProtocol Protocol;<span style="color:#75715e">//协议</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span> Code;<span style="color:#75715e">//状态码</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> oParam;<span style="color:#75715e">//扩展参数1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> tParam;<span style="color:#75715e">//扩展参数2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Binary;<span style="color:#75715e">//字节流</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">INetModule</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoginUIForm</span> : INetModule, UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.LoginUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_login_result,<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.LoginUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_login_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)<span style="color:#75715e">//失败</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;登陆失败&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)<span style="color:#75715e">//成功</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;登陆成功&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RegisterUIForm</span> : INetModule, UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.RegisterUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_register_result,<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.RegisterUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_register_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)<span style="color:#75715e">//失败</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;注册失败&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)<span style="color:#75715e">//成功</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;注册成功&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameShopUIForm</span> : INetModule, UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.GameShopUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_purchase_result,<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.GameShopUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_purchase_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)<span style="color:#75715e">//失败</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;购买失败&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)<span style="color:#75715e">//成功</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;购买成功&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChatRoomUIForm</span> : INetModule, UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ChatRoomUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_chat_result, <span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ChatRoomUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_chat_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;聊天消息显示&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExchangeGoodsUIForm</span> : INetModule, UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ExchangeGoodsUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_exchange_result,<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ExchangeGoodsUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_exchange_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">0</span>)<span style="color:#75715e">//失败</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;兑换失败&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (gmMessage.Code == <span style="color:#ae81ff">1</span>)<span style="color:#75715e">//成功</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;兑换成功&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Globe</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> LoginUIForm LoginUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> RegisterUIForm RegisterUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> GameShopUIForm GameShopUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ChatRoomUIForm ChatRoomUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ExchangeGoodsUIForm ExchangeGoodsUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SocketManager</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> SocketManager instance = <span style="color:#66d9ef">new</span> SocketManager();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Dictionary&lt;CsProtocol,INetModule&gt; MessageProcessor 
+</span></span><span style="display:flex;"><span>                                         = <span style="color:#66d9ef">new</span> Dictionary&lt;CsProtocol, INetModule&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)<span style="color:#75715e">//消息监听主入口</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                INetModule netModule = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(MessageProcessor.TryGetValue(gmMessage.Protocol, <span style="color:#66d9ef">out</span> netModule))
+</span></span><span style="display:flex;"><span>                    netModule.ReceiveMessage(gmMessage);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> (Exception e)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(e);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> AddListener(CsProtocol csProtocol,INetModule netModule)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(!MessageProcessor.ContainsKey(csProtocol))
+</span></span><span style="display:flex;"><span>                MessageProcessor.Add(csProtocol,netModule);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;已经注册相关协议,请勿重复&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RemoveListener(CsProtocol csProtocol)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!MessageProcessor.Remove(csProtocol))
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;移除失败,没有存在此协议&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>写完以后,大家刚开始用着还是挺开心,SocketManager里的代码也简单清晰了很多,所以项目组的人都夸他写的这个很棒,但是有一个程序员开始反驳他了,说他连这个天才的设计都可以想到为何不把value改成委托岂不是美哉？他仔细思考了一下,确实说的很有道理啊,为什么我不把字典的value改成委托。于是乎,他又开始重构代码。</p>
+<h2 id="3字典的value改成委托">3.字典的value改成委托</h2>
+<p>他思考了一下,同事说的这个方案确实优秀,不用每个需要接受消息的类去继承INetModule接口,并且接受消息的函数可以随意命名,虽然只是小小的改动,好处确实多多。于是他又又开始调整代码,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> CsProtocol : <span style="color:#66d9ef">uint</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cs_login_result = <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        cs_register_result = <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        cs_exchange_result = <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        cs_chat_result = <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>        cs_purchase_result = <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">GmMessage</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> CsProtocol Protocol;<span style="color:#75715e">//协议</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span> Code;<span style="color:#75715e">//状态码</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> oParam;<span style="color:#75715e">//扩展参数1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">uint</span> tParam;<span style="color:#75715e">//扩展参数2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Binary;<span style="color:#75715e">//字节流</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoginUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.LoginUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_login_result,ReceiveLoginResult);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.LoginUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_login_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveLoginResult(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;登陆模块消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RegisterUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.RegisterUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_register_result,ReceiveRegisterResult);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.RegisterUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_register_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveRegisterResult(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;注册模块消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GameShopUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.GameShopUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_purchase_result,ReceivePurchaseResult);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.GameShopUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_purchase_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceivePurchaseResult(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;购买模块消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChatRoomUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ChatRoomUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_chat_result,ReceiveChatResut);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ChatRoomUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_chat_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveChatResut(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;聊天模块消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExchangeGoodsUIForm</span> : UIForm
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> Awake()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ExchangeGoodsUiForm = <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.AddListener(CsProtocol.cs_exchange_result,ReceiveExchangeResult);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Globe.ExchangeGoodsUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            SocketManager.instance.RemoveListener(CsProtocol.cs_exchange_result);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveExchangeResult(GmMessage gmMessage)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;兑换模块消息&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Globe</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> LoginUIForm LoginUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> RegisterUIForm RegisterUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> GameShopUIForm GameShopUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ChatRoomUIForm ChatRoomUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ExchangeGoodsUIForm ExchangeGoodsUiForm = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SocketManager</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> SocketManager instance = <span style="color:#66d9ef">new</span> SocketManager();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Dictionary&lt;CsProtocol,Action&lt;GmMessage&gt;&gt; MessageProcessor 
+</span></span><span style="display:flex;"><span>                                    = <span style="color:#66d9ef">new</span> Dictionary&lt;CsProtocol, Action&lt;GmMessage&gt;&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ReceiveMessage(GmMessage gmMessage)<span style="color:#75715e">//消息监听主入口</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Action&lt;GmMessage&gt; netFun = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(MessageProcessor.TryGetValue(gmMessage.Protocol, <span style="color:#66d9ef">out</span> netFun))
+</span></span><span style="display:flex;"><span>                    netFun?.Invoke(gmMessage);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> (Exception e)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Console.WriteLine(e);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> AddListener(CsProtocol csProtocol, Action&lt;GmMessage&gt; netFun)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(!MessageProcessor.ContainsKey(csProtocol))
+</span></span><span style="display:flex;"><span>                MessageProcessor.Add(csProtocol, netFun);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;已经注册相关协议,请勿重复&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RemoveListener(CsProtocol csProtocol)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!MessageProcessor.Remove(csProtocol))
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;移除失败,没有存在此协议&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>到这里就是最佳的消息监听的方案了。此程序员内心os:我简直是一个天才可以想到这种设计方式去实现消息监听,升职加薪、迎娶白富美岂不是指日可待🧐。</p>
+<h2 id="总结">总结</h2>
+<h2 id="1观察者模式优缺点">1.观察者模式优缺点</h2>
+<p>优点:1、可以减少通知类过于庞大,建立了一套触发机制。 2、观察者模式支持广播通讯,被观察者会向所有的注册过的观察者发出通知。<br>
+缺点:1、如果过多注册被观察对象,可能导致性能问题(因为多了字典的查询或者是循环)。2、如果被观察者之间有循环依赖的话,被观察者会触发它们之间的循环调用,导致系统崩溃。</p>
+<h2 id="2观察者模式使用场景">2.观察者模式使用场景</h2>
+<p>1.网络模块开发时的消息监听方案<br>
+2.玩家的游戏人物状态更新时,需要通知其他客户端玩家同步更新。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-UI%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            迭代器模式</a>
+                            <p>前言 C#中数据结构都实现了迭代器的功能,具体是如何实现的,接下来就由此篇文章去介绍一下C#是如何实现...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="迭代器模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_24.jpg" alt="迭代器模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            代理模式</a>
+                            <p>前言 代理模式主要是用来对目标对象访问权限的控制,比如游戏商城里购买道具时,通过代理类去判断玩家是否可...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_4.jpg" alt="代理模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            单例模式</a>
+                            <p>前言 单例模式有二种,饿汉模式和懒汉模式。这里将去实现单例模式的这些例子,然后分析它们的优缺点和使用场...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_5.jpg" alt="单例模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            原型模式</a>
+                            <p>前言 原型模式是用于创建重复的对象,当类里有很多复杂参数的时候,我们可以避免使用拷贝(赋值)构造函数,...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_19.jpg" alt="原型模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            命令模式</a>
+                            <p>前言 命令模式可以实现操作的前进和回滚,经常使用P图软件的用户一定知道软件提供了对操作前进和回滚的功能...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_7.jpg" alt="命令模式">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

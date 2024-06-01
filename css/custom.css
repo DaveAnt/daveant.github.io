@@ -1,0 +1,113 @@
+
+#search-input-wrap.on {
+    display: inline-block;
+}
+#search-input-wrap {
+    display: none;
+    padding-left: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #999;
+}
+#search-input-icon {
+    color: #fff;
+    padding-right: .5em;
+    display: inline-block;
+    opacity: .7;
+}
+#search-input {
+    background: 0 0;
+    font-size: inherit;
+    font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+    outline: 0;
+    -webkit-appearance: none;
+}
+
+#vcomments textarea {
+    background: url(/img/inner/comment_bg.png) 100% 100% no-repeat;
+}
+
+.toc-container {
+    z-index: 9;
+    width: 200px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    transform: translateX(0);
+    right: calc((100% - 1200px)/ 2);
+    position: fixed !important;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.toc {
+    z-index: 9;
+    overflow-y: auto;
+    position: sticky;
+    top: 100px
+    width: 200px;
+    padding: 60px 0 60px 0;
+    background: url(../img/inner/shader.png) no-repeat;
+}
+
+@media (max-width:1200px) {
+    .toc-container {
+        display: none
+    }
+}
+
+.toc-list ul li a{
+    z-index: 10;
+    background: url(../img/inner/title.png)no-repeat;
+    background-position:3% 50% ;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 7px 15px 10px 15px;
+    width: 130px;
+    display: block;
+    text-decoration: none;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #E3E3E3;
+    border-bottom: 1px solid #E3E3E3;
+    border-top: 1px solid #E3E3E3;
+    box-shadow: 2px 2px 4px #ededed;
+    font-size:18px;
+}
+
+.toc-list ul li ul li a{
+    z-index: 10;
+    background: none;
+    padding: 3px 10px 3px 10px;
+    width: 130px;
+    display: none;
+    text-decoration: none;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #E3E3E3;
+    border-bottom: 2px solid #E3E3E3;
+    border-top: 2px solid #E3E3E3;
+    box-shadow: 2px 2px 4px #ededed;
+    font-size:14px;
+}
+
+.toc-list ul li a:hover {
+    width: 150px;
+    font-size:20px;
+}
+
+.toc-list ul li ul li a:hover {
+    width: 140px;
+    font-size:16px;
+}
+
+.toc-list ul li:hover ul li a{
+    display: block;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+*{
+    cursor: url(../mouse/miku_arrow.cur), auto !important;
+}

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader属性交互 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%9d%90%e8%b4%a8%e9%9d%a2%e6%9d%bf%e4%ba%a4%e4%ba%92">
+				                            1.材质面板交互
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2shaderlab%e5%b1%9e%e6%80%a7%e4%b8%8ecg%e5%8f%98%e9%87%8f%e7%9a%84%e5%8c%b9%e9%85%8d">
+				                            2.ShaderLab属性与CG变量的匹配
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3unity%e7%9a%84%e5%86%85%e7%bd%ae%e6%96%87%e4%bb%b6%e5%92%8c%e5%8f%98%e9%87%8f">
+				                            3.Unity的内置文件和变量
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader属性交互</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader属性交互</h1>
+                <div class="stuff">
+                    <span>April 19, 2020</span>
+                    <span>字数 1788</span>
+                                  
+                    <span id="/posts/UnityShader属性交互/" class="leancloud_visitors" data-flag-title="UnityShader属性交互">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_5.jpg
+cover: https://pics.images.ac.cn/image/5eb5523196b4d.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>看过<a href="https://daveant.gitee.io/posts/Hello_Shader/">Hello Shader</a>篇章的知道为了实现炫酷的Shader效果,靠基础的Shader知识完全不够用的,使用属性标签是实现炫酷Shader的必经之路。</p>
+</blockquote>
+<h2 id="1材质面板交互">1.材质面板交互</h2>
+<p>材质提供了可以方便调节Unity Shader中参数方式,通过这些参数可以随时调整材质的效果,而这些参数就需要写在Properties语义块中,假设需要显示一个颜色拾取器,从而直接控制模型在屏幕上显示的颜色,为此开始编写Shader来实现以上需求。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/SimpleShader&#34;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Properties{
+</span></span><span style="display:flex;"><span>        _Color(<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>,1.<span style="color:#a6e22e">0</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SubShader{
+</span></span><span style="display:flex;"><span>        Pass{
+</span></span><span style="display:flex;"><span>            CGPROGRAM
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//使用vert函数和frag函数  </span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag  
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//在CG代码中,需要定义与属性名称和类型都匹配的变量</span>
+</span></span><span style="display:flex;"><span>            fixed4 _Color;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//使用结构体来定义顶点着色器的输入</span>
+</span></span><span style="display:flex;"><span>            struct a2v {
+</span></span><span style="display:flex;"><span>                float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">float</span> normal : NORMAL;
+</span></span><span style="display:flex;"><span>                float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            struct v2f {
+</span></span><span style="display:flex;"><span>                float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>                fixed3 color : COLOR0;
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>            v2f <span style="color:#a6e22e">vert</span>(a2v v){
+</span></span><span style="display:flex;"><span>                v2f o;
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>                o.<span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> v.<span style="color:#a6e22e">normal</span> <span style="color:#f92672">*</span> 0.<span style="color:#a6e22e">5</span> <span style="color:#f92672">+</span> fixed3(0.<span style="color:#a6e22e">9</span>, 0.<span style="color:#a6e22e">3</span>, 0.<span style="color:#a6e22e">5</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 <span style="color:#a6e22e">frag</span>(v2f o) : SV_Target{
+</span></span><span style="display:flex;"><span>                fixed3 c <span style="color:#f92672">=</span> o.<span style="color:#a6e22e">color</span>;
+</span></span><span style="display:flex;"><span>                c <span style="color:#f92672">*=</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> fixed4(c,1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ENDCG
+</span></span><span style="display:flex;"><span>    	}
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>首先在Properties语义块中声明一个属性_Color,它的类型是Color,初始化的值(1.0,1.0,1.0,1.0)对应是白色,为了CG代码中可以访问到它,还需要在CG代码片段中提前定义新的变量,这个变量的Pro名称和类型必须与Properties语义块中的属性定义相匹配。</p>
+<h2 id="2shaderlab属性与cg变量的匹配">2.ShaderLab属性与CG变量的匹配</h2>
+<p>以上代码展示了Color属性与CG变量fixed的对应,Properties还有其他的属性,接下来给出对应的表格。</p>
+<table>
+<thead>
+<tr>
+<th>ShaderLab属性类型</th>
+<th>CG变量类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Color、Vector</td>
+<td>float4、half4、fixed4</td>
+</tr>
+<tr>
+<td>Range、Float</td>
+<td>float、half、fixed</td>
+</tr>
+<tr>
+<td>2D</td>
+<td>sampler2D</td>
+</tr>
+<tr>
+<td>Cube</td>
+<td>samplerCube</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>sampler3D</td>
+</tr>
+</tbody>
+</table>
+<p>有时在CG变量钱会有uniform关键字,例如以下代码段:</p>
+<pre tabindex="0"><code>uniform fixed4 _Color;
+</code></pre><p>uniform关键字是CG中修饰变量和参数的修饰词,它仅仅是用于提供关于该变量的初始值是如何指定和存储相关信息(和其他图像编程接口中的uniform关键字作用不太一样的),在UnityShader中可以省略此关键词。</p>
+<h2 id="3unity的内置文件和变量">3.Unity的内置文件和变量</h2>
+<p>在Unity中编写基本的顶点、片元着色器的过程。顶点、片元着色器的复杂之处在于很多事情需要亲自去实现,比如转换法线方向、处理光照、阴影等。为了避免开发者重复创造轮子,Unity提供了很多内置文件,这些文件包含很多提前定义的函数、变量和宏。包含文件类似于C++中头文件引入的方式。在Unity中文件后缀是.cginc,在编写Shader时可以通过#include把这些文件包含进来,这样就可以直接使用Unity定义好的有用的变量和帮助函数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>
+</span></span></code></pre></div><p>UnityCG这个文件编译时将自动包含进来,这些文件存在Unity安装目录下的Editor\Data\CGIncludes里,如果安装目录找不到这些.cginc文件可以去<a href="http://unity3d.com/cn/get-unity/download/archive">Unity官网</a>下载,如果想要学习内置着色器的实现或内置函数的实现时,都可以直接去查看这些文件内部实现。下面给出表格(编译时会自动包含进来的文件)。</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UnityCG.cginc</td>
+<td>包含最常用使用的帮助函数、宏、结构体等。</td>
+</tr>
+<tr>
+<td>UnityShaderVariables.cginc</td>
+<td>包含许多基本的内置全局函数,比如UNITY_MATRIX_MVP矩阵等。</td>
+</tr>
+<tr>
+<td>Lighting.cginc</td>
+<td>包含各种内置光照模型,编写Surface Shader的会自动包含进来。</td>
+</tr>
+<tr>
+<td>HLSL.Support.cginc</td>
+<td>包含很多用于跨平台编译的宏定义。</td>
+</tr>
+<tr>
+<td>UnityStandardBRDF.cginc</td>
+<td>对应不同的BRDF模型实现。</td>
+</tr>
+<tr>
+<td>UnityStandardCore.cginc</td>
+<td>实现基于物理系统的渲染效果。</td>
+</tr>
+</tbody>
+</table>
+<p>UnityCG.cginc是经常接触到的包含文件,下面整理经常用到的结构体和帮助函数表格。</p>
+<table>
+<thead>
+<tr>
+<th>结构体名称</th>
+<th>描述</th>
+<th>包含变量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appdata_base</td>
+<td>可用于顶点着色器的输入</td>
+<td>顶点位置、顶点法线、第一组纹理坐标</td>
+</tr>
+<tr>
+<td>appdata_tan</td>
+<td>可用于顶点着色器的输入</td>
+<td>顶点位置、顶点切线、顶点法线、第一组纹理坐标</td>
+</tr>
+<tr>
+<td>appdata_full</td>
+<td>可用于顶点着色器的输入</td>
+<td>顶点位置、顶点切线、顶点法线、四组以上纹理坐标</td>
+</tr>
+<tr>
+<td>appdata_img</td>
+<td>可用于顶点着色器的输入</td>
+<td>顶点位置、第一组纹理坐标</td>
+</tr>
+<tr>
+<td>v2f_img</td>
+<td>可用于顶点着色器的输出</td>
+<td>剪裁空间位置、纹理坐标</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float3 WorldSpaceViewDir(float4 v)</td>
+<td>输入模型空间中顶点位置,返回世界空间中从该点到摄像机的观察方向</td>
+</tr>
+<tr>
+<td>float3 ObjSpaceViewDir(float4 v)</td>
+<td>输入模型空间中的顶点位置,返回模型空间中从该点到摄像机的观察方向</td>
+</tr>
+<tr>
+<td>float3 WorldSpaceLightDir(float4 v)</td>
+<td>仅可用于前向渲染中,输入模型空间中的顶点位置,返回世界空间从该点到光源的光照方向,矢量没有被归一化</td>
+</tr>
+<tr>
+<td>float3 ObjSpaceLightDir(float4 v)</td>
+<td>仅可用于前向渲染中,输入模型空间中的顶点位置,返回模型空间从该点到光源的光照方向,矢量没有被归一化</td>
+</tr>
+<tr>
+<td>float3 UnityObjectToWorldNormal(float3 norm)</td>
+<td>把法线方向从模型空间转换到世界空间中</td>
+</tr>
+<tr>
+<td>float3 UnityObjectToWorldDir(in float3 norm)</td>
+<td>把方向矢量从模型空间转换到世界空间中</td>
+</tr>
+<tr>
+<td>float3 UnityWorldToObjectDir(float3 norm)</td>
+<td>把法线方向从世界空间转换到模型空间中</td>
+</tr>
+</tbody>
+</table>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

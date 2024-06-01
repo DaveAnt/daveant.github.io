@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>编码解码和协议分析 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e7%bc%96%e7%a0%81%e5%8f%91%e5%b1%95%e5%8f%b2">
+				                            1.编码发展史
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e7%bc%96%e7%a0%81%e8%a7%a3%e7%a0%81%e4%b9%b1%e7%a0%81">
+				                            2.编码解码、乱码
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%b8%b8%e8%a7%81%e7%bc%96%e7%a0%81%e8%a1%a8">
+				                            3.常见编码表
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#4%e9%80%9a%e4%bf%a1%e5%8d%8f%e8%ae%aeprotobuf">
+				                            4.通信协议(Protobuf)
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        编码解码和协议分析</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                编码解码和协议分析</h1>
+                <div class="stuff">
+                    <span>August 10, 2020</span>
+                    <span>字数 5055</span>
+                                  
+                    <span id="/posts/编码解码和协议分析/" class="leancloud_visitors" data-flag-title="编码解码和协议分析">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <h2 id="前言">前言</h2>
+<blockquote>
+<p>计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,ASCII编码只能表现256个字符,但是经过计算机不断发展,编码方式越来越多,于是编程时就需要注意不同环境的编码格式,防止乱码&hellip;</p>
+</blockquote>
+<h2 id="1编码发展史">1.编码发展史</h2>
+<p>开始计算机只在美国用。八位的字节可组合出256(2的8次方)种不同的状态。<b><font color="red">把其中编号从0开始的32种状态分别规定了特殊的用途</font></b>,又把所有的空格、标点符号、数字、大小写字母分别用连续的字节状态表示,一直编到了第127号,计算机就可以用不同字节来存储英语了。于是都把这方案叫做Ascii编码(美国信息互换标准代码)。当时世界上所有计算机都用ASCII编码来保存英文。<br>
+后来计算机发展越来越广泛,世界各国为了可以在计算机保存文字,各国决定采用127号之后的空位来表示这些新的字母、符号,还加入了很多画表格时需要用下到的横线、竖线、交叉等形状,一直把序号编到了最后状态255。<b><font color="red">从128到255这一页的字符集被称“扩展字符集”</font></b>。但是原有编号方式已经放不下更多的。
+等中国人得到计算机时,已经没有可以利用的字节状态来表示汉字,况且有6000多个常用汉字需要保存呢。于是国人就自主研发,把那些127号之后的奇异符号们直接取消掉。规定：<b><font color="red">一个小于127的字符的意义与原来相同,但两个大于127的字符连在一起时,就表示一个汉字,前面的一个字节(它称之为高字节)从0xA1用到0xF7,后面一个字节(低字节)从0xA1到0xFE</font></b>,这样就组合出大约7000多个简体汉字了。在这些编码里,还把数学符号、罗马希腊的字母、日文的假名们都编进去了,连在ASCII里本来就有的数字、标点、字母都统统重新编了两个字节长的编码,这就是常说的“全角”字符,而原来在127号以下的就叫“半角”字符。<br>
+中国人民看到这样很不错,于是把这种汉字方案叫做“GB2312”。GB2312是对ASCII的中文扩展。
+但中国汉字太多了,后来还是不够用,于是干脆不再要求低字节一定是127号之后的内码,<b><font color="red">只要第一个字节是大于127就固定表示一个汉字的开始,不管后面跟的是不是扩展字符集里的内容。结果扩展之后的编码方案被称为GBK标准</font></b>,GBK包括了GB2312的所有内容,同时又增加了近20000个新的汉字(包括繁体字)和符号。后来少数民族也要用电脑了,于是又加几千个新的少数民族的字,GBK扩成了GB18030。从此之后,中华民族的文化就可以在计算机时代中传承了。<br>
+当时各国都像中国这样搞出一套自己的编码标准,结果互相之间谁也不懂谁的编码,谁也不支持别人的编码。当时的中国人想让电脑显示汉字,就必须装上一个“汉字系统”,专门用来处理汉字的显示、输入的问题,装错了字符系统,显示就会乱码。这怎么办？就在这时,一个叫ISO(国际标谁化组织)的国际组织决定着手解决这个问题。他们采用的方法很简单：<b><font color="red">废了所有的地区性编码方案,重新搞一个包括了地球上所有文化、所有字母和符号的编码！他们打算叫它“UniversalMultiple-OctetCodedCharacterSet”,简称UCS,俗称“UNICODE”。</font></b>
+UNICODE开始制订时,计算机的存储器容量极大地发展了,空间再也不成为问题了。于是ISO就直接规定必须用两个字节,也就是16位来统一表示所有的字符,对于Ascii里的那些“半角”字符,UNICODE包持其原编码不变,只是将其长度由原来的8位扩展为16位,而其他文化和语言的字符则全部重新统一编码。由于“半角”英文符号只需要用到低8位,所以其高8位永远是0,因此这种大气的方案在保存英文文本时会多浪费一倍的空间。<br>
+<b><font color="red">但是UNICODE在制订时没有考虑与任何现有的编码方案保持兼容,使得GBK与UNICODE在汉字的内码编排上完全是不一样的,</font></b>没有简单的算术方法可以把文本内容从UNICODE编码和另种编码进快速行转换,所以必须通过查表来进行。UNICODE用两个字节来表示一个字符,总共可以组合出65535不同的字符,这大概已经可以覆盖世界上所有文化的符号。<br>
+UNICODE来到时,计算机网络也开始兴起,<b><font color="red">UNICODE如何在网络上传输也是必须考虑的问题,于是面向传输的UTF(UCSTransferFormat)标准出现了</font></b>,UTF8就是每次8位传输数据,而UTF16就是每次16位,只不过为了传输时的可靠性,<b><font color="red">从UNICODE到UTF时并不是直接的对应,而是要过一些算法和规则来转换。</font></b><br>
+看了这么多应该比较累了,学习过程得到一些反馈或者有意思的事情才会更加有动力,所以接下来展示个比较有意思的图片,自行研究是什么原因(现在微信表白都是喜欢你啊,什么一辈子啊,low不low。作为程序猿表白应该含蓄一点,有特色一点。)
+<img src="/img/post/Must/encode/exp1.png" alt="exp1"></p>
+<h2 id="2编码解码乱码">2.编码解码、乱码</h2>
+<p>由于以上讲述过的历史原因,就会出现小节2标题的概念(如果只有一种编码方式,谁会在乎什么编码解码呢,可能这两个词都不会出现,乱码就更加不可能了),所以这里就讲述下这三种概念具体含义。</p>
+<ul>
+<li>编码<br>
+<b>编码过程就是按照规定编码格式将字符用字节流存储。</b></li>
+<li>解码<br>
+<b>解码过程就是按照特定的编码表将字节流转换成字符。</b></li>
+<li>乱码<br>
+<b>乱码的原因是文本字符编码过程与字节流解码过程使用了不同的编码格式,往往归咎于解码格式选择错误,也就是说解码过程出现了问题。如 果本地计算器字符是utf-8编码然后进行请求,远程服务器使用GBK解码那肯定出现乱码。因为文字按照utf-8编码规则编成的0、1,按照GBK规则解码回来并不是原来 的文字。通常情况下文件读写保存、网络编码传输、数据库存取上。牵涉到字符都可能出现乱码,因为只要有字符就会有解码过程。</b></li>
+</ul>
+<p>不涉及服务器请求方面的(本地开发、单机游戏等等),基本不用注意编码解码的问题,如果涉及到Http、协议方面的请求,就需要统一编码格式(前个月做某个需求时候,博主就被坑的有点神志不清、眼神涣散,于是出现了今天这篇文章,从头到脚彻彻底底把这个基础知识搞得明明白白)。</p>
+<h2 id="3常见编码表">3.常见编码表</h2>
+<table>
+<thead>
+<tr>
+<th>编码格式</th>
+<th>原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISO8859-1</td>
+<td>ISO-8859-1仍然是单字节编码,它总共能表示256个字符。</td>
+</tr>
+<tr>
+<td>GB-2312</td>
+<td>2个扩展ASCII码的扩展区域(0xA0后)来表示汉字,英文字母和iso8859-1一致(兼容iso8859-1编码)。</td>
+</tr>
+<tr>
+<td>GBK</td>
+<td>全兼容GB2312,同时又增加了近20000个新的汉字(包括繁体字)和符号。</td>
+</tr>
+<tr>
+<td>Unicode</td>
+<td>最统一的编码,可以用来表示所有语言的字符,不兼容iso8859-1编码的,也不兼容任何编码。</td>
+</tr>
+<tr>
+<td>UTF-16</td>
+<td>UTF-16具体定义了Unicode字符在计算机中存取方法。UTF-16用两个字节来表示Unicode 转化格式。</td>
+</tr>
+<tr>
+<td>UTF-8</td>
+<td>UTF-16会增大网络传输的流量,UTF-8 采用了变长技术,每个编码区域有不同的字码长度。</td>
+</tr>
+</tbody>
+</table>
+<p>中文字符后四种编码格式都能处理,<b><font color="red">GB2312与GBK编码规则类似,但是GBK范围更大,它能处理所有汉字字符</font></b>,所以GB2312与GBK比较应该选择GBK。UTF-16与UTF-8都是处理Unicode编码,它们编码规则不太相同,<b><font color="red">相对来说UTF-16编码效率最高,字符到字节相互转换更简单,进行字符串操作也更好。</font></b>它适合在本地磁盘和内存之间使用,可以进行字符和字节之间快速切换,如Visual Studio 2010创建的工程默认内存编码就是采用UTF-16编码。但是<b><font color="red">它不适合在网络之间传输,因为网络传输容易损坏字节流</font></b>,一旦字节流损坏将很难恢复。相比较而言<b><font color="red">UTF-8更适合网络传输</font></b>,对ASCII字符采用单字节存储,另外单个字符损坏也不会影响后面其它字符,在编码效率上介于GBK和UTF-16之间,所以UTF-8在编码效率上和编码安全性上做了平衡,是理想的中文编码方式。
+<img src="/img/post/Must/encode/exp2.png" alt="exp2"></p>
+<h2 id="4通信协议protobuf">4.通信协议(Protobuf)</h2>
+<p>只要涉及到通信功能,就一定会涉及到编码解码概念,目前网络结构模式主要有两种[浏览器/服务器模式]和[客户端/服务器模式],BS
+模式统一了客户端(就是浏览器),将系统概念实现的核心部分集中到服务器上,简化了系统开发、维护和使用。CS模式是定制的客户端,服务器性能、安全普遍比BS的服务器好。</p>
+<ul>
+<li>1.浏览器/服务器(BS模式)<br>
+<font color="violet">请求URL地址、Http Header、Post表单提交</font><b><font color="red">默认编解码都是ISO-8859-1</font></b>。如果以上情况带有非ASCII字符的话,可以通过URIEncoding设置成UTF-8编码。<font color="violet">至于Http Body默认编码方式是服务器系统编码,默认解码方式是浏览器解码,</font><b><font color="red">通常会采用Utf-8</font></b>。如果编码方式采用GBK的话,可以通过Http Header的Content-Type告诉0浏览器解码方式是GBK(没有设置Content-Type就使用默认解码)。所以在CS模式去请求URL时也需要上述解编码的问题。</li>
+<li>2.客户端/服务器(CS模式)<br>
+游戏开发中,前端后端协议通常都会协商定制通信协议的格式,统一格式后用程序脚本对应前端和后端的编程语言,分别生成一份协议的编解码方案,便于协议的一致性,通常编码格式会采用utf-8。协议拟定的工具还是很多的,<b><font color="red">比较出名的是Google的Protobuf,ProtocolBuffer(PB)是google 的一种数据交换的格式,它独立于语言,独立于平台。</font></b></li>
+</ul>
+<p>ProtocolBuffer算是一种信源编码。所谓信源编码,就是将待传输的信源符号经过某种变换,转换成码流进行传输的这个变换过程。信源编码可分为两类：有损编码与无损编码,<b><font color="red">PB自然是属于无损编码</font></b>,在无损编码中,又分为定长编码和变长编码,定长编码就是一个符号变换后的码字的比特长度是固定的,<b><font color="red">比如ASCII、Utf-16都是定长编码,码字是8比特,16比特。变长编码则是将信源符号映射为不同的码字长度。</font></b>典型的是Huffman编码,PB也属于这一类。<br>
+从另一个角度来看,也可以看做一种协议。无论如何PB的信源就是整数、Float值、字符串等等程序设计中常见的变量,主要用于对象序列化。那么,如何记录一个对象的变量值呢？目前典型的格式有XML和JSON。这两种方式都有两个共同特点,即自描述特性以及文本描述。自描述是指变量名也包含在格式中。而PB则去除了这一条,同时采用二进制编码,通信底层的协议一般均为二进制,具有解析速度快、占用空间小的优点,缺点嘛,当然是缺乏可读性了。<br>
+PB认为每个整数编码后还是整数个字节,但字节个数可能不同。整数个字节简化了一些设计,并将每个字节拿出1比特来作为边界的标记。一个字节有8比特,拿出最高位的那个比特MSB(Most Significant Bit),这个比特用于记录这个字节是否是编码结果的最后一个字节。如果等于1,则表示还没有到最后一个字节,否则表示到了最后一个字节。<br>
+PB的设计者认为&quot;A&quot;，&ldquo;B&rdquo;，&ldquo;C&quot;这些变量名不应该包含在传输消息中,因为Test对象可能会被反复传输,每次传输都要传输&quot;A&rdquo;，&ldquo;B&rdquo;，&ldquo;C&quot;这些标记,但实际上这些标记是不会变的,只有值会变。所以顶多传一次就行了,那么PB的设计就换种思路,在通信双方都保持一份文档,记录了&quot;A&rdquo;，&ldquo;B&rdquo;，&ldquo;C&quot;的编号,比如：&ldquo;A&rdquo;，&ldquo;B&rdquo;，&ldquo;C&rdquo;，&ldquo;D&quot;的编号分别为1、2、3、4。于是在序列化时,只需要传输下面的信息：<br>
+1:&ldquo;46&rdquo;,2:&ldquo;13.45&rdquo;,3:&ldquo;aaaa&rdquo;,4:&ldquo;3.78&rdquo;<br>
+例子虽然看起来并不起眼,但是<b><font color="red">程序里面很多时候变量比较长,其实还是能节省很多空间的</font></b>,只要把这个信息传过去,对方本身保留了一份编号文档,于是可以反序列化了。<br>
+那么按照这种逻辑,1、2、3、4这些编号都没必要传了,直接按照某种约定顺序发过去就行了不是也可以？对方照着顺序解码即可。
+<b><font color="red">但PB还是保留了1、2、3、4这些编号信息,因为某些值可能为空,没必要传递过去,甚至在程序中,对象中很多变量值其实都是缺省值,或者无所谓的值</font></b>,只有一部分需要传递过去,这时只需要传递一部分即可。而1、2、3、4这些编号都不记录的话,就必须所有的都传递过去,反而并不节省空间。<br>
+最终PB采用了“编号+对应变量值”的这种形式来序列化。因为编号肯定是唯一的这种形式其实是Key-Value对,Key就是编号,Value就是编号对应变量的值。<br>
+编码结果就呈现为：<br>
+Key 1的编码&ndash;Key 2的编码&ndash;Value 3的编码&ndash;Value。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/ETServer%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            CSharp特性详解</a>
+                            <p>前言 CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_7.jpg" alt="CSharp特性详解">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            Socket基础知识</a>
+                            <p>前言 所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_5.jpg" alt="Socket基础知识">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            CSharp中的多线程</a>
+                            <p>1.相关概念 进程 是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_6.jpg" alt="CSharp中的多线程">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            坐标空间变换</a>
+                            <p>前言 这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_4.jpg" alt="坐标空间变换">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

@@ -1,0 +1,647 @@
+[
+    {
+        "uri": "/posts/Unity的Dots技术入门",
+        "title": "Unity的Dots技术入门",
+        "content": "对ET框架环境的搭建,主要是一步步教学如何部署使ET框架正常运行框架,数据库配置和处理一些相关报错。",
+        "tags": [
+            "Unity",
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/ETServer开发环境",
+        "title": "ETServer开发环境",
+        "content": "对ET框架环境的搭建,主要是一步步教学如何部署使ET框架正常运行框架,数据库配置和处理一些相关报错。",
+        "tags": [
+            "Unity",
+            "服务器"
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Event初探篇",
+        "title": "Gameframework-Event初探篇",
+        "content": "讲解GF框架的事件触发机制,浅显的分析了事件模块的优点。",
+        "tags": [
+            "Unity",
+            "客户端"
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Localization初探篇",
+        "title": "Gameframework-Localization初探篇",
+        "content": "讲解GF框架的本地化模块原理,本地化模块可以使游戏更好的走向国际化。",
+        "tags": [
+            "Unity",
+            "客户端"
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-ObjectPool初探篇",
+        "title": "Gameframework-ObjectPool初探篇",
+        "content": "讲解GF框架的对象池原理,对象池可以避免频繁的垃圾释放和创建,对游戏优化提供一定帮助。",
+        "tags": [
+            "Unity",
+            "客户端"
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Procedure初探篇",
+        "title": "Gameframework-Procedure初探篇",
+        "content": "讲解GF框架的流程原理,流程可以说使GF的一种概念,可以使代码更加的高内聚低耦合,程序便于维护。",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Procedure进阶篇",
+        "title": "Gameframework-Procedure进阶篇",
+        "content": "扩展GF框架的流程模块,重写了流程组件的检视面板,多加了一个流程锁的概念,便于流程的跳转。",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-ReferencePool初探篇",
+        "title": "Gameframework-ReferencePool初探篇",
+        "content": "可能刚学编程的会不知道引用类型和值类型是什么意思,导致可能会不明白框架给出的引用池到底是什么用来干嘛的,为什么创建对象必须调用引用池给出的接口Acquire函数,才会对游戏性能有所优化。",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Resource初探篇",
+        "title": "Gameframework-Resource初探篇",
+        "content": "Unity资源的热更新就是AssetBundle,游戏开发的初学者必经之路。而且Unity官方说明最好不要继续使用Resource文件夹加载资源,所以现在来看看GF框架的Resource模块到底写了什么,浅析一下此模块的原理。",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Sound初探篇",
+        "title": "Gameframework-Sound初探篇",
+        "content": "Sound模块是游戏开发必须的模块,这篇文章就带各位初次探索GF声音模块的实现原理。",
+        "tags": [
+            "Unity",
+            "客户端"  
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-UI初探篇",
+        "title": "Gameframework-UI初探篇",
+        "content": "UI初探主要讲解常用接口的使用,并且会给出UIManger的依赖图,更好的帮助大家理解。",
+        "tags": [
+            "Unity",
+            "客户端"  
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-UI进阶篇",
+        "title": "Gameframework-UI进阶篇",
+        "content": "UI进阶主要是分析GF框架的优点,和一些Bug的修复和优化,和博主之前写的UI框架进行对比。",
+        "tags": [
+            "Unity",
+            "客户端"  
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework开发环境搭建",
+        "title": "Gameframework开发环境搭建",
+        "content": "这个老司机就不用看了,新手如果对GF框架环境搭建有疑惑可以去look一下。",
+        "tags": [
+            "Unity",
+            "客户端"  
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework架构思路",
+        "title": "Gameframework架构思路",
+        "content": "分析GF框架的搭建原理,思考开发者当时整体架构时的思路、分析如此架构框架的好处。",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Scene初探篇",
+        "title": "Gameframework-Scene初探篇",
+        "content": "GF框架的Scene模块的原理分析,主要讲解SceneManager接口的使用和Scene模块的一些设计思路",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Config进阶篇",
+        "title": "Gameframework-Config进阶篇",
+        "content": "在初探篇里讲述了重写Config模块的思路,现在就来考虑重写Config模块方式,让它使用起来更加的方便吧!",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-Resource热更新",
+        "title": "Gameframework-Resource热更新",
+        "content": "使用GF框架实战资源热更新,模拟资源在云服务器上的热更新,主要步骤就是资源检查、资源下载、资源替换。",
+        "tags": [
+            "Unity",
+            "客户端",
+            "热更新" 
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework-TaskPool初探篇",
+        "title": "Gameframework-TaskPool初探篇",
+        "content": "GF框架的任务池模块还是比较复杂的,分析任务池实现的底层原理和使用任务池的优点。",
+        "tags": [
+            "Unity",
+            "客户端" 
+        ]
+    },
+    {
+        "uri": "/posts/MVC模式",
+        "title": "MVC模式",
+        "content": "MVC模式是通过中介模式实现的,提供了一种概念。视图层、控制层、模型数据层代码进行分层开发,可使项目工程结构清晰。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader复杂光照",
+        "title": "UnityShader复杂光照",
+        "content": "基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要掌握更复杂的光照渲染。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader渲染路径",
+        "title": "UnityShader渲染路径",
+        "content": "渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需要和光源打交道,需要为每个Pass指定它的渲染路径。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader透明效果-扩展篇",
+        "title": "UnityShader透明效果-扩展篇",
+        "content": "在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说明原因了,所以这里就尝试几种解决方案。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader透明效果",
+        "title": "UnityShader透明效果",
+        "content": "英雄联盟等游戏都有这个需求,人物只要蹲到草里透明的效果,这样具体如何实现透明效果呢？这里就来实战一下。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader遮罩纹理",
+        "title": "UnityShader遮罩纹理",
+        "content": "在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加强烈点,而某区域的高光弱点。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader渐变纹理-卡通渲染",
+        "title": "UnityShader渐变纹理-卡通渲染",
+        "content": "渐变纹理通常是用来控制漫反射的结果,也可以得到插画、卡通风格的渲染效果,使用这种技术可以保证物体的的轮廓线相比于之前使用传统漫反射光照更加明显。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader凹凸映射",
+        "title": "UnityShader凹凸映射",
+        "content": "在游戏世界中实现凹凸不平的地面。通常有两种方式,建模时对地面直接进行凹凸处理,或使用Shader让地面表现凹凸不平。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader基本纹理",
+        "title": "UnityShader基本纹理",
+        "content": "纹理最初目的就是使用图片来控制模型的外观,使用纹理映射技术,把一张图“黏”在模型表面。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/Shader入门教程",
+        "title": "Shader入门教程",
+        "content": "Shader基本语法和常识入门的说明,如果苦于UnityShader入门资料缺少,这个将会是很好的选择。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader基本运算",
+        "title": "UnityShader基本运算",
+        "content": "UnityShader的内置变量和函数,主要是偏向帮助手册形式的文章,用来查阅的CG的函数功能。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader调式",
+        "title": "UnityShader调式",
+        "content": "虽然Unity2019.3.1已经有可视化Shader,但老祖宗吃饭的家伙还是不能忘的,这里就来介绍一下3种调试Shader的方式。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader基本光照",
+        "title": "UnityShader基本光照",
+        "content": "一切物体都受到光照的影响,游戏要模拟出现实世界的光照,自然而然出现很多关于光照的理论和知识,当然理论为了性能考虑并不是完全和现实世界的同样。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader语义",
+        "title": "UnityShader语义",
+        "content": "Shader中的语义通俗来说就是可以让Shader知道从哪里读取数据,并把数据输出到哪里。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/Hello-Shader",
+        "title": "Hello-Shader",
+        "content": "这是最简单顶点、片元UnityShader,从来没有编写过UnityShader的小白来说将会是他们入门的首个UnityShader。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/UnityShader属性交互",
+        "title": "UnityShader属性交互",
+        "content": "使用Properties语义块实现材质面板出现可控参数,例子中通过设置材质面板的颜色拾取器来改变模型颜色。",
+        "tags": [
+            "Unity",
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/Unity打包网络被墙问题",
+        "title": "Unity打包网络被墙问题",
+        "content": "如果使用Unity打包Apk出现url无法获取到文件时,这篇文章将会提供给各位一定帮助的,希望各位耐心看完后,最终会解决问题的~",
+        "tags": [
+            "Unity"
+        ]
+    },
+    {
+        "uri": "/posts/Unity检视面板重写",
+        "title": "Unity检视面板重写",
+        "content": "通过重写检视面板可以实现模拟Unity已经封装好的组件的检视面板,并且还会实现检视面板如何自动识别新创建的脚本。",
+        "tags": [
+            "Unity",
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/Unity的Transform小知识点",
+        "title": "Unity的Transform小知识点",
+        "content": "如果已经很厉害的Unity开发人员就不要看,通过作者遇到的问题进行抛砖引玉,分析transform一些有意思的知识点。",
+        "tags": [
+            "Unity",
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/Unity多人聊天室",
+        "title": "Unity多人聊天室",
+        "content": "使用Socket(Tcp)编写多人聊天室的服务器端,Unity进行简单聊天界面的客户端搭建,可以进一步理解Socket和多线程相关知识。",
+        "tags": [
+            "Unity",
+            "客户端",
+            "服务器"
+        ]
+    },
+    {
+        "uri": "/posts/ScrollView循环滚动",
+        "title": "ScrollView循环滚动",
+        "content": "ScrollView存在大量Item,不可能全部实例化出来,Unity没有提供优化手段,需要自行想办法降低DrawCall。",
+        "tags": [
+            "Unity",
+            "客户端"
+        ]
+    },
+    {
+        "uri": "/posts/ScrollCircleMaker-v1.0教程",
+        "title": "ScrollCircleMaker-v1.0教程",
+        "content": "ScrollCircleMaker是博主开发1个多月的循环插件,可以解决你想到的任何滑动问题,内置三大辅助器。",
+        "tags": [
+            "Unity",
+            "客户端"
+        ]
+    },
+    {
+        "uri": "/posts/XLua开发环境搭建",
+        "title": "XLua开发环境搭建",
+        "content": "腾讯的热更新方案,已经有很多成功案例,这篇文章就简单介绍XLua环境搭建。",
+        "tags": [
+            "热更新",
+            "客户端"
+        ]
+    },
+    {
+        "uri": "/posts/中介者模式",
+        "title": "中介者模式",
+        "content": "主要解决复杂的对象引用和相互调用时,导致代码变得很乱,将调用方式集中在中介者里。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/享元模式",
+        "title": "享元模式",
+        "content": "可以将稳定不变的数据进行重复利用,避免数据的频繁创建和释放,也优化程序内存占有。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/代理模式",
+        "title": "代理模式",
+        "content": "抽离出安全、权限层,用来对目标对象访问权限进行控制。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/单例模式",
+        "title": "单例模式",
+        "content": "单例模式有两个模式,确保任何时候对象只有一个,避免重复创建和释放,应用于对象资源共享和相互通信的情况下。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/原型模式",
+        "title": "原型模式",
+        "content": "引用类型重复创建时,可以避免使用拷贝(赋值)构造函数,去复刻对象。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/命令模式",
+        "title": "命令模式",
+        "content": "将某些功能函数封装成对象,这样就可对函数功能进行保存。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/备忘录模式",
+        "title": "备忘录模式",
+        "content": "提供一种恢复状态的机制,可以方便地回到某个历史状态,用户不必关心数据保存方式。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/外观模式",
+        "title": "外观模式",
+        "content": "将多个对象组合调用提供出外观类接口,隐藏访问子功能的复杂性。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/工厂模式",
+        "title": "工厂模式",
+        "content": "工厂模式把创建对象集中,使矛盾集中在工厂类中,导致工厂类会高耦合。\r\n\r\n工厂方法是对象创建单独提供专属工厂类,符合开闭原则。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/建造模式",
+        "title": "建造模式",
+        "content": "工厂模式注重创建对象,而建造者模式注重的是对象接口的调用过程和组合,注重对象方法。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/桥接模式",
+        "title": "桥接模式",
+        "content": "桥接模式是关联关系,降低类之间的耦合,功能模块可以进行重复利用。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/模板方法模式",
+        "title": "模板方法模式",
+        "content": "此模式经常使用,封装不变部分,扩展可变部分,提取公共代码,便于维护和使用。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/状态模式",
+        "title": "状态模式",
+        "content": "减少分支和循环语句,实现了状态之间自动切换关系。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/空对象模式",
+        "title": "空对象模式",
+        "content": "空对象去取代空引用,主要目的是当数据是空引用时提供一种默认的处理方式。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/策略模式",
+        "title": "策略模式",
+        "content": "算法可以自由切换,和状态模式相比切换是可控的,状态模式是内控的。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/组合模式",
+        "title": "组合模式",
+        "content": "可以表达模块之间的层级关系,比如系统窗口或者文件夹的实现。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/装饰器模式",
+        "title": "装饰器模式",
+        "content": "动态给对象添加额外的职责,增加新的功能,用来修饰基本对象。",
+        "tags": [
+            "基础"
+        ]
+    },
+
+    {
+        "uri": "/posts/观察者模式",
+        "title": "观察者模式",
+        "content": "可以减少通知类过于庞大,建立了一套触发机制,并支持广播通讯。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/解释器模式",
+        "title": "解释器模式",
+        "content": "解释器模式相当于翻译官,一些固定语法构建出解释语句。可以实现对象转换成Json、Xml或者数据库的简单调用。​​​​​​",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/访问模式",
+        "title": "访问模式",
+        "content": "提供访问数据的方式,因数据不易变,访问数据方式易变的,将两者分离实现,代码更好的维护。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/责任链模式",
+        "title": "责任链模式",
+        "content": "责任链是让多个对象都有可能接收请求,将这些对象连接成一条链,并且沿着这条链把请求的数据传递下去,直到遇到递归弹栈的条件。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/过滤器模式",
+        "title": "过滤器模式",
+        "content": "对数据组按照一定条件进行筛选。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/迭代器模式",
+        "title": "迭代器模式",
+        "content": "迭代器模式支持以不同方式遍历聚合对象,使数据和遍历数据的职责进行分离。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/适配器模式",
+        "title": "适配器模式",
+        "content": "类适配器是针对适配目标是接口的情况下使用,缺省适配器是是为了弥补接口过大所犯下的过错。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/什么是DrawCall",
+        "title": "什么是DrawCall？",
+        "content": "游戏开发圈里的人一定听过优化游戏要降低DrawCall,这样到底什么是DrawCall呢？Unity中应该如何降低DrawCall,这里就来讲解一下关于DrawCall知识点。",
+        "tags": [
+            "渲染"
+        ]
+    },
+    {
+        "uri": "/posts/游戏中的数学",
+        "title": "游戏中的数学",
+        "content": "主要讲述向量和矩阵的各种计算在游戏中的含义,虽然公式可以不用记了,调用一下接口即可,但公式背后的数学含义还需要知道的。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/64位和32位程序的区别",
+        "title": "64位和32位程序的区别",
+        "content": "亲身经历讲述64位和32位程序的区别,以及程序开发时需要注意的一些问题。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/坐标空间变换",
+        "title": "坐标空间变换",
+        "content": "游戏引擎中避免不了坐标空间变换的使用,这篇文章来讲解为什么需要多种坐标空间和坐标空间变换矩阵的推导。",
+        "tags": [
+            "基础"
+        ]
+    },
+    {
+        "uri": "/posts/Gameframework_Config初探篇",
+        "title": "Gameframework_Config初探篇",
+        "content": "GF框架的配置模块,正常的游戏产品一般都不会把配置参数写死在代码中,这样会带来很多缺点,所以配置模块不可缺少。",
+        "tags": [
+            "Unity",
+            "客户端"  
+        ]
+    },
+    {
+        "uri": "/posts/Socket基础知识",
+        "title": "Socket基础知识",
+        "content": "Socket是网络开发必备的知识,在博主看来编程最浪漫三件事就是Socket、多线程、图形学。",
+        "tags": [
+            "基础" 
+        ]
+    },
+    {
+        "uri": "/posts/编码解码和协议分析",
+        "title": "编码解码和协议分析",
+        "content": "计算机通信、本地保存读取都会涉及到编码解码,由于编码史问题,存在很多编码格式,所以这里来掌握下编解码的概念吧!",
+        "tags": [
+            "基础",
+            "服务器"
+        ]
+    },
+    {
+        "uri": "/posts/CSharp特性详解",
+        "title": "CSharp特性详解",
+        "content": "Attribute可由用户自有定义的修饰符(Modifier),可以用来修饰各种需要被修饰的目标。可以对类、以及C#程序集中的成员进一步的描述。",
+        "tags": [
+            "基础" 
+        ]
+    },
+    {
+        "uri": "/posts/CSharp中的多线程",
+        "title": "CSharp中的多线程",
+        "content": "高级语言基本上封装了多种实现多线程的方式,这里简单总结C#中多线程实现方法,包括Thread、ThreadPool、Parallel和Task类。",
+        "tags": [
+            "基础" 
+        ]
+    },
+    {
+        "uri": "/posts/ETServer消息分拨机制",
+        "title": "ETServer消息分拨机制",
+        "content": "高级语言基本上封装了多种实现多线程的方式,这里简单总结C#中多线程实现方法,包括Thread、ThreadPool、Parallel和Task类。",
+        "tags": [
+             "Unity",
+             "服务器"
+        ]
+    }
+]

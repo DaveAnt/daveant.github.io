@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Socket基础知识 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1socket%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5">
+				                            1.Socket基本概念
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2socket%e9%93%be%e6%8e%a5%e6%b5%81%e7%a8%8b">
+				                            2.Socket链接流程
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3udpkcptcp%e4%bc%98%e7%bc%ba%e7%82%b9%e5%88%86%e6%9e%90">
+				                            3.UDP、KCP、TCP优缺点分析
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#4c%e5%b8%b8%e7%94%a8%e7%9a%84sokcet%e6%8e%a5%e5%8f%a3%e5%92%8c%e5%b1%9e%e6%80%a7">
+				                            4.C#常用的Sokcet接口和属性
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#5%e5%ae%9e%e6%88%98sokcet">
+				                            5.实战Sokcet
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Socket基础知识</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Socket基础知识</h1>
+                <div class="stuff">
+                    <span>May 4, 2020</span>
+                    <span>字数 2656</span>
+                                  
+                    <span id="/posts/Socket基础知识/" class="leancloud_visitors" data-flag-title="Socket基础知识">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Must/wallhaven_5.jpg
+cover: https://pics.images.ac.cn/image/5eb551d6e02ca.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字就是网络上进程通信的一端,提供了应用层进程利用网络协议交换数据的机制。</p>
+</blockquote>
+<h2 id="1socket基本概念">1.Socket基本概念</h2>
+<p>在Internet上有很多这样的主机,这些主机运行多个服务软件,同时提供几种不同服务。每种服务都会打开个Socket,并绑定到对应端口上(端口不能重复),不同的端口对应提供于不同的服务(应用程序),因此在网络协议中使用端口号识别主机上不同进程。例如:Http使用80端口,FTP使用21端口。<br>
+前人已经做了好多的事了,网络间通信也就简单了许多,但毕竟还是有挺多工作要做的。以前听到Socket编程,觉得比较高深的编程知识,但只要弄清Socket编程的工作原理,神秘的面纱也就揭开了。<br>
+<img src="/img/post/Must/socket/exp1.png" alt="exp1">
+通过上图得知Socket是应用层与协议族通信的软件抽象层,它是一组接口。在设计模式中的Socket其实是门面模式,它把复杂的协议族隐藏在Socket接口后,对开发者来说是一组简单的接口和属性。</p>
+<h2 id="2socket链接流程">2.Socket链接流程</h2>
+<p>简易的BS流程如下：</p>
+<ul>
+<li>1.建立连接,接受客户端连接。</li>
+<li>2.接受请求,从网络中读取HTTP请求报文。</li>
+<li>3.处理请求,访问资源。</li>
+<li>4.构建响应,创建带有Header的HTTP响应报文。</li>
+<li>5.发送响应,传给客户端。</li>
+</ul>
+<p>简易的CS流程如下：</p>
+<ul>
+<li>1.建立多线程连接请求。</li>
+<li>2.接受对应协议请求。</li>
+<li>3.处理对应协议请求。</li>
+<li>4.构建客户端请求响应。</li>
+<li>5.发送响应,传给客户端。</li>
+<li>6.客户端接收请求完成相关表现。</li>
+</ul>
+<p>服务器程序调用函数逻辑如下：</p>
+<ul>
+<li>Socket() 创建套接字</li>
+<li>Bind() 分配套接字地址</li>
+<li>Listen() 等待连接请求</li>
+<li>Accept() 允许连接请求</li>
+<li>Send()/Receive() 数据交换</li>
+<li>Close() 关闭连接</li>
+</ul>
+<p>客户端程序调用函数逻辑如下：</p>
+<ul>
+<li>Socket() 创建套接字</li>
+<li>Connect() 链接服务器</li>
+<li>Send()/Receive() 数据交换</li>
+<li>Close() 关闭连接</li>
+</ul>
+<p>接下来给出流程图,来深度理解链接过程吧。
+<img src="/img/post/Must/socket/exp2.png" alt="exp2">
+实际BS、CS架构设计比上图复杂很多,服务器起码会涉及到多线程和分布式。</p>
+<h2 id="3udpkcptcp优缺点分析">3.UDP、KCP、TCP优缺点分析</h2>
+<ul>
+<li>UDP报文没有可靠性保证、顺序保证和流量控制字段等,可靠性较差。但是正因为UDP协议的控制选项较少,在数据传输过程中延迟小、数据传输效率高,适合对可靠性要求不高的应用程序,或者可以保障可靠性的应用程序,那些即时战略游戏基本上都是UDP,比如王者荣耀、英雄联盟、守望先锋。</li>
+<li>TCP为了保证报文传输的可靠,就给每个包一个序号,同时序号也保证了传送到接收端实体的包的按序接收。然后接收端实体对已成功收到字节发回相应的确认(ACK);如果发送端实体在合理往返时延(RTT)内未收到确认,那么对应数据(假设丢失)将会被重传。</li>
+<li>KCP是快速可靠协议,能以比TCP浪费10%-20%的带宽的代价,换取平均延迟降低30%-40%,且最大延迟降低三倍的传输效果。纯算法实现,并不负责底层协议(如UDP)的收发,需要使用者自行定义下层数据包的发送方式,Callback方式提供给KCP。连时钟都需要外部传递进来,内部不会有任何系统调用。</li>
+</ul>
+<p>所以要保证TCP可靠性和UDP高效性,可以采用KCP开源方案来解决,<a href="https://github.com/slicol/KCP-Socket">相关开源地址</a>和<a href="http://gameinstitute.qq.com/lore/detail/10131">相关教程</a>,UDP和TCP相对是两个极端。<b><font color="red">TCP运行速度慢、效率低、占用系统资源多、易被攻击、不会丢包,而UDP恰恰相反。</font></b></p>
+<h2 id="4c常用的sokcet接口和属性">4.C#常用的Sokcet接口和属性</h2>
+<p>常用属性表格：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AddressFamily</td>
+<td>获取Socket的地址族</td>
+</tr>
+<tr>
+<td>Available</td>
+<td>获取已经从网络接收且可供读取的数据量</td>
+</tr>
+<tr>
+<td>Connected</td>
+<td>获取一个值,该值指示Socket是在上次Send还是Receive操作时连接到远程主机</td>
+</tr>
+<tr>
+<td>Handle</td>
+<td>获取Socket的操作系统句柄</td>
+</tr>
+<tr>
+<td>LocalEndPoint</td>
+<td>获取本地终结点</td>
+</tr>
+<tr>
+<td>ProtocolType</td>
+<td>获取Socket的协议类型</td>
+</tr>
+<tr>
+<td>RemoteEndPoint</td>
+<td>获取远程终结点</td>
+</tr>
+<tr>
+<td>SendTimeout</td>
+<td>接收数据(Send)超过的事件</td>
+</tr>
+<tr>
+<td>SendBufferSize</td>
+<td>指定Socket发送缓存区大小</td>
+</tr>
+<tr>
+<td>ReceiveTimeout</td>
+<td>接收数据(Receive)超过的事件</td>
+</tr>
+<tr>
+<td>ReceiveBufferSize</td>
+<td>指定Socket接收缓存区大小</td>
+</tr>
+<tr>
+<td>Ttl</td>
+<td>指定Socket发送协议(IP)数据包生存时间</td>
+</tr>
+</tbody>
+</table>
+<p>常用方法表格：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td>为新建连接创建新的Socket</td>
+</tr>
+<tr>
+<td>BeginAccept</td>
+<td>开始一个异步操作来接受一个传入的连接尝试</td>
+</tr>
+<tr>
+<td>BeginConnect</td>
+<td>开始一个对远程主机连接的异步请求</td>
+</tr>
+<tr>
+<td>BeginDisconnect</td>
+<td>开始异步请求从远程终结点断开连接</td>
+</tr>
+<tr>
+<td>BeginReceive</td>
+<td>开始从连接的Socket中异步接收数据</td>
+</tr>
+<tr>
+<td>BeginSend</td>
+<td>将数据异步发送到连接的Socket</td>
+</tr>
+<tr>
+<td>BeginSendFile</td>
+<td>将文件异步发送到连接的Socket对象</td>
+</tr>
+<tr>
+<td>BeginSendTo</td>
+<td>向特定远程主机异步发送数据</td>
+</tr>
+<tr>
+<td>Close</td>
+<td>关闭Socket连接并释放所有关联的资源</td>
+</tr>
+<tr>
+<td>Connect</td>
+<td>建立与远程主机的连接</td>
+</tr>
+<tr>
+<td>Disconnect</td>
+<td>关闭套接字连接并允许重用套接字</td>
+</tr>
+<tr>
+<td>EndAccept</td>
+<td>异步接受传入的连接尝试</td>
+</tr>
+<tr>
+<td>EndConnect</td>
+<td>结束挂起的异步连接请求</td>
+</tr>
+<tr>
+<td>EndDisconnect</td>
+<td>结束挂起的异步断开连接请求</td>
+</tr>
+<tr>
+<td>EndReceive</td>
+<td>结束挂起的异步读取</td>
+</tr>
+<tr>
+<td>EndSend</td>
+<td>结束挂起的异步发送</td>
+</tr>
+<tr>
+<td>EndSendFile</td>
+<td>结束文件的挂起异步发送</td>
+</tr>
+<tr>
+<td>EndSendTo</td>
+<td>结束挂起的、向指定位置进行的异步发送</td>
+</tr>
+<tr>
+<td>Listen</td>
+<td>将Socket置于侦听状态</td>
+</tr>
+<tr>
+<td>Receive</td>
+<td>接收来自绑定的Socket的数据</td>
+</tr>
+<tr>
+<td>Send</td>
+<td>将数据发送到连接的Socket</td>
+</tr>
+<tr>
+<td>SendFile</td>
+<td>将文件和可选数据异步发送到连接的Socket</td>
+</tr>
+<tr>
+<td>SendTo</td>
+<td>将数据发送到特定终结点</td>
+</tr>
+<tr>
+<td>Shutdown</td>
+<td>禁用某Socket上的发送和接收</td>
+</tr>
+<tr>
+<td>GetSocketOption</td>
+<td>返回Socket选项值</td>
+</tr>
+<tr>
+<td>SetSocketOption</td>
+<td>设置Socket选项值</td>
+</tr>
+<tr>
+<td>Poll</td>
+<td>确定Socket状态</td>
+</tr>
+<tr>
+<td>Select</td>
+<td>确定多个套接字状态</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5实战sokcet">5.实战Sokcet</h2>
+<p>最后尝试编写比较简单TCP的Socket案例工程,首先是客户端的完整代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Text;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.IO;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net.Sockets;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> SocketDemo
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>　<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span>
+</span></span><span style="display:flex;"><span>　{
+</span></span><span style="display:flex;"><span>　　<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>　　{
+</span></span><span style="display:flex;"><span>　　　<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>　　　{
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">int</span> port = <span style="color:#ae81ff">2000</span>;
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">string</span> host = <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>;
+</span></span><span style="display:flex;"><span>　　　　IPAddress ip = IPAddress.Parse(host);
+</span></span><span style="display:flex;"><span>　　　　IPEndPoint ipe = <span style="color:#66d9ef">new</span> IPEndPoint(ip, port);<span style="color:#75715e">//把ip和端口转化为IPEndPoint实例</span>
+</span></span><span style="display:flex;"><span>　　　　Socket c = <span style="color:#66d9ef">new</span> Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);<span style="color:#75715e">//创建一个Socket</span>
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;Conneting...&#34;</span>);
+</span></span><span style="display:flex;"><span>　　　　c.Connect(ipe);<span style="color:#75715e">//连接到服务器</span>
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">string</span> sendStr = <span style="color:#e6db74">&#34;hello!This is a socket test&#34;</span>;
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">byte</span>[] bs = Encoding.ASCII.GetBytes(sendStr);
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;Send Message&#34;</span>);
+</span></span><span style="display:flex;"><span>　　　　c.Send(bs, bs.Length, <span style="color:#ae81ff">0</span>);<span style="color:#75715e">//发送测试信息</span>
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">string</span> recvStr = <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">byte</span>[] recvBytes = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[<span style="color:#ae81ff">1024</span>];
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">int</span> bytes;
+</span></span><span style="display:flex;"><span>　　　　bytes = c.Receive(recvBytes, recvBytes.Length, <span style="color:#ae81ff">0</span>);<span style="color:#75715e">//从服务器端接受返回信息</span>
+</span></span><span style="display:flex;"><span>　　　　recvStr += Encoding.ASCII.GetString(recvBytes, <span style="color:#ae81ff">0</span>, bytes);
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;Client Get Message:{0}&#34;</span>, recvStr);<span style="color:#75715e">//显示服务器返回信息</span>
+</span></span><span style="display:flex;"><span>　　　　c.Close();
+</span></span><span style="display:flex;"><span>　　　}
+</span></span><span style="display:flex;"><span>　　　<span style="color:#66d9ef">catch</span> (ArgumentNullException e)
+</span></span><span style="display:flex;"><span>　　　{
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;ArgumentNullException: {0}&#34;</span>, e);
+</span></span><span style="display:flex;"><span>　　　}
+</span></span><span style="display:flex;"><span>　　　<span style="color:#66d9ef">catch</span> (SocketException e)
+</span></span><span style="display:flex;"><span>　　　{
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;SocketException: {0}&#34;</span>, e);
+</span></span><span style="display:flex;"><span>　　　}
+</span></span><span style="display:flex;"><span>　　　Console.WriteLine(<span style="color:#e6db74">&#34;Press Enter to Exit&#34;</span>);
+</span></span><span style="display:flex;"><span>　　　Console.ReadLine();
+</span></span><span style="display:flex;"><span>　　}
+</span></span><span style="display:flex;"><span>　}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>接下来是服务器完整的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Text;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.IO;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net.Sockets;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> SocketDemo
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>　<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Server</span>
+</span></span><span style="display:flex;"><span>　{
+</span></span><span style="display:flex;"><span>　　<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>　　{
+</span></span><span style="display:flex;"><span>　　　<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>　　　{
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">int</span> port = <span style="color:#ae81ff">2000</span>;
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">string</span> host = <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>;
+</span></span><span style="display:flex;"><span>　　　　IPAddress ip = IPAddress.Parse(host);
+</span></span><span style="display:flex;"><span>　　　　IPEndPoint ipe = <span style="color:#66d9ef">new</span> IPEndPoint(ip, port);
+</span></span><span style="display:flex;"><span>　　　　Socket s = <span style="color:#66d9ef">new</span> Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);<span style="color:#75715e">//创建一个Socket类</span>
+</span></span><span style="display:flex;"><span>　　　　s.Bind(ipe);<span style="color:#75715e">//绑定2000端口</span>
+</span></span><span style="display:flex;"><span>　　　　s.Listen(<span style="color:#ae81ff">0</span>);<span style="color:#75715e">//开始监听</span>
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;Wait for connect&#34;</span>);
+</span></span><span style="display:flex;"><span>　　　　Socket temp = s.Accept();<span style="color:#75715e">//为新建连接创建新的Socket。</span>
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;Get a connect&#34;</span>);
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">string</span> recvStr = <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">byte</span>[] recvBytes = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[<span style="color:#ae81ff">1024</span>];
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">int</span> bytes;
+</span></span><span style="display:flex;"><span>　　　　bytes = temp.Receive(recvBytes, recvBytes.Length, <span style="color:#ae81ff">0</span>);<span style="color:#75715e">//从客户端接受信息</span>
+</span></span><span style="display:flex;"><span>　　　　recvStr += Encoding.ASCII.GetString(recvBytes, <span style="color:#ae81ff">0</span>, bytes);
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;Server Get Message:{0}&#34;</span>,recvStr);<span style="color:#75715e">//把客户端传来的信息显示出来</span>
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">string</span> sendStr = <span style="color:#e6db74">&#34;Ok!Client Send Message Sucessful!&#34;</span>;
+</span></span><span style="display:flex;"><span>　　　　<span style="color:#66d9ef">byte</span>[] bs = Encoding.ASCII.GetBytes(sendStr);
+</span></span><span style="display:flex;"><span>　　　　temp.Send(bs, bs.Length, <span style="color:#ae81ff">0</span>);<span style="color:#75715e">//返回客户端成功信息</span>
+</span></span><span style="display:flex;"><span>　　　　temp.Close();
+</span></span><span style="display:flex;"><span>　　　　s.Close();
+</span></span><span style="display:flex;"><span>　　　}
+</span></span><span style="display:flex;"><span>　　　<span style="color:#66d9ef">catch</span> (ArgumentNullException e)
+</span></span><span style="display:flex;"><span>　　　{
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;ArgumentNullException: {0}&#34;</span>, e);
+</span></span><span style="display:flex;"><span>　　　}
+</span></span><span style="display:flex;"><span>　　　<span style="color:#66d9ef">catch</span> (SocketException e)
+</span></span><span style="display:flex;"><span>　　　{
+</span></span><span style="display:flex;"><span>　　　　Console.WriteLine(<span style="color:#e6db74">&#34;SocketException: {0}&#34;</span>, e);
+</span></span><span style="display:flex;"><span>　　　}
+</span></span><span style="display:flex;"><span>　　　Console.WriteLine(<span style="color:#e6db74">&#34;Press Enter to Exit&#34;</span>);
+</span></span><span style="display:flex;"><span>　　　Console.ReadLine();
+</span></span><span style="display:flex;"><span>　　}
+</span></span><span style="display:flex;"><span>　}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上案例展示Socket基本用法,首先启动服务器程序,再打开客户端程序,由于Accept函数调用后会进行阻塞,所以不必担心服务器无法接收到客户端请求,服务器通常采用多线程方式进行一对多的服务。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84ScrollView%E5%BE%AA%E7%8E%AF%E6%BB%9A%E5%8A%A8/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            编码解码和协议分析</a>
+                            <p>前言 计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,A...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_1.jpg" alt="编码解码和协议分析">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            CSharp特性详解</a>
+                            <p>前言 CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_7.jpg" alt="CSharp特性详解">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            CSharp中的多线程</a>
+                            <p>1.相关概念 进程 是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_6.jpg" alt="CSharp中的多线程">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            坐标空间变换</a>
+                            <p>前言 这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_4.jpg" alt="坐标空间变换">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

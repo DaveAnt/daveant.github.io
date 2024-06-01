@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on 星空城下无君王</title>
+    <link>https://daveant.github.io/series/</link>
+    <description>Recent content in Series on 星空城下无君王</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 05 May 2024 18:16:34 +0800</lastBuildDate>
+    <atom:link href="https://daveant.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unity</title>
+      <link>https://daveant.github.io/series/unity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/unity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Et</title>
+      <link>https://daveant.github.io/series/et/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/et/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Must</title>
+      <link>https://daveant.github.io/series/must/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/must/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shader</title>
+      <link>https://daveant.github.io/series/shader/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/shader/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gf</title>
+      <link>https://daveant.github.io/series/gf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/gf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mode</title>
+      <link>https://daveant.github.io/series/mode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/mode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Xlua</title>
+      <link>https://daveant.github.io/series/xlua/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://daveant.github.io/series/xlua/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

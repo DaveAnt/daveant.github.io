@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-Procedure初探篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%b5%81%e7%a8%8b%e7%9a%84%e5%8e%9f%e7%90%86">
+				                            1.流程的原理
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%b5%81%e7%a8%8b%e6%a8%a1%e5%9d%97%e7%9a%84%e5%85%b7%e4%bd%93%e4%bd%bf%e7%94%a8">
+				                            2.流程模块的具体使用
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-Procedure初探篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-Procedure初探篇</h1>
+                <div class="stuff">
+                    <span>March 24, 2020</span>
+                    <span>字数 2555</span>
+                                  
+                    <span id="/posts/Gameframework-Procedure初探篇/" class="leancloud_visitors" data-flag-title="Gameframework-Procedure初探篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_4.jpg
+cover: https://pics.images.ac.cn/image/5eb54e1576cf9.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>流程是Gameframework里的一种概念,刚刚使用这个框架时可能比较晕,流程其实是继承了有限状态机类,为游戏提供状态切换的模块。</p>
+</blockquote>
+<h2 id="1流程的原理">1.流程的原理</h2>
+<p>建议诸位如果没有看过<a href="https://blog.csdn.net/m0_37920739/article/details/104525017">状态模式</a>,先去看看状态模式到底是什么东西？
+文章中写的有限动作状态机是不可重复利用的,只是介绍使用状态模式如何模拟出Unity的动画有限状态机,而GameFramework作者设计的有限状态机可复用的,让我们来看一下流程基类继承有限状态机实现了什么,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#75715e">//------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Game Framework</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Copyright © 2013-2020 Jiang Yin. All rights reserved.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Homepage: https://gameframework.cn/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Feedback: mailto:ellan@gameframework.cn</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> GameFramework.Fsm;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> ProcedureOwner = GameFramework.Fsm.IFsm&lt;GameFramework.Procedure.IProcedureManager&gt;;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> GameFramework.Procedure
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// 流程基类。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProcedureBase</span> : FsmState&lt;IProcedureManager&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 状态初始化时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;procedureOwner&#34;&gt;流程持有者。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnInit(ProcedureOwner procedureOwner)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnInit(procedureOwner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 进入状态时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;procedureOwner&#34;&gt;流程持有者。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnEnter(ProcedureOwner procedureOwner)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnEnter(procedureOwner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 状态轮询时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;procedureOwner&#34;&gt;流程持有者。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;elapseSeconds&#34;&gt;逻辑流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;realElapseSeconds&#34;&gt;真实流逝时间,以秒为单位。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnUpdate(ProcedureOwner procedureOwner, <span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 离开状态时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;procedureOwner&#34;&gt;流程持有者。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;isShutdown&#34;&gt;是否是关闭状态机时触发。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnLeave(ProcedureOwner procedureOwner, <span style="color:#66d9ef">bool</span> isShutdown)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnLeave(procedureOwner, isShutdown);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// 状态销毁时调用。</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;/summary&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/// &lt;param name=&#34;procedureOwner&#34;&gt;流程持有者。&lt;/param&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnDestroy(ProcedureOwner procedureOwner)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnDestroy(procedureOwner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以看到流程基类继承了有限状态机,并且把泛型设置成IProcedureManager,ProcedureManager和上面链接里的ActionPlayer类是差不多的,只不过多了一些参数获取和功能函数,比如是否存在状态、获取流程、初始化流程管理器等等。然后流程基类ProcedureBase相当于上面链接里的IAction接口,所以要使用流程模块时,需要继承ProcedureBase,如果需要初始化就是重写OnInit函数,流程开启时重写OnEnter函数,按照以上代码注释去重写某些函数即可,最后就是状态切换是需要重写OnUpdate里,各位不用担心还没有OnInit、OnEnter就先执行OnUpdate进行状态切换了。函数执行顺序是OnInit、OnEnter、OnUpdate,OnUpdate是不断循环判断是否可以进行跳转的。</p>
+<h2 id="2流程模块的具体使用">2.流程模块的具体使用</h2>
+<p>作者给出的游戏Demo工程里,一共定义了7个流程,分别是启动流程、菜单流程、主场景流程、预制体加载流程、Splash流程(防止资源检查和预制体加载流程过长导致黑白或无反应)、场景切换流程、资源检查流程,具体图片如下:
+<img src="/img/post/Gameframework/procedure/exp1.png" alt="exp1">
+这些脚本都是继承于ProcedureBase类,然后流程组件(ProcedureComponent)即可识别出定义了那些流程,诸位可能还是比较奇怪,这么多流程先启动那个,如果流程顺序乱了怎么办？看一下ProcedureComponent脚本就可知道原由了,具体图片如下:
+<img src="/img/post/Gameframework/procedure/exp2.png" alt="exp2">
+继承流程基类的流程全部在这里了,然后通过设置Entrance Procedure属性来设置首先启动的流程,可以尝试一下把StarForce工程的启动流程直接换成ProcedureMain会不会出现问题,接下来看一下启动流程到底做了什么,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> GameFramework.Localization;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityGameFramework.Runtime;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> ProcedureOwner = GameFramework.Fsm.IFsm&lt;GameFramework.Procedure.IProcedureManager&gt;;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> StarForce
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProcedureLaunch</span> : ProcedureBase
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">bool</span> UseNativeDialog
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnEnter(ProcedureOwner procedureOwner)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnEnter(procedureOwner);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 构建信息:发布版本时,把一些数据以 Json 的格式写入 Assets/GameMain/Configs/BuildInfo.txt,供游戏逻辑读取。</span>
+</span></span><span style="display:flex;"><span>            GameEntry.BuiltinData.InitBuildInfo();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 语言配置:设置当前使用的语言,如果不设置,则默认使用操作系统语言。</span>
+</span></span><span style="display:flex;"><span>            InitLanguageSettings();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 变体配置:根据使用的语言,通知底层加载对应的资源变体。</span>
+</span></span><span style="display:flex;"><span>            InitCurrentVariant();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 画质配置:根据检测到的硬件信息 Assets/Main/Configs/DeviceModelConfig 和用户配置数据,设置即将使用的画质选项。</span>
+</span></span><span style="display:flex;"><span>            InitQualitySettings();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 声音配置:根据用户配置数据,设置即将使用的声音选项。</span>
+</span></span><span style="display:flex;"><span>            InitSoundSettings();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 默认字典:加载默认字典文件 Assets/GameMain/Configs/DefaultDictionary.xml。</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 此字典文件记录了资源更新前使用的各种语言的字符串,会随 App 一起发布,故不可更新。</span>
+</span></span><span style="display:flex;"><span>            GameEntry.BuiltinData.InitDefaultDictionary();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnUpdate(ProcedureOwner procedureOwner, <span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">base</span>.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            ChangeState&lt;ProcedureSplash&gt;(procedureOwner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitLanguageSettings()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (GameEntry.Base.EditorResourceMode &amp;&amp; GameEntry.Base.EditorLanguage != Language.Unspecified)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 编辑器资源模式直接使用 Inspector 上设置的语言</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Language language = GameEntry.Localization.Language;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> languageString = GameEntry.Setting.GetString(Constant.Setting.Language);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (!<span style="color:#66d9ef">string</span>.IsNullOrEmpty(languageString))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    language = (Language)Enum.Parse(<span style="color:#66d9ef">typeof</span>(Language), languageString);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">catch</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (language != Language.English
+</span></span><span style="display:flex;"><span>                &amp;&amp; language != Language.ChineseSimplified
+</span></span><span style="display:flex;"><span>                &amp;&amp; language != Language.ChineseTraditional
+</span></span><span style="display:flex;"><span>                &amp;&amp; language != Language.Korean)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 若是暂不支持的语言,则使用英语</span>
+</span></span><span style="display:flex;"><span>                language = Language.English;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                GameEntry.Setting.SetString(Constant.Setting.Language, language.ToString());
+</span></span><span style="display:flex;"><span>                GameEntry.Setting.Save();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            GameEntry.Localization.Language = language;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Log.Info(<span style="color:#e6db74">&#34;Init language settings complete, current language is &#39;{0}&#39;.&#34;</span>, language.ToString());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitCurrentVariant()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (GameEntry.Base.EditorResourceMode)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 编辑器资源模式不使用 AssetBundle,也就没有变体了</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> currentVariant = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (GameEntry.Localization.Language)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> Language.English:
+</span></span><span style="display:flex;"><span>                    currentVariant = <span style="color:#e6db74">&#34;en-us&#34;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> Language.ChineseSimplified:
+</span></span><span style="display:flex;"><span>                    currentVariant = <span style="color:#e6db74">&#34;zh-cn&#34;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> Language.ChineseTraditional:
+</span></span><span style="display:flex;"><span>                    currentVariant = <span style="color:#e6db74">&#34;zh-tw&#34;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> Language.Korean:
+</span></span><span style="display:flex;"><span>                    currentVariant = <span style="color:#e6db74">&#34;ko-kr&#34;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>                    currentVariant = <span style="color:#e6db74">&#34;zh-cn&#34;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            GameEntry.Resource.SetCurrentVariant(currentVariant);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Log.Info(<span style="color:#e6db74">&#34;Init current variant complete.&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitQualitySettings()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            QualityLevelType defaultQuality = QualityLevelType.Fantastic;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> qualityLevel = GameEntry.Setting.GetInt(Constant.Setting.QualityLevel, (<span style="color:#66d9ef">int</span>)defaultQuality);
+</span></span><span style="display:flex;"><span>            QualitySettings.SetQualityLevel(qualityLevel, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Log.Info(<span style="color:#e6db74">&#34;Init quality settings complete.&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitSoundSettings()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            GameEntry.Sound.Mute(<span style="color:#e6db74">&#34;Music&#34;</span>, GameEntry.Setting.GetBool(Constant.Setting.MusicMuted, <span style="color:#66d9ef">false</span>));
+</span></span><span style="display:flex;"><span>            GameEntry.Sound.SetVolume(<span style="color:#e6db74">&#34;Music&#34;</span>, GameEntry.Setting.GetFloat(Constant.Setting.MusicVolume, <span style="color:#ae81ff">0.3f</span>));
+</span></span><span style="display:flex;"><span>            GameEntry.Sound.Mute(<span style="color:#e6db74">&#34;Sound&#34;</span>, GameEntry.Setting.GetBool(Constant.Setting.SoundMuted, <span style="color:#66d9ef">false</span>));
+</span></span><span style="display:flex;"><span>            GameEntry.Sound.SetVolume(<span style="color:#e6db74">&#34;Sound&#34;</span>, GameEntry.Setting.GetFloat(Constant.Setting.SoundVolume, <span style="color:#ae81ff">1f</span>));
+</span></span><span style="display:flex;"><span>            GameEntry.Sound.Mute(<span style="color:#e6db74">&#34;UISound&#34;</span>, GameEntry.Setting.GetBool(Constant.Setting.UISoundMuted, <span style="color:#66d9ef">false</span>));
+</span></span><span style="display:flex;"><span>            GameEntry.Sound.SetVolume(<span style="color:#e6db74">&#34;UISound&#34;</span>, GameEntry.Setting.GetFloat(Constant.Setting.UISoundVolume, <span style="color:#ae81ff">1f</span>));
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>            Log.Info(<span style="color:#e6db74">&#34;Init sound settings complete.&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以看到启动流程在OnEnter函数里完成了配置相关的操作,然后OnUpdate里直接跳转ProcedureSplash流程,Gameframework的流程使用就大概如此,但是各位还是好奇,到游戏主界面后也没有看见直接跳转啊！因为有变量去判断是否要跳转到游戏场景的流程,具体ProcedureMenu里OnUpdate代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> OnUpdate(ProcedureOwner procedureOwner, <span style="color:#66d9ef">float</span> elapseSeconds, <span style="color:#66d9ef">float</span> realElapseSeconds)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">base</span>.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (m_StartGame)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            procedureOwner.SetData&lt;VarInt&gt;(Constant.ProcedureData.NextSceneId, GameEntry.Config.GetInt(<span style="color:#e6db74">&#34;Scene.Main&#34;</span>));
+</span></span><span style="display:flex;"><span>            procedureOwner.SetData&lt;VarInt&gt;(Constant.ProcedureData.GameMode, (<span style="color:#66d9ef">int</span>)GameMode.Survival);
+</span></span><span style="display:flex;"><span>            ChangeState&lt;ProcedureChangeScene&gt;(procedureOwner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>通过判断m_StartGame去判断是否可以跳转(点击开始时m_StartGame会变成True),其实我们可以提出新概念就是流程锁,不必每个流程去定义类似m_StartGame的变量,直接在ProcedureManager给它加一个锁变量,比如当点击开始时,去解锁流程锁跳转,之后再把流程锁关上即可,这个扩展功能将在流程扩展篇里实现,这里就不和各位深入探索了。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-ObjectPool%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Procedure%E8%BF%9B%E9%98%B6%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>CSharp中的多线程 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e7%9b%b8%e5%85%b3%e6%a6%82%e5%bf%b5">
+				                            1.相关概念
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%ae%9e%e6%88%98%e5%a4%9a%e7%ba%bf%e7%a8%8b">
+				                            2.实战多线程
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e7%ba%bf%e7%a8%8b%e9%94%81">
+				                            3.线程锁
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#4%e5%a4%9a%e7%ba%bf%e7%a8%8b%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">
+				                            4.多线程使用场景
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        CSharp中的多线程</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                CSharp中的多线程</h1>
+                <div class="stuff">
+                    <span>April 17, 2020</span>
+                    <span>字数 3836</span>
+                                  
+                    <span id="/posts/CSharp中的多线程/" class="leancloud_visitors" data-flag-title="CSharp中的多线程">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Must/wallhaven_6.jpg
+cover: https://pics.images.ac.cn/image/5eb551f1cc02f.html-->
+<h2 id="1相关概念">1.相关概念</h2>
+<ul>
+<li>进程<br>
+是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在操作系统中被视为进程,进程可以包括一个或多个线程。线程是操作系统分配处理器时间的基本单元,在进程中可以有多个线程同时执行代码。进程之间是相对独立的,进程无法访问另一个进程的数据（除非利用分布式计算方式）,进程运行的失败也不会影响其他进程的运行,Windows系统就是利用进程把工作划分为多个独立的区域的。进程可以理解为程序的基本边界。是应用程序的运行例程和动态执行的过程。</li>
+<li>多线程<br>
+可以同时完成多个任务;可以使程序的响应速度更快;可以让占用大量处理时间的任务或当前没有进行处理的任务定期将处理时间让给别的任务;可以随时停止任务;可以设置每个任务的优先级以优化程序性能。多核多CPU的电脑同时刻可以运行多个线程,多线程是并发无序执行,会导致难以控制和提高内存的占用,但会提高CPU的利用率和程序性能。</li>
+<li>协程<br>
+从技术角度来说协程就是可以暂停的执行函数,协程开的再多也不会像线程那样出现大量开销,某个时刻只能运行一个协程,协程相当于抽象在线程上的技术(基本上在主线程上使用协程,如果子线程上可以开启协程,建议大家不要这样去操作)。</li>
+</ul>
+<p>线程可以包含多个协程,进程可以包含多个线程。其实书本形式的概念没有必要记得很清楚,只需要知道线程可以理解成轻量级的进程,是程序最小执行单位,协程不能理解成轻量级的线程,是可以暂停的特殊函数。协程是同步的(比如有一个人有A,B两个事情,A,B交替的做,可以出现的效果就是A,B差不多同时完成),线程是异步的(比如有两个人有A,B两个事情,分配好任务以后就可以开始任务了,唯一导致速度变慢的原因:假设只有一个画笔,他们任务都是画画,总不可能让他们为了一只笔打起来吧！所以需要线程同步),使用多线程时注意减少多线程同步(排队)和合理开辟线程数。</p>
+<h2 id="2实战多线程">2.实战多线程</h2>
+<ul>
+<li>Thread类<br>
+通过ThreadStart(无参数)或ParameterizedThreadStart(含参数)创建Thread对象。如果线程尚未处于运行状态,调用Start函数启动线程;如果当前线程正在执行,调用Abort函数可以结束当前线程,在调用该方法的线程上抛出ThreadAbortException异常,通常来说应该谨慎使用Abort函数;如果想要顺序执行线程A、B可以通过Join函数,比如线程B执行到某处必须要把线程A执行完才可以继续线程B,这时就可以调用线程A的Join函数;线程还可以通过IsBackground属性设置其前台或后台线程,通过Priority属性设置线程的优先级。关于多线程详细的接口和属性可以参考<a href="https://www.runoob.com/csharp/csharp-multithreading.html">菜鸟教程</a>。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Thread thread = <span style="color:#66d9ef">new</span> Thread(<span style="color:#66d9ef">new</span> ThreadStart(DoWork));
+</span></span><span style="display:flex;"><span>    thread.Start();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Thread parameterizedThread = <span style="color:#66d9ef">new</span> Thread(<span style="color:#66d9ef">new</span> ParameterizedThreadStart(DoWorkWithParam));
+</span></span><span style="display:flex;"><span>    parameterizedThread.Start(thread);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Console.ReadKey();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> DoWork()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">10</span>; i++)
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;Work thread:&#34;</span> + i.ToString());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">catch</span> (Exception e)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(e.Message);
+</span></span><span style="display:flex;"><span>        Thread.ResetAbort();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Thread.Sleep(<span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>    Console.WriteLine(<span style="color:#e6db74">&#34;Work thread: finished&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> DoWorkWithParam(<span style="color:#66d9ef">object</span> obj)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Thread sub = (Thread)obj;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//sub.Join();//阻塞自身,等待sub结束</span>
+</span></span><span style="display:flex;"><span>    Console.WriteLine(<span style="color:#e6db74">&#34;Parame Work thread: over&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>ThreadPool类<br>
+ThreadPool类可以减少频繁创建线程的开销,并且合理创建和管理线程。提供给用户比较简单的执行方式,只需调用QueueUserWorkItem方法,传递WaitCallback类型的委托,线程池即从池中选择出合理线程执行该任务。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ThreadPool.QueueUserWorkItem(DoWork);
+</span></span><span style="display:flex;"><span>    ThreadPool.QueueUserWorkItem(DoWork);
+</span></span><span style="display:flex;"><span>    ThreadPool.QueueUserWorkItem(DoWork);
+</span></span><span style="display:flex;"><span>    Console.ReadKey();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> DoWork(Object o)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">10</span>; i++)
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;loop:{0}, thread id: {1}&#34;</span>, i, Thread.CurrentThread.ManagedThreadId);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用线程池的注意事项：<br>
+1.线程池中的线程均为后台线程,不能修改为前台线程,并且不能给入池的线程设置优先级或名称。<br>
+2.入池的所有线程都是单线程单元(STA)线程,线程池的线程是串行的,使用者不必担心死锁问题,重复以上代码发现线程id是连续的就知道含义了。<br>
+3.入池的线程只适合时间较短任务,如果线程需要长时间运行,使用Thread类创建线程或使用Task的LongRunning选项。</p>
+<ul>
+<li>Parallel类<br>
+Parallel和Task类都位于System.Threading.Task命名空间中,是线程更高级的抽象。Parrallel类有For、ForEach、Invoke三个方法,前两者在每次迭代中调用相同的代码,实现了数据并行性,Invoke允许同时调用不同的方法,实现任务并行性。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ParallelLoopResult result = Parallel.For(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">100</span>, (i, state) =&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;i:{0}, thread id: {1}&#34;</span>, i, Thread.CurrentThread.ManagedThreadId);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (i &gt; <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>            state.Break();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Thread.Sleep(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Console.ReadKey();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如需同时执行多个不同的任务,可以使用Parallel.Invoke方法,它允许传递一个Action委托数组。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Parallel.Invoke(DoWork, DoWork, DoWork);
+</span></span><span style="display:flex;"><span>    Console.ReadKey();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> DoWork()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">10</span>; i++)
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;loop:{0}, thread id: {1}&#34;</span>, i, Thread.CurrentThread.ManagedThreadId);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Task类<br>
+Task类为控制线程提供了很大的灵活性。Task类可以获取线程的返回值,也可以定义连续任务在一个任务结束后开启下个任务,还可以在层次结构中安排任务,在父任务中可以创建子任务,这样就创建了依赖关系,如果父任务被取消,子任务也随之取消。Task类默认使用线程池中的线程,如果该任务长期运行,应使用TaskCreationOptions.LongRunning属性告诉任务管理器创建新线程,而不是使用线程池中的线程。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        TaskFactory tf = <span style="color:#66d9ef">new</span> TaskFactory();
+</span></span><span style="display:flex;"><span>        Task t1 = tf.StartNew(TaskMethod.DoTask, <span style="color:#e6db74">&#34;using a task factory&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Task t2 = Task.Factory.StartNew(TaskMethod.DoTask, <span style="color:#e6db74">&#34;factory via a task&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Task t3 = <span style="color:#66d9ef">new</span> Task(TaskMethod.DoTask, <span style="color:#e6db74">&#34;using a task constructor and start&#34;</span>);
+</span></span><span style="display:flex;"><span>        t3.Start();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//需要.NetFramework 4.5以上</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> t4 = Task.Run(() =&gt; TaskMethod.DoTask(<span style="color:#e6db74">&#34;using Run method&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Console.ReadKey();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TaskMethod</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">object</span> taskLock = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">object</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> DoTask(<span style="color:#66d9ef">object</span> msg)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; <span style="color:#ae81ff">10</span>; ++i)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(msg);
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;Task id:{0}, Thread id :{1}&#34;</span>,
+</span></span><span style="display:flex;"><span>                            Task.CurrentId == <span style="color:#66d9ef">null</span> ? <span style="color:#e6db74">&#34;no task&#34;</span> : Task.CurrentId.ToString(),
+</span></span><span style="display:flex;"><span>                            Thread.CurrentThread.ManagedThreadId);
+</span></span><span style="display:flex;"><span>        }           
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>任务有返回值的情况,可使用Task<TResult>泛型类定义返回值类型,以下代码演示调用返回int值的任务的方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> t5 = <span style="color:#66d9ef">new</span> Task&lt;<span style="color:#66d9ef">int</span>&gt;(TaskWithResult, Tuple.Create&lt;<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>&gt;(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>    t5.Start();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Console.WriteLine(<span style="color:#e6db74">&#34;adder results: {0}&#34;</span>, t5.Result);
+</span></span><span style="display:flex;"><span>    Console.ReadKey(); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> TaskWithResult(<span style="color:#66d9ef">object</span> o)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Tuple&lt;<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>&gt; adder = (Tuple&lt;<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>&gt;)o;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> adder.Item1 + adder.Item2;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>调用Task类的RunSynchronously方法,可以直接在当前线程上调用该任务实现同。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    TaskMethod.DoTask(<span style="color:#e6db74">&#34;Just Main thread&#34;</span>);
+</span></span><span style="display:flex;"><span>    Task t1 = <span style="color:#66d9ef">new</span> Task(TaskMethod.DoTask, <span style="color:#e6db74">&#34;using Run Sync&#34;</span>);
+</span></span><span style="display:flex;"><span>    Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+</span></span><span style="display:flex;"><span>    t1.RunSynchronously();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>任务底层调用是通过线程池实现的,这样的话任务也是单线程单元(STA),只不过连续任务应该使用ContinueWith函数去实现。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    TaskFactory tf = <span style="color:#66d9ef">new</span> TaskFactory();
+</span></span><span style="display:flex;"><span>    Task t1 = tf.StartNew(() =&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;Current Task id = {0}&#34;</span>, Task.CurrentId);
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;执行任务1\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        Thread.Sleep(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    }).ContinueWith((t) =&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;Last Task id = {0}&#34;</span>, t.Id);
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;Current Task id = {0}&#34;</span>, Task.CurrentId);
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;执行任务2\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        Thread.Sleep(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    }).ContinueWith(<span style="color:#66d9ef">delegate</span> (Task t)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;Last Task id = {0}&#34;</span>, t.Id);
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;Current Task id = {0}&#34;</span>, Task.CurrentId);
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;执行任务3\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>    }, TaskContinuationOptions.OnlyOnRanToCompletion);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Console.ReadKey();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以通过设置TaskContinuationOptions属性指定继续执行任务的条件,下面给出表格用来参考。</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AttachedToParent</td>
+<td>如果延续为子任务,则指定将延续附加到任务层次结构中的父级。 只有当延续前面的任务也是子任务时,延续才可以是子任务。 默认情况下,子任务(即由外部任务创建的内部任务)将独立于其父任务执行。可以使用 AttachedToParent 选项以便将父任务和子任务同步。</td>
+</tr>
+<tr>
+<td>DenyChildAttach</td>
+<td>指定任何使用 AttachedToParent 选项创建,并尝试作为附加的子任务执行的子任务(即由此延续创建的任何嵌套内部任务)都无法附加到父任务。</td>
+</tr>
+<tr>
+<td>ExecuteSynchronously</td>
+<td>指定应同步执行延续任务。 指定此选项后,延续任务在导致前面的任务转换为其最终状态的相同线程上运行。</td>
+</tr>
+<tr>
+<td>HideScheduler</td>
+<td>创建的任务将默认计划程序(Default)视为当前的计划程序,而不是正在运行该延续的计划程序。</td>
+</tr>
+<tr>
+<td>LazyCancellation</td>
+<td>在延续取消的情况下,防止延续的完成直到完成先前的任务。</td>
+</tr>
+<tr>
+<td>LongRunning</td>
+<td>指定延续将是长期运行的、粗粒度的操作。</td>
+</tr>
+<tr>
+<td>None</td>
+<td>如果未指定延续选项,应在执行延续任务时使用指定的默认行为。</td>
+</tr>
+<tr>
+<td>NotOnCanceled</td>
+<td>指定不应在延续任务前面的任务已取消的情况下安排延续任务。</td>
+</tr>
+<tr>
+<td>otOnFaulted</td>
+<td>指定不应在延续任务前面的任务引发了未处理异常的情况下安排延续任务。</td>
+</tr>
+<tr>
+<td>NotOnRanToCompletion</td>
+<td>指定不应在延续任务前面的任务已完成运行的情况下安排延续任务。</td>
+</tr>
+<tr>
+<td>OnlyOnCanceled</td>
+<td>指定只应在延续前面的任务已取消的情况下安排延续任务。</td>
+</tr>
+<tr>
+<td>OnlyOnFaulted</td>
+<td>指定只有在延续任务前面的任务引发了未处理异常的情况下才应安排延续任务。</td>
+</tr>
+<tr>
+<td>OnlyOnRanToCompletion</td>
+<td>指定只应在延续任务前面的任务已完成运行的情况下才安排延续任务。</td>
+</tr>
+<tr>
+<td>PreferFairness</td>
+<td>按任务计划的顺序安排任务,因此较早安排的任务将更可能较早运行,而较晚安排运行的任务将更可能较晚运行。</td>
+</tr>
+<tr>
+<td>RunContinuationsAsynchronously</td>
+<td>指定应异步运行延续任务。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3线程锁">3.线程锁</h2>
+<p>线程锁是为了线程同步,防止线程之间竞争资源导致的死锁,可以避免线程锁的使用就尽量避免,但有时确实缺少需要线程同步。C#中lock、Monitor、Mutex都可以实现线程锁,lock的语法形式如下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">lock</span>(lockObject)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//临界区代码</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在 lock 中的变量建议定义成私有的静态的,如果lock(this)锁定当前实例对象,需要保证每个线程里的this是不是同个this(实例不同相当于没有锁,最后还会导致死锁)。使用 Monitor 锁定线程的代码如下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>Monitor.Enter(lockObject);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//临界区代码</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">finally</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Monitor.Exit(lockObject);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Monitor和lock的原理是一样的。C#中 Mutex 类也用于线程同步操作的类,例如当多个线程同时访问同个资源时保证同时间只能有一个线程访问资源。
+在 Mutex 类中,WaitOne用于等待资源被释放,ReleaseMutex函数用于释放资源,WaitOne函数在等待ReleaseMutex函数执行后才会结束。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (mutex.WaitOne())
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">finally</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        mutex.ReleaseMutex();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里的mutex是私有的静态的,private static Mutex mutex = new Mutex();说了这么多,来总结一下到底什么是锁呢？比如多线程都要操作同个文件,这个文件有没有被某个线程使用如何知道呢？可以定义关于这个文件的锁变量(_lockFile)来代表资源是否占用中,所以锁的是可以代表这个资源的变量,最后建议使用lock来实现线程同步。</p>
+<h2 id="4多线程使用场景">4.多线程使用场景</h2>
+<p>1.游戏当下载过来时的资源转移(玩过手游的都知道把游戏下载过来都有免流量的读条。)<br>
+2.游戏资源的加载(手游方面要实现AB包异步加载。)<br>
+3.游戏中靠配置文件生成的地图场景(可以拆解的费时任务。)</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Hello-Shader/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            编码解码和协议分析</a>
+                            <p>前言 计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,A...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_1.jpg" alt="编码解码和协议分析">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            CSharp特性详解</a>
+                            <p>前言 CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSharp特性详解">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_7.jpg" alt="CSharp特性详解">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            Socket基础知识</a>
+                            <p>前言 所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_5.jpg" alt="Socket基础知识">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            坐标空间变换</a>
+                            <p>前言 这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_4.jpg" alt="坐标空间变换">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

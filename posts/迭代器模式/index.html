@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>迭代器模式 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e4%bd%bf%e7%94%a8c%e6%8e%a5%e5%8f%a3%e5%ae%9e%e7%8e%b0%e8%bf%ad%e4%bb%a3%e5%99%a8">
+				                            1.使用C#接口实现迭代器
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%b8%8d%e7%94%a8net%e6%8e%a5%e5%8f%a3%e4%bc%9a%e6%80%8e%e4%b9%88">
+				                            2.不用.Net接口会怎么？
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e6%8e%a5%e5%8f%a3%e8%ae%be%e8%ae%a1%e4%b9%8b%e5%b7%a7%e5%a6%99">
+				                            3.接口设计之巧妙
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e6%80%bb%e7%bb%93">
+				                            总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e8%bf%ad%e4%bb%a3%e5%99%a8%e4%bc%98%e7%bc%ba%e7%82%b9">
+				                            1.迭代器优缺点:
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e8%bf%ad%e4%bb%a3%e5%99%a8%e7%9a%84%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">
+				                            2.迭代器的使用场景:
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        迭代器模式</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                迭代器模式</h1>
+                <div class="stuff">
+                    <span>March 23, 2020</span>
+                    <span>字数 2279</span>
+                                  
+                    <span id="/posts/迭代器模式/" class="leancloud_visitors" data-flag-title="迭代器模式">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/DesignPattern/wallhaven_24.jpg
+cover: https://pics.images.ac.cn/image/5eb54cee8320e.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>C#中数据结构都实现了迭代器的功能,具体是如何实现的,接下来就由此篇文章去介绍一下C#是如何实现迭代器的,从使用C#自身提供的接口再到从0到1创建出迭代器。</p>
+</blockquote>
+<h2 id="1使用c接口实现迭代器">1.使用C#接口实现迭代器</h2>
+<p>随便找一个C#实现的数据结构,比如看看列表是如何实现的迭代器功能的,其实网上资料说要实现迭代器,C#已经给出了2个接口,一个是IEumerator还有一个是IEnumerable。来看看List有没有继承这些接口,首先Ctrl+Click进入List实现的代码中,查看一下List到底如何定义的,具体情况如下:
+<img src="/img/post/DesignPattern/iterator/exp1.png" alt="exp1">
+列表确实继承并实现了接口方法,接下来自定义一个迭代器去实现这些接口,看看这些接口到底拟定了那些方法,这些方法的功能又是什么,接下来将一一说明,首先实现这些接口,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Enumerable</span>&lt;T&gt; : IEnumerable&lt;T&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> T[] values;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Int32 startingPoint;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Enumerable(T[] values, Int32 startingPoint)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.values = values;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.startingPoint = startingPoint;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> IEnumerator GetEnumerator()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Enumerator&lt;T&gt;(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        IEnumerator&lt;T&gt; IEnumerable&lt;T&gt;.GetEnumerator()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Enumerator&lt;T&gt;(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Enumerator</span>&lt;T&gt; : IEnumerator&lt;T&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Enumerable&lt;T&gt; parent;<span style="color:#75715e">//迭代的对象  #1</span>
+</span></span><span style="display:flex;"><span>        Int32 position;<span style="color:#75715e">//当前游标的位置 #2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">internal</span> Enumerator(Enumerable&lt;T&gt; parent)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.parent = parent;
+</span></span><span style="display:flex;"><span>            position = -<span style="color:#ae81ff">1</span>;<span style="color:#75715e">// 数组元素下标从0开始,初始时默认当前游标设置为 -1,即在第一个元素之前, #3</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> MoveNext()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (position != parent.values.Length) <span style="color:#75715e">//判断当前位置是否为最后一个,如果不是游标自增 #4</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                position++;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> position &lt; parent.values.Length;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> T Current
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (position == -<span style="color:#ae81ff">1</span> || position == parent.values.Length)<span style="color:#75715e">//第一个之前和最后一个自后的访问非法 #5</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InvalidOperationException();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                Int32 index = position + parent.startingPoint;<span style="color:#75715e">//考虑自定义开始位置的情况  #6</span>
+</span></span><span style="display:flex;"><span>                index = index % parent.values.Length;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> parent.values[index];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">object</span> IEnumerator.Current =&gt; <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NotImplementedException();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Reset()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            position = -<span style="color:#ae81ff">1</span>;<span style="color:#75715e">//将游标重置为-1  #7</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Dispose()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NotImplementedException();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这样就实现了迭代器,这两个接口到底实现了那些方法呢？下面将给出表格:</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetEnumerator</td>
+<td>获取迭代器本身</td>
+</tr>
+<tr>
+<td>MoveNext</td>
+<td>迭代器下移,返回是否可以继续迭代的状态</td>
+</tr>
+<tr>
+<td>Current</td>
+<td>获取迭代器当前的值</td>
+</tr>
+<tr>
+<td>Reset</td>
+<td>重置迭代器</td>
+</tr>
+</tbody>
+</table>
+<p>接下来尝试使用这个自定义的迭代器,因为实现了.Net自带的IEnumerable接口的集合,可以直接使用foreach就很方便,不然只能使用for循环去调用,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">string</span>[] values = { <span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>, <span style="color:#e6db74">&#34;d&#34;</span>, <span style="color:#e6db74">&#34;e&#34;</span> };
+</span></span><span style="display:flex;"><span>Enumerable&lt;<span style="color:#66d9ef">string</span>&gt; collection = <span style="color:#66d9ef">new</span> Enumerable&lt;<span style="color:#66d9ef">string</span>&gt;(values, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> x <span style="color:#66d9ef">in</span> collection)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Console.WriteLine(x);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可能会开始思考,去实现IEnumerator接口好像没有必要,因为大部分迭代器去继承这个接口实现逻辑基本差不多的,我们又不需要实现特殊的逻辑的话,难道框架没有提供一个默认迭代器吗？哈哈哈哈,告诉大家还真的提供了一个默认的方式,把IEnumerator去掉,修改GetEnumerator的实现即可,具体代码段如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> IEnumerator GetEnumerator()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> index = <span style="color:#ae81ff">0</span>; index &lt; <span style="color:#66d9ef">this</span>.values.Length; index++)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> values[(index + startingPoint) % values.Length];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>yield return和普通的return可是不一样,它返回了默认的迭代块,实际上当编译器遇到yield return返回的迭代块时,它创建了一个已经实现的内部默认迭代器类。这个类记住了聚合对象的当前位置以及本地变量,包括参数等等,这个默认类实际上类似与我们上面继承IEnumerator接口实现出的类。</p>
+<h2 id="2不用net接口会怎么">2.不用.Net接口会怎么？</h2>
+<p>其实没有任何问题,咱们尝试一下即可,首先定义一下接口,然后完全靠自己去实现迭代器会怎么样,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IMEnumerator</span>&lt;T&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> MoveNext();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    T Current { <span style="color:#66d9ef">get</span>; }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Reset();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IMEnumerable</span>&lt;T&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    IMEnumerator&lt;T&gt; GetEnumerator();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>然后继承上面定义的接口,具体实现这些接口的方式是一样的,唯一不同的是调用代码时不能使用foreach,你都不用.Net框架提供的接口了,还想要foreach语法结构清晰的调用迭代器,醒一下醒一下,直接使用for语言调用迭代器算了,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">string</span>[] values = { <span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>, <span style="color:#e6db74">&#34;d&#34;</span>, <span style="color:#e6db74">&#34;e&#34;</span> };
+</span></span><span style="display:flex;"><span>Enumerable&lt;<span style="color:#66d9ef">string</span>&gt; collection = <span style="color:#66d9ef">new</span> Enumerable&lt;<span style="color:#66d9ef">string</span>&gt;(values, <span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(Enumerator&lt;<span style="color:#66d9ef">string</span>&gt; iter = collection.GetEnumerator(); iter.MoveNext();){
+</span></span><span style="display:flex;"><span>    Console.WriteLine(iter.Current);
+</span></span><span style="display:flex;"><span>}  
+</span></span></code></pre></div><h2 id="3接口设计之巧妙">3.接口设计之巧妙</h2>
+<p>有没有想过,为什么需要设计出2个接口,一个是IEumerator还有一个是IEnumerable,因为IEumerator相当于数据层和获取迭代块的接口,IEnumerable相当于实际迭代块记录状态的接口,这样设计更加的各司其职,代码更好的解耦。迭代器提供了一种方法按照某种顺序访问对象组中各个元素, 而又无须暴露该对象的内部结构的设计方式。如果非要把两个接口合起来实现会有问题吗？答案就是问题不大,咱们可以尝试一下,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Enumerator</span>&lt;T&gt; : IEnumerator&lt;T&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> T[] values;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Int32 startingPoint;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Enumerator(T[] values, Int32 startingPoint)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.values = values;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.startingPoint = startingPoint;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        Int32 position;<span style="color:#75715e">//当前游标的位置 #2</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> MoveNext()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (position != values.Length) <span style="color:#75715e">//判断当前位置是否为最后一个,如果不是游标自增 #4</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                position++;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> position &lt; values.Length;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> T Current
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (position == -<span style="color:#ae81ff">1</span> || position == values.Length)<span style="color:#75715e">//第一个之前和最后一个自后的访问非法 #5</span>
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InvalidOperationException();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                Int32 index = position + startingPoint;<span style="color:#75715e">//考虑自定义开始位置的情况  #6</span>
+</span></span><span style="display:flex;"><span>                index = index % values.Length;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> values[index];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">object</span> IEnumerator.Current =&gt; <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NotImplementedException();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Reset()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            position = -<span style="color:#ae81ff">1</span>;<span style="color:#75715e">//将游标重置为-1  #7</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这样可以吗？迭代器用完以后,不要把它释放了,重置一下迭代器状态,以上代码也是可以正常迭代获取数据的。但是万一以后这个聚合数据需要换个迭代方式,是直接修改这个类比较好呢,还是单独实现一个新的迭代器,然后修改GetEnumerator获取迭代器的方式比较好呢(万一产品经理又说把迭代器改回来怎么办？可能有人抬杠,把代码回滚一下不就行了(对对对就是你,赶紧滚粗去🙃))。所以数据层和迭代器的本身分开实现比较好,使用迭代器模式可以轻易的换个迭代器(通过修改GetEnumerator函数)。</p>
+<h2 id="总结">总结</h2>
+<h2 id="1迭代器优缺点">1.迭代器优缺点:</h2>
+<p>优点:1、迭代器支持以不同的方式遍历一个聚合对象,简化了聚合类。 2、在迭代器模式中,增加新的聚合类和迭代器类都很方便,无须修改原有代码。<br>
+缺点:由于迭代器模式将存储数据和遍历数据的职责分离,增加新的聚合类需要对应增加新的迭代器类,类的个数成对增加,这在一定程度上增加了系统的复杂性。</p>
+<h2 id="2迭代器的使用场景">2.迭代器的使用场景:</h2>
+<p>1.需要为集合对象提供多种遍历方式。<br>
+2.为遍历不同的聚合结构提供一个统一的接口</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-Localization%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/Gameframework-ObjectPool%E5%88%9D%E6%8E%A2%E7%AF%87/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            代理模式</a>
+                            <p>前言 代理模式主要是用来对目标对象访问权限的控制,比如游戏商城里购买道具时,通过代理类去判断玩家是否可...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="代理模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_4.jpg" alt="代理模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            单例模式</a>
+                            <p>前言 单例模式有二种,饿汉模式和懒汉模式。这里将去实现单例模式的这些例子,然后分析它们的优缺点和使用场...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="单例模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_5.jpg" alt="单例模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            原型模式</a>
+                            <p>前言 原型模式是用于创建重复的对象,当类里有很多复杂参数的时候,我们可以避免使用拷贝(赋值)构造函数,...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="原型模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_19.jpg" alt="原型模式">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            命令模式</a>
+                            <p>前言 命令模式可以实现操作的前进和回滚,经常使用P图软件的用户一定知道软件提供了对操作前进和回滚的功能...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" title="命令模式">
+                            <img class="relateimg" src="/img/title/DesignPattern/wallhaven_7.jpg" alt="命令模式">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

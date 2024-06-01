@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-Config进阶篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e9%85%8d%e7%bd%ae%e6%a8%a1%e5%9d%97%e9%87%8d%e5%86%99">
+				                            1.配置模块重写
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%bf%ae%e6%94%b9%e5%90%8e%e5%87%ba%e7%8e%b0%e7%9a%84%e9%97%ae%e9%a2%98">
+				                            2.修改后出现的问题
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e4%b8%ba%e6%b7%bb%e5%8a%a0xlsx%e9%85%8d%e7%bd%ae%e5%81%9a%e5%87%86%e5%a4%87">
+				                            3.为添加xlsx配置做准备
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-Config进阶篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-Config进阶篇</h1>
+                <div class="stuff">
+                    <span>April 13, 2020</span>
+                    <span>字数 1598</span>
+                                  
+                    <span id="/posts/Gameframework-Config进阶篇/" class="leancloud_visitors" data-flag-title="Gameframework-Config进阶篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_13.jpg
+cover: https://pics.images.ac.cn/image/5eb5512b3b4c2.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xlsx、xls辅助器做准备。</p>
+</blockquote>
+<h2 id="1配置模块重写">1.配置模块重写</h2>
+<p>之前问过作者为什么不用dynamic去实现配置模块,作者说框架比较早了当时的解决方案就写成这样了,确实GF框架很早之前就出来了,而且使用dynamic的环境是.net4.0以上,随着时代和技术的发展,到如今dynamic可以满足使用条件了,就让这篇文章来重写Config模块吧!首先需要把ConfigData结构体改成以下所示:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ConfigData</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> <span style="color:#66d9ef">dynamic</span> m_Value;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> Type m_Type;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> ConfigData(<span style="color:#66d9ef">dynamic</span> m_Value, Type m_Type)
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">this</span>.m_Value = m_Value;
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">this</span>.m_Type = m_Type;
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">dynamic</span> Value
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_Value;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">public</span> Type Type
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">get</span>
+</span></span><span style="display:flex;"><span>	        {
+</span></span><span style="display:flex;"><span>	            <span style="color:#66d9ef">return</span> m_Type;
+</span></span><span style="display:flex;"><span>	        }
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>这里用class还是struct看个人需求,在初探篇里面已经说清楚了,如果数据比较少但是频繁取用的话建议改成class,由测试结果而言还是比较倾向使用struct的,ConfigData数据改变以后就需要调整DefaultConfigHelper里AddConfig的代码了,具体修改方案如下图所示:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">bool</span> AddConfig(<span style="color:#66d9ef">string</span> configName, <span style="color:#66d9ef">string</span> configValue)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">dynamic</span> m_Value = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        Type m_Type = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> intValue = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> floatValue = <span style="color:#ae81ff">0f</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> boolValue = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">bool</span>.TryParse(configValue, <span style="color:#66d9ef">out</span> boolValue))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_Value = boolValue;
+</span></span><span style="display:flex;"><span>            m_Type = <span style="color:#66d9ef">typeof</span>(<span style="color:#66d9ef">bool</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">int</span>.TryParse(configValue, <span style="color:#66d9ef">out</span> intValue))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_Value = intValue;
+</span></span><span style="display:flex;"><span>            m_Type = <span style="color:#66d9ef">typeof</span>(<span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">float</span>.TryParse(configValue, <span style="color:#66d9ef">out</span> floatValue))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_Value = floatValue;
+</span></span><span style="display:flex;"><span>            m_Type = <span style="color:#66d9ef">typeof</span>(<span style="color:#66d9ef">float</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_Value = configValue;
+</span></span><span style="display:flex;"><span>            m_Type = <span style="color:#66d9ef">typeof</span>(<span style="color:#66d9ef">string</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> m_ConfigManager.AddConfig(configName, m_Value ,m_Type);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>对于dynamic赋值和用dynamic赋值都不需要进行拆箱和装箱的操作,左右类型不一致就会抛出异常,所以就需要用try-catch捕获代码可能出现的异常,之前模块中GetBool、GetInt、GetFloat等等接口换成GetValue和GetType的两种方法就足够使用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">dynamic</span> GetValue(<span style="color:#66d9ef">string</span> configName)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	    ConfigData configData;
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">if</span> (!m_ConfigDatas.TryGetValue(configName,<span style="color:#66d9ef">out</span> configData))
+</span></span><span style="display:flex;"><span>	    {
+</span></span><span style="display:flex;"><span>	        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> GameFrameworkException(Utility.Text.Format(<span style="color:#e6db74">&#34;Config name &#39;{0}&#39; is not exist.&#34;</span>, configName));
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> configData.Value;
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>至于其他细节问题需要对应修改的自行解决~</p>
+<h2 id="2修改后出现的问题">2.修改后出现的问题</h2>
+<p>经过一系列猛如虎的操作,如果出现报错了,各位不要惊慌。辛好提前踩过坑了(踩坑的时间确实有点长~),这里就直接说一下可能会遇到的问题。
+<img src="/img/post/Gameframework/config/exp2.png" alt="exp2">
+重新生成解决方案时,发现Unity中还是报了缺少Microsoft.CSharp的库,这时第一个想法就是Unity不能使用dynamic,这样真的是太失败了,先分析一下为什么还是会报错？解决方案的错误已经都解决了,这里报错可能是Unity的.Net环境比较低导致的,所以到PlyerSettings里去查看一下是不是有选择.Net环境的选项(是的,这个操作困扰了我4个多小时&hellip;),可以看到以下选择项(Api Compatibility Level)。
+<img src="/img/post/Gameframework/config/exp3.jpg" alt="exp3">
+可能不知道博主找到这个界面时,当时表情有多猥琐(换你干瞪眼半天,结果突然出现解决方案,应该和我相比好不到那里去~)。
+<img src="/img/post/Gameframework/config/look1.jpg" alt="look1">
+这里修改成4.x以后还是打包测试一下看看有没有具体的问题,在下测试了一下是没有任何问题的。</p>
+<h2 id="3为添加xlsx配置做准备">3.为添加xlsx配置做准备</h2>
+<p>直接网上查找C#读取xlxs和xls的工程,可以避免造轮子的话就不要造(毕竟造好轮子是个手艺活,在下这个脑力恐怕不行,而且浪费时间~),直接获取了网上现有的Demo工程即可,当然使用时发现了一些坑,改进以后打包成unitypackapge分享到csdn了,下面会给出链接,先来分析一下使用时遇到的问题~,首先System.Data.dll重复,直接删掉即可,其次下面评论说编辑器下可以使用,但是打包到平台就无法读取了,博主也是好奇就打包apk和exe测试了一下,发现确实无法正常显示数据了。直接将查看错误的工具导入到Unity重新打包发现只是文件找不到而已~,具体截图如下:
+<img src="/img/post/Gameframework/config/exp4.jpg" alt="exp4">
+直接把文件拷贝到报错路径再测试一下,如图所示:
+<img src="/img/post/Gameframework/config/exp5.jpg" alt="exp5">
+<a href="https://download.csdn.net/download/m0_37920739/12325205">Execl读取器</a>使用时出现其他问题欢迎交流~,对于Execl修改器博主完全不感冒的,毕竟在Unity中点击文件即可打开execl(当然电脑需要有execl),唯一问题就是文件共同读取会导致的以下情况：
+<img src="/img/post/Gameframework/config/exp6.jpg" alt="exp6">
+就是修改时无法使用Unity,其他没什么问题了,把execl关掉以后就可以正常了,当然有精神洁癖的大佬自行添加Unity下的execl修改器也是可以的,这样就不会冲突了。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/Unity%E6%89%93%E5%8C%85%E7%BD%91%E7%BB%9C%E8%A2%AB%E5%A2%99%E9%97%AE%E9%A2%98/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

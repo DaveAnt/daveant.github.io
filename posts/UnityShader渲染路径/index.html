@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader渲染路径 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5">
+				                            1.基本概念
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e5%90%84%e4%b8%aa%e6%b8%b2%e6%9f%93%e8%b7%af%e5%be%84%e5%8e%9f%e7%90%86">
+				                            2.各个渲染路径原理
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%86%85%e7%bd%ae%e5%85%89%e7%85%a7%e5%8f%98%e9%87%8f%e5%92%8c%e5%87%bd%e6%95%b0">
+				                            3.内置光照变量和函数
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader渲染路径</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader渲染路径</h1>
+                <div class="stuff">
+                    <span>May 1, 2020</span>
+                    <span>字数 3416</span>
+                                  
+                    <span id="/posts/UnityShader渲染路径/" class="leancloud_visitors" data-flag-title="UnityShader渲染路径">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_9.jpg
+cover: https://pics.images.ac.cn/image/5eb5524c699ea.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需要和光源打交道,需要为每个Pass指定它的渲染路径。</p>
+</blockquote>
+<h2 id="1基本概念">1.基本概念</h2>
+<p>渲染路径可以理解为Unity说：“哦,原来这位程序猿需要这种渲染路径,那么我把光源处理完成后,把光照信息存放在对应的数据里,这样程序猿就可以去访问啦!”,为Shader设置需要的渲染路径,该Shader的光照计算才能正确执行。<br>
+Unity支持多种类型的渲染路径,在Unity2018版本后有四种：前向渲染(Forward)、延迟渲染路径(Deferred)、顶点照明渲染路径(Legacy Vertex Lit)、延迟多光源动态阴影(Legacy Deferred(light prepass)),如果显卡不支持延迟渲染,Unity就会使用向前渲染。可以在Edit/Project Settings下设置Rendering Path。
+<img src="/img/post/Shader/rendering-path/exp1.jpg" alt="exp1">
+在Shader中设置每个Pass中的LightMode标签来实现,下面给出LightMode支持的渲染路径选项。</p>
+<table>
+<thead>
+<tr>
+<th>标签名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Always</td>
+<td>不管使用哪种渲染路径,该Pass总是会被渲染,但不会计算任何光照</td>
+</tr>
+<tr>
+<td>ForwardBase</td>
+<td>用于向前渲染,该Pass会计算环境光、最重要的平行光、逐顶点/Sh光源和Lightmaps</td>
+</tr>
+<tr>
+<td>ForwardAdd</td>
+<td>用于向前渲染,该Pass会计算额外的逐像素光源,每个Pass对应一个光源。</td>
+</tr>
+<tr>
+<td>Deferred</td>
+<td>用于延迟渲染,该Pass会渲染G缓冲(G-buffer)</td>
+</tr>
+<tr>
+<td>ShadowCaster</td>
+<td>把物体深度信息渲染到阴影映射纹理(shadowmap)或深度纹理</td>
+</tr>
+<tr>
+<td>PrepassBase</td>
+<td>用于遗留的延迟渲染,该Pass会渲染法线和高光反射的指数部分</td>
+</tr>
+<tr>
+<td>PrepassFinal</td>
+<td>用于遗留的延迟渲染,该Pass通过合并纹理、光照和自发光来渲染得到最后颜色</td>
+</tr>
+<tr>
+<td>Vertex、VertexLMRGB和VertexLM</td>
+<td>用于遗留的延迟渲染</td>
+</tr>
+</tbody>
+</table>
+<p>指定渲染路径标签相当于告诉Unity：“嘿,我这边使用向前渲染了,你把那些光照属性都按前向渲染的流程准备好,一会我就用了。”如果没有指定渲染路径,可能使光照变量无法被正确复杂,最终效果也会错误。<br>
+<a href="https://docs.unity3d.com/Manual/RenderingPaths.html">Unity官方文档</a>给出详细的渲染路径的特性比较(是否支持逐像素光照、半透明物体、实时阴影)和性能比较,根据发布平台区选择合适的渲染路径,如果平台不支持这个渲染路径,Unity会自动降低一级渲染路径。</p>
+<h2 id="2各个渲染路径原理">2.各个渲染路径原理</h2>
+<ul>
+<li>前向渲染路径<br>
+前向渲染路径是传统常用的渲染路径,每次完整的前向渲染,需要渲染对象的渲染图元,并计算颜色缓冲区、深度缓冲区。利用深度缓冲决定片元是否更新颜色缓冲区,伪代码如下：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(each primitive in <span style="color:#66d9ef">this</span> model){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(each fragment covered by <span style="color:#66d9ef">this</span> primitive){
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(failed in depth test)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">//如果没有通过深度测试,说明片元不可见</span>
+</span></span><span style="display:flex;"><span>			discard
+</span></span><span style="display:flex;"><span>		}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">//如果可见进行光照计算</span>
+</span></span><span style="display:flex;"><span>			float4 color <span style="color:#f92672">=</span> Shading(materialInfo,pos,normal,lightDir,viewDir);
+</span></span><span style="display:flex;"><span>			writeFrameBuffer(fragment,color);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果物体在n个逐像素光源的影响区域内,那么该物体需要执行n个Pass,每个Pass计算逐像素光源的光照结果,然后在帧缓冲中把这些光照结果混合起来得到最终的颜色值。<br>
+在Unity中前向渲染有三种处理(即照亮物体)的方式：<b>逐顶点处理、逐像素处理、球谐函数(SH)处理。</b>而决定光源使用哪种处理模式取决于它的光源类型和渲染模式,渲染模式(Render Mode)设置成Important时,意味着和Unity说:“嘿伙计,这个光源很重要,把它当成逐像素来处理！”。
+<img src="/img/post/Shader/rendering-path/exp2.jpg" alt="exp2">
+Unity会按照这些光源对物体影响程度(该物体的远近、光源强度等),按照重要程序对光源进行排序,其中一定数目的光源进行逐像素方式处理,最多四个光源按逐顶点方式处理,剩下就使用最差的SH方式处理了。前向渲染有两种Pass：Base Pass和Additionnal Pass,需要注意的是<b><font color="red">必须使用下面截图的编译指令,才可以得到正确的光照变量,在Additional Paass渲染设置中,必须开启混合模式Blend One One,防止这个渲染模式覆盖掉之前得到渲染结果。</font></b>
+<img src="/img/post/Shader/rendering-path/exp3.jpg" alt="exp3">
+渲染路径的设置为了告诉Pass在前向渲染中的位置,然后底层的渲染引擎会进行相关计算并填充一些内置变量(比如_LightColor0)。</p>
+<ul>
+<li>顶点照明渲染路径<br>
+顶点照明渲染路径是对硬件配置要求最少、运算性能最高的,但同时也是得到效果最差的渲染路径,它不支持那些逐像素才能得到的效果,比如阴影、法线映射、高精度的高光反射等。实际上它仅仅是前向渲染的其中一个备胎(子集),所有可以在顶点照明渲染路径中实现的功能都可以在前向渲染路径中完成。<br>
+顶点照明渲染路径只是使用了逐顶点方式计算光照,确实没有神奇的地方。<b><font color="red">实际上在前向渲染路径中可以计算一些逐顶点的光源</font></b>,但如果选择使用顶点照明渲染路径,那么Unity会填充那些逐顶点相关的光源变量,意味着逐像素的光照变量是无法使用的。<br>
+顶点照明渲染路径通常在一个Pass中可以完成对物体的渲染。在这个Pass中会计算所有光照的所关心的光源变量,并且这个计算时按逐顶点处理的,<b><font color="red">是Unity中最快的渲染路径,并且具有最广泛的硬件支持,随着近代配置越来越高,顶点光照相关设定可能在未来版本会被移除(其实5.0版本就开始考虑是否需要舍弃了)</font></b></li>
+<li>延迟渲染路径<br>
+当场景存在大量实时光源时,前向渲染性能会急速下降,这时就可以使用古老延迟渲染技术,延迟渲染会利用额外的G缓冲来存储表面法线、位置、用于光照计算的材质属性。<br>
+延迟渲染使用2个Pass来处理,第一个Pass不进行任何光照计算,而仅仅是片源可见,然后把相关信息保存到G缓冲中,第二Pass进行真正的光照计算,伪代码如下：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Pass 1{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(each primitive in <span style="color:#66d9ef">this</span> model)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span>(each fragment covered by <span style="color:#66d9ef">this</span> primitive)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span>(failed in depth test){
+</span></span><span style="display:flex;"><span>				<span style="color:#75715e">//没有通过深度测试,不可见</span>
+</span></span><span style="display:flex;"><span>				discard
+</span></span><span style="display:flex;"><span>			}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>				writeGBuffer(materialInfo,pos,normal,lightDir,viewDir);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>Pass 2{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//利用G缓冲的信息进行真正的光照计算</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(each pixel in the screen)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(the pixel is valid){
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">//从G缓冲中读取相关信息</span>
+</span></span><span style="display:flex;"><span>			readGBuffer(pixel,materialInfo,pos,normal,lightDir,viewDir);
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">//根据读取到的信息进行光照计算</span>
+</span></span><span style="display:flex;"><span>			float4 color <span style="color:#f92672">=</span> Shading(materialInfo,pos,normal,lightDir,viewDir);
+</span></span><span style="display:flex;"><span>			writeGBuffer(pixel,color);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>延迟渲染的效率和场景光源数量无关,而是使用屏幕空间大小有关,这是因为需要的信息存储在缓冲区中,而这些缓冲区可以理解成一张张2D图像,计算实际上就是这些图像空间中进行的。<br>
+游戏中存在大量实时光照时可以使用延迟渲染路径来优化,但是有以下缺点：<b><font color="red">不支持真正的抗锯齿功能、不能处理半透明物体、显卡必须支持Multiple Rener Targets,Shader Mode3.0以上,深度渲染纹理以及双面渲染缓冲。</font></b></p>
+<h2 id="3内置光照变量和函数">3.内置光照变量和函数</h2>
+<p><b>前向渲染可用的光照变量</b></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_LightColor0</td>
+<td>float4</td>
+<td>该Pass处理的逐像素光源的颜色</td>
+</tr>
+<tr>
+<td>_WorldSpaceLightPos0</td>
+<td>float4</td>
+<td>_WorldSpaceLightPos0.xyz是该Pass逐像素光源的位置,平行光w为0不然是1</td>
+</tr>
+<tr>
+<td>_LightMatrix0</td>
+<td>float4*4</td>
+<td>从世间空间到光源空间的变换矩阵。可以用于采样cookie和光强衰减纹理</td>
+</tr>
+<tr>
+<td>unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0</td>
+<td>float4</td>
+<td>仅用于Base Pass,前4个非重要的点光源在世界空间中的位置</td>
+</tr>
+<tr>
+<td>unity_4LightAtten0</td>
+<td>float4</td>
+<td>仅用于Base Pass,存储了前4个非重要的点光源的衰减因子</td>
+</tr>
+<tr>
+<td>unity_LightColor</td>
+<td>half4</td>
+<td>仅用于Base Pass,存储了前4个非重要的点光源的颜色</td>
+</tr>
+</tbody>
+</table>
+<p><b>前向渲染可用的光照函数</b></p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float3 WorldSpaceLightDir(float4 v)</td>
+<td>仅可用于前向渲染中。输入模型空间中的顶点位置,返回世界空间中从该点到光源的光照方向。内部使用了UnityWorldSpaceLightDir函数。没有被归一化。</td>
+</tr>
+<tr>
+<td>float3 UnityWorldSpaceLightDir(float4 v)</td>
+<td>仅可用于前向渲染中。输入世间空间中的顶点位置,返回世间空间中从该点到光源的光照方向。没有被归一化。</td>
+</tr>
+<tr>
+<td>float3 ObjectSpaceLightDir(float4 v)</td>
+<td>仅可用于前向渲染中。输入模型空间中的顶点位置,返回模型空间中从该点到光源的光照方向。没有被归一化。</td>
+</tr>
+<tr>
+<td>float3 Shade4PointLights(&hellip;)</td>
+<td>仅可用于前向渲染中,计算四个点光源的光照,它的参数是已经打包进矢量的光照数据,通常就是以上表中的内置变量。</td>
+</tr>
+</tbody>
+</table>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+<p><b>顶点照明渲染可用的光照变量</b></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unity_LightColor</td>
+<td>half4</td>
+<td>光源颜色</td>
+</tr>
+<tr>
+<td>unity_LightPosition</td>
+<td>float4</td>
+<td>xyz分量是视角空间中光源位置。如果光源是平行光,那么z分量值为0,其他光源类型z分量为1</td>
+</tr>
+<tr>
+<td>unity_LightAtten</td>
+<td>half4</td>
+<td>光源衰减因子。如果光源是聚光灯,x分量是cos(spotAngle/2),y分量是I/cos(spotAngle/4);如果是其他类型的光源,x分量是-1,y分量是1,z分量是衰减平方,w是光源范围开根号结果</td>
+</tr>
+<tr>
+<td>unity_SpotDirection</td>
+<td>float4</td>
+<td>如果光源是聚灯光的话,值为视角空间的聚光灯的位置,如果是其他类型光源,值为(0,0,1,0)</td>
+</tr>
+</tbody>
+</table>
+<p><b>顶点照明渲染可用的光照函数</b></p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float3 ShadedVertexLights(float4 vertex,float normal)</td>
+<td>输入模型空间中的顶点位置和法线,计算四个逐顶点光源的光照以及环境光。内部实现实际上调用ShadeVertexLightsFull函数</td>
+</tr>
+<tr>
+<td>float3 ShadeVertexLightsFull(float4 vertex,float3 normal,int light Count,bool spotLight)</td>
+<td>输入模型空间中懂得顶点位置和法线,计算lightCount光源数目以及环境光,如果spotLight值为true,那么这些光源会被当成聚光灯来处理,虽然结果会精确,但计算更加耗时;否则按点光源处理。</td>
+</tr>
+</tbody>
+</table>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+<p><b>延迟渲染可用的光照变量</b></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_LightColor</td>
+<td>float4</td>
+<td>光源颜色</td>
+</tr>
+<tr>
+<td>_LightMatrix0</td>
+<td>float4*4</td>
+<td>从世间空间到光源空间的变换矩阵,可以用于采用cookie和光强衰减纹理</td>
+</tr>
+</tbody>
+</table>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

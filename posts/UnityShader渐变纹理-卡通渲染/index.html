@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader渐变纹理-卡通渲染 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e6%b8%90%e5%8f%98%e7%ba%b9%e7%90%86%e5%ae%9e%e6%88%98">
+				                            1.渐变纹理实战
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%b8%90%e5%8f%98%e7%ba%b9%e7%90%86%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">
+				                            2.渐变纹理注意事项
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e5%8d%a1%e9%80%9a%e6%b8%b2%e6%9f%93">
+				                            3.卡通渲染
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader渐变纹理-卡通渲染</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader渐变纹理-卡通渲染</h1>
+                <div class="stuff">
+                    <span>April 28, 2020</span>
+                    <span>字数 2846</span>
+                                  
+                    <span id="/posts/UnityShader渐变纹理-卡通渲染/" class="leancloud_visitors" data-flag-title="UnityShader渐变纹理-卡通渲染">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_12.jpg
+cover: https://pics.images.ac.cn/image/5eb552a861369.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>渐变纹理通常是用来控制漫反射结果的,也可以得到插画、卡通风格的渲染效果,使用这种技术可以保证物体的的轮廓线相比于之前使用传统漫反射光照更加明显。</p>
+</blockquote>
+<h2 id="1渐变纹理实战">1.渐变纹理实战</h2>
+<p>最开始在渲染中使用纹理是为了定义物体的颜色,后来发现纹理其实可以用于存储任何表面属性,常见用法就是使用渐变纹理来控制漫反射光照的结果,在之前计算漫反射光照是,都是使用表面法线和光照方向的点积结果与材质的反射率相乘来得到表面漫反射光照。使用这种技术可以保证物体的轮廓相比于之前使用传统漫反射光照更加明显,而且能够提供多种色调变化。很多卡通、插画风格的渲染都使用这种技术。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Ramp Texture&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_RampTex (<span style="color:#e6db74">&#34;Ramp Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_Specular (<span style="color:#e6db74">&#34;Specular&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_Gloss (<span style="color:#e6db74">&#34;Gloss&#34;</span>, Range(8.<span style="color:#a6e22e">0</span>, 256)) <span style="color:#f92672">=</span> 20
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Pass { 
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _RampTex;
+</span></span><span style="display:flex;"><span>			float4 _RampTex_ST;
+</span></span><span style="display:flex;"><span>			fixed4 _Specular;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _Gloss;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span> <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX(v.<span style="color:#a6e22e">texcoord</span>, _RampTex);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#75715e">// Use the texture to sample the diffuse color</span>
+</span></span><span style="display:flex;"><span>				fixed halfLambert  <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">5</span> <span style="color:#f92672">*</span> dot(worldNormal, worldLightDir) <span style="color:#f92672">+</span> 0.<span style="color:#a6e22e">5</span>;
+</span></span><span style="display:flex;"><span>				fixed3 diffuseColor <span style="color:#f92672">=</span> tex2D(_RampTex, fixed2(halfLambert, halfLambert)).<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> diffuseColor;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 viewDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceViewDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				fixed3 halfDir <span style="color:#f92672">=</span> normalize(worldLightDir <span style="color:#f92672">+</span> viewDir);
+</span></span><span style="display:flex;"><span>				fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> pow(max(0, dot(worldNormal, halfDir)), _Gloss);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse <span style="color:#f92672">+</span> specular, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Specular&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>首先使用内置TRANSFORM_TEX宏定义来计算经过平铺和偏移后的纹理坐标。接下来就是关键的片元着色器代码,很久之前提到过<a href="https://daveant.gitee.io/posts/UnityShader%E5%9F%BA%E6%9C%AC%E5%85%89%E7%85%A7/">半兰伯特模型</a>,通过这个理论把halfLambert的范围映射到[0,1]之间,之后使用它来构建纹理坐标,按老规矩渐变纹理_RampTex进行采样,然后把渐变纹理采样得到颜色和材质颜色_Color相乘,得到最终的漫反射颜色。这里使用黑-灰-白渐变纹理,通常用于卡通渲染的效果。
+<img src="/img/post/Shader/gradual_normal/exp1.jpg" alt="exp1"></p>
+<h2 id="2渐变纹理注意事项">2.渐变纹理注意事项</h2>
+<p>将渐变纹理的Warp Mode设置为Clamp模式,以防止纹理进行采样时由于浮点数精度而造成的问题,下面给出Warp Mode分别为Repeat和Clamp模式的效果对比。
+<img src="/img/post/Shader/gradual_normal/exp2.jpg" alt="exp2">
+使用Repeat模式在高光区域会出现黑点,这是由于浮点精度造成的,使用fixed2(halfLambert,halfLambert)对渐变纹理进行采样时,虽然理论上halfLambert的值在[0,1]之间,但会有类似1.001这样值出现,<b><font color="red">如果使用Repeat模式,就会舍弃整数部分保留小数部分,导致最终的值接近0(即黑色),因此高光区会有黑点出现。</font></b></p>
+<h2 id="3卡通渲染">3.卡通渲染</h2>
+<p>单单使用渐变纹理控制面反射色调是完全不够,因为卡通风格的高光效果也和基本光照不同,在卡通风格中,模型的高光往往是一块分界明显的纯色区域。除了光照模型不同外,卡通风格通常还需要在物体边缘部分绘制轮廓(添加描边)。描边类型可以分成以下五种方式。</p>
+<ul>
+<li>基于观察角度和表面法线的轮廓。这种方式使用视角方向和表面法线的点乘结果来得到轮廓线的信息,这种方式简单快速在一个Pass中得到渲染结果,但局限性很大,很多模型渲染出来的描边效果都不尽人意。</li>
+<li>过程式几何轮廓。这种方式的核心式使用两个Pass渲染,第一个Pass渲染背面的面片,并使用某些技术让其轮廓可见;第二个Pass再正常渲染正面的面片。这种方式的优点在于快速有效,并且适用绝大多数表面平滑的模型,但是它不适合类似于立方体的平面模型。</li>
+<li>基于图像处理的轮廓线渲染,这种方式优点在于适用于任何类型的模型,但它也有自身的局限,一些升读和法线变化很小的的轮廓无法被检测出来,例如桌子上的纸张。</li>
+<li>基于轮廓边检测的轮廓线渲染。以上方式都无法实现轮廓线的独特风格渲染,如果精确检测出轮廓边就可渲染出独特的风格,检测公式很简单,检查和这条边相邻两个三角面片是否满足以下条件：<b>(n<sub>0</sub>.v&gt;0)≠(n<sub>1</sub>.v&gt;0)</b><br>
+其中n<sub>0</sub>和n<sub>1</sub>分别表示两个相邻三角面片的法向,v是从视角到该边任意顶点的方向,公式本质在于检查两个相邻的三角面片是否朝向正面、背面。它的缺点是除了实现相对复杂外,还会导致动画连贯性问题。</li>
+<li>最后一个就是混合上述几种渲染方式,比如首先找到精确的轮廓边,把模型和轮廓边渲染到纹理中,再使用图像处理方法识别出轮廓线,并在图像空间下进行风格化渲染。</li>
+</ul>
+<p>卡通风格的高光往往是模型上一块块分界明显的纯色区域,所以可以使用以下方式去实现卡通高光：<br>
+<b>float spec = dot(worldNormal,worldHalfDir);<br>
+Spec = step(threshold,spec);</b><br>
+这种简单粗暴的方式很出现明显的锯齿,所以公式可以调整成以下：<br>
+<b>float spec = dot(worldNormal,worldHalfDir);<br>
+Spec = lerp(0,1,smoothstep(-w,w,spec - threshold));</b><br>
+上面用了很多内置函数,接下来给出表格。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>step</td>
+<td>实现阀值比较,参数1是参考值,参数2是待比较数值。如果参数1&gt;=参数2返回1,不然返回0。</td>
+</tr>
+<tr>
+<td>smoothstep</td>
+<td>w是很小的值,当spec - threshold小于-w返回0;大于w返回1。</td>
+</tr>
+<tr>
+<td>lerp</td>
+<td>0到1之间进行插值,从而达到平滑实现抗锯齿效果。</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Cartoon Shader&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_MainTex (<span style="color:#e6db74">&#34;Main Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_Ramp (<span style="color:#e6db74">&#34;Ramp Texture&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_Outline (<span style="color:#e6db74">&#34;Outline&#34;</span>, Range(0, 10)) <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">1</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_OutlineColor</span> (<span style="color:#e6db74">&#34;Outline Color&#34;</span>, Color) <span style="color:#f92672">=</span> (0, 0, 0, 1)
+</span></span><span style="display:flex;"><span>		_Specular (<span style="color:#e6db74">&#34;Specular&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_SpecularScale (<span style="color:#e6db74">&#34;Specular Scale&#34;</span>, Range(0, 0.<span style="color:#a6e22e">1</span>)) <span style="color:#f92672">=</span> 0.<span style="color:#a6e22e">01</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>		Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> <span style="color:#e6db74">&#34;Queue&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Geometry&#34;</span>}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			NAME <span style="color:#e6db74">&#34;OUTLINE&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			Cull Front
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _Outline;
+</span></span><span style="display:flex;"><span>			fixed4 _OutlineColor;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>			}; 
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>			    float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span> (a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				float4 pos <span style="color:#f92672">=</span> mul(UNITY_MATRIX_MV, v.<span style="color:#a6e22e">vertex</span>); 
+</span></span><span style="display:flex;"><span>				float3 normal <span style="color:#f92672">=</span> mul((float3x3)UNITY_MATRIX_IT_MV, v.<span style="color:#a6e22e">normal</span>);  
+</span></span><span style="display:flex;"><span>				normal.<span style="color:#a6e22e">z</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>0.<span style="color:#a6e22e">5</span>;
+</span></span><span style="display:flex;"><span>				pos <span style="color:#f92672">=</span> pos <span style="color:#f92672">+</span> float4(normalize(normal), 0) <span style="color:#f92672">*</span> _Outline;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> mul(UNITY_MATRIX_P, pos);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			float4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target { 
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> float4(_OutlineColor.<span style="color:#a6e22e">rgb</span>, 1);               
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Pass {
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			Cull Back
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma multi_compile_fwdbase
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityCG.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;AutoLight.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;UnityShaderVariables.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			sampler2D _Ramp;
+</span></span><span style="display:flex;"><span>			fixed4 _Specular;
+</span></span><span style="display:flex;"><span>			fixed _SpecularScale;
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float4 tangent : TANGENT;
+</span></span><span style="display:flex;"><span>			}; 
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : POSITION;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 worldNormal : TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float3 worldPos : TEXCOORD2;
+</span></span><span style="display:flex;"><span>				SHADOW_COORDS(3)
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span> (a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos( v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span> <span style="color:#f92672">=</span> TRANSFORM_TEX (v.<span style="color:#a6e22e">texcoord</span>, _MainTex);
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldNormal</span>  <span style="color:#f92672">=</span> UnityObjectToWorldNormal(v.<span style="color:#a6e22e">normal</span>);
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">worldPos</span> <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, v.<span style="color:#a6e22e">vertex</span>).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				TRANSFER_SHADOW(o);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			float4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target { 
+</span></span><span style="display:flex;"><span>				fixed3 worldNormal <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">worldNormal</span>);
+</span></span><span style="display:flex;"><span>				fixed3 worldLightDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceLightDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				fixed3 worldViewDir <span style="color:#f92672">=</span> normalize(UnityWorldSpaceViewDir(i.<span style="color:#a6e22e">worldPos</span>));
+</span></span><span style="display:flex;"><span>				fixed3 worldHalfDir <span style="color:#f92672">=</span> normalize(worldLightDir <span style="color:#f92672">+</span> worldViewDir);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed4 c <span style="color:#f92672">=</span> tex2D (_MainTex, i.<span style="color:#a6e22e">uv</span>);
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				UNITY_LIGHT_ATTENUATION(atten, i, i.<span style="color:#a6e22e">worldPos</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed diff <span style="color:#f92672">=</span>  dot(worldNormal, worldLightDir);
+</span></span><span style="display:flex;"><span>				diff <span style="color:#f92672">=</span> (diff <span style="color:#f92672">*</span> 0.<span style="color:#a6e22e">5</span> <span style="color:#f92672">+</span> 0.<span style="color:#a6e22e">5</span>) <span style="color:#f92672">*</span> atten;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> tex2D(_Ramp, float2(diff, diff)).<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed spec <span style="color:#f92672">=</span> dot(worldNormal, worldHalfDir);
+</span></span><span style="display:flex;"><span>				fixed w <span style="color:#f92672">=</span> fwidth(spec) <span style="color:#f92672">*</span> 2.<span style="color:#a6e22e">0</span>;
+</span></span><span style="display:flex;"><span>				fixed3 specular <span style="color:#f92672">=</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> lerp(0, 1, smoothstep(<span style="color:#f92672">-</span>w, w, spec <span style="color:#f92672">+</span> _SpecularScale <span style="color:#f92672">-</span> 1)) <span style="color:#f92672">*</span> step(0.<span style="color:#a6e22e">0001</span>, _SpecularScale);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse <span style="color:#f92672">+</span> specular, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其中Properties标签中,_Ramp用于控制漫反射的渐变纹理,_Outline用于控制轮廓线宽度,_OutlineColor对应轮廓线颜色,_Specular是高光反射颜色,_SpecularScale用于控制计算高光反射时的阀值。<br>
+在第一个Pass中使用了Cull指令把正面三角面片剔除,表面只渲染背面,为它定义了名字是描边是常见的效果,为了以后不重复编写此Pass,直接调用它的名字即可。第一个Pass对法线进行处理是为了尽可能避免背面扩张后顶点挡住正面的面片。
+第二Pass剔除背面渲染,在顶点着色器中使用Unity内置的SHADOW_COORDS和TRSNDFER_DHSDOW来计算阴影所需要的各个变量。最后片元着色器中把计算光照需要的各个方向矢量进行归一化处理,然后计算材质的反射率albedo和环境光照ambient,接着使用内置的UNITY_LIGHT_ATTENUATION宏计算当前世界坐标下的阴影值,随后计算半兰伯特漫反射系数和阴影值相乘得到最终的漫反射系数,使用漫反射系数对渐变纹理_Ramp进行采样,将结果和材质反射率、光照颜色相乘作为最终的漫反射光照。
+高光反射使用了fwidth对高光边界进行抗锯齿处理,并将计算而得到高光反射系数和高光反射颜色相乘,得到高光反射的光照部分。为了完全消除高光反射光照,使用了step(0.0001,_SpecularScale),将_SpecularScale设置为0即可。
+<img src="/img/post/Shader/gradual_normal/exp3.jpg" alt="exp3"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%87%B9%E5%87%B8%E6%98%A0%E5%B0%84/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            UnityShader遮罩纹理</a>
+                            <p>前言 在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%81%AE%E7%BD%A9%E7%BA%B9%E7%90%86/" title="UnityShader遮罩纹理">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_11.jpg" alt="UnityShader遮罩纹理">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

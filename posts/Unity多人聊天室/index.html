@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Unity多人聊天室 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e5%ae%a2%e6%88%b7%e7%ab%af%e5%bc%80%e5%8f%91">
+				                            1.客户端开发
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%bc%80%e5%8f%91">
+				                            2.服务器开发
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e6%89%a9%e5%b1%95%e6%80%9d%e8%80%83">
+				                            3.扩展思考
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Unity多人聊天室</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Unity多人聊天室</h1>
+                <div class="stuff">
+                    <span>August 27, 2020</span>
+                    <span>字数 1913</span>
+                                  
+                    <span id="/posts/Unity多人聊天室/" class="leancloud_visitors" data-flag-title="Unity多人聊天室">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Unity/wallhaven_4.jpg
+cover: https://ae01.alicdn.com/kf/Hb2b9f21ac44247209e4e7066a5ea67ccE.jpg-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>使用Socket(Tcp)编写多人聊天室的服务器端,使用Unity进行简单聊天界面的客户端搭建。对Socket编程有恐惧的新手按照文章步骤来可以深入理解Socket和多线程相关知识点。</p>
+</blockquote>
+<h2 id="1客户端开发">1.客户端开发</h2>
+<p>首先把客户端聊天界面搭建起来,因为聊天消息可能长度不一,需要不规则长度的滑动方式。可尝试使用博主近期开发的<a href="https://github.com/DaveAnt/ScollCircleMaker">ScrollCircleMaker</a>快速搭建聊天场景,然后加个输入框和发送按钮即可,具体效果图如下所示：
+<img src="/img/post/Unity/group_chat/exp1.png" alt="exp1">
+接下来尝试编写客户端通信代码,开启子线程进行网络消息接受、发送,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine.UI;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net.Sockets;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Text;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Threading;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UIPlugs.ScrollCircleMaker;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChatNetwork</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> m_ipAddress = <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> m_port = <span style="color:#ae81ff">2345</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Socket m_clientSocket;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Thread m_reCeiveThread;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">byte</span>[] m_msgData = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[<span style="color:#ae81ff">1024</span>];<span style="color:#75715e">//消息数据容器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> m_message;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> InputField  m_input;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> GameObject m_content;
+</span></span><span style="display:flex;"><span>    GroupChatMaker chatMaker;
+</span></span><span style="display:flex;"><span>    SynchronizationContext mainThreadSynContext;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        m_input.text = <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        chatMaker = (GroupChatMaker)m_content.GetComponent&lt;ScrollCircleComponent&gt;().baseMaker;
+</span></span><span style="display:flex;"><span>        mainThreadSynContext = SynchronizationContext.Current;
+</span></span><span style="display:flex;"><span>        ConnentToServer();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//开启一个线程专门用于接收消息</span>
+</span></span><span style="display:flex;"><span>        m_reCeiveThread = <span style="color:#66d9ef">new</span> Thread(ReceiveMessage);
+</span></span><span style="display:flex;"><span>        m_reCeiveThread.Start();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Update()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (!<span style="color:#66d9ef">string</span>.IsNullOrEmpty(m_message))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_input.text += <span style="color:#e6db74">&#34;\n&#34;</span> + m_message;
+</span></span><span style="display:flex;"><span>            Debug.Log(<span style="color:#e6db74">&#34;m_message:&#34;</span> + m_message);
+</span></span><span style="display:flex;"><span>            m_message = <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> ConnentToServer()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        m_clientSocket = <span style="color:#66d9ef">new</span> Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+</span></span><span style="display:flex;"><span>        Debug.Log(<span style="color:#e6db74">&#34;开始连接服务器&#34;</span>);
+</span></span><span style="display:flex;"><span>        m_clientSocket.Connect(<span style="color:#66d9ef">new</span> IPEndPoint(IPAddress.Parse(m_ipAddress), m_port));
+</span></span><span style="display:flex;"><span>        Debug.Log(<span style="color:#e6db74">&#34;连接服务器执行完毕&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> SendMessageToServer(<span style="color:#66d9ef">string</span> message)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span>[] data = Encoding.UTF8.GetBytes(message);
+</span></span><span style="display:flex;"><span>        m_clientSocket.Send(data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> OnSendMessageClick()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> message = m_input.text;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(message))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Debug.LogWarning(<span style="color:#e6db74">&#34;发送消息不能为空&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        SendMessageToServer(message);
+</span></span><span style="display:flex;"><span>        m_input.text = <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> ReceiveMessage()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//在接受消息之前判断Socket是否连接</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_clientSocket.Connected == <span style="color:#66d9ef">false</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> length = m_clientSocket.Receive(m_msgData);<span style="color:#75715e">//这里会等待接收消息，程序暂停，只有接收到消息后才会继续执行</span>
+</span></span><span style="display:flex;"><span>            m_message = Encoding.UTF8.GetString(m_msgData, <span style="color:#ae81ff">0</span>, length);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">string</span> chat_message = m_message;
+</span></span><span style="display:flex;"><span>            mainThreadSynContext.Send(<span style="color:#66d9ef">new</span> SendOrPostCallback((ss) =&gt;
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                chatMaker.Helper.AddItem(chat_message);
+</span></span><span style="display:flex;"><span>            }), <span style="color:#66d9ef">null</span>);<span style="color:#75715e">//通知主线程</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> OnDestroy()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        m_clientSocket.Shutdown(SocketShutdown.Both);
+</span></span><span style="display:flex;"><span>        m_clientSocket.Close();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>需要注意调用插件接口时,必须回到主线程调用,<b><font color="red">Unity引擎相关操作为了确保线程安全都是不支持在子线程中调用的</font></b>,博主使用<b><font color="red">SynchronizationContext的Send方法</font></b>通知主线程调用插件接口。到这里就成功完成客户端的所有问题了,将ChatNetwork脚本随便挂载到场景中,指定对应按钮(OnSendMessageClick是按钮注册事件)和输入框,至于插件如何快速创建不规则单行滑动可参考Demo-8。</p>
+<h2 id="2服务器开发">2.服务器开发</h2>
+<p>接下来尝试开发多人聊天服务器,通过死循环将请求的Socket保存到列表中,只要有客户端发送消息,服务器就广播列表中所有Socket,客户端接受到消息后做出相应的显示效果。这里把保存列表里的Socket稍微封装了一下,封装成ClientSocket类,里面多了监听消息函数和Socket链接状态。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Linq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Text;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Threading.Tasks;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net.Sockets;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Threading;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> ChatRoomServer
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> m_ipAddress = <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> m_port = <span style="color:#ae81ff">2345</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> Socket m_tcpServerServer;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> List&lt;ClientSocket&gt; m_clientList = <span style="color:#66d9ef">new</span> List&lt;ClientSocket&gt;();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_tcpServerServer = <span style="color:#66d9ef">new</span> Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+</span></span><span style="display:flex;"><span>            m_tcpServerServer.Bind(<span style="color:#66d9ef">new</span> IPEndPoint(IPAddress.Parse(m_ipAddress), m_port));           
+</span></span><span style="display:flex;"><span>            m_tcpServerServer.Listen(<span style="color:#ae81ff">1000</span>);<span style="color:#75715e">//2.设置监听数量上限</span>
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;server running...&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Socket tcpClientSocket = m_tcpServerServer.Accept();
+</span></span><span style="display:flex;"><span>                Console.WriteLine(<span style="color:#e6db74">&#34;a client is connected!&#34;</span>);
+</span></span><span style="display:flex;"><span>                ClientSocket client = <span style="color:#66d9ef">new</span> ClientSocket(tcpClientSocket);
+</span></span><span style="display:flex;"><span>                m_clientList.Add(client);
+</span></span><span style="display:flex;"><span>                Thread.Sleep(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> BroadCastMessage(<span style="color:#66d9ef">string</span> message)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (m_clientList == <span style="color:#66d9ef">null</span> || m_clientList.Count == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span>[] data = Encoding.UTF8.GetBytes(message);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//用来存储已经断开连接的客户端</span>
+</span></span><span style="display:flex;"><span>            List&lt;ClientSocket&gt; notConnected = <span style="color:#66d9ef">new</span> List&lt;ClientSocket&gt;();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">var</span> client <span style="color:#66d9ef">in</span> m_clientList)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>( client.IsConnected)
+</span></span><span style="display:flex;"><span>                    client.SendMessageToClient(data);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                    notConnected.Add(client);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">var</span> item <span style="color:#66d9ef">in</span> notConnected)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                m_clientList.Remove(item);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientSocket</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> Socket m_clientSocket;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">bool</span> IsConnected
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">get</span> { <span style="color:#66d9ef">return</span> m_clientSocket.Connected; }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">byte</span>[] m_data = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[<span style="color:#ae81ff">1024</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> ClientSocket(Socket s)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_clientSocket = s;
+</span></span><span style="display:flex;"><span>            ThreadPool.QueueUserWorkItem(<span style="color:#66d9ef">new</span> WaitCallback(ReceiveMessage));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> ReceiveMessage(<span style="color:#66d9ef">object</span> a)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (m_clientSocket.Poll(<span style="color:#ae81ff">10</span>, SelectMode.SelectRead))
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    m_clientSocket.Shutdown(SocketShutdown.Both);
+</span></span><span style="display:flex;"><span>                    m_clientSocket.Close();
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> length = m_clientSocket.Receive(m_data);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">string</span> message = Encoding.UTF8.GetString(m_data, <span style="color:#ae81ff">0</span>, length);
+</span></span><span style="display:flex;"><span>                IPEndPoint tmpSocketPoint = m_clientSocket.RemoteEndPoint <span style="color:#66d9ef">as</span> IPEndPoint;
+</span></span><span style="display:flex;"><span>                Console.WriteLine(tmpSocketPoint.Address.ToString() + <span style="color:#e6db74">&#34;:&#34;</span> + message);
+</span></span><span style="display:flex;"><span>                Program.BroadCastMessage(message);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SendMessageToClient(<span style="color:#66d9ef">byte</span>[] messageData)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            m_clientSocket.Send(messageData);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>服务器<b><font color="red">通过m_clientSocket.Poll试图读取客户端数据,如果10毫秒内读取不到,那么判断已经断开连接,直接清理掉这个客户端的Socket。</font></b><br>
+通过以上代码得知发送消息也是字节流,这样为什么不把接收到的字节流直接广播出去呢？而是要转换成字符串再转换回字节流？主要目的是剪裁字节流大小,原因有以下三点:</p>
+<ul>
+<li>1.每次都没有这么大数据传输(客户端会做限制,就像微信消息总是有发送上限的),直接发送1024的字节流增加服务器带宽压力。</li>
+<li>2.数组由于没有清理过,在接收消息后,数组后面元素可能存储上次数据,导致客户端接收消息混乱(比如说第一条消息比第二条消息长的时候)。</li>
+<li>3.客户端接受了无用的数据,实在没有必要。</li>
+</ul>
+<p>到这里多人聊天功能就全部完成了,具体效果图如下：
+<img src="/img/post/Unity/group_chat/exp2.png" alt="exp2"></p>
+<h2 id="3扩展思考">3.扩展思考</h2>
+<p>在局域网中想尝试在不同机器上进行通信以上代码是不行的,因为代码客户端的请求直接写成本地IP(127.0.0.1),把相同程序放到不同机器上会导致链接服务器失败,可以尝试打开命令行输入以下指令查看本机所对应的局域网IP,然后将127.0.0.1全部改成所示的IP：
+<img src="/img/post/Unity/group_chat/exp3.png" alt="exp3">
+如何搭建出可以商用的多人聊天服务器框架？以上代码Socket处理性能很差,最大连接数估计不能超过100个,不然服务器压力会很大(虽然消息监听已经使用多线程),这里提供三个解决方案来提高链接数量。</p>
+<ul>
+<li>1.通过IOCP模型重写多人聊天服务器。</li>
+<li>2.采用分布式架构降低服务器压力。</li>
+<li>3.自行百度(怎么设计分布式高并发聊天室的服务器架构?),哈哈哈哈,是不是太臭不要脸了。</li>
+</ul>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/ETServer%E6%B6%88%E6%81%AF%E5%88%86%E6%8B%A8%E6%9C%BA%E5%88%B6/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_9.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            ScrollCircleMaker Tutorial</a>
+                            <p>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel....</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" title="ScrollCircleMaker Tutorial">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_8.jpg" alt="ScrollCircleMaker Tutorial">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            Unity的Dots技术入门</a>
+                            <p>前言 看过Dots技术宣传片,当时确实被震惊到了,脑袋里闪过一句话:时代变了!大人。DOTS是Data...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Unity%E7%9A%84Dots%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8/" title="Unity的Dots技术入门">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_7.jpg" alt="Unity的Dots技术入门">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            ScrollCircleMaker-Obsolete教程</a>
+                            <p>前言 ScrollCircleMaker-Obsolete v1.0已经放弃维护，目前基于ScriptableProcessor为核心重写了一版Scrol...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" title="ScrollCircleMaker-Obsolete教程">
+                            <img class="relateimg" src="/img/title/Unity/wallhaven_6.jpg" alt="ScrollCircleMaker-Obsolete教程">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

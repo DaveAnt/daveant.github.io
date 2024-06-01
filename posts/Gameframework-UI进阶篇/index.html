@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>Gameframework-UI进阶篇 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e8%b0%83%e6%95%b4%e4%bc%98%e5%8c%96ui%e6%a8%a1%e5%9d%97">
+				                            1.调整优化UI模块
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%bc%98%e7%a7%80%e7%9a%84ui%e6%a8%a1%e5%9d%97">
+				                            2.优秀的UI模块
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        Gameframework-UI进阶篇</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                Gameframework-UI进阶篇</h1>
+                <div class="stuff">
+                    <span>March 10, 2020</span>
+                    <span>字数 1110</span>
+                                  
+                    <span id="/posts/Gameframework-UI进阶篇/" class="leancloud_visitors" data-flag-title="Gameframework-UI进阶篇">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Gameframework/wallhaven_10.jpg
+cover: https://pics.images.ac.cn/image/5eb54e27d003a.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>UI模块初探里发现的小问题,按钮点击没有反应和每个界面都添加了Canvas,所以准备调整一下。</p>
+</blockquote>
+<h2 id="1调整优化ui模块">1.调整优化UI模块</h2>
+<p>按钮点击没有反应可能的原因在初章已经说过了,这里把每个挂载到界面的Canvas组件移除掉,然后在UIComponent的Start函数m_InstanceRoot实例化根Canvas组件,具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (m_InstanceRoot == <span style="color:#66d9ef">null</span>)  <span style="color:#75715e">//默认根层级</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>        m_InstanceRoot = <span style="color:#66d9ef">new</span> GameObject(<span style="color:#e6db74">&#34;UI Root&#34;</span>);
+</span></span><span style="display:flex;"><span>        m_InstanceRoot.transform.SetParent(transform);
+</span></span><span style="display:flex;"><span>        m_InstanceRoot.transform.localScale = Vector3.one;
+</span></span><span style="display:flex;"><span>        m_InstanceRoot.AddComponent&lt;Canvas&gt;().renderMode = RenderMode.ScreenSpaceOverlay;
+</span></span><span style="display:flex;"><span>        m_InstanceRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span>        CanvasScaler tmpCanvasScaler = m_InstanceRoot.AddComponent&lt;CanvasScaler&gt;();
+</span></span><span style="display:flex;"><span>        tmpCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+</span></span><span style="display:flex;"><span>        tmpCanvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+</span></span><span style="display:flex;"><span>        tmpCanvasScaler.referenceResolution = <span style="color:#66d9ef">new</span> Vector2(Screen.width,Screen.height);
+</span></span><span style="display:flex;"><span>        tmpCanvasScaler.matchWidthOrHeight = <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>先把界面Canvas删掉以后,在UGuiForm.cs的OnDepthChanged函数会报错误,所以这里直接修改功能的实现,如图所示:<br>
+调整界面层级
+<img src="/img/post/Gameframework/ui/exp4.png" alt="exp4">
+获取界面深度
+<img src="/img/post/Gameframework/ui/exp5.png" alt="exp5">
+主要是这些地方要修改一下,这个接口具体功能各位可以百度查找一下,Unity渲染顺序是越深度越下端越往后去渲染出来,所以你要界面被遮挡,就将0传递进去就表示这个层级下它是最早被渲染的,这样后面渲染的就会把它遮挡住了。到这里基本就修复完成,接下来深度的了解一下GF框架设计巧妙之处。</p>
+<h2 id="2优秀的ui模块">2.优秀的UI模块</h2>
+<p>系统看过UI框架之后,明显感觉UI模块功能详细和可编辑可拓展,之前也写过基于Unity的小框架,只不过很多地方都在代码中定死。看过UIComponent这个脚本之后,就感觉UI框架会很不错,很多可控的参数,可以调整需要实例化多少个界面组,之前写的代码如下(可以和GF写的UI模块进行对比):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> InitGame()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        GameObject UIRoot = <span style="color:#66d9ef">new</span> GameObject(<span style="color:#e6db74">&#34;UIRoot&#34;</span>);
+</span></span><span style="display:flex;"><span>        GameObject uiCamera = <span style="color:#66d9ef">new</span> GameObject(<span style="color:#e6db74">&#34;uiCamera&#34;</span>);
+</span></span><span style="display:flex;"><span>        GameObject NormalRoot = <span style="color:#66d9ef">new</span> GameObject(TagInfos.NormalRoot);
+</span></span><span style="display:flex;"><span>        GameObject PopupRoot = <span style="color:#66d9ef">new</span> GameObject(TagInfos.PopupRoot);
+</span></span><span style="display:flex;"><span>        GameObject HintRoot = <span style="color:#66d9ef">new</span> GameObject(TagInfos.HintRoot);
+</span></span><span style="display:flex;"><span>        GameObject ToppestRoot = <span style="color:#66d9ef">new</span> GameObject(TagInfos.ToppestRoot);
+</span></span><span style="display:flex;"><span>        GameObject EffectRoot = <span style="color:#66d9ef">new</span> GameObject(TagInfos.EffectRoot);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        uiCamera.transform.SetParent(UIRoot.transform);
+</span></span><span style="display:flex;"><span>        NormalRoot.transform.SetParent(UIRoot.transform);
+</span></span><span style="display:flex;"><span>        PopupRoot.transform.SetParent(UIRoot.transform);
+</span></span><span style="display:flex;"><span>        HintRoot.transform.SetParent(UIRoot.transform);
+</span></span><span style="display:flex;"><span>        ToppestRoot.transform.SetParent(UIRoot.transform);
+</span></span><span style="display:flex;"><span>        EffectRoot.transform.SetParent(UIRoot.transform);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        UIRoot.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        uiCamera.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        NormalRoot.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        PopupRoot.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        HintRoot.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        ToppestRoot.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        EffectRoot.layer = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//初始化画布组件</span>
+</span></span><span style="display:flex;"><span>        Camera camera = uiCamera.AddComponent&lt;Camera&gt;();
+</span></span><span style="display:flex;"><span>        Canvas canvas = UIRoot.AddComponent&lt;Canvas&gt;();
+</span></span><span style="display:flex;"><span>        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+</span></span><span style="display:flex;"><span>        canvas.worldCamera = camera;
+</span></span><span style="display:flex;"><span>        canvas.pixelPerfect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.planeDistance = <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>        canvas.sortingOrder = -<span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        CanvasScaler canvasScaler = UIRoot.AddComponent&lt;CanvasScaler&gt;();
+</span></span><span style="display:flex;"><span>        canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+</span></span><span style="display:flex;"><span>        canvasScaler.referenceResolution = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">1980</span>, <span style="color:#ae81ff">1080</span>);
+</span></span><span style="display:flex;"><span>        canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+</span></span><span style="display:flex;"><span>        canvasScaler.matchWidthOrHeight = <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        canvasScaler.referencePixelsPerUnit = <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>        UIRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//初始化相机组件</span>
+</span></span><span style="display:flex;"><span>        camera.clearFlags = CameraClearFlags.Depth;
+</span></span><span style="display:flex;"><span>        camera.cullingMask = <span style="color:#ae81ff">1</span> &lt;&lt; <span style="color:#ae81ff">5</span>;<span style="color:#75715e">//表示UI</span>
+</span></span><span style="display:flex;"><span>        camera.orthographic = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        camera.orthographicSize = <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        camera.nearClipPlane = -<span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        camera.farClipPlane = <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>        camera.depth = <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        uiCamera.AddComponent&lt;AudioListener&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//正常层级</span>
+</span></span><span style="display:flex;"><span>        canvas = NormalRoot.AddComponent&lt;Canvas&gt;();
+</span></span><span style="display:flex;"><span>        RectTransform rectTransform = canvas.transform <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMax = Vector2.one;
+</span></span><span style="display:flex;"><span>        rectTransform.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0.5f</span>, <span style="color:#ae81ff">0.5f</span>);
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMax = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        canvas.overrideSorting = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.pixelPerfect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.sortingOrder = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        NormalRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//弹窗口层级</span>
+</span></span><span style="display:flex;"><span>        canvas = PopupRoot.AddComponent&lt;Canvas&gt;();
+</span></span><span style="display:flex;"><span>        rectTransform = canvas.transform <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMax = Vector2.one;
+</span></span><span style="display:flex;"><span>        rectTransform.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0.5f</span>, <span style="color:#ae81ff">0.5f</span>);
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMax = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        canvas.overrideSorting = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.pixelPerfect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.sortingOrder = <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>        PopupRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//提示层级</span>
+</span></span><span style="display:flex;"><span>        canvas = HintRoot.AddComponent&lt;Canvas&gt;();
+</span></span><span style="display:flex;"><span>        rectTransform = canvas.transform <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMax = Vector2.one;
+</span></span><span style="display:flex;"><span>        rectTransform.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0.5f</span>, <span style="color:#ae81ff">0.5f</span>);
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMax = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        canvas.overrideSorting = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.pixelPerfect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.sortingOrder = <span style="color:#ae81ff">200</span>;
+</span></span><span style="display:flex;"><span>        HintRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//最高层级</span>
+</span></span><span style="display:flex;"><span>        canvas = ToppestRoot.AddComponent&lt;Canvas&gt;();
+</span></span><span style="display:flex;"><span>        rectTransform = canvas.transform <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMax = Vector2.one;
+</span></span><span style="display:flex;"><span>        rectTransform.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0.5f</span>, <span style="color:#ae81ff">0.5f</span>);
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMax = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        canvas.overrideSorting = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.pixelPerfect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.sortingOrder = <span style="color:#ae81ff">300</span>;
+</span></span><span style="display:flex;"><span>        ToppestRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//2D特效层级</span>
+</span></span><span style="display:flex;"><span>        canvas = EffectRoot.AddComponent&lt;Canvas&gt;();
+</span></span><span style="display:flex;"><span>        rectTransform = canvas.transform <span style="color:#66d9ef">as</span> RectTransform;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.anchorMax = Vector2.one;
+</span></span><span style="display:flex;"><span>        rectTransform.pivot = <span style="color:#66d9ef">new</span> Vector2(<span style="color:#ae81ff">0.5f</span>, <span style="color:#ae81ff">0.5f</span>);
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMax = Vector2.zero;
+</span></span><span style="display:flex;"><span>        rectTransform.offsetMin = Vector2.zero;
+</span></span><span style="display:flex;"><span>        canvas.overrideSorting = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.pixelPerfect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        canvas.sortingOrder = <span style="color:#ae81ff">400</span>;
+</span></span><span style="display:flex;"><span>        EffectRoot.AddComponent&lt;GraphicRaycaster&gt;();
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        DontDestroyOnLoad(UIRoot);
+</span></span><span style="display:flex;"><span>        DontDestroyOnLoad(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>优秀的框架应该暴露给使用者更多的可编辑可能性,而且GF框架还是写的很细腻,界面会挂载2个脚本（UIForm.cs和UGuiForm.cs),第一个感觉就是没有必要分开,将它们可以合起来的。但是思考之后,想清楚了UIForm是框架用来控制的（业务逻辑方面的）,UGuiForm主要是用来UI逻辑方面的控制,更好的高内聚低耦合。</p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/%E7%A9%BA%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            Gameframework-TaskPool初探篇</a>
+                            <p>构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-TaskPool%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-TaskPool初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_19.jpg" alt="Gameframework-TaskPool初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            Gameframework-Scene初探篇</a>
+                            <p>前言 Scene是特殊的资源,加载场景时会用到Unity自带的SceneManager实现场景加载,S...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Scene%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Scene初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_17.jpg" alt="Gameframework-Scene初探篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            Gameframework-Config进阶篇</a>
+                            <p>前言 初探篇分析了重写配置模块的思路,按照之前分析的思路尝试重写配置模块,然后为GF配置模块添加xls...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E8%BF%9B%E9%98%B6%E7%AF%87/" title="Gameframework-Config进阶篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_13.jpg" alt="Gameframework-Config进阶篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            Gameframework-Resource热更新</a>
+                            <p>正在构思中&hellip;...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Resource%E7%83%AD%E6%9B%B4%E6%96%B0/" title="Gameframework-Resource热更新">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_14.jpg" alt="Gameframework-Resource热更新">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            Gameframework-Config初探篇</a>
+                            <p>前言 听过游戏数值策划岗位的,都知道他们是为了游戏数值的平衡和制定,游戏中各种公式的设计,以及整个系统...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Gameframework-Config%E5%88%9D%E6%8E%A2%E7%AF%87/" title="Gameframework-Config初探篇">
+                            <img class="relateimg" src="/img/title/Gameframework/wallhaven_15.jpg" alt="Gameframework-Config初探篇">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

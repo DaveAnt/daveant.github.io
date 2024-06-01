@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>UnityShader遮罩纹理 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1%e9%81%ae%e7%bd%a9%e7%ba%b9%e7%90%86%e5%ae%9e%e6%88%98">
+				                            1.遮罩纹理实战
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2%e4%bc%98%e5%8c%96%e9%81%ae%e7%bd%a9%e7%ba%b9%e7%90%86">
+				                            2.优化遮罩纹理
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e6%a8%a1%e6%8b%9fdota2%e7%9a%84shader">
+				                            3.模拟Dota2的Shader
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        UnityShader遮罩纹理</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                UnityShader遮罩纹理</h1>
+                <div class="stuff">
+                    <span>April 29, 2020</span>
+                    <span>字数 1580</span>
+                                  
+                    <span id="/posts/UnityShader遮罩纹理/" class="leancloud_visitors" data-flag-title="UnityShader遮罩纹理">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <!--cover: /img/title/Shader/wallhaven_11.jpg
+cover: https://pics.images.ac.cn/image/5eb552b2d9edd.html-->
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>在很多商业游戏中都可以见到遮罩纹理的身影,使用遮罩纹理可以更加细腻的控制光照,比如某区域高光更加强烈点,而某区域的高光弱点。</p>
+</blockquote>
+<h2 id="1遮罩纹理实战">1.遮罩纹理实战</h2>
+<p>使用遮罩纹理的流程一般是:通过采样得到的遮罩纹理纹素值,然后使用其中某几个通道的值来与某种表面属性进行相乘,这样当该通道的值为0时可以保护表面不受该属性的影响,总而言之使用遮罩纹理可以让美术人员更加精确(像素级别)控制模型表面的各种性质。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Mask Texture&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_MainTex (<span style="color:#e6db74">&#34;Main Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_BumpMap (<span style="color:#e6db74">&#34;Normal Map&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bump&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_BumpScale(<span style="color:#e6db74">&#34;Bump Scale&#34;</span>, Float) <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_SpecularMask</span> (<span style="color:#e6db74">&#34;Specular Mask&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_SpecularScale (<span style="color:#e6db74">&#34;Specular Scale&#34;</span>, Float) <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_Specular</span> (<span style="color:#e6db74">&#34;Specular&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_Gloss (<span style="color:#e6db74">&#34;Gloss&#34;</span>, Range(8.<span style="color:#a6e22e">0</span>, 256)) <span style="color:#f92672">=</span> 20
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Pass { 
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			sampler2D _BumpMap;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _BumpScale;
+</span></span><span style="display:flex;"><span>			sampler2D _SpecularMask;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _SpecularScale;
+</span></span><span style="display:flex;"><span>			fixed4 _Specular;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _Gloss;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 tangent : TANGENT;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 lightDir: TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float3 viewDir : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span>.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">=</span> v.<span style="color:#a6e22e">texcoord</span>.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*</span> _MainTex_ST.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">+</span> _MainTex_ST.<span style="color:#a6e22e">zw</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				TANGENT_SPACE_ROTATION;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">lightDir</span> <span style="color:#f92672">=</span> mul(rotation, ObjSpaceLightDir(v.<span style="color:#a6e22e">vertex</span>)).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">viewDir</span> <span style="color:#f92672">=</span> mul(rotation, ObjSpaceViewDir(v.<span style="color:#a6e22e">vertex</span>)).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>			 	fixed3 tangentLightDir <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">lightDir</span>);
+</span></span><span style="display:flex;"><span>				fixed3 tangentViewDir <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">viewDir</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				fixed3 tangentNormal <span style="color:#f92672">=</span> UnpackNormal(tex2D(_BumpMap, i.<span style="color:#a6e22e">uv</span>));
+</span></span><span style="display:flex;"><span>				tangentNormal.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*=</span> _BumpScale;
+</span></span><span style="display:flex;"><span>				tangentNormal.<span style="color:#a6e22e">z</span> <span style="color:#f92672">=</span> sqrt(1.<span style="color:#a6e22e">0</span> <span style="color:#f92672">-</span> saturate(dot(tangentNormal.<span style="color:#a6e22e">xy</span>, tangentNormal.<span style="color:#a6e22e">xy</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> tex2D(_MainTex, i.<span style="color:#a6e22e">uv</span>).<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0, dot(tangentNormal, tangentLightDir));
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>			 	fixed3 halfDir <span style="color:#f92672">=</span> normalize(tangentLightDir <span style="color:#f92672">+</span> tangentViewDir);
+</span></span><span style="display:flex;"><span>			 	<span style="color:#75715e">// Get the mask value</span>
+</span></span><span style="display:flex;"><span>			 	fixed specularMask <span style="color:#f92672">=</span> tex2D(_SpecularMask, i.<span style="color:#a6e22e">uv</span>).<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span> _SpecularScale;
+</span></span><span style="display:flex;"><span>			 	<span style="color:#75715e">// Compute specular term with the specular mask</span>
+</span></span><span style="display:flex;"><span>			 	fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> pow(max(0, dot(tangentNormal, halfDir)), _Gloss) <span style="color:#f92672">*</span> specularMask;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse <span style="color:#f92672">+</span> specular, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Specular&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>_SpecularMask即是高光反射遮罩纹理、_SpecularScale则是控制遮罩影响度的系数。以上Shader中的主纹理_MainTex、法线纹理_BumpMap和遮罩纹理_SpecularMask定义了共同的纹理属性变量_MainTex_ST。这意味着在材质面板中修改主纹理的平铺系数、偏移系数同时影响三个纹理的采样。目的是优化插值寄存器空间,防止顶点着色器迅速占满。
+需要使用遮罩纹理的地方是片元着色器,在计算高光反射式,首先对遮罩纹理_SpecularMask进行采样。由于遮罩纹理每个纹素rbg纹理其实都是一样的,表明该点对应的高光反射强度,这里使用r分量计算掩码值。最后为了可以控制高光反射的强度,得到的掩码值和_SpecularScale相乘。最终效果如图：
+<img src="/img/post/Shader/mask_texture/exp1.jpg" alt="exp1"></p>
+<h2 id="2优化遮罩纹理">2.优化遮罩纹理</h2>
+<p>使用最终遮罩纹理其实有很多空间被浪费—它的rgb分量存储的都是同个值。在实际游戏开发中,往往会充分利用遮罩纹理中每个颜色通道来存储不同的表面属性。遮罩纹理不限于保护某些区域使它们免于修改,而是存储任何希望逐像素控制的表面属性,通常高光反射存储R通道,把边缘光照强制存储在G通道,把高光反射的指数存储在B通道,最后把自发光存储在A通道。<br>
+在游戏《DOTA2》的开发中,开发人员为每个模型使用4张纹理：一张用于定义模型颜色,一张用于定义表面法线,另外两张都是遮罩纹理。两张纹理提供八种额外表面属性,使得游戏中的人物材质自由度很强可以支持很多高级的模型属性。具体如下图所示:
+<img src="/img/post/Shader/mask_texture/exp2.jpg" alt="exp2">
+有兴趣可以look<a href="https://support.steampowered.com/kb_article.php?ref=9334-YDXV-8590">Dota2角色设计指南</a>或<a href="http://www.dota2.com/workshop/requirements">Dota2官网</a>找到需要的模型。很感谢这些大佬式的公司可以分享出技术和资料以供学习的,毕竟站在巨人的肩膀上才可以看的更远。博主下载了<a href="http://www.dota2.com/workshop/requirements/ogre_magi">食人魔魔法师</a>用来进行学习。
+<img src="/img/post/Shader/mask_texture/exp3.jpg" alt="exp3"></p>
+<h2 id="3模拟dota2的shader">3.模拟Dota2的Shader</h2>
+<p>由于博主下载过来的资料中好像没有找到类似的Mask1和Mask2纹理贴图,所以就随便意思下按照以上截图中的说明,让每个Mask通道影响到它对应的地方,比如Mask1的g通道应该影响diffuse。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Unity Shaders Book/Chapter 7/Mask Texture&#34;</span> {
+</span></span><span style="display:flex;"><span>	Properties {
+</span></span><span style="display:flex;"><span>		_Color (<span style="color:#e6db74">&#34;Color Tint&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_MainTex (<span style="color:#e6db74">&#34;Main Tex&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_BumpMap (<span style="color:#e6db74">&#34;Normal Map&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bump&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_BumpScale(<span style="color:#e6db74">&#34;Bump Scale&#34;</span>, Float) <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_LightingMask</span> (<span style="color:#e6db74">&#34;Lighting Mask&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_DetailsMask (<span style="color:#e6db74">&#34;Details Mask&#34;</span>, 2D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;whihte&#34;</span> {}
+</span></span><span style="display:flex;"><span>		_SpecularScale (<span style="color:#e6db74">&#34;Specular Scale&#34;</span>, Float) <span style="color:#f92672">=</span> 1.<span style="color:#a6e22e">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_Specular</span> (<span style="color:#e6db74">&#34;Specular&#34;</span>, Color) <span style="color:#f92672">=</span> (1, 1, 1, 1)
+</span></span><span style="display:flex;"><span>		_Gloss (<span style="color:#e6db74">&#34;Gloss&#34;</span>, Range(8.<span style="color:#a6e22e">0</span>, 256)) <span style="color:#f92672">=</span> 20
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	SubShader {
+</span></span><span style="display:flex;"><span>		Pass { 
+</span></span><span style="display:flex;"><span>			Tags { <span style="color:#e6db74">&#34;LightMode&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ForwardBase&#34;</span> }
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			CGPROGRAM
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma vertex vert
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>pragma fragment frag
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			<span style="color:#960050;background-color:#1e0010">#</span>include <span style="color:#e6db74">&#34;Lighting.cginc&#34;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 _Color;
+</span></span><span style="display:flex;"><span>			sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>			float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>			sampler2D _BumpMap;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _BumpScale;
+</span></span><span style="display:flex;"><span>			sampler2D _LightingMask;
+</span></span><span style="display:flex;"><span>			sampler2D _DetailsMask;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _SpecularScale;
+</span></span><span style="display:flex;"><span>			fixed4 _Specular;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">float</span> _Gloss;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct a2v {
+</span></span><span style="display:flex;"><span>				float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>				float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>				float4 tangent : TANGENT;
+</span></span><span style="display:flex;"><span>				float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			struct v2f {
+</span></span><span style="display:flex;"><span>				float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>				float2 uv : TEXCOORD0;
+</span></span><span style="display:flex;"><span>				float3 lightDir: TEXCOORD1;
+</span></span><span style="display:flex;"><span>				float3 viewDir : TEXCOORD2;
+</span></span><span style="display:flex;"><span>			};
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			v2f <span style="color:#a6e22e">vert</span>(a2v v) {
+</span></span><span style="display:flex;"><span>				v2f o;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> UnityObjectToClipPos(v.<span style="color:#a6e22e">vertex</span>);			
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">uv</span>.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">=</span> v.<span style="color:#a6e22e">texcoord</span>.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*</span> _MainTex_ST.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">+</span> _MainTex_ST.<span style="color:#a6e22e">zw</span>;		
+</span></span><span style="display:flex;"><span>				TANGENT_SPACE_ROTATION;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">lightDir</span> <span style="color:#f92672">=</span> mul(rotation, ObjSpaceLightDir(v.<span style="color:#a6e22e">vertex</span>)).<span style="color:#a6e22e">xyz</span>;
+</span></span><span style="display:flex;"><span>				o.<span style="color:#a6e22e">viewDir</span> <span style="color:#f92672">=</span> mul(rotation, ObjSpaceViewDir(v.<span style="color:#a6e22e">vertex</span>)).<span style="color:#a6e22e">xyz</span>;				
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> o;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			fixed4 <span style="color:#a6e22e">frag</span>(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>			 	fixed3 tangentLightDir <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">lightDir</span>);
+</span></span><span style="display:flex;"><span>				fixed3 tangentViewDir <span style="color:#f92672">=</span> normalize(i.<span style="color:#a6e22e">viewDir</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				fixed3 tangentNormal <span style="color:#f92672">=</span> UnpackNormal(tex2D(_BumpMap, i.<span style="color:#a6e22e">uv</span>));
+</span></span><span style="display:flex;"><span>				tangentNormal.<span style="color:#a6e22e">xy</span> <span style="color:#f92672">*=</span> _BumpScale;
+</span></span><span style="display:flex;"><span>				tangentNormal.<span style="color:#a6e22e">z</span> <span style="color:#f92672">=</span> sqrt(1.<span style="color:#a6e22e">0</span> <span style="color:#f92672">-</span> saturate(dot(tangentNormal.<span style="color:#a6e22e">xy</span>, tangentNormal.<span style="color:#a6e22e">xy</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>				fixed3 albedo <span style="color:#f92672">=</span> tex2D(_MainTex, i.<span style="color:#a6e22e">uv</span>).<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Color.<span style="color:#a6e22e">rgb</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 ambient <span style="color:#f92672">=</span> UNITY_LIGHTMODEL_AMBIENT.<span style="color:#a6e22e">xyz</span> <span style="color:#f92672">*</span> albedo;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>				fixed3 diffuse <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> albedo <span style="color:#f92672">*</span> max(0, dot(tangentNormal, tangentLightDir)) <span style="color:#f92672">*</span> tex2D(_LightingMask, i.<span style="color:#a6e22e">uv</span>).<span style="color:#a6e22e">g</span>;
+</span></span><span style="display:flex;"><span>				
+</span></span><span style="display:flex;"><span>			 	fixed3 halfDir <span style="color:#f92672">=</span> normalize(tangentLightDir <span style="color:#f92672">+</span> tangentViewDir);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			 	fixed specularMask <span style="color:#f92672">=</span> tex2D(_LightingMask, i.<span style="color:#a6e22e">uv</span>).<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span> _SpecularScale;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			 	fixed3 specular <span style="color:#f92672">=</span> _LightColor0.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> _Specular.<span style="color:#a6e22e">rgb</span> <span style="color:#f92672">*</span> pow(max(0, dot(tangentNormal, halfDir)), _Gloss) <span style="color:#f92672">*</span> specularMask;
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> fixed4(ambient <span style="color:#f92672">+</span> diffuse <span style="color:#f92672">+</span> specular, 1.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			ENDCG
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	FallBack <span style="color:#e6db74">&#34;Specular&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>具体效果如下所示：
+<img src="/img/post/Shader/mask_texture/exp4.jpg" alt="exp4"></p>
+
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%90%E5%8F%98%E7%BA%B9%E7%90%86-%E5%8D%A1%E9%80%9A%E6%B8%B2%E6%9F%93/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            UnityShader复杂光照</a>
+                            <p>前言 基本光照篇中讲述了只适合场景中存在一个平行光的渲染,很明显单独掌握这点知识完全不够用的,所以需要...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E5%A4%8D%E6%9D%82%E5%85%89%E7%85%A7/" title="UnityShader复杂光照">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_17.jpg" alt="UnityShader复杂光照">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            UnityShader渲染路径</a>
+                            <p>前言 渲染路径(Rendering Path)决定光照是如何应用到UnityShader中的,因此如果需...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/" title="UnityShader渲染路径">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_9.jpg" alt="UnityShader渲染路径">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            UnityShader透明效果-扩展篇</a>
+                            <p>前言 在透明效果篇简单说明了透明测试和透明度混合简单实现,但有时会得到错误的效果,在最后扩展小节三里说...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C-%E6%89%A9%E5%B1%95%E7%AF%87/" title="UnityShader透明效果-扩展篇">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_16.jpg" alt="UnityShader透明效果-扩展篇">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            UnityShader透明效果</a>
+                            <p>前言 透明是游戏中经常要使用到的一种效果。在实际渲染中要实现透明效果,通常会在渲染模型时控制它的透明通...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/UnityShader%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C/" title="UnityShader透明效果">
+                            <img class="relateimg" src="/img/title/Shader/wallhaven_15.jpg" alt="UnityShader透明效果">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+

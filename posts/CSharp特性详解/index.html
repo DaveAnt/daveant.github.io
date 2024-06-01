@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate">
+  <title>CSharp特性详解 &middot; 星空城下无君王</title>
+  <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
+  <meta name="description" content="DaveAnt的游戏开发分享站">
+  <meta name="author" content="DaveAnt">
+  <link rel="icon" type="image/png" href="https://daveant.github.io/favicon.ico">
+  <link rel="stylesheet" href="/css/diaspora.css">
+  <link rel="stylesheet" href="/css/insight.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/waifu.css">
+  <link rel="stylesheet" href="/css/qplayer.css">
+  <link rel="stylesheet" href="/css/qplayer.init.css">
+  <script src="/js/qplayer.js"></script>
+  <script src="/js/qplayer.init.js"></script>  
+</head>
+<div class="waifu">
+<div class="waifu-tips"></div>
+<div class="waifu-tool">
+    <span class="fui-home"></span>
+    <span class="fui-top"></span>
+    <span class="fui-chat"></span>
+    <span class="fui-user"></span>
+    <span class="fui-eye"></span>
+    <span class="fui-cross"></span>
+</div>
+</div><body class="loading">
+        <div id="loading"></div>
+				<div id="nav"></div>
+				<div class="nav-user"></div>
+	
+	
+	
+	
+	
+	
+		<div class="toc-container" id="single">
+		    <div class="toc">
+				<aside class="toc-list">
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#%e5%89%8d%e8%a8%80">
+				                            前言
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#1serializable%e7%89%b9%e6%80%a7">
+				                            1.Serializable特性
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#2csharp%e9%a2%84%e5%ae%9a%e4%b9%89%e7%89%b9%e6%80%a7">
+				                            2.CSharp预定义特性
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#3%e8%87%aa%e5%ae%9a%e4%b9%89%e7%89%b9%e6%80%a7%e4%bd%bf%e7%94%a8">
+				                            3.自定义特性使用
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				        
+				            
+				                
+				                
+				                    
+				                    <ul>
+				                    
+				                    <ul>
+				                    
+				                    
+				                        <li>
+				                            <a class="toc-link" href="#4%e6%80%bb%e7%bb%93">
+				                            4.总结
+				                            </a>
+				                        </li>
+				                    
+				                    </ul>
+				                    
+				                    </ul>
+				                    
+				                
+				            
+				        
+				</aside>
+		    </div>
+		</div>
+	
+
+    <div id="single">
+    <div id="top" style="display: block;">
+        <div class="bar">
+        </div>
+        <a title="返回首页" class="icon-home" href="javascript:history.back()"></a>
+        <div title="播放/暂停" class="icon-play">
+        </div>
+        
+        <h3 class="subtitle" style="display: none;">
+        CSharp特性详解</h3>
+        <div class="social">
+            <div>
+                <div class="share">
+                    <a title="打赏作者[微信]" class="icon-wechat" href="javascript:;"></a>
+                    <a title="打赏作者[支付宝]" class="icon-alipay" href="javascript:;"></a>
+                </div>
+                <div id="wechatpay"> <img src="/img/inner/wechatpay.jpg"/> </div>
+                <div id="alipay"> <img src="/img/inner/alipay.jpg"/> </div>
+            </div>
+        </div>
+        <div class="scrollbar" style="width: 1.1636%;"></div>
+    </div>
+    <div class="section">
+        <div class="article">
+            <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
+                <h1 class="title">
+                CSharp特性详解</h1>
+                <div class="stuff">
+                    <span>August 10, 2020</span>
+                    <span>字数 2996</span>
+                                  
+                    <span id="/posts/CSharp特性详解/" class="leancloud_visitors" data-flag-title="CSharp特性详解">
+                        <i class="leancloud-visitors-count">极速模式</i>
+                    </span>
+                    
+                </div>
+                <div class="content">
+                    <h2 id="前言">前言</h2>
+<blockquote>
+<p>CSharp的特性(Attribute)是比较难以理解的技术,写代码时通常都要求写注释,为了是让其他程序猿快速理解代码含义,但是注释是写给&rsquo;人&rsquo;看的,突发奇想下：能不能写出给C#编译器看的注释,比如在某些代码段上打上标记,让编译器看到标记后,做出不同的运行效果？其实&hellip;这就是特性。</p>
+</blockquote>
+<h2 id="1serializable特性">1.Serializable特性</h2>
+<p>为什么Serializable特性作为小节1讲解呢？因为它是比较常见的特性,在网络对象进行传输时和数据库进行对象保存时,使用序列化特性后的类、结构体、枚举等等都可实现序列化操作的,<b><font color="red">SerializableAttribute仅是标记而已,它并不执行序列化动作。</font></b>这样为何在C#中必须要使用它呢？而其他语言好像没有C#这种技术,接下来展示序列化的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.IO;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Runtime.Serialization;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Runtime.Serialization.Formatters.Binary;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> TestPro
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [Serializable]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Age { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Sex { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Name { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Person person = <span style="color:#66d9ef">new</span> Person();
+</span></span><span style="display:flex;"><span>            person.Age = <span style="color:#ae81ff">18</span>;
+</span></span><span style="display:flex;"><span>            person.Sex = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            person.Name = <span style="color:#e6db74">&#34;李洛克&#34;</span>;
+</span></span><span style="display:flex;"><span>            IFormatter formatter = <span style="color:#66d9ef">new</span> BinaryFormatter();
+</span></span><span style="display:flex;"><span>            Stream stream = <span style="color:#66d9ef">new</span> FileStream(<span style="color:#e6db74">&#34;PersonFile.bin&#34;</span>, FileMode.Create,
+</span></span><span style="display:flex;"><span>            FileAccess.Write, FileShare.None);
+</span></span><span style="display:flex;"><span>            formatter.Serialize(stream, person);
+</span></span><span style="display:flex;"><span>            stream.Close();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>运行生成.dll和.exe以后,通过ildasm查看il代码分析下原因,以下截图就是Person类的。
+<img src="/img/post/Must/csharp-attribute/exp1.png" alt="exp1">
+<b><font color="red">只是多了serializable指令,而且比起其他特性,它的构造函数都没有执行({}红色区域是正常特性的构造函数执行位置)</font></b>,从il代码看不出什么情况,只能从功能去猜想序列化实现的原理,通常来说序列化某个自定义类时,都要程序猿去实现具体的序列化方法(比如C、Delphi等等低级语言),而C#使用<u>formatter.Serialize(stream, person)</u>即可,这是什么神仙接口呢？(没有具体告诉接口类里有那些属性、变量),但使用它可完成基本的序列化动作,其实C#是通过反射这种技术去完成序列化接口的,了解<a href="https://www.runoob.com/csharp/csharp-reflection.html">反射原理</a>的程序猿可自定义实现通用的序列化接口,反射打个比方就是文件夹下查找某个文件,使用序列化特性可以提高反射性能(查找对应类和获取到它的属性、变量性能),下面给出简单示意图。
+<img src="/img/post/Must/csharp-attribute/exp2.png" alt="exp2">
+使用序列化特性标记以后可提高性能,不用遍历程序集所有类、结构体,所以使用C#接口进行序列化时需要使用它,不然就自定义序列化接口(比如Person1使用Person1Serialize,Person2使用Person2Serialize)。如果对序列化方式不满意,但不想自定义序列化类,希望通过C#接口实现序列化也是有办法的,Person继承ISerializable,实现GetObjectData即可,比如序列化时给名字添加前缀或不序列化名字,代码实现如下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#a6e22e">	[Serializable]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> : ISerializable
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Age { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Sex { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Name { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">set</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> GetObjectData(SerializationInfo info, StreamingContext context)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            info.AddValue(<span style="color:#e6db74">&#34;Age&#34;</span>, Age);
+</span></span><span style="display:flex;"><span>            info.AddValue(<span style="color:#e6db74">&#34;Sex&#34;</span>, Sex);
+</span></span><span style="display:flex;"><span>            info.AddValue(<span style="color:#e6db74">&#34;Name&#34;</span>,<span style="color:#e6db74">&#34;火影忍者&#34;</span> + Name);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="2csharp预定义特性">2.CSharp预定义特性</h2>
+<p>小节2在网上可以普遍查询到的资料,这里简单说明下情况,.Net框架提供三种预定义特性:</p>
+<ul>
+<li>AttributeUsage</li>
+<li>Conditional</li>
+<li>Obsolete</li>
+</ul>
+<p>预定义特性 AttributeUsage 描述了如何使用自定义特性类。它规定了特性可应用到的项目的类型。规定该特性的语法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>	<span style="color:#f92672">[</span>AttributeUsage(
+</span></span><span style="display:flex;"><span>	   validon,<span style="color:#75715e">//AttributeTargets.Class...</span>
+</span></span><span style="display:flex;"><span>	   AllowMultiple<span style="color:#f92672">=</span>allowmultiple,<span style="color:#75715e">//该特性是否多用的</span>
+</span></span><span style="display:flex;"><span>	   Inherited<span style="color:#f92672">=</span>inherited<span style="color:#75715e">//该特性是否继承的</span>
+</span></span><span style="display:flex;"><span>	)<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>Conditional预定义特性标记了条件方法,其方法是否被执行依赖指定的预处理标识符是否被定义。具体代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#75715e">#define</span> DEBUG
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Diagnostics;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Debug</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [Conditional(&#34;DEBUG&#34;)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Log(<span style="color:#66d9ef">string</span> msg)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(msg);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [Conditional(&#34;DEBUG&#34;)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> LogWarning(<span style="color:#66d9ef">string</span> msg)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;w:&#34;</span> + msg);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [Conditional(&#34;DEBUG&#34;)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> LogError(<span style="color:#66d9ef">string</span> msg)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#e6db74">&#34;e:&#34;</span> + msg);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestPro</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Debug.Log(<span style="color:#e6db74">&#34;In Main function.&#34;</span>);
+</span></span><span style="display:flex;"><span>        Console.ReadKey();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Obsolete预定义特性标记了不应被使用的程序实体。它可以让您通知编译器丢弃某个特定的目标元素。具体代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Math</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">        [Obsolete(&#34;Don&#39;t use Cal, use gCal instead&#34;, true)]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Cal()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> gCal()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="3自定义特性使用">3.自定义特性使用</h2>
+<p>开发经常遇到的情况,就是结构体、类需要稍微调整下,但不想改动过大,而且改动逻辑是偏向行为方面的改变,比如消息协议类之前都是在单个服务器上运行的,经过实战以后发现服务器压力过大了,公司领导准备让程序猿优化服务器性能,首先想到的就是分布式服务器设计思路,<b><font color="red">把服务器功能分开后部署到不同服务器机器上(处理Http请求的服务器、数据库操作的服务器、网关服务器、处理游戏战斗模块服务器),这样可以很大程度减轻服务器的压力</font></b>(把拆分出的服务器还是部署到一个机器上,就和之前没有区别,可能还会增加本地服务器之间微小的通信消耗),所以需要大量重构代码,这时可使用自定义特性的奇淫技巧来解决这方面问题,修改过的伪代码如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> TestPro
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> AppType
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Gate,
+</span></span><span style="display:flex;"><span>        Realm,
+</span></span><span style="display:flex;"><span>        Http,
+</span></span><span style="display:flex;"><span>        DB
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MessageHandlerAttribute</span> : Attribute
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> AppType appType { <span style="color:#66d9ef">get</span>; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> Type selfType { <span style="color:#66d9ef">get</span>; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> MessageHandlerAttribute()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> MessageHandlerAttribute(AppType appType)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.appType = appType;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.selfType = <span style="color:#66d9ef">this</span>.GetType();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [MessageHandler(AppType.Gate)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CG_LoginMessageHandler</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RunTask()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;登陆网关服务器&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [MessageHandler(AppType.DB)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CD_RegisterMessageHandler</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> RunTask()
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Console.WriteLine(<span style="color:#e6db74">&#34;注册数据库服务器&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            CD_RegisterMessageHandler registerMessageHandler = <span style="color:#66d9ef">new</span> CD_RegisterMessageHandler();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> messageAttr = (MessageHandlerAttribute)Attribute.GetCustomAttribute(
+</span></span><span style="display:flex;"><span>                registerMessageHandler.GetType(), <span style="color:#66d9ef">typeof</span>(MessageHandlerAttribute));
+</span></span><span style="display:flex;"><span>            Console.WriteLine(messageAttr.appType);
+</span></span><span style="display:flex;"><span>            Console.WriteLine(messageAttr.selfType);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可能稍微修改代码就适合以上需求,正常来说Main函数里应该有个死循环,然后取用消息队列里的消息句柄类,通过特性附加的信息进行不同的处理(比如把消息分拨都其他服务器),这里只获取、打印出附加的特性信息,概念图应该如下所示:
+<img src="/img/post/Must/csharp-attribute/exp3.png" alt="exp3">
+可能分布式服务器的概念图是这样的,如果不符合逻辑的话或者不够严谨的话(随便画的),希望各位不要太过较真,可以理解大概意思即可。</p>
+<h2 id="4总结">4.总结</h2>
+<p>常用的内建特性表格:</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JsonProperty</td>
+<td>JsonConvert.SerializeObject指定json格式的键值名称</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>可序列化</td>
+</tr>
+<tr>
+<td>NonSerialized</td>
+<td>不可序列化,可在类内部变量使用,表面序列化时过滤掉它</td>
+</tr>
+<tr>
+<td>DLLImport</td>
+<td>非托管代码实现的</td>
+</tr>
+<tr>
+<td>WebMethod</td>
+<td>被作为web服务器对外暴露的方法</td>
+</tr>
+<tr>
+<td>Required</td>
+<td>必须存在的字段</td>
+</tr>
+<tr>
+<td>MaxLength(100)</td>
+<td>限制字符串、数组长度</td>
+</tr>
+<tr>
+<td>DebuggerStepThrough</td>
+<td>在代码打断点调试过程中,不进入该方法,加在不可能有错误的地方,方便调试</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Attribute是什么？<br>
+Attribute是一种可由用户自有定义的修饰符(Modifier),可以用来修饰各种需要被修饰的目标。可以对类、以及C#程序集中的成员进行进一步的描述。简单地说,Attribute就是一种“附着物”,就像牡蛎吸附在船底或礁石上一样。 <b><font color="red">这些附着物的作用是为它们附着体追加上额外的信息(这些信息保存在附着物的体内),通过Ildasm可以发现特性通常会被附带构造</font></b>,Attribute是程序代码一部分,它不会被编译器丢弃,而且还会被编译器编译进程序集(Assembly)的元数据里(Metadata)里。在程序运行时,可以随时从元数据(.NET的元数据是指程序集中的命名空间、类、方法、属性等信息,这些信息是可以通过Reflection读取出来的)中获取出这些附加信息,并可以决策程序的运行效果。</p>
+</li>
+<li>
+<p>Attribute与注释的区别<br>
+注释是对程序源代码的说明,主要目的是给人看的,在程序被编译的时候会被编译器所丢弃,因此它丝毫不会影响到程序的执行。Attribute是给编译器看的,CSharp内建的特性可以达到很多有趣的效果,比如跳过调式、提示函数过期、编译开关效果等,自定义的特性也可以自行决定附加信息的用处。</p>
+</li>
+<li>
+<p>特性小技巧<br>
+获取某个特性的所有类,然后通过特性类中的属性、变量筛选出指定类,具体代码如下：</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span>    <span style="color:#75715e">//获取某个特性,指定参数的类</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Type[] SeekFeatureAttr&lt;T&gt;(Type seekAttribute,Func&lt;Attribute[],T, <span style="color:#66d9ef">bool</span>&gt; seekFunc,T data)
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        Assembly assembly = Assembly.GetAssembly(seekAttribute);
+</span></span><span style="display:flex;"><span>        Type[] types = assembly.GetExportedTypes();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Type[] makerType = types.Where(element =&gt;{
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> seekFunc(Attribute.GetCustomAttributes(element, <span style="color:#66d9ef">true</span>),data);
+</span></span><span style="display:flex;"><span>        }).ToArray();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> makerType;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//筛选出特性委托</span>
+</span></span><span style="display:flex;"><span>    Func&lt;Attribute[],<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span>&gt; seekFunc = (MakerHandleAttributes,handleData) =&gt;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">foreach</span> (Attribute attribute <span style="color:#66d9ef">in</span> MakerHandleAttributes)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (attribute <span style="color:#66d9ef">is</span> MakerHandleAttribute)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                MakerHandleAttribute makerHandleAttribute = attribute <span style="color:#66d9ef">as</span> MakerHandleAttribute;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> ((<span style="color:#66d9ef">int</span>)makerHandleAttribute.makerHandle == handleData)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    };
+</span></span></code></pre></div>
+                    <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
+                        <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
+                        <a href="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">/mp3/她曾活过啊.mp3</a>
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relate">
+        <ul >
+            <h3 id="prev_next">
+                <em>相 关 文 章</em>
+                <span>
+                    <a href="javascript: window.scrollTo(0, 0);">
+                    返回顶部</a>
+                    
+                        <a href="https://daveant.github.io/posts/ScrollCircleMaker-Obsolete%E6%95%99%E7%A8%8B/" rel="prev">上一篇</a>
+                    
+                    
+                        <a href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" rel="next">下一篇</a>
+                    
+                </span>
+            </h3>
+            
+            
+            
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            编码解码和协议分析</a>
+                            <p>前言 计算器显示的字符最终存在内存里都是以二进制码形式的,最开始的计算机字符用ASCII编码去存储,A...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%E5%92%8C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" title="编码解码和协议分析">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_1.jpg" alt="编码解码和协议分析">
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            Socket基础知识</a>
+                            <p>前言 所谓套接字(Socket),就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。套接字...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/Socket%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="Socket基础知识">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_5.jpg" alt="Socket基础知识">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            CSharp中的多线程</a>
+                            <p>1.相关概念 进程 是Windows系统中的基本概念,它包含着运行程序所需要的资源。正在运行的应用程序在...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/CSharp%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="CSharp中的多线程">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_6.jpg" alt="CSharp中的多线程">
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        <div>
+                            <a class="relatea" href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            坐标空间变换</a>
+                            <p>前言 这是比较冷门的知识点,为什么需要不同坐标空间？在游戏开发时有很多不同的坐标空间定义,比如模型空间...</p>
+                        </div>
+                        
+                        <a href="https://daveant.github.io/posts/%E5%9D%90%E6%A0%87%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2/" title="坐标空间变换">
+                            <img class="relateimg" src="/img/title/Must/wallhaven_4.jpg" alt="坐标空间变换">
+                        </a>
+                    </li>
+                    
+                
+            
+        </ul>
+    </div>
+</div>
+    
+  <div class="post-comment" style="max-width:720px;margin: 0 auto;background:transparent;background-color:rgba(255,255,255,0.8);" id="single">
+    
+    <img src="/img/inner/icon-comment.png" style="display:inline-block;vertical-align:middle;"/>
+    <span style="font-size: 22px;font-weight: 700;vertical-align:middle;"> 评论 </span>
+    <div id="vcomments">
+        <script type="text/javascript">
+            $.getScript('/js/Valine.min.js', function() {
+              new Valine({
+                el: '#vcomments' ,
+                appId: 'qzl794vHGf8vva0aofpshidh-gzGzoHsz',
+                appKey: 'r9iB1MRnpaWEdKfUkk2FhWtg',
+                notify: 'false', 
+                verify: 'false', 
+                avatar:'robohash', 
+                placeholder: '小问号你是否有很多朋友？(注:回复会通过邮箱通知,填写邮箱才可生效。)',
+                visitor: 'true'
+            });
+          });
+        </script>       
+    </div>
+  </div>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+var siteTitle = "星空城下无君王";
+var homePage = "https://daveant.github.io/";
+
+var userAgentInfo = navigator.userAgent;
+var Agents = ["Android", "iPhone",
+    "SymbianOS", "Windows Phone", "iPod"];
+var isMobile = false;
+for (var v = 0; v < Agents.length; v++) {
+	if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	  isMobile = true;
+	  break;
+	}
+}
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            TAGS: '便签',
+        },
+        ROOT_URL: "https://daveant.github.io/",
+        CONTENT_URL: '/lunr.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);	
+
+</script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<script src="/js/wallpaperDefine.js"></script>
+<script src="/js/InsightSearch.js"></script>
+<script src="/js/live2d-main.js"></script>
+<script src="/js/waifu-tips.js"></script>
+<script src="/js/wallhaven.js"></script></body>
+</html>
+
