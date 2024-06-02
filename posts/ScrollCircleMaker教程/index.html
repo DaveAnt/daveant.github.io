@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate">
-  <title>ScrollCircleMaker Tutorial &middot; 星空城下无君王</title>
+  <title>ScrollCircleMaker教程 &middot; 星空城下无君王</title>
   <meta name="keywords" content="星空城下无君王, GF教程, ET教程, XLua教程, Unity游戏开发教程">
   <meta name="description" content="DaveAnt的游戏开发分享站">
   <meta name="author" content="DaveAnt">
@@ -72,8 +72,8 @@
 				                    
 				                    
 				                        <li>
-				                            <a class="toc-link" href="#1introduce">
-				                            1.Introduce
+				                            <a class="toc-link" href="#1%e6%8f%92%e4%bb%b6%e8%af%b4%e6%98%8e">
+				                            1.插件说明
 				                            </a>
 				                        </li>
 				                    
@@ -91,8 +91,8 @@
 				                    
 				                    
 				                        <li>
-				                            <a class="toc-link" href="#2examples">
-				                            2.Examples
+				                            <a class="toc-link" href="#2%e6%a0%b7%e5%bc%8f%e6%95%88%e6%9e%9c">
+				                            2.样式效果
 				                            </a>
 				                        </li>
 				                    
@@ -110,8 +110,8 @@
 				                    
 				                    
 				                        <li>
-				                            <a class="toc-link" href="#3document">
-				                            3.Document
+				                            <a class="toc-link" href="#3%e6%96%87%e6%a1%a3%e8%af%b4%e6%98%8e">
+				                            3.文档说明
 				                            </a>
 				                        </li>
 				                    
@@ -129,8 +129,8 @@
 				                    
 				                    
 				                        <li>
-				                            <a class="toc-link" href="#4design-concept">
-				                            4、Design concept
+				                            <a class="toc-link" href="#4%e8%ae%be%e8%ae%a1%e6%80%9d%e7%bb%b4%e5%af%bc%e5%9b%be">
+				                            4、设计思维导图
 				                            </a>
 				                        </li>
 				                    
@@ -153,7 +153,7 @@
         </div>
         
         <h3 class="subtitle" style="display: none;">
-        ScrollCircleMaker Tutorial</h3>
+        ScrollCircleMaker教程</h3>
         <div class="social">
             <div>
                 <div class="share">
@@ -170,22 +170,22 @@
         <div class="article">
             <div style="background:transparent;background-color:rgba(255,255,255,0.8);">
                 <h1 class="title">
-                ScrollCircleMaker Tutorial</h1>
+                ScrollCircleMaker教程</h1>
                 <div class="stuff">
                     <span>May 5, 2024</span>
-                    <span>字数 775</span>
+                    <span>字数 1501</span>
                                   
-                    <span id="/posts/ScrollCircleMaker Tutorial/" class="leancloud_visitors" data-flag-title="ScrollCircleMaker Tutorial">
+                    <span id="/posts/ScrollCircleMaker教程/" class="leancloud_visitors" data-flag-title="ScrollCircleMaker教程">
                         <i class="leancloud-visitors-count">极速模式</i>
                     </span>
                     
                 </div>
                 <div class="content">
                     <h1 id="scrollcirclemaker">ScrollCircleMaker</h1>
-<h1 id="1introduce">1.Introduce</h1>
-<p>ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&rsquo;re good to go. Developed based on the ScriptableProcessor plugin, it can completely replace Unity&rsquo;s ScrollRect or layout components.</p>
-<h1 id="2examples">2.Examples</h1>
-<p>Next, we will show some video examples of test cases.</p>
+<h1 id="1插件说明">1.插件说明</h1>
+<p>ScrollCircleMaker是一个高性能的循环滚动插件，支持所有布局结构。只需几行代码，您就可以轻松实现聊天框、背包、横幅等。只需创建一个UI/ScrollCircleView或右键单击附加一个ScrollCircleRect，就可以开始了。它基于ScriptableProcessor插件开发，可以完全取代Unity的ScrollRect或布局组件。</p>
+<h1 id="2样式效果">2.样式效果</h1>
+<p>视频预览：https://www.bilibili.com/video/BV1TJ4m1K7CC</p>
 <ul>
 <li>ChatPanel</li>
 </ul>
@@ -198,7 +198,7 @@
 <li>DemoPanel</li>
 </ul>
 <p><img src="/img/post/Unity/scrollcirclemaker/DemoPanel.png" alt="InspectorWin"></p>
-<p>Here, we will demonstrate the process of writing the logic code for the final video.</p>
+<p>在这里将演示上述效果的业务逻辑代码的写法。</p>
 <pre tabindex="0"><code>public class SampleScene : MonoBehaviour
 {
     bool sss,sss2;
@@ -337,14 +337,14 @@
         return (byte)(indexData.dataId % 2);
     }
 }
-</code></pre><h1 id="3document">3.Document</h1>
-<p><b>Callback Interface Documentation Table</b></p>
+</code></pre><h1 id="3文档说明">3.文档说明</h1>
+<p><b>回调接口文档表</b></p>
 <table>
 <thead>
 <tr>
-<th>Function name</th>
-<th>Parameter desc</th>
-<th>Function Purpose</th>
+<th>函数名称</th>
+<th>参数描述</th>
+<th>函数用途</th>
 </tr>
 </thead>
 <tbody>
@@ -380,13 +380,13 @@
 </tr>
 </tbody>
 </table>
-<p><b>Operation Interface Documentation Table</b></p>
+<p><b>操作接口文档表</b></p>
 <table>
 <thead>
 <tr>
-<th>Function name</th>
-<th>Parameter desc</th>
-<th>Function Purpose</th>
+<th>函数名称</th>
+<th>参数描述</th>
+<th>函数用途</th>
 </tr>
 </thead>
 <tbody>
@@ -432,21 +432,21 @@
 </tr>
 </tbody>
 </table>
-<p>Syntax for binding events related to Item.</p>
+<p>与相关绑定事件的语法。</p>
 <pre tabindex="0"><code>ScrollCircleRect.OnBindItemEvents(&#34;SampleItem2&#34;, UpdateItemEvent,InitItemEvent,DestroyItemEvent,GetItemEvent,ReleaseItemEvent);
-</code></pre><p>Normally, only the UpdateItemEvent needs to be specified. The GetItemEvent and ReleaseItemEvent can be replaced with other generic methods using the following approach.</p>
-<pre tabindex="0"><code>ScrollCircleRect.parser.itemHavior = ItemHavior.Out;//Move out of view, move into view
+</code></pre><p>通常只需要指定UpdateItemEvent。GetItemEvent和ReleaseItemEvent可以使用内置方法替换为其他行为。</p>
+<pre tabindex="0"><code>ScrollCircleRect.parser[0].itemHavior = ItemHavior.Out;//Move out of view, move into view
 </code></pre><ul>
 <li>Out Move out of view, move into view</li>
 <li>Scale Scale=0，Scale=1</li>
 <li>Alpha CanvasGroup.alpha=0，CanvasGroup.alpha=1</li>
 <li>Active SetActive(false)，SetActive(true)</li>
 </ul>
-<p>The following is the only mounted component of the plugin. The first half is similar to ScrollRect, and the second half is a layout module completed through the ScriptableProcessor plugin. <font color='red'>The plugin utilizes various built-in pooling techniques in Unity, supports preview in the Editor, supports animations (even for items that are recycled in a loop), and supports multiple layout combinations.</font> Layout adjustments can be made by inheriting from LayoutDataBase to override the layout or directly rewriting various callback functions.</p>
+<p>ScrollCircleRect是插件唯一挂载的组件。前半部分类似于ScrollRect，后半部分是通过ScriptableProcessor插件完成的布局模块<font color='red'>该插件利用了Unity中的各种内置池技术，支持编辑器中预览、动画效果、多种布局组合，滑动条使用</font>布局调整可以通过继承LayoutDataBase来重写布局，也可以直接重写各种布局回调函数。</p>
 <p><img src="/img/post/Unity/scrollcirclemaker/InspectorWin.png" alt="InspectorWin"></p>
-<h1 id="4design-concept">4、Design concept</h1>
+<h1 id="4设计思维导图">4、设计思维导图</h1>
 <p><img src="/img/post/Unity/scrollcirclemaker/Design.png" alt="Design">
-Here is the overall design concept of the plugin. Various modules utilize object pools and reference pools, so you don&rsquo;t have to worry about frequent garbage collection. However, if you have irregular items, please avoid enabling the &ldquo;repeat&rdquo; option because it uses compressed storage for GroupData, which may cause issues.</p>
+上述是插件设计理念。各种模块都使用对象池和引用池，所以您不必担心频繁的垃圾收集。如果是不规则的布局，请避免启用“repeat”选项，因为它会让GroupData的压缩存储，这会导致问题。</p>
 
                     <audio id="audio" loop="1" preload="auto" style="width: 100%;" controls="controls">
                         <source type="audio/mpeg" src="/mp3/%e5%a5%b9%e6%9b%be%e6%b4%bb%e8%bf%87%e5%95%8a.mp3">
@@ -464,7 +464,7 @@ Here is the overall design concept of the plugin. Various modules utilize object
                     <a href="javascript: window.scrollTo(0, 0);">
                     返回顶部</a>
                     
-                        <a href="https://daveant.github.io/posts/ScriptableProcessor-Tutorial/" rel="prev">上一篇</a>
+                        <a href="https://daveant.github.io/posts/ScriptableProcessor%E6%95%99%E7%A8%8B/" rel="prev">上一篇</a>
                     
                     
                 </span>

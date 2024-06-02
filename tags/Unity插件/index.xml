@@ -9,18 +9,18 @@
     <lastBuildDate>Sun, 05 May 2024 18:16:34 +0800</lastBuildDate>
     <atom:link href="https://daveant.github.io/tags/Unity%E6%8F%92%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ScrollCircleMaker Tutorial</title>
-      <link>https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/</link>
+      <title>ScrollCircleMaker教程</title>
+      <link>https://daveant.github.io/posts/ScrollCircleMaker%E6%95%99%E7%A8%8B/</link>
       <pubDate>Sun, 05 May 2024 18:16:34 +0800</pubDate>
-      <guid>https://daveant.github.io/posts/ScrollCircleMaker-Tutorial/</guid>
-      <description>ScrollCircleMaker 1.Introduce ScrollCircleMaker is a high-performance looping scroll plugin that supports all layout structures. With just a few lines of code, you can easily implement chat boxes, backpacks, banners, and more. Simply create a UI/ScrollCircleView or attach a ScrollCircleRect with a right-click, and you&amp;rsquo;re good to go. Developed based on</description>
+      <guid>https://daveant.github.io/posts/ScrollCircleMaker%E6%95%99%E7%A8%8B/</guid>
+      <description>ScrollCircleMaker 1.插件说明 ScrollCircleMaker是一个高性能的循环滚动插件，支持所有布局结构。只需几</description>
     </item>
     <item>
-      <title>ScrollCircleMaker Tutorial</title>
-      <link>https://daveant.github.io/posts/ScriptableProcessor-Tutorial/</link>
+      <title>ScrollCircleMaker教程</title>
+      <link>https://daveant.github.io/posts/ScriptableProcessor%E6%95%99%E7%A8%8B/</link>
       <pubDate>Sat, 04 May 2024 13:23:34 +0800</pubDate>
-      <guid>https://daveant.github.io/posts/ScriptableProcessor-Tutorial/</guid>
-      <description>ScriptableProcessor 1.Introduce Hi there! Have you ever encountered a situation where there is an abstract base class called DataTableHelperBase in the project, with parent classes such as TxtDataTableHelper, CsvDataTableHelper, XmlDataTableHelper, JsonDataTableHelper, etc.? And you wish to dynamically select and set parameters for the parent class directly in the inspector panel.</description>
+      <guid>https://daveant.github.io/posts/ScriptableProcessor%E6%95%99%E7%A8%8B/</guid>
+      <description>ScriptableProcessor 1.插件说明 你好！您是否遇到过这样的情况：项目中有一个名为DataTableHelperBase的</description>
     </item>
     <item>
       <title>ScrollCircleMaker-Obsolete教程</title>
